@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: searched
+source: https://bakkt.readme.io/reference/login , https://bakkt.readme.io/docs/getting-started
+docs: https://bakkt.readme.io/reference/login
+summary:
+  types:
+  - http-token
+  style: login-endpoint returns bearer security token; token sent in Authorization header on all subsequent
+    HTTPS calls
+  api_key_in:
+  - header
+  oauth2_flows: []
+schemes:
+- name: BakktSecurityToken
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  description: Clients call POST /apex-crypto/api/v2/login (Crypto Solutions) or Generate Access Token
+    (Fiat/Partner) with a provisioned logonId/password to obtain a short-lived security token, then pass
+    it in the Authorization header on every subsequent request over HTTPS.
+  obtain_operations:
+  - login
+  - generateAccessToken
+  sources:
+  - openapi/bakkt-crypto-openapi.yml
+provisioning:
+  self_service: false
+  how: Credentials (username, password, environment, IP whitelisting) are provisioned per client by contacting
+    sales@bakkt.com; one credential set per client.
+  notes: IP-whitelisted, dedicated per-client API gateway.
