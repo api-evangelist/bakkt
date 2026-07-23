@@ -1,8 +1,12 @@
 aid: bakkt
 name: Bakkt
-description: 'Bakkt is a company surfaced as a portfolio company of multicoin-capital, pantera-capital
-  and added to the API Evangelist network as a stub for enrichment. Sector: crypto-web3. This profile
-  is a lead awaiting the enrichment pipeline.'
+description: 'Bakkt is a digital asset platform that provides crypto trading, custody, and fiat
+  funding infrastructure to financial institutions and fintech apps. Its Crypto Solutions API is a
+  REST/FIX platform (with WebSocket market data and webhook/SQS events) that lets a client''s
+  investors buy, sell, hold, and transfer bitcoin, ether, and other digital assets in a branded
+  environment, plus a Fiat/Partner API for account opening, KYC/KYB, Plaid bank linking, and
+  ACH/Wire on-ramping. Surfaced as a portfolio company of Multicoin Capital and Pantera Capital and
+  enriched from Bakkt''s public developer hub (bakkt.readme.io / developer.bakkt.com).'
 url: https://raw.githubusercontent.com/api-evangelist/bakkt/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,18 +15,276 @@ x-backed-by:
 - pantera-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
 - Crypto Web3
-apis: []
+- Cryptocurrency
+- Digital Assets
+- Trading
+- Payments
+- Fiat On-Ramp
+- Custody
+- Webhooks
+- FIX Protocol
+image: https://bakkt.com/favicon.ico
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: bakkt:bakkt-accounts-api
+  name: Bakkt Accounts API
+  description: Accounts are used to represent users that use the platform's services.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-accounts-api-openapi.yml
+- aid: bakkt:bakkt-authorization-api
+  name: Bakkt Authorization API
+  description: >-
+    Authorization allows Client systems to authenticate and access services on behalf of their investors.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-authorization-api-openapi.yml
+- aid: bakkt:bakkt-block-trade-allocate-api
+  name: Bakkt Block Trade & Allocate API
+  description: The Block Trade & Allocate API from Bakkt — 5 operation(s) for block trade & allocate.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Block Trade & Allocate
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-block-trade-allocate-api-openapi.yml
+- aid: bakkt:bakkt-configuration-and-status-api
+  name: Bakkt Configuration and Status API
+  description: >-
+    Client systems can use these resources to provide a connection to the platform's services and check
+    API status.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Configuration and Status
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-configuration-and-status-api-openapi.yml
+- aid: bakkt:bakkt-currency-onboarding-api
+  name: Bakkt Currency Onboarding API
+  description: The Currency Onboarding API from Bakkt — 5 operation(s) for currency onboarding.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Currency Onboarding
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-currency-onboarding-api-openapi.yml
+- aid: bakkt:bakkt-documents-api
+  name: Bakkt Documents API
+  description: >-
+    Documents allows users to upload and retrieve documents along with their relevant metadata.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-documents-api-openapi.yml
+- aid: bakkt:bakkt-fiat-onboarding-api
+  name: Bakkt Fiat Onboarding API
+  description: The Fiat Onboarding API from Bakkt — 5 operation(s) for fiat onboarding.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Fiat Onboarding
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-fiat-onboarding-api-openapi.yml
+- aid: bakkt:bakkt-gift-api
+  name: Bakkt Gift API
+  description: The Gift API from Bakkt — 2 operation(s) for gift.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Gift
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-gift-api-openapi.yml
+- aid: bakkt:bakkt-instruments-api
+  name: Bakkt Instruments API
+  description: Instruments provides information about assets offered on the platform.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Instruments
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-instruments-api-openapi.yml
+- aid: bakkt:bakkt-jurisdictions-api
+  name: Bakkt Jurisdictions API
+  description: Jurisdictions provides information about trading restrictions in different jurisdictions
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Jurisdictions
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-jurisdictions-api-openapi.yml
+- aid: bakkt:bakkt-orders-api
+  name: Bakkt Orders API
+  description: Orders enables customers to buy or sell crypto.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-orders-api-openapi.yml
+- aid: bakkt:bakkt-partner-connectivity-api
+  name: Bakkt Partner Connectivity API
+  description: The Partner Connectivity API from Bakkt — 2 operation(s) for partner connectivity.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Partner Connectivity
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-partner-connectivity-api-openapi.yml
+- aid: bakkt:bakkt-partner-party-funding-api
+  name: Bakkt Partner Party Funding API
+  description: The Partner Party Funding API from Bakkt — 5 operation(s) for partner party funding.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Partner Party Funding
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-partner-party-funding-api-openapi.yml
+- aid: bakkt:bakkt-partner-party-kyc-api
+  name: Bakkt Partner Party Kyc API
+  description: The Partner Party Kyc API from Bakkt — 1 operation(s) for partner party kyc.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Partner Party Kyc
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-partner-party-kyc-api-openapi.yml
+- aid: bakkt:bakkt-partner-party-linking-api
+  name: Bakkt Partner Party Linking API
+  description: The Partner Party Linking API from Bakkt — 3 operation(s) for partner party linking.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Partner Party Linking
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-partner-party-linking-api-openapi.yml
+- aid: bakkt:bakkt-positions-api
+  name: Bakkt Positions API
+  description: Positions provide up-to-date information about crypto balances and transactions.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Positions
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-positions-api-openapi.yml
+- aid: bakkt:bakkt-transfers-api
+  name: Bakkt Transfers API
+  description: >-
+    Transfers allow users to access deposit and withdrawal functionality both within the Bakkt network
+    and across the blockchain.
+  humanURL: https://bakkt.readme.io/docs/welcome
+  baseURL: https://api.bakkt.com
+  tags:
+  - Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/bakkt-transfers-api-openapi.yml
 common:
+# --- link properties (identity / discoverability) ---
+- type: DeveloperPortal
+  url: https://bakkt.readme.io/
+- type: Documentation
+  url: https://bakkt.readme.io/docs/welcome
+- type: APIReference
+  url: https://bakkt.readme.io/reference/login
+- type: GettingStarted
+  url: https://bakkt.readme.io/docs/getting-started
+- type: Support
+  url: https://bakkt.readme.io/docs/support-feedback
+- type: Blog
+  url: https://bakkt.com/blog
+- type: StatusPage
+  url: https://status.bakkt.com
+- type: TermsOfService
+  url: https://bakkt.com/user-agreement
+- type: PrivacyPolicy
+  url: https://bakkt.com/privacy-policy
 - type: Website
   url: https://bakkt.com
+# --- artifact pointers ---
+- type: Authentication
+  url: authentication/bakkt-authentication.yml
+- type: Conventions
+  url: conventions/bakkt-conventions.yml
+- type: Idempotency
+  url: conventions/bakkt-conventions.yml
+- type: ErrorCatalog
+  url: errors/bakkt-problem-types.yml
+- type: ErrorCodes
+  url: errors/bakkt-error-codes.yml
+- type: DeclineCodes
+  url: errors/bakkt-decline-codes.yml
+- type: Lifecycle
+  url: lifecycle/bakkt-lifecycle.yml
+- type: ChangeLog
+  url: changelog/bakkt-changelog.yml
+- type: Webhooks
+  url: asyncapi/bakkt-webhooks.yml
+- type: MCPServer
+  url: mcp/bakkt-mcp.yml
+- type: Conformance
+  url: conformance/bakkt-conformance.yml
+- type: DataModel
+  url: data-model/bakkt-data-model.yml
+- type: Sandbox
+  url: sandbox/bakkt-sandbox.yml
+- type: LLMsTxt
+  url: llms/bakkt-llms.txt
+- type: WellKnown
+  url: well-known/bakkt-well-known.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/bakkt-agentic-access.yml
+- type: DomainSecurity
+  url: security/bakkt-domain-security.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

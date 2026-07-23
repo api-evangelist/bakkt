@@ -1,0 +1,385 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Partner Party Funding API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- name: Partner Party Funding
+paths:
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/wire-instructions:
+    get:
+      tags:
+      - Partner Party Funding
+      summary: Generate inbound wire instructions
+      description: Generate end user specific inbound wire instructions for fiat deposit. Reponse not to be cached. Bank instructions may change over time.
+      operationId: generateWireInstructions
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Request Accepted
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WireInstructionsResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/fiatAccount/balance:
+    get:
+      tags:
+      - Partner Party Funding
+      summary: Retrieve Fiat Account Balance
+      description: Retrieve the fiat account balance of a consumer
+      operationId: getFiatAccountBalance
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetFiatAccountBalanceResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/bankAccountLinking/ach:
+    post:
+      tags:
+      - Partner Party Funding
+      summary: Add Bank Account - ACH
+      operationId: linkBankAccountAchAsync
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/LinkBankAccountAchRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/LinkBankAccountAchResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/transfer:
+    post:
+      tags:
+      - Partner Party Funding
+      summary: Deposit or withdraw funds
+      description: Initiate deposit or withdraw on behalf of the consumer on linked fiat account.
+      operationId: transferFiatCurrency
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+        required: true
+      responses:
+        '200':
+          description: Request Accepted
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/bankAccountLinking/unlink:
+    post:
+      tags:
+      - Partner Party Funding
+      summary: Unlink fiat Account
+      operationId: unlinkBankAccount
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: x-tracking-id
+        in: header
+        required: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/UnlinkBankAccountRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UnlinkBankAccountResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+components:
+  schemas:
+    TransferRequest:
+      type: object
+      required:
+      - amount
+      - currency
+      - fiatTransactType
+      - idempotencyKey
+      - instrumentType
+      - partnerTransactionRef
+      properties:
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+          enum:
+          - USD
+        fiatTransactType:
+          type: string
+          enum:
+          - DEPOSIT
+          - WITHDRAW
+        idempotencyKey:
+          type: string
+        instrumentType:
+          type: string
+          enum:
+          - ACH
+          - DEBIT
+          - WIRE
+        partnerTransactionRef:
+          type: string
+        wireWithdrawDetails:
+          $ref: '#/components/schemas/WireWithdrawDetails'
+    GetFiatAccountBalanceResponse:
+      required:
+      - partnerPartyRef
+      - currency
+      - settledAmount
+      - unsettledAmount
+      type: object
+      properties:
+        partnerPartyRef:
+          type: string
+          description: The Partner's primary key for this Party
+          example: b9e930d0-372a-48f0-9c04-fd51c58eafb6
+        currency:
+          type: string
+          description: Currency of the settled and unsettled amounts
+          example: USD
+        settledAmount:
+          type: number
+          description: Settled Fiat Account balance
+          example: 50.01
+        unsettledAmount:
+          type: number
+          description: Unsettled Fiat Account balance
+          example: 100.01
+    UnlinkBankAccountRequest:
+      required:
+      - instrumentType
+      - partnerTransactionRef
+      type: object
+      properties:
+        instrumentType:
+          type: string
+          enum:
+          - ACH
+          - DEBIT
+          - TPJ
+          - WIRE
+        partnerTransactionRef:
+          maxLength: 255
+          minLength: 0
+          type: string
+    LinkBankAccountAchRequest:
+      required:
+      - accountNumber
+      - accountType
+      - partnerTransactionRef
+      - routingNumber
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+        partnerTransactionRef:
+          maxLength: 255
+          minLength: 0
+          type: string
+        routingNumber:
+          type: string
+    PublicApiError:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Message from the exception
+          example: Parameter passed for field is not meeting its required format.
+        detail:
+          type: string
+          description: Description of the type
+          example: validation error
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicApiErrorDetail'
+        type:
+          type: string
+          example: INVALID_FIELD_VALUE
+    LinkBankAccountAchResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    WireInstructionsResponse:
+      type: object
+      required:
+      - wireReferenceNumber
+      - wireRoutingNumber
+      - wireAccountNumber
+      - wireSwiftCode
+      - wireBankName
+      - wireBankAddress
+      - wireBeneficiaryName
+      - wireBeneficiaryAddress
+      properties:
+        wireReferenceNumber:
+          type: string
+        wireRoutingNumber:
+          type: string
+        wireAccountNumber:
+          type: string
+        wireSwiftCode:
+          type: string
+        wireBankName:
+          type: string
+        wireBankAddress:
+          type: string
+        wireBeneficiaryName:
+          type: string
+        wireBeneficiaryAddress:
+          type: string
+    UnlinkBankAccountResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    WireWithdrawDetails:
+      type: object
+      properties:
+        wireRoutingNumber:
+          type: string
+        wireAccountNumber:
+          type: string
+        wireBankName:
+          type: string
+        wireBankAddress:
+          type: string
+        wireSwiftCode:
+          type: string
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR

@@ -1,0 +1,180 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Jurisdictions API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- description: Jurisdictions provides information about trading restrictions in different jurisdictions
+  name: Jurisdictions
+paths:
+  /apex-crypto/api/v2/jurisdictions:
+    get:
+      deprecated: true
+      description: Use this endpoint to retrieve a list of supported jurisdictions and any trading restrictions in place.
+      operationId: getJurisdictions
+      responses:
+        '200':
+          description: This response returns information for all jurisdictions in the system.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JurisdictionResponse'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Jurisdiction Definitions
+      tags:
+      - Jurisdictions
+  /apex-crypto/api/v2/jurisdictions/all:
+    get:
+      description: Use this endpoint to retrieve a list of supported jurisdictions and any restrictions in place.
+      operationId: getJurisdictionsAll
+      parameters:
+      - description: Country to query for. Lowest priority.
+        in: query
+        name: country
+        schema:
+          type: string
+      - description: State to query for. Prioritized over country.
+        in: query
+        name: state
+        schema:
+          type: string
+      - description: Deprecated, use tradingPair going forward. currency to query for. High priority.
+        in: query
+        name: currency
+        schema:
+          type: string
+      - description: tradingPair to query for. Highest priority. Example Value (BTCUSD, ETHUSDT)
+        in: query
+        name: tradingPair
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response returns information for all jurisdictions in the system.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JurisdictionAllResponse'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Jurisdiction Definitions
+      tags:
+      - Jurisdictions
+components:
+  schemas:
+    SecurityStatus:
+      properties:
+        currency:
+          type: string
+        status:
+          enum:
+          - OPEN
+          - CLOSE
+          - PROHIBITED
+          type: string
+        tradingPair:
+          type: string
+    JurisdictionResponse:
+      properties:
+        jurisdictions:
+          items:
+            $ref: '#/components/schemas/JurisdictionStatus'
+          type: array
+          x-order: 0
+    JurisdictionAllResponse:
+      properties:
+        jurisdictions:
+          items:
+            $ref: '#/components/schemas/JurisdictionAll'
+          type: array
+          x-order: 0
+    JurisdictionAll:
+      properties:
+        countryCode:
+          description: The ISO 3166-1 alpha-3 country code of the jursidiction
+          type: string
+          x-order: 0
+        domain:
+          $ref: '#/components/schemas/JurisdictionDomain'
+        stateCode:
+          description: State of residence (two-letter state abbreviation)
+          type: string
+          x-order: 1
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    JurisdictionStatus:
+      properties:
+        countryCode:
+          description: The ISO 3166-1 alpha-3 country code of the jursidiction
+          type: string
+          x-order: 0
+        securities:
+          description: A list of security-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 3
+        stateCode:
+          type: string
+          x-order: 1
+        status:
+          description: '<br/>`OPEN` - Customer may buy and sell in this jurisdiction <br/>`CLOSE` - Customer may only sell their existing position in this jurisdiction <br/>`PROHIBITED` - Customer may not buy or sell in this jurisdiction
+
+            '
+          enum:
+          - OPEN
+          - CLOSE
+          - PROHIBITED
+          type: string
+          x-order: 2
+    JurisdictionDomain:
+      properties:
+        orders:
+          description: A list of currency-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 0
+        staking:
+          description: A list of currency-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 1
+        transfers:
+          description: A list of currency-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 2

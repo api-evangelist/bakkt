@@ -1,0 +1,313 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Documents API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- description: Documents allows users to upload and retrieve documents along with their relevant metadata.
+  name: Documents
+paths:
+  /apex-crypto/api/v2/documents/{clientDocumentId}:
+    get:
+      description: Use this endpoint to download a specific document associated with a given UUID
+      operationId: downloadDocument
+      parameters:
+      - description: Client document ID of the requested document
+        in: path
+        name: clientDocumentId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: This response returns the full details of the document.
+        '404':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/Error'
+            image/bmp:
+              schema:
+                $ref: '#/components/schemas/Error'
+            image/gif:
+              schema:
+                $ref: '#/components/schemas/Error'
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/Error'
+            image/png:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Download Document
+      tags:
+      - Documents
+  /apex-crypto/api/v2/documents/{clientAccountId}/accountDocumentMetadata:
+    get:
+      description: Use this endpoint to retrieve metadata for all documents associated with a specific account
+      operationId: retrieveAccountDocumentMetadata
+      parameters:
+      - description: Client account ID of the requested document
+        in: path
+        name: clientAccountId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of document metadata for each document associated to a given account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveAccountDocumentMetadataResponse'
+        '404':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve All Document Metadata for an Account
+      tags:
+      - Documents
+  /apex-crypto/api/v2/documents/{clientDocumentId}/metadata:
+    get:
+      description: Use this endpoint to retrieve metadata for the document associated with a specific UUID
+      operationId: retrieveDocumentMetadata
+      parameters:
+      - description: Client document ID of the requested document
+        in: path
+        name: clientDocumentId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: This response returns the full details of the document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Metadata for Specific Document
+      tags:
+      - Documents
+  /apex-crypto/api/v2/documents:
+    post:
+      description: Use this endpoint to upload a document and associated metadata
+      operationId: uploadDocument
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                metadata:
+                  description: "Document metadata with the DocumentRequest schema.  Handled as a formData string rather than the typical\nbody reference due to the limitations of OpenAPI spec v2.\n\nExample:\n {\n    \"clientDocumentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"account\": \"myaccountnumber\",\n    \"documentType\": \"DRIVERS_LICENSE\",\n    \"description\": \"my optional description\",\n    \"documentSide\": \"FRONT\",\n    \"clientOwnerId\": \"3fa87f64-5717-4562-b3fc-2c963f66afa6\",\n    \"issueCountry\": \"USA\",\n    \"documentExpiration\": \"2023-10-04T16:34:29.446Z\"\n  }\n"
+                  type: string
+                document:
+                  description: 'Document file to upload. The Content-Type header for this formData part must be set correctly.
+
+                    '
+                  type: string
+                  format: binary
+              required:
+              - metadata
+              - document
+        required: true
+      responses:
+        '200':
+          description: This response returns the full details of the document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Upload Document and Metadata
+      tags:
+      - Documents
+components:
+  schemas:
+    DocumentMetadata:
+      properties:
+        account:
+          description: An account number to associate with the document being uploaded
+          type: string
+          x-order: 1
+        clientDocumentId:
+          description: Client-specified unique identifer for the uploaded document
+          format: uuid
+          type: string
+          x-order: 0
+        clientOwnerId:
+          description: An id used to associate the owner of the document with the document being uploaded
+          type: string
+          x-order: 6
+        description:
+          description: A description of the document being uploaded
+          type: string
+          x-order: 4
+        documentExpiration:
+          description: Date for which the document expires
+          format: date-time
+          type: string
+          x-order: 7
+          nullable: true
+        documentSide:
+          $ref: '#/components/schemas/DocumentSide'
+        documentType:
+          $ref: '#/components/schemas/DocumentType'
+        issueCountry:
+          description: Country for which the document was issued in/for
+          type: string
+          x-order: 3
+      required:
+      - clientDocumentId
+      - account
+      - documentType
+      - documentSide
+      type: object
+    RetrieveAccountDocumentMetadataResponse:
+      properties:
+        documentMetadata:
+          items:
+            $ref: '#/components/schemas/DocumentMetadata'
+          type: array
+          x-order: 0
+      type: object
+    Document:
+      properties:
+        createdAt:
+          description: The time the document was uploaded to the Bakkt platform
+          format: date-time
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt unique identifer for the document
+          format: uuid
+          type: string
+          x-order: 0
+        request:
+          $ref: '#/components/schemas/DocumentRequest'
+      required:
+      - id
+      - createdAt
+      - request
+      type: object
+    DocumentSide:
+      description: Side of the document that is being submitted. Note that this field is required for entity account documents, including owner specific documents.
+      enum:
+      - FRONT
+      - BACK
+      - UNSPECIFIED
+      type: string
+    DocumentRequest:
+      description: Request to upload a document with metadata
+      properties:
+        account:
+          description: An account number to associate with the document being uploaded
+          type: string
+          x-order: 1
+        clientDocumentId:
+          description: Client-specified unique identifer for the uploaded document
+          format: uuid
+          type: string
+          x-order: 0
+        clientOwnerId:
+          description: An id used to associate the owner of the document with the document being uploaded
+          type: string
+          x-order: 6
+        description:
+          description: A description of the document being uploaded
+          type: string
+          x-order: 4
+        documentExpiration:
+          description: Date for which the document expires
+          format: date-time
+          type: string
+          x-order: 7
+          nullable: true
+        documentSide:
+          $ref: '#/components/schemas/DocumentSide'
+        documentType:
+          $ref: '#/components/schemas/DocumentType'
+        issueCountry:
+          description: The ISO 3166-1 alpha-3 country code of the country for which the document is issued for
+          type: string
+          x-order: 3
+      required:
+      - clientDocumentId
+      - account
+      - documentType
+      type: object
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    DocumentType:
+      description: Document type assigned at upload
+      enum:
+      - DRIVERS_LICENSE
+      - IDENTIFICATION_CARD
+      - PASSPORT
+      - SOCIAL_SECURITY_CARD
+      - RAW_CIP_DATA
+      - TRUST_CERTIFICATION
+      - ENTITY_DUE_DILIGENCE
+      - RAW_CDD_DATA
+      - VISA
+      - W_8BEN_FORM
+      - PASSPORT_CARD
+      - CERTIFICATE_OF_INCORPORATION
+      - CERTIFICATE_OF_BENEFICIAL_OWNERS
+      - PROOF_OF_ENTITY_ADDRESS
+      - PROOF_OF_ENTITY_EIN_TAX_ID
+      - PROOF_OF_RESIDENTIAL_ADDRESS
+      - PROOF_OF_PERSONAL_TAX_ID
+      - SOURCE_OF_FUNDS
+      - TRANSFER_ON_DEATH
+      type: string

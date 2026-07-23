@@ -1,0 +1,55 @@
+generated: '2026-07-18'
+method: searched
+source: https://bakkt.readme.io/docs/webhooks , https://bakkt.readme.io/docs/event-queue , https://bakkt.readme.io/docs/sqs
+spec_type: Webhooks
+delivery:
+- HTTPS POST to client-provided webhook URL
+- AWS SQS event queue
+- WebSocket (market data + coin-transfer updates)
+webhook_types:
+- type: PARTY_EVENT
+  area: Account opening / KYC
+  description: Account status notifications.
+  party_status:
+  - ACTIVE
+  - INACTIVE
+  - SUSPENDED
+  - LIQUIDATED
+  - UNDER_REVIEW
+  - CLOSED
+  reason_codes:
+  - ACCOUNT_CLOSURE_REQUESTED
+  - COMPLIANCE_LOCKED
+  - LIQUIDATED
+  - OTHER
+  - CLOSED
+  - ENROLLMENT
+  - RISK_KYC
+  - RISK_OFAC
+  - PENDING_REVIEW
+  - DOCUMENT_VERIFICATION
+  key_fields:
+  - requestId
+  - partnerPartyRef
+  - partnerWebhookType
+  - partyStatus
+  - reasonCode
+  - verificationURL
+  - verificationURLExpiry
+- type: BANK_ACCOUNT_LINK
+  area: Fiat bank linking
+  description: Plaid/manual bank-account link status events (including unsupported-bank cases).
+- type: FIAT_EVENT
+  area: Fiat funding
+  description: 'ACH and Wire funding lifecycle events: standard flow, returns (pre/post completion), cancellations,
+    declines, TPJ, and manual adjustments.'
+  sub_flows:
+  - ACH standard
+  - ACH return
+  - ACH cancelled
+  - ACH decline
+  - Wire
+  - TPJ
+  - Manual adjustments
+notes: Bakkt publishes webhook payload examples but no machine-readable AsyncAPI document; this catalog
+  is captured from the webhooks guide.

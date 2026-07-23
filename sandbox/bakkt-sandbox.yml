@@ -1,0 +1,22 @@
+generated: '2026-07-18'
+method: searched
+source: https://bakkt.readme.io/docs/webhooks (Client Integration Testing Workflow) , https://bakkt.readme.io/reference/heartbeat
+  , https://bakkt.readme.io/docs/getting-started
+environments:
+  model: Dedicated per-client environment provisioned by Bakkt; access granted via sales@bakkt.com with
+    IP whitelisting.
+  self_service: false
+dev_endpoints:
+- operation: heartbeat
+  note: Development-only connectivity check.
+- operation: addManualBankAccount
+  note: Add bank account details — Test Environment Use Only.
+kyc_test_triggers:
+  description: Magic PII values documented to drive KYC screening outcomes in the integration-testing
+    workflow.
+  pass: Enroll a user with any PII (other than the failure scenarios) -> partyStatus ACTIVE, reasonCode
+    ENROLLMENT.
+  fail_kyc: Enroll a user with familyName "Dawn", givenName "Maggic" -> KYC/document-verification failure
+    webhook.
+note: Bakkt publishes test webhook scenarios rather than public test cards; only values verbatim from
+  the docs are captured here.

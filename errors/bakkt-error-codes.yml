@@ -1,0 +1,29 @@
+generated: '2026-07-18'
+method: searched
+source: https://bakkt.readme.io/docs/error-codes
+envelope_ref: errors/bakkt-problem-types.yml
+registries:
+- name: API Order Reject Reasons
+  docs: https://bakkt.readme.io/docs/api-order-reject-reasons
+  examples:
+  - reason: 'unknown: empty quotes'
+    meaning: No price available for the order symbol.
+  - reason: 'unknown: trade quantity exceeds position side'
+    meaning: Attempt to sell more coin than the account holds.
+  - reason: price too far through market
+    meaning: Order price is >10% away from market on the wrong side.
+  - reason: 'invalid_argument: live_till Order expired'
+    meaning: Order placed during the maintenance window (16:30-17:05 CT).
+  - reason: 'failed_precondition: unable to trade due to ''NY'' allowing CLOSE only'
+    meaning: Buy attempted from a close-only jurisdiction.
+  - reason: 'invalid_argument: quantity order notional must be more than $1.00'
+    meaning: Order below $1 minimum (allowed only when selling an entire position).
+- name: ACH Return Codes
+  docs: https://bakkt.readme.io/docs/ach-return-codes
+  ref: errors/bakkt-decline-codes.yml
+- name: Fiat Funding Onramp Error Codes
+  docs: https://bakkt.readme.io/docs/fiat-onramp-error-codes
+- name: Gifting Error Codes
+  docs: https://bakkt.readme.io/docs/gifting-error-codes
+- name: Batch Trade & Allocation Error Codes
+  docs: https://bakkt.readme.io/docs/batch-trade-allocation-error-codes

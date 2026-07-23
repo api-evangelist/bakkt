@@ -1,0 +1,104 @@
+# Bakkt Documentation
+
+> Documentation for Bakkt
+
+## Guides
+- [Welcome to Bakkt® Trade](https://bakkt.readme.io/docs/welcome.md): Full-stack APIs for turnkey crypto trading in your application
+- [Supported Assets](https://bakkt.readme.io/docs/supported-assets.md)
+- [Getting Started](https://bakkt.readme.io/docs/getting-started.md)
+- [Account Opening](https://bakkt.readme.io/docs/account-opening.md): Account creation, editing, and document uploading
+- [Entity Accounts](https://bakkt.readme.io/docs/entity-accounts.md)
+- [Uploading Documents](https://bakkt.readme.io/docs/document-api-process-copy.md)
+- [Market Data Feed](https://bakkt.readme.io/docs/market-data-feed.md): Cryptocurrency market data feed process
+- [Flow of Funds](https://bakkt.readme.io/docs/flow-of-funds.md)
+- [Fiat Funding Onramp](https://bakkt.readme.io/docs/fiat-api-guide.md): API guide for Partners to offer fiat funding service with Bakkt
+- [Wire Funding](https://bakkt.readme.io/docs/wire-funding.md)
+- [Crypto Trading Order Management](https://bakkt.readme.io/docs/order-types.md)
+- [FIX Protocol](https://bakkt.readme.io/docs/fix-protocol-specifications.md): FIX Implementation Details
+- [REST Order Management](https://bakkt.readme.io/docs/order-management-via-rest.md)
+- [Coin Transfers](https://bakkt.readme.io/docs/coin-transfers.md)
+- [Addresss Types](https://bakkt.readme.io/docs/wallet-types-supported.md)
+- [Deposit Workflow](https://bakkt.readme.io/docs/deposit-cryptocurrency.md)
+- [Withdraw Workflow](https://bakkt.readme.io/docs/withdraw-cryptocurrency.md)
+- [Batch Trade and Allocations](https://bakkt.readme.io/docs/batch-trade-and-allocation-process.md)
+- [Gifting](https://bakkt.readme.io/docs/gifting-process.md): Cryptocurrency gifts and rewards program process
+- [Start of Day Reports](https://bakkt.readme.io/docs/sod-reports.md)
+- [Daily Crypto Positions](https://bakkt.readme.io/docs/asset-position-files.md)
+- [Daily Trade and Settlement Reports](https://bakkt.readme.io/docs/daily-trade-and-settlement-reports.md)
+- [Execution Confirm](https://bakkt.readme.io/docs/execution-report.md): Bakkt communicates order acknowledgments, cancels, rejections, and fills via the Execution Report.
+- [Net Settlement](https://bakkt.readme.io/docs/net-settlement.md)
+- [Aged TPJ File](https://bakkt.readme.io/docs/aged-tpj.md)
+- [Daily Coin Transfers](https://bakkt.readme.io/docs/daily-coin-transfers.md)
+- [Cash Activity](https://bakkt.readme.io/docs/cash-activity.md)
+- [Cash Balance](https://bakkt.readme.io/docs/cash-balance.md)
+- [Developer Resources](https://bakkt.readme.io/docs/developer-resources.md)
+- [Event Notifications](https://bakkt.readme.io/docs/event-queue.md)
+- [SQS](https://bakkt.readme.io/docs/sqs.md)
+- [Webhooks](https://bakkt.readme.io/docs/webhooks.md)
+- [Time & Maintenance Windows](https://bakkt.readme.io/docs/time-maintenance-windows.md)
+- [Troubleshooting and Error Codes](https://bakkt.readme.io/docs/error-codes.md)
+- [ACH Return Codes](https://bakkt.readme.io/docs/ach-return-codes.md): ACH Return Codes and Their Meanings
+- [Fiat Funding Onramp Error Codes](https://bakkt.readme.io/docs/fiat-onramp-error-codes.md)
+- [API Order Reject Reasons](https://bakkt.readme.io/docs/api-order-reject-reasons.md)
+- [Gifting Error Codes](https://bakkt.readme.io/docs/gifting-error-codes.md)
+- [Batch Trade & Allocation Error Codes](https://bakkt.readme.io/docs/batch-trade-allocation-error-codes.md)
+- [Change Log](https://bakkt.readme.io/docs/change-log.md)
+- [Support & Feedback](https://bakkt.readme.io/docs/support-feedback.md)
+- [FAQ](https://bakkt.readme.io/docs/faq.md): Discover answers to some commonly asked questions.
+- [Understanding Tax 1099-DA Reporting](https://bakkt.readme.io/docs/2025-tax-season-overview-digital-asset-reporting.md): Starting January 1, 2025, the IRS has implemented reporting requirements for digital asset brokers.
+
+## API Reference
+- [Login](https://bakkt.readme.io/reference/login.md): Client systems use this service to get a security token. All subsequent calls to the gateway must have the token in the 'Authorization' header and must be made over HTTPS.
+- [Retrieve Instrument Definitions](https://bakkt.readme.io/reference/getinstruments.md): Use this endpoint to retrieve information about all crypto intruments in the system.
+- [Submit an Order to Buy or Sell Crypto](https://bakkt.readme.io/reference/submitorder.md): Client systems use this endpoint to submit new order instructions to buy or sell crypto on behalf of an investor. <br/><br/>The order processes asynchronously. The system allows duplicate submissions; however, order details must NOT change in subsequent requests. Orders are uniquely tracked for idempotency by the submitting system providing the `clientOrderId` field. <br/><br/> Clients can provide the amounts to purchase or sell crypto in two different ways: <br/> <br/>`Notional` - Using the notional field, an investor may place an order for crypto given a USD amount to purchase. For example, an investor can buy $100 of BTCUSD at market price by entering 100 in the notional field. <br/>`Absolute` - Using the quantity field, an investor may place an order for an exact amount of crypto. For example, an investor can sell 0.05 BTC for USD by entering 0.05 in the quantity field.
+- [Retrieve an Order by Client Order ID](https://bakkt.readme.io/reference/getorder.md): Use this endpoint to retrieve an order by its `clientOrderId.`
+- [Submit a Request to Cancel an Order](https://bakkt.readme.io/reference/cancelorder.md): Use this endpoint to submit a request to cancel an order. Requests to cancel orders are subject to the status of the order and if the order has not already processed.
+- [Retrieve Crypto Positions](https://bakkt.readme.io/reference/getpositions.md): Use this endpoint to retrieve current position amounts for all crypto in an investor's account. The amounts are in crypto quantities - not notional.
+- [Create a New User Account](https://bakkt.readme.io/reference/createaccount.md): Use this endpoint to create new investor accounts. The client must provide an account ID that uniquely identifies the investor from other investors on the client's platform.
+- [Update Settlement Method on Account](https://bakkt.readme.io/reference/updateaccountsettlement.md): Use this endpoint to update settlement method on input account.
+- [Trigger KYB Screening on Account](https://bakkt.readme.io/reference/triggerkybscreening.md): Use this endpoint to trigger a KYB screening on input account.
+- [Retrieves Accounts by Account ID](https://bakkt.readme.io/reference/getaccount.md): This endpoint retrieves an investor account provided the client's unique account ID.
+- [Retrieves account status by Account ID](https://bakkt.readme.io/reference/getaccountstatus.md): This endpoint retrieves an investor account trading status provided the client's unique account ID.
+- [KYC transfer recovery request](https://bakkt.readme.io/reference/kyctransferrecovery.md): Use this endpoing to recover KYC's that are transferred
+- [Check the Health of the API Gateway](https://bakkt.readme.io/reference/getapistatus.md): This endpoint provides an easy way to ensure the dedicated API Gateway is online and ready to service requests.
+- [Get Client Connection Configurations](https://bakkt.readme.io/reference/getconfig.md): Use this endpoint to get various configuration items for client systems to receive a flow of market data and coin transfers updates during and after processing.
+- [Upload Document and Metadata](https://bakkt.readme.io/reference/uploaddocument.md): Use this endpoint to upload a document and associated metadata
+- [Retrieve All Document Metadata for an Account](https://bakkt.readme.io/reference/retrieveaccountdocumentmetadata.md): Use this endpoint to retrieve metadata for all documents associated with a specific account
+- [Download Document](https://bakkt.readme.io/reference/downloaddocument.md): Use this endpoint to download a specific document associated with a given UUID
+- [Retrieve Metadata for Specific Document](https://bakkt.readme.io/reference/retrievedocumentmetadata.md): Use this endpoint to retrieve metadata for the document associated with a specific UUID
+- [Retrieve a Wallet Receive Address](https://bakkt.readme.io/reference/postreceiveaddress.md): This endpoint returns a wallet receive address to use for a deposit. Receive addresses change over time, so clients should not cache them. Repeated calls to this service may or may not return the same result.
+- [Lookup the name of a vasp associated with a wallet address.](https://bakkt.readme.io/reference/lookupvasp.md): Use this endpoint to lookup the name of a vasp associated with a wallet address.
+- [Verify that a wallet address is valid prior to using it in a transfer request.](https://bakkt.readme.io/reference/verifywalletaddress.md): Use this endpoint to verify that a wallet address is valid prior to using it in a transfer request.
+- [Create a Crypto Withdrawal Request](https://bakkt.readme.io/reference/postwithdraw.md): This endpoint initiates a withdrawal from the investor's positions to a wallet on the blockchain. This action requires users to request a fee estimate first.
+- [Retrieve a Fee Estimate to Complete a Withdrawal](https://bakkt.readme.io/reference/postwithdrawfee.md): Withdrawing coins from an investor's crypto account may impose fees. Clients should request a fee estimate detailing those fees and present it to investors for confirmation prior to completing a withdrawal. Clients must then use the ID of the fee estimate to submit a withdrawal. The terms of the fee estimate are based on the underlying crypto networks' market conditions and the system honors them up to a certain grace period after generating them. After the grace period, clients must request a new fee estimate to conduct the withdrawal. Requests for estimates have no associated cost.
+- [Retrieve the Withdrawal Status](https://bakkt.readme.io/reference/getwithdraw.md): Use this action to proactively request the status of a previously submitted withdrawal request. Bakkt provides this service as a convenience to ask about specific withdrawals. Since Crypto systems must confirm withdrawals on the blockchain, the request always has a network-dependent time lag from the moment a user submits a withdrawal on chain until the transfer completes. While client systems may use this service to ask for the latest update for a given transfer, Bakkt encourages clients to rely on the transfer websockets mechanism to receive timely updates to transfers as they post to Bakkt systems and move through the blockchain.
+- [Retrieve Jurisdiction Definitions](https://bakkt.readme.io/reference/getjurisdictions.md): Use this endpoint to retrieve a list of supported jurisdictions and any trading restrictions in place.
+- [Retrieve Jurisdiction Definitions](https://bakkt.readme.io/reference/getjurisdictionsall.md): Use this endpoint to retrieve a list of supported jurisdictions and any restrictions in place.
+- [Request For Currency Allocation](https://bakkt.readme.io/reference/allocationcurrencybatchallocatecreate.md): Currency allocation request for a single customer account
+- [Retrieve Currency Allocation Details By clientTransactionId](https://bakkt.readme.io/reference/allocationcurrencybatchallocateget.md): Retrieve details pertaining to a particular currency allocation by its clientTransactionId
+- [Request To Close Currency Allocation Batch](https://bakkt.readme.io/reference/allocationcurrencybatchclose.md): Request to close off currency allocations of a particular batch
+- [Request For New Currency Allocation Batch](https://bakkt.readme.io/reference/allocationcurrencybatchopen.md): Open a new batch of currency allocations for a particular currency where all transactions will be quantity based
+- [Retrieve Currency Allocation Details By batchTransactionId](https://bakkt.readme.io/reference/allocationcurrencybatchget.md): Retrieve allocation details pertaining to a particular series of currency allocations by their batchTransactionId
+- [Request For Fiat Allocation](https://bakkt.readme.io/reference/allocationfiatbatchallocatecreate.md): Fiat allocation request for a single customer account
+- [Retrieve Fiat Allocation Details By clientTransactionId](https://bakkt.readme.io/reference/allocationfiatbatchallocateget.md): Retrieve details pertaining to a particular fiat allocation by its clientTransactionId
+- [Request To Close Fiat Allocation Batch](https://bakkt.readme.io/reference/allocationfiatbatchclose.md): Request to close off fiat allocations of a particular batch
+- [Request For New Fiat Allocation Batch](https://bakkt.readme.io/reference/allocationfiatbatchopen.md): Open a new batch of fiat allocations for a particular currency where all transactions will be quantity based
+- [Retrieve Fiat Allocation Details By batchTransactionId](https://bakkt.readme.io/reference/allocationfiatbatchget.md): Retrieve allocation details pertaining to a particular series of fiat allocations by their batchTransactionId
+- [Get Partner Party Document Verification Details](https://bakkt.readme.io/reference/getkycdocumentverificationdetails.md): Retrieves the Document Verification Details for the party
+- [Request For Gift](https://bakkt.readme.io/reference/allocationgiftcreate.md): Request to gift to a single customer account
+- [Retrieve Gift Details By clientTransactionId](https://bakkt.readme.io/reference/allocationgiftget.md): Retrieve details pertaining to a particular gift by its clientTransactionId
+- [Request For Allocation](https://bakkt.readme.io/reference/allocationtradebatchallocatecreate.md): Allocation request for a single customer account
+- [Retrieve Allocation Details By clientTransactionId](https://bakkt.readme.io/reference/allocationtradebatchallocateget.md): Retrieve details pertaining to a particular allocation by its clientTransactionId
+- [Request To Close Allocation Batch](https://bakkt.readme.io/reference/allocationtradebatchclose.md): Request to close off allocations of a particular batch
+- [Request For New Allocation Batch](https://bakkt.readme.io/reference/openbatchtradeallocation.md): Open a new batch of allocations for a particular symbol where all transactions will either be notional or quantity based
+- [Retrieve Allocation Details By batchTransactionId](https://bakkt.readme.io/reference/allocationtradebatchget.md): Retrieve allocation details pertaining to a particular series of allocations by its batchTransactionId
+- [Generate Access Token](https://bakkt.readme.io/reference/generateaccesstoken.md): Generate Access Token which is used to access Bakkt APIs
+- [Check connectivity with Bakkt backend](https://bakkt.readme.io/reference/heartbeat.md): This endpoint is meant to be access for development only
+- [Unlink a fiat account](https://bakkt.readme.io/reference/removefiataccount.md): Unlink a linked consumer fiat account
+- [Link a Plaid account using processor token](https://bakkt.readme.io/reference/addbankaccount.md): Send a processor token to link Plaid account
+- [Add Bank Account](https://bakkt.readme.io/reference/addmanualbankaccount.md): Add bank account details to a consumer account at Bakkt. Test Environment Use Only
+- [Deposit or withdraw funds](https://bakkt.readme.io/reference/transferfiatcurrency.md): Initiate deposit or withdraw on behalf of the consumer on linked fiat account.
+- [Unlink fiat Account](https://bakkt.readme.io/reference/unlinkbankaccount.md)
+- [Add Bank Account - ACH](https://bakkt.readme.io/reference/linkbankaccountachasync.md)
+- [Generate inbound wire instructions](https://bakkt.readme.io/reference/generatewireinstructions.md): Generate end user specific inbound wire instructions for fiat deposit. Reponse not to be cached. Bank instructions may change over time.
+- [Retrieve Fiat Account Balance](https://bakkt.readme.io/reference/getfiataccountbalance.md): Retrieve the fiat account balance of a consumer

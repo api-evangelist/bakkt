@@ -1,0 +1,364 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Orders API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- description: Orders enables customers to buy or sell crypto.
+  name: Orders
+paths:
+  /apex-crypto/api/v2/orders/{clientOrderId}/cancel:
+    post:
+      description: Use this endpoint to submit a request to cancel an order. Requests to cancel orders are subject to the status of the order and if the order has not already processed.
+      operationId: cancelOrder
+      parameters:
+      - description: The `clientOrderId` of order to cancel (submitted when the order was originally created)
+        in: path
+        name: clientOrderId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelRequest'
+        description: Additional information regarding the order to cancel
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelResponse'
+        '400':
+          description: This response returns if the order could not be found to cancel it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: This response returns if the system could not complete this request, because the system could not find the order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounteres an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Submit a Request to Cancel an Order
+      tags:
+      - Orders
+  /apex-crypto/api/v2/orders/{clientOrderId}:
+    get:
+      description: Use this endpoint to retrieve an order by its `clientOrderId.`
+      operationId: getOrder
+      parameters:
+      - description: Client Order ID of the order to retrieve
+        in: path
+        name: clientOrderId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response returns the full details of the order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: This response returns if the system could not complete this request because the order could not be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve an Order by Client Order ID
+      tags:
+      - Orders
+  /apex-crypto/api/v2/orders:
+    post:
+      description: 'Client systems use this endpoint to submit new order instructions to buy or sell crypto on behalf of an investor. <br/><br/>The order processes asynchronously. The system allows duplicate submissions; however, order details must NOT change in subsequent requests. Orders are uniquely tracked for idempotency by the submitting system providing the `clientOrderId` field. <br/><br/> Clients can provide the amounts to purchase or sell crypto in two different ways: <br/> <br/>`Notional` - Using the notional field, an investor may place an order for crypto given a USD amount to purchase. For example, an investor can buy $100 of BTCUSD at market price by entering 100 in the notional field. <br/>`Absolute` - Using the quantity field, an investor may place an order for an exact amount of crypto. For example, an investor can sell 0.05 BTC for USD by entering 0.05 in the quantity field.
+
+        '
+      operationId: submitOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrderRequest'
+        description: Submits a new order to fill given the terms provided by the investor
+        required: true
+      responses:
+        '200':
+          description: This response returns when the order already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '201':
+          description: This response returns the newly created order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: This response returns when the request to submit the order was submitted improperly.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Submit an Order to Buy or Sell Crypto
+      tags:
+      - Orders
+components:
+  schemas:
+    CancelRequest:
+      description: A request to stop attempting to serve an order; a `clientOrderId` is identified alongside this request object in order to target a specific order to cancel
+      properties:
+        id:
+          description: An ID that uniquely identifies a request to cancel
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    OrderType:
+      description: '<br/>`MARKET` - Fill the order using current MARKET price <br/>`LIMIT` - Fill the order matching the price constraints provided
+
+        '
+      enum:
+      - LIMIT
+      - MARKET
+      - STOP_LIMIT
+      type: string
+    OrderCancel:
+      properties:
+        rejectReason:
+          type: string
+        request:
+          $ref: '#/components/schemas/CancelRequest'
+        transactTime:
+          format: date-time
+          type: string
+      required:
+      - request
+      type: object
+    OrderStatus:
+      enum:
+      - IN_PROGRESS
+      - COMPLETE
+      type: string
+    TimeInForce:
+      description: '<br/>`IOC` - Fill immediately and cancel any amount that can''t be filled <br/>`DAY` - Fill order until the end of the current trading day <br/>`GTC` - Fill order until canceled or after 90 days <br/>`GTD` - Fill order until the good-till date
+
+        '
+      enum:
+      - IOC
+      - DAY
+      - GTC
+      - GTD
+      type: string
+    Order:
+      description: An Order represents a request to buy or sell crypto. Orders can be placed with various criteria that include, but are not limited to, how much to purchase, how long the purchase order should stand, what price is acceptable in the case of limit orders, etc. Orders are sent to one or more liquidity providers for fullfillment using a best-bid, offer-match methodology in order to acquire the best market execution for investors' orders.
+      properties:
+        averagePrice:
+          description: The price of the order averaged across all filled quantities for the order
+          type: string
+        cancels:
+          items:
+            $ref: '#/components/schemas/OrderCancel'
+          type: array
+        createdAt:
+          description: The time the order was submitted on the Apex Crypto platform
+          format: date-time
+          type: string
+        cumulativeQuantity:
+          description: The total amount of quantity filled for an order; if subsequent orders are filled, this value may increase commensurately
+          type: string
+        executions:
+          description: The results of the order's attempt(s) to execute
+          items:
+            $ref: '#/components/schemas/Execution'
+          type: array
+        id:
+          description: Unique `clientOrderId` that represents this order
+          type: string
+        leavesQuantity:
+          description: In the case that your order is not yet or cannot be fully filled, this amount indicates the order's open quantity remaining
+          type: string
+        rejectReason:
+          description: Provided when an order is rejected in the course of attempting to serve the request
+          type: string
+        request:
+          $ref: '#/components/schemas/NewOrderRequest'
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        working:
+          default: false
+          description: True if the order is actively being worked
+          type: boolean
+      required:
+      - id
+      - request
+      type: object
+    Execution:
+      description: An execution captures the results of an attempt to fill an order. There may be zero or more execution reports associated with an order to track its attempts to purchase or sell a crypto asset.
+      properties:
+        commission:
+          description: 'In order to ensure that any configured minimum trade fee is met by any trading scenario, the first execution fill is charged the minimum fee. The Apex Crypto system maintains a running total of any bps commission charges as other fills are executed for that order. Once the minimum fee has been satisfied by the bps commission charges for all of the fills on the order, the bps commission charges apply to any subsequent fills.
+
+            '
+          type: string
+        executedAt:
+          description: Time the execution was completed
+          format: date-time
+          type: string
+        id:
+          description: A unique identifier for the execution report
+          type: string
+        netMoney:
+          type: string
+        price:
+          description: The price at which the execution filled
+          type: string
+        quantity:
+          description: The amount that was filled in this execution
+          type: string
+        side:
+          $ref: '#/components/schemas/Side'
+        symbol:
+          description: The symbol filled
+          type: string
+        tradeDate:
+          description: Trading date the execution was completed on
+          format: date
+          type: string
+      required:
+      - id
+      - side
+      - symbol
+      - quantity
+      - price
+      - netMoney
+      - executedAt
+      type: object
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    NewOrderRequest:
+      properties:
+        account:
+          description: Investor account identifier
+          example: ABC12345
+          type: string
+        bpsCommission:
+          description: Clients use this parameter to add commission (in basis points) to the investor's executed trade cost
+          type: integer
+        bpsMarkup:
+          description: Clients use this parameter to add markup (in basis points) to the investor's ordered asset price
+          type: integer
+        clientOrderId:
+          description: Client-specified unique identifier used to track, manage, and retrieve details about the order once it's submitted.
+          example: d3adb33f-some-guid-here-fcaf3b33f
+          maxLength: 64
+          type: string
+        expireTime:
+          description: Time the order expires for GTD orders
+          format: date-time
+          type: string
+          nullable: true
+        fixedCommission:
+          description: Clients use this parameter to add fixed commission (in USD) to the investor's executed trade cost
+          type: string
+        fixedMarkup:
+          description: Clients use this parameter to add fixed markup (in USD) to the investor's ordered asset price
+          type: string
+        notional:
+          description: Order size in approximate monetary units; mutually exclusive with quantity
+          type: string
+        price:
+          description: All float fields must accommodate up to fifteen significant digits
+          type: string
+        quantity:
+          description: Order size in number of product units; mutually exclusive with notional
+          type: string
+        side:
+          $ref: '#/components/schemas/Side'
+        stopPrice:
+          description: The stop price for stop limit order.
+          type: string
+        symbol:
+          description: The symbol representing a crypto asset on the platform
+          example: BTCUSD
+          type: string
+        timeInForce:
+          $ref: '#/components/schemas/TimeInForce'
+        type:
+          $ref: '#/components/schemas/OrderType'
+      required:
+      - symbol
+      - clientOrderId
+      - type
+      - timeInForce
+      - account
+      - side
+      type: object
+    Side:
+      description: '<br/>`BUY` - Buy crypto assets <br/>`SELL` - Sell crypto assets
+
+        '
+      enum:
+      - BUY
+      - SELL
+      type: string
+    CancelResponse:
+      properties:
+        receivedAt:
+          description: The time the request to cancel the order was received
+          format: date-time
+          type: string
+        request:
+          $ref: '#/components/schemas/CancelRequest'
+      required:
+      - request
+      type: object

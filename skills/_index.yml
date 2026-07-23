@@ -1,0 +1,16 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/bakkt-crypto-openapi.yml
+skills:
+- file: bakkt-open-account-and-buy-crypto.md
+  name: Open a Bakkt account and buy crypto
+  api: openapi/bakkt-crypto-openapi.yml
+  operations: [login, createAccount, triggerKYBScreening, getAccountStatus, getInstruments, submitOrder, getOrder]
+- file: bakkt-fiat-onramp-and-fund.md
+  name: Link a bank account and fund with fiat
+  api: openapi/bakkt-crypto-openapi.yml
+  operations: [generateAccessToken, addBankAccount, transferFiatCurrency, getFiatAccountBalance, generateWireInstructions]
+- file: bakkt-withdraw-crypto.md
+  name: Withdraw crypto to an external wallet
+  api: openapi/bakkt-crypto-openapi.yml
+  operations: [login, postReceiveAddress, verifyWalletAddress, lookupVasp, postWithdrawFee, postWithdraw, getWithdraw, getPositions]

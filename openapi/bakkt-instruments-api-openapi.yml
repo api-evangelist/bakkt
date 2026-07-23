@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Instruments API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- description: Instruments provides information about assets offered on the platform.
+  name: Instruments
+paths:
+  /apex-crypto/api/v2/instruments:
+    get:
+      description: Use this endpoint to retrieve information about all crypto intruments in the system.
+      operationId: getInstruments
+      responses:
+        '200':
+          description: This response returns information for all instruments in the system.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentResponse'
+        '500':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Instrument Definitions
+      tags:
+      - Instruments
+components:
+  schemas:
+    InstrumentResponse:
+      properties:
+        instruments:
+          items:
+            $ref: '#/components/schemas/Instrument'
+          type: array
+    Instrument:
+      properties:
+        minimumOrderQuantity:
+          description: The smallest quantity of this crypto that can be bought or sold
+          type: string
+        minimumPriceIncrement:
+          type: string
+        minimumQuantityIncrement:
+          type: string
+        symbol:
+          type: string
+      required:
+      - minimumOrderQuantity
+      - minimumPriceIncrement
+      - minimumQuantityIncrement
+      - symbol
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object

@@ -1,0 +1,44 @@
+generated: '2026-07-18'
+method: searched
+source: https://bakkt.readme.io/reference/submitorder , https://bakkt.readme.io/docs/order-types , https://bakkt.readme.io/reference/login
+auth_style: Bearer security token in Authorization header, obtained from the login/generate-access-token
+  endpoint (see authentication/bakkt-authentication.yml).
+idempotency:
+  supported: true
+  mechanism: client-supplied idempotency key in the request body
+  key_field: clientOrderId (orders), clientTransactionId (allocations/gifts/transfers)
+  behavior: Duplicate submissions with the same clientOrderId are de-duplicated; order details must NOT
+    change across retries. Orders are uniquely tracked for idempotency by the submitting system.
+  scope: per submitting client system
+  docs: https://bakkt.readme.io/reference/submitorder
+async_processing:
+  orders: Orders process asynchronously; acknowledgments, cancels, rejections and fills are delivered
+    via the Execution Report and event/webhook mechanisms rather than synchronously.
+pagination:
+  style: not-documented
+  notes: Endpoints are keyed by client-supplied IDs (account ID, clientOrderId, batchTransactionId); no
+    cursor/offset pagination documented.
+versioning:
+  style: uri-path
+  current: v2 (Crypto Solutions /apex-crypto/api/v2), v1 (Fiat/Partner /partner/v1)
+  notes: Path version prefix indicates major version; same-prefix URLs retain backward compatibility.
+datetime:
+  format: epoch time in UTC
+  notes: All date/time units must be specified as epoch time in UTC.
+error_envelope:
+  shape: '{ code: int, message: string }'
+  ref: errors/bakkt-problem-types.yml
+  notes: 4xx = client error, 5xx = Bakkt system error.
+transport:
+  https_required: true
+  protocols:
+  - REST/JSON
+  - FIX (order management)
+  - WebSocket (market data, coin-transfer updates)
+  - AWS SQS (event notifications)
+cross_links:
+  errors: errors/bakkt-problem-types.yml
+  decline_codes: errors/bakkt-decline-codes.yml
+  lifecycle: lifecycle/bakkt-lifecycle.yml
+  authentication: authentication/bakkt-authentication.yml
+  webhooks: asyncapi/bakkt-webhooks.yml

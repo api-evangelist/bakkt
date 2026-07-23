@@ -1,0 +1,30 @@
+generated: '2026-07-18'
+method: searched
+hosts:
+- https://bakkt.com
+- https://developer.bakkt.com
+- https://bakkt.readme.io
+- https://api.bakkt.com
+documents:
+- path: /.well-known/security.txt
+  host: bakkt.com
+  status: 404
+- path: /.well-known/openid-configuration
+  host: bakkt.com
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  host: bakkt.com
+  status: 404
+- path: /.well-known/api-catalog
+  host: bakkt.com
+  status: 404
+- path: /.well-known/security.txt
+  host: developer.bakkt.com
+  status: 500
+- path: /.well-known/security.txt
+  host: bakkt.readme.io
+  status: 404
+- path: /.well-known/security.txt
+  host: api.bakkt.com
+  status: 403
+result: none-published

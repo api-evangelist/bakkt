@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Partner Party Kyc API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- name: Partner Party Kyc
+paths:
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/kyc/documentVerificationDetails:
+    get:
+      tags:
+      - Partner Party Kyc
+      summary: Get Partner Party Document Verification Details
+      description: Retrieves the Document Verification Details for the party
+      operationId: getKycDocumentVerificationDetails
+      parameters:
+      - name: partnerId
+        in: path
+        description: Partner that the Party is linked to. May be different to the Partner associated with the credentials.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 53b16517-7766-4124-ab53-a798c310c139
+      - name: partnerPartyRef
+        in: path
+        description: Partner's primary key for Party
+        required: true
+        schema:
+          type: string
+        example: 98179173-65bc-4018-8a1a-7b5b87cbf3d8
+      - name: overrideCustomerDeclinedConsent
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: x-tracking-id
+        in: header
+        required: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/KycDocumentVerificationDetails'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+components:
+  schemas:
+    PublicApiError:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Message from the exception
+          example: Parameter passed for field is not meeting its required format.
+        detail:
+          type: string
+          description: Description of the type
+          example: validation error
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicApiErrorDetail'
+        type:
+          type: string
+          example: INVALID_FIELD_VALUE
+    KycDocumentVerificationDetails:
+      type: object
+      properties:
+        verificationURL:
+          type: string
+          description: The url to be used for document verification
+          example: https://www.example-docv-url.com
+        verificationURLExpiry:
+          type: string
+          description: The time at which the verification URL will expire
+          example: '2024-05-04T12:00:00.000Z'
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR

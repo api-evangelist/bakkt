@@ -1,0 +1,60 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/bakkt-crypto-openapi.yml (components.schemas $ref graph)
+entities:
+- Account
+- Order
+- Position
+- Instrument
+- Transfer
+- Withdrawal
+- Document
+- Allocation
+- Batch
+- FiatAccount
+- Gift
+- Jurisdiction
+relationships:
+- from: Account
+  to: Order
+  type: has_many
+  via: accountId
+- from: Account
+  to: Position
+  type: has_many
+  via: accountId
+- from: Account
+  to: Document
+  type: has_many
+  via: accountId
+- from: Account
+  to: FiatAccount
+  type: has_many
+  via: accountId
+- from: Order
+  to: Instrument
+  type: belongs_to
+  via: symbol
+- from: Order
+  to: Account
+  type: belongs_to
+  via: accountId
+- from: Allocation
+  to: Batch
+  type: belongs_to
+  via: batchTransactionId
+- from: Withdrawal
+  to: Account
+  type: belongs_to
+  via: accountId
+- from: Gift
+  to: Account
+  type: belongs_to
+  via: accountId
+identifiers:
+  account: client-supplied accountId
+  order: clientOrderId
+  allocation: clientTransactionId
+  batch: batchTransactionId
+  party: partnerPartyRef
+schema_count: 114

@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Bakkt Crypto Solutions
+  version: 1.0.0
+extends: openapi/bakkt-crypto-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-rating: 4
+    x-apievangelist-source: reconstructed from bakkt.readme.io per-endpoint OpenAPI fragments
+    x-idempotency: clientOrderId / clientTransactionId
+    x-status-page: https://status.bakkt.com
+- target: $.components
+  update:
+    securitySchemes:
+      BakktSecurityToken:
+        type: http
+        scheme: bearer
+        description: Bearer security token from the login / generate-access-token endpoint.

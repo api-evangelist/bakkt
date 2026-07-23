@@ -1,0 +1,81 @@
+generated: '2026-07-18'
+method: searched
+source: https://bakkt.readme.io/docs/ach-return-codes
+context: ACH return codes returned on fiat funding (ACH) transactions; surfaced via FIAT_EVENT webhooks
+  and Cash Activity reports.
+envelope_field: reasonCode (ACH return code) on FIAT_EVENT webhook payloads
+note: NACHA standard ACH return codes; list truncated to the R01-R24 range captured verbatim from the
+  Bakkt docs table (the full table continues beyond R24).
+decline_codes:
+- code: R01
+  meaning: Insufficient funds
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R02
+  meaning: Account closed
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R03
+  meaning: Unable to locate account or no account
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R04
+  meaning: Invalid account number
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R05
+  meaning: Unauthorized debit to consumer account using Corporate SEC code
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R06
+  meaning: Returned due to ODFI's request
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R07
+  meaning: Authorization revoked by customer
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R08
+  meaning: Payment stopped
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R09
+  meaning: Uncollected funds
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R10
+  meaning: Customer advises unauthorized, improper, ineligible, or part of an incomplete transaction
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R11
+  meaning: Check Truncation Entry Return
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R12
+  meaning: Branch sold to another DFI
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R13
+  meaning: Invalid ACH routing number
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R14
+  meaning: Representative payee deceased or unable to continue in that capacity
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R15
+  meaning: Beneficiary or account holder deceased
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R16
+  meaning: Account frozen/entry returned per OFAC instruction
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R17
+  meaning: File record edit criteria
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R18
+  meaning: Improper effective entry date
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R19
+  meaning: Amount field error
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R20
+  meaning: Non-transaction account
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R21
+  meaning: Invalid company identification
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R22
+  meaning: Invalid individual ID number
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R23
+  meaning: Credit entry refused by the receiver
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.
+- code: R24
+  meaning: Duplicate entry
+  action: Notify the customer; the ACH debit/credit was returned and the funding did not settle.

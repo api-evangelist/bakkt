@@ -1,0 +1,19 @@
+generated: '2026-07-18'
+method: searched
+source: https://bakkt.readme.io/docs/change-log , https://status.bakkt.com , https://bakkt.readme.io/docs/time-maintenance-windows
+versioning:
+  scheme: uri-path
+  current: v2 (Crypto Solutions), v1 (Fiat/Partner)
+  docs: https://bakkt.readme.io/reference/login
+  policy: Path version prefix denotes major version; same-prefix URLs retain backward compatibility.
+status_page: https://status.bakkt.com
+maintenance_window:
+  daily: 16:30-17:05 CT (Bakkt Crypto Solutions); orders placed during the window are rejected as expired.
+  docs: https://bakkt.readme.io/docs/time-maintenance-windows
+changelog: https://bakkt.readme.io/docs/change-log
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No formal RFC 8594 deprecation policy published; changelog notes removals (e.g. Partner SDK removed
+    2023-10-10).
+deprecated_operations: []

@@ -1,0 +1,143 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Partner Connectivity API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- name: Partner Connectivity
+paths:
+  /partner/v1/oauth2/token:
+    post:
+      tags:
+      - Partner Connectivity
+      summary: Generate Access Token
+      description: Generate Access Token which is used to access Bakkt APIs
+      operationId: generateAccessToken
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: grant_type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/PartnerTokenResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /partner/v1/heartbeat:
+    post:
+      tags:
+      - Partner Connectivity
+      summary: Check connectivity with Bakkt backend
+      description: This endpoint is meant to be access for development only
+      operationId: heartbeat
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/HeartBeatRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/HeartBeatResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+components:
+  schemas:
+    PartnerTokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: A standard JWT access token
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ii1xR1ZoVXdOMjc5a3NqNEoySnFXSWk2RDNQcyJ9.eyJhdWQiOiI3NTFkZjg0Yi0wZWU3LTQ2MWQtYThiZi0yMGQ2MTY1OTY2Y2EiLCJleHAiOjE2MTk1ODE3OTAsImlhdCI6MTYxOTU3ODE5MCwiaXNzIjoiaHR0cHM6Ly9pZC5kZXYuYmFra3QuY29tLyIsInN1YiI6ImE1NDNhMjE1LTg2M2QtNGFlMS1hYTZmLWIyYzEzNDczYmYzYyIsImp0aSI6ImZlMTY2OTc4LTJjODUtNGU2Zi05NDFkLTJjOTYyYmZkZjYwOSIsImF1dGhlbnRpY2F0aW9uVHlwZSI6IlBBU1NXT1JEIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZmRkMmNlYjktZjI0NS00ZWZiLTg3OTgtMGI0MTU1NjcyNGMzIiwiYXBwbGljYXRpb25JZCI6Ijc1MWRmODRiLTBlZTctNDYxZC1hOGJmLTIwZDYxNjU5NjZjYSIsInJvbGVzIjpbImJha2t0X21lcmNoYW50Il0sImJwSWQiOjQzNTY3MX0.NQgIPKNGqZfWqRHAaaBCHsWTEvhPv2g9MRtbnOqgMjaz8rHQQaor3dAcwozKSuw9VoE6JKMRP2ftigNhnqVyJUUxzAULm2MT8e7UOtCuVHld4TRjpAFJW-0qkeLMmag9nxZMFthqsiJFqrDI4BHfOF2t4TbIOEwfRKq42iQkIDNTzFzn34k_fVBBqcxQsBAOK7vea0LqO39lzNE1o2DLeJ5erqnCEwi05-zZR4zO0Es25eHpuwA3L1Qf-YRBGXm4ELxenUilEWRQJForVx2qTOGPIUapPzbpTmdxMwNEJUeYcTY9T_u5MZEf1GsE8rodRpuBneRoCGfpjkv6095Exg
+        expiresIn:
+          type: string
+          description: How long the token will last in seconds
+          example: '3667'
+        tokenType:
+          type: string
+          description: The token type that was generated
+          example: Bearer
+    PublicApiError:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Message from the exception
+          example: Parameter passed for field is not meeting its required format.
+        detail:
+          type: string
+          description: Description of the type
+          example: validation error
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicApiErrorDetail'
+        type:
+          type: string
+          example: INVALID_FIELD_VALUE
+    HeartBeatResponse:
+      required:
+      - result
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique key used by check Bakkt connectivity, copy from request requestId
+          example: 123e4567-e89b-12d3-a456-426614174000
+        result:
+          type: string
+          description: Phrase attesting bakkt created the ping response
+          example: 'PONG: heartbeat received'
+    HeartBeatRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique key used by check Bakkt connectivity
+          example: 123e4567-e89b-12d3-a456-426614174000
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR

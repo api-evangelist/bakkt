@@ -1,0 +1,172 @@
+generated: '2026-07-18'
+method: derived
+status: candidate
+source: openapi/bakkt-crypto-openapi.yml
+server:
+  name: bakkt
+  transport: stdio
+  note: No official Bakkt MCP server found; candidate tool list derived one-per-operation from the reconstructed
+    OpenAPI.
+tools:
+- name: addBankAccount
+  description: Link a Plaid account using processor token
+  source_operation: openapi/bakkt-crypto-openapi.yml#addBankAccount
+- name: addManualBankAccount
+  description: Add Bank Account
+  source_operation: openapi/bakkt-crypto-openapi.yml#addManualBankAccount
+- name: allocationCurrencyBatchAllocateCreate
+  description: Request For Currency Allocation
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationCurrencyBatchAllocateCreate
+- name: allocationCurrencyBatchAllocateGet
+  description: Retrieve Currency Allocation Details By clientTransactionId
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationCurrencyBatchAllocateGet
+- name: allocationCurrencyBatchClose
+  description: Request To Close Currency Allocation Batch
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationCurrencyBatchClose
+- name: allocationCurrencyBatchGet
+  description: Retrieve Currency Allocation Details By batchTransactionId
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationCurrencyBatchGet
+- name: allocationCurrencyBatchOpen
+  description: Request For New Currency Allocation Batch
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationCurrencyBatchOpen
+- name: allocationFiatBatchAllocateCreate
+  description: Request For Fiat Allocation
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationFiatBatchAllocateCreate
+- name: allocationFiatBatchAllocateGet
+  description: Retrieve Fiat Allocation Details By clientTransactionId
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationFiatBatchAllocateGet
+- name: allocationFiatBatchClose
+  description: Request To Close Fiat Allocation Batch
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationFiatBatchClose
+- name: allocationFiatBatchGet
+  description: Retrieve Fiat Allocation Details By batchTransactionId
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationFiatBatchGet
+- name: allocationFiatBatchOpen
+  description: Request For New Fiat Allocation Batch
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationFiatBatchOpen
+- name: allocationGiftCreate
+  description: Request For Gift
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationGiftCreate
+- name: allocationGiftGet
+  description: Retrieve Gift Details By clientTransactionId
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationGiftGet
+- name: allocationTradeBatchAllocateCreate
+  description: Request For Allocation
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationTradeBatchAllocateCreate
+- name: allocationTradeBatchAllocateGet
+  description: Retrieve Allocation Details By clientTransactionId
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationTradeBatchAllocateGet
+- name: allocationTradeBatchClose
+  description: Request To Close Allocation Batch
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationTradeBatchClose
+- name: allocationTradeBatchGet
+  description: Retrieve Allocation Details By batchTransactionId
+  source_operation: openapi/bakkt-crypto-openapi.yml#allocationTradeBatchGet
+- name: cancelOrder
+  description: Submit a Request to Cancel an Order
+  source_operation: openapi/bakkt-crypto-openapi.yml#cancelOrder
+- name: createAccount
+  description: Create a New User Account
+  source_operation: openapi/bakkt-crypto-openapi.yml#createAccount
+- name: downloadDocument
+  description: Download Document
+  source_operation: openapi/bakkt-crypto-openapi.yml#downloadDocument
+- name: generateAccessToken
+  description: Generate Access Token
+  source_operation: openapi/bakkt-crypto-openapi.yml#generateAccessToken
+- name: generateWireInstructions
+  description: Generate inbound wire instructions
+  source_operation: openapi/bakkt-crypto-openapi.yml#generateWireInstructions
+- name: getAccount
+  description: Retrieves Accounts by Account ID
+  source_operation: openapi/bakkt-crypto-openapi.yml#getAccount
+- name: getAccountStatus
+  description: Retrieves account status by Account ID
+  source_operation: openapi/bakkt-crypto-openapi.yml#getAccountStatus
+- name: getApiStatus
+  description: Check the Health of the API Gateway
+  source_operation: openapi/bakkt-crypto-openapi.yml#getApiStatus
+- name: getConfig
+  description: Get Client Connection Configurations
+  source_operation: openapi/bakkt-crypto-openapi.yml#getConfig
+- name: getFiatAccountBalance
+  description: Retrieve Fiat Account Balance
+  source_operation: openapi/bakkt-crypto-openapi.yml#getFiatAccountBalance
+- name: getInstruments
+  description: Retrieve Instrument Definitions
+  source_operation: openapi/bakkt-crypto-openapi.yml#getInstruments
+- name: getJurisdictions
+  description: Retrieve Jurisdiction Definitions
+  source_operation: openapi/bakkt-crypto-openapi.yml#getJurisdictions
+- name: getJurisdictionsAll
+  description: Retrieve Jurisdiction Definitions
+  source_operation: openapi/bakkt-crypto-openapi.yml#getJurisdictionsAll
+- name: getKycDocumentVerificationDetails
+  description: Get Partner Party Document Verification Details
+  source_operation: openapi/bakkt-crypto-openapi.yml#getKycDocumentVerificationDetails
+- name: getOrder
+  description: Retrieve an Order by Client Order ID
+  source_operation: openapi/bakkt-crypto-openapi.yml#getOrder
+- name: getPositions
+  description: Retrieve Crypto Positions
+  source_operation: openapi/bakkt-crypto-openapi.yml#getPositions
+- name: getWithdraw
+  description: Retrieve the Withdrawal Status
+  source_operation: openapi/bakkt-crypto-openapi.yml#getWithdraw
+- name: heartbeat
+  description: Check connectivity with Bakkt backend
+  source_operation: openapi/bakkt-crypto-openapi.yml#heartbeat
+- name: kycTransferRecovery
+  description: KYC transfer recovery request
+  source_operation: openapi/bakkt-crypto-openapi.yml#kycTransferRecovery
+- name: linkBankAccountAchAsync
+  description: Add Bank Account - ACH
+  source_operation: openapi/bakkt-crypto-openapi.yml#linkBankAccountAchAsync
+- name: login
+  description: Login
+  source_operation: openapi/bakkt-crypto-openapi.yml#login
+- name: lookupVasp
+  description: Lookup the name of a vasp associated with a wallet address.
+  source_operation: openapi/bakkt-crypto-openapi.yml#lookupVasp
+- name: openBatchTradeAllocation
+  description: Request For New Allocation Batch
+  source_operation: openapi/bakkt-crypto-openapi.yml#openBatchTradeAllocation
+- name: postReceiveAddress
+  description: Retrieve a Wallet Receive Address
+  source_operation: openapi/bakkt-crypto-openapi.yml#postReceiveAddress
+- name: postWithdraw
+  description: Create a Crypto Withdrawal Request
+  source_operation: openapi/bakkt-crypto-openapi.yml#postWithdraw
+- name: postWithdrawFee
+  description: Retrieve a Fee Estimate to Complete a Withdrawal
+  source_operation: openapi/bakkt-crypto-openapi.yml#postWithdrawFee
+- name: removeFiatAccount
+  description: Unlink a fiat account
+  source_operation: openapi/bakkt-crypto-openapi.yml#removeFiatAccount
+- name: retrieveAccountDocumentMetadata
+  description: Retrieve All Document Metadata for an Account
+  source_operation: openapi/bakkt-crypto-openapi.yml#retrieveAccountDocumentMetadata
+- name: retrieveDocumentMetadata
+  description: Retrieve Metadata for Specific Document
+  source_operation: openapi/bakkt-crypto-openapi.yml#retrieveDocumentMetadata
+- name: submitOrder
+  description: Submit an Order to Buy or Sell Crypto
+  source_operation: openapi/bakkt-crypto-openapi.yml#submitOrder
+- name: transferFiatCurrency
+  description: Deposit or withdraw funds
+  source_operation: openapi/bakkt-crypto-openapi.yml#transferFiatCurrency
+- name: triggerKYBScreening
+  description: Trigger KYB Screening on Account
+  source_operation: openapi/bakkt-crypto-openapi.yml#triggerKYBScreening
+- name: unlinkBankAccount
+  description: Unlink fiat Account
+  source_operation: openapi/bakkt-crypto-openapi.yml#unlinkBankAccount
+- name: updateAccountSettlement
+  description: Update Settlement Method on Account
+  source_operation: openapi/bakkt-crypto-openapi.yml#updateAccountSettlement
+- name: uploadDocument
+  description: Upload Document and Metadata
+  source_operation: openapi/bakkt-crypto-openapi.yml#uploadDocument
+- name: verifyWalletAddress
+  description: Verify that a wallet address is valid prior to using it in a transfer request.
+  source_operation: openapi/bakkt-crypto-openapi.yml#verifyWalletAddress

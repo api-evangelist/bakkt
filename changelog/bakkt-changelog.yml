@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: searched
+source: https://bakkt.readme.io/docs/change-log
+scheme: dated-doc-table
+current_version: v2 (Crypto Solutions) / v1 (Fiat/Partner)
+entries:
+- date: '2024-08-01'
+  highlights:
+  - Added tag99 (stopPx) and stop-limit to FIX tag 40.
+  breaking: false
+- date: '2024-03-26'
+  highlights:
+  - 'Added new instrument types to FIAT_EVENT webhooks and Cash Activity Report: PARTNER_WRITE_OFF, BAKKT_WRITE_OFF,
+    DECEASED_PARTY, OTHER_ADJUSTMENT.'
+  breaking: false
+- date: '2024-02-07'
+  highlights:
+  - Corrected fiatTransactionType/transactionStatus values; documented ACH Cancelled flow and ACH Transaction
+    Flow.
+  breaking: false
+- date: '2023-12-01'
+  highlights:
+  - Added plaidAccount/link-specific webhooks.
+  breaking: false
+- date: '2023-11-17'
+  highlights:
+  - Added Wire support to Transfer Fiat Currency, Instrument Type and Cash Activity Report.
+  breaking: false
+- date: '2023-10-10'
+  highlights:
+  - Added change log; Partner SDK removed (no longer supported); added ACH_RETURN_FEE instrument type.
+  breaking: true

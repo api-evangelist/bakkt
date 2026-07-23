@@ -1,0 +1,759 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/bakkt-crypto-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 54
+  by_action_class:
+    acting: 30
+    connected: 24
+  by_consequence:
+    write: 19
+    read: 24
+    physical: 11
+  human_in_the_loop_required: 0
+operations:
+- path: /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/plaidAccount/link
+  method: post
+  operationId: addBankAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/bankAccount
+  method: post
+  operationId: addManualBankAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/currency/batch/allocate
+  method: post
+  operationId: allocationCurrencyBatchAllocateCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/currency/batch/allocate/{clientTransactionId}
+  method: get
+  operationId: allocationCurrencyBatchAllocateGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/allocation/currency/batch/close
+  method: post
+  operationId: allocationCurrencyBatchClose
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/currency/batch/{batchTransactionId}
+  method: get
+  operationId: allocationCurrencyBatchGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/allocation/currency/batch/open
+  method: post
+  operationId: allocationCurrencyBatchOpen
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/fiat/batch/allocate
+  method: post
+  operationId: allocationFiatBatchAllocateCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/fiat/batch/allocate/{clientTransactionId}
+  method: get
+  operationId: allocationFiatBatchAllocateGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/allocation/fiat/batch/close
+  method: post
+  operationId: allocationFiatBatchClose
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/fiat/batch/{batchTransactionId}
+  method: get
+  operationId: allocationFiatBatchGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/allocation/fiat/batch/open
+  method: post
+  operationId: allocationFiatBatchOpen
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/gift
+  method: post
+  operationId: allocationGiftCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/gift/{clientTransactionId}
+  method: get
+  operationId: allocationGiftGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/allocation/trade/batch/allocate
+  method: post
+  operationId: allocationTradeBatchAllocateCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/trade/batch/allocate/{clientTransactionId}
+  method: get
+  operationId: allocationTradeBatchAllocateGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/allocation/trade/batch/close
+  method: post
+  operationId: allocationTradeBatchClose
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/allocation/trade/batch/{batchTransactionId}
+  method: get
+  operationId: allocationTradeBatchGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/orders/{clientOrderId}/cancel
+  method: post
+  operationId: cancelOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/accounts
+  method: post
+  operationId: createAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/documents/{clientDocumentId}
+  method: get
+  operationId: downloadDocument
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /partner/v1/oauth2/token
+  method: post
+  operationId: generateAccessToken
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/wire-instructions
+  method: get
+  operationId: generateWireInstructions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/accounts/{clientAccountId}
+  method: get
+  operationId: getAccount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/accounts/{clientAccountId}/status
+  method: get
+  operationId: getAccountStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/status
+  method: get
+  operationId: getApiStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/config
+  method: get
+  operationId: getConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/fiatAccount/balance
+  method: get
+  operationId: getFiatAccountBalance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/instruments
+  method: get
+  operationId: getInstruments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/jurisdictions
+  method: get
+  operationId: getJurisdictions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/jurisdictions/all
+  method: get
+  operationId: getJurisdictionsAll
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/kyc/documentVerificationDetails
+  method: get
+  operationId: getKycDocumentVerificationDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/orders/{clientOrderId}
+  method: get
+  operationId: getOrder
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/positions/{account}
+  method: get
+  operationId: getPositions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/transfers/withdraw/coin/{clientTransactionId}
+  method: get
+  operationId: getWithdraw
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /partner/v1/heartbeat
+  method: post
+  operationId: heartbeat
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/accounts/kycTransferRecovery/{clientAccountId}
+  method: post
+  operationId: kycTransferRecovery
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/bankAccountLinking/ach
+  method: post
+  operationId: linkBankAccountAchAsync
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/login
+  method: post
+  operationId: login
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/transfers/vaspLookup/{receivingWallet}
+  method: get
+  operationId: lookupVasp
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/allocation/trade/batch/open
+  method: post
+  operationId: openBatchTradeAllocation
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/transfers/deposit/coin/receiveAddress
+  method: post
+  operationId: postReceiveAddress
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/transfers/withdraw/coin
+  method: post
+  operationId: postWithdraw
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/transfers/withdraw/coin/estimate
+  method: post
+  operationId: postWithdrawFee
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/fiatAccount/unlink
+  method: post
+  operationId: removeFiatAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/documents/{clientAccountId}/accountDocumentMetadata
+  method: get
+  operationId: retrieveAccountDocumentMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/documents/{clientDocumentId}/metadata
+  method: get
+  operationId: retrieveDocumentMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apex-crypto/api/v2/orders
+  method: post
+  operationId: submitOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/transfer
+  method: post
+  operationId: transferFiatCurrency
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/accounts/triggerKYBScreening/{clientAccountId}
+  method: post
+  operationId: triggerKYBScreening
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/bankAccountLinking/unlink
+  method: post
+  operationId: unlinkBankAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/accounts/settlementMethod/update
+  method: post
+  operationId: updateAccountSettlement
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/documents
+  method: post
+  operationId: uploadDocument
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /apex-crypto/api/v2/transfers/verifyWalletAddress
+  method: post
+  operationId: verifyWalletAddress
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

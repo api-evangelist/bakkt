@@ -1,0 +1,388 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Block Trade & Allocate API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- name: Block Trade & Allocate
+paths:
+  /apex-crypto/api/v2/allocation/trade/batch/allocate:
+    post:
+      description: Allocation request for a single customer account
+      operationId: allocationTradeBatchAllocateCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchTradeAllocationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful submission of allocation request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchTradeAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request For Allocation
+      tags:
+      - Block Trade & Allocate
+  /apex-crypto/api/v2/allocation/trade/batch/allocate/{clientTransactionId}:
+    get:
+      description: Retrieve details pertaining to a particular allocation by its clientTransactionId
+      operationId: allocationTradeBatchAllocateGet
+      parameters:
+      - description: Client-specified unique identifer for the allocation
+        in: path
+        name: clientTransactionId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns details of the allocation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchTradeAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Allocation Details By clientTransactionId
+      tags:
+      - Block Trade & Allocate
+  /apex-crypto/api/v2/allocation/trade/batch/close:
+    post:
+      description: Request to close off allocations of a particular batch
+      operationId: allocationTradeBatchClose
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchAllocationCloseRequest'
+        required: true
+      responses:
+        '200':
+          description: This response returns the details of the closed batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request To Close Allocation Batch
+      tags:
+      - Block Trade & Allocate
+  /apex-crypto/api/v2/allocation/trade/batch/{batchTransactionId}:
+    get:
+      description: Retrieve allocation details pertaining to a particular series of allocations by its batchTransactionId
+      operationId: allocationTradeBatchGet
+      parameters:
+      - description: Client-specified unique identifier for a set of allocations belonging to the same batch request
+        in: path
+        name: batchTransactionId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: This response returns the details of the allocation batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Allocation Details By batchTransactionId
+      tags:
+      - Block Trade & Allocate
+  /apex-crypto/api/v2/allocation/trade/batch/open:
+    post:
+      description: Open a new batch of allocations for a particular symbol where all transactions will either be notional or quantity based
+      operationId: openBatchTradeAllocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchAllocationOpenRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully opened allocations batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request For New Allocation Batch
+      tags:
+      - Block Trade & Allocate
+components:
+  schemas:
+    BatchAllocationOpenRequest:
+      description: Request to open an allocation batch
+      properties:
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+        symbol:
+          description: The symbol representing a crypto asset on the platform
+          type: string
+          x-order: 1
+        type:
+          description: Denotes if the order is based on monetary units or exact quantity of crypto
+          enum:
+          - NOTIONAL
+          - QUANTITY
+          type: string
+          x-order: 2
+      required:
+      - batchTransactionId
+      - symbol
+      - type
+    AllocationStatus:
+      description: Status of allocation
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      type: string
+    BatchTradeAllocation:
+      description: Summary of details pertaining to an allocation request
+      properties:
+        createdAt:
+          description: Date at which the allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 0
+        feeApplied:
+          description: USD value of the fee applied to the allocation
+          format: decimal
+          type: string
+          x-order: 5
+        id:
+          description: Bakkt unique identifier for the allocation
+          format: uuid
+          type: string
+          x-order: 1
+        netMoney:
+          description: Notional value of the allocation, inclusive of any fees applied
+          format: decimal
+          type: string
+          x-order: 2
+        price:
+          description: Price of the order at time of allocation
+          format: decimal
+          type: string
+          x-order: 3
+        quantity:
+          description: Order size in number of product units
+          format: decimal
+          type: string
+          x-order: 4
+        rejectReason:
+          description: The reason the allocation was rejected
+          type: string
+          x-order: 7
+        request:
+          $ref: '#/components/schemas/BatchTradeAllocationRequest'
+        status:
+          $ref: '#/components/schemas/AllocationStatus'
+      required:
+      - createdAt
+      - id
+      - request
+      - status
+    BatchAllocationStatus:
+      description: Status of allocation
+      enum:
+      - OPEN
+      - CLOSED
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      type: string
+    BatchAllocation:
+      description: Details of a particular allocation batch containing one or many allocation requests
+      properties:
+        allocations:
+          description: Number of requested allocations within the batch
+          type: integer
+          x-order: 0
+        createdAt:
+          description: Date at which the allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt allocation id
+          format: uuid
+          type: string
+          x-order: 2
+        rejectReason:
+          description: The reason the allocation was rejected
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/BatchAllocationOpenRequest'
+        status:
+          $ref: '#/components/schemas/BatchAllocationStatus'
+      required:
+      - allocations
+      - createdAt
+      - id
+      - request
+      - status
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    BatchAllocationCloseRequest:
+      description: Request to close off allocations of a particular batch
+      properties:
+        allocations:
+          description: Number of requested allocations within the batch
+          type: integer
+          x-order: 1
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+      required:
+      - batchTransactionId
+      - allocations
+    BatchTradeAllocationRequest:
+      description: Allocation request for a single customer account
+      properties:
+        account:
+          description: Bakkt client account identifier
+          type: string
+          x-order: 0
+        amount:
+          description: Order size depending on request type (NOTIONAL or QUANTITY)
+          format: decimal
+          type: string
+          x-order: 1
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 2
+        bpsCommission:
+          description: Clients use this parameter to add commission (in basis points) to the investor's executed allocation cost
+          type: integer
+          x-order: 6
+          nullable: true
+        clientTransactionId:
+          description: Client-specified unique identifier for the allocation
+          format: uuid
+          type: string
+          x-order: 3
+        fixedCommission:
+          description: Clients use this parameter to add fixed commission (in USD) to the investor's executed allocation cost
+          format: decimal
+          type: string
+          x-order: 7
+          nullable: true
+        side:
+          description: Denotes whether buying or selling an asset
+          enum:
+          - BUY
+          - SELL
+          type: string
+          x-order: 4
+        symbol:
+          description: The symbol representing a crypto asset on the platform
+          type: string
+          x-order: 5
+      required:
+      - account
+      - amount
+      - batchTransactionId
+      - clientTransactionId
+      - side
+      - symbol

@@ -1,0 +1,82 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Positions API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- description: Positions provide up-to-date information about crypto balances and transactions.
+  name: Positions
+paths:
+  /apex-crypto/api/v2/positions/{account}:
+    get:
+      description: Use this endpoint to retrieve current position amounts for all crypto in an investor's account. The amounts are in crypto quantities - not notional.
+      operationId: getPositions
+      parameters:
+      - description: Account for which to retrieve positions
+        in: path
+        name: account
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response returns a list of crypto positions in the investor's account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PositionResponse'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Crypto Positions
+      tags:
+      - Positions
+components:
+  schemas:
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    Position:
+      properties:
+        account:
+          type: string
+        currency:
+          type: string
+        current:
+          type: string
+        settled:
+          type: string
+        tradable:
+          description: Current amount available for trading
+          type: string
+        transferable:
+          description: Current amount available for withdrawal
+          type: string
+    PositionResponse:
+      properties:
+        positions:
+          items:
+            $ref: '#/components/schemas/Position'
+          type: array

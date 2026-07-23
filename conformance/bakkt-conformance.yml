@@ -1,0 +1,27 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/bakkt-crypto-openapi.yml + docs
+standards:
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme; auth is a login endpoint returning a bearer security token.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom {code,message} envelope, not application/problem+json.
+- id: fix-protocol
+  conforms: true
+  evidence: FIX order-management interface documented (bakkt.readme.io/docs/fix-protocol-specifications).
+- id: ach-nacha
+  conforms: true
+  evidence: ACH fiat funding uses NACHA standard return codes.
+- id: idempotency
+  conforms: true
+  evidence: clientOrderId/clientTransactionId idempotency keys on writes.
+- id: kyc-aml-ofac
+  conforms: true
+  evidence: KYC/KYB screening, OFAC screening, CIP checks documented in account-opening flow.
+- id: irs-1099-da
+  conforms: true
+  evidence: Digital asset 1099-DA tax reporting supported (2025 tax season overview).

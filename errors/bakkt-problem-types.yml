@@ -1,0 +1,42 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/bakkt-crypto-openapi.yml (Error schema {code,message}; 401/default responses)
+format: bakkt-error-envelope
+envelope:
+  fields:
+    code: HTTP-style integer error code (4xx client / 5xx system)
+    message: human-readable detail
+  content_type: application/json
+  rfc9457: false
+problems:
+- status: 400
+  title: Invalid argument
+  type: about:blank
+  format: bakkt-error-envelope
+  meaning: Malformed request or invalid field (e.g. too many decimal places, notional below $1.00).
+- status: 401
+  title: Unauthorized
+  type: about:blank
+  format: bakkt-error-envelope
+  meaning: Missing/invalid security token; user not authorized to obtain a token or call the endpoint.
+  source_operation: openapi/bakkt-crypto-openapi.yml#login
+- status: 403
+  title: Forbidden / jurisdiction restriction
+  type: about:blank
+  format: bakkt-error-envelope
+  meaning: Trading not permitted for the account jurisdiction (e.g. close-only) or IP not whitelisted.
+- status: 404
+  title: Not found
+  type: about:blank
+  format: bakkt-error-envelope
+  meaning: Account, order, or document not found for the supplied identifier.
+- status: 409
+  title: Conflict / duplicate
+  type: about:blank
+  format: bakkt-error-envelope
+  meaning: 'Idempotency conflict: same clientOrderId resubmitted with changed order details.'
+- status: 500
+  title: Internal error
+  type: about:blank
+  format: bakkt-error-envelope
+  meaning: Bakkt Crypto Solutions system error while handling the request.

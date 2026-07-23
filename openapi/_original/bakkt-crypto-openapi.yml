@@ -1,0 +1,4700 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors
+    can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints,
+    and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using
+    epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility
+    to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from
+    the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto
+    Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- name: Partner Party Linking
+- description: Orders enables customers to buy or sell crypto.
+  name: Orders
+- description: Accounts are used to represent users that use the platform's services.
+  name: Accounts
+- description: Documents allows users to upload and retrieve documents along with their relevant metadata.
+  name: Documents
+- name: Partner Connectivity
+- name: Partner Party Funding
+- description: Client systems can use these resources to provide a connection to the platform's services and check API status.
+  name: Configuration and Status
+- description: Instruments provides information about assets offered on the platform.
+  name: Instruments
+- description: Jurisdictions provides information about trading restrictions in different jurisdictions
+  name: Jurisdictions
+- description: Positions provide up-to-date information about crypto balances and transactions.
+  name: Positions
+- description: Transfers allow users to access deposit and withdrawal functionality both within the Bakkt network and across
+    the blockchain.
+  name: Transfers
+- description: Authorization allows Client systems to authenticate and access services on behalf of their investors.
+  name: Authorization
+paths:
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/plaidAccount/link:
+    post:
+      tags:
+      - Partner Party Linking
+      summary: Link a Plaid account using processor token
+      description: Send a processor token to link Plaid account
+      operationId: addBankAccount
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/PlaidAccountLinkingRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/AccountLinkResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/bankAccount:
+    post:
+      tags:
+      - Partner Party Linking
+      summary: Add Bank Account
+      description: Add bank account details to a consumer account at Bakkt. Test Environment Use Only
+      operationId: addManualBankAccount
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/CreateBankAccountRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/CreateBankAccountResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /apex-crypto/api/v2/allocation/currency/batch/allocate:
+    post:
+      description: Currency allocation request for a single customer account
+      operationId: allocationCurrencyBatchAllocateCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurrencyAllocationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful submission of currency allocation request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request For Currency Allocation
+      tags:
+      - Currency Onboarding
+  /apex-crypto/api/v2/allocation/currency/batch/allocate/{clientTransactionId}:
+    get:
+      description: Retrieve details pertaining to a particular currency allocation by its clientTransactionId
+      operationId: allocationCurrencyBatchAllocateGet
+      parameters:
+      - description: Client-specified unique identifer for the currency allocation
+        in: path
+        name: clientTransactionId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns details of the allocation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Currency Allocation Details By clientTransactionId
+      tags:
+      - Currency Onboarding
+  /apex-crypto/api/v2/allocation/currency/batch/close:
+    post:
+      description: Request to close off currency allocations of a particular batch
+      operationId: allocationCurrencyBatchClose
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchCurrencyAllocationCloseRequest'
+        required: true
+      responses:
+        '200':
+          description: This response returns the details of the closed batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchCurrencyAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request To Close Currency Allocation Batch
+      tags:
+      - Currency Onboarding
+  /apex-crypto/api/v2/allocation/currency/batch/{batchTransactionId}:
+    get:
+      description: Retrieve allocation details pertaining to a particular series of currency allocations by their batchTransactionId
+      operationId: allocationCurrencyBatchGet
+      parameters:
+      - description: Client-specified unique identifier for a set of currency allocations belonging to the same batch request
+        in: path
+        name: batchTransactionId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: This response returns the details of the currency allocation batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchCurrencyAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Currency Allocation Details By batchTransactionId
+      tags:
+      - Currency Onboarding
+  /apex-crypto/api/v2/allocation/currency/batch/open:
+    post:
+      description: Open a new batch of currency allocations for a particular currency where all transactions will be quantity
+        based
+      operationId: allocationCurrencyBatchOpen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchCurrencyAllocationOpenRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully opened allocations batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchCurrencyAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request For New Currency Allocation Batch
+      tags:
+      - Currency Onboarding
+  /apex-crypto/api/v2/allocation/fiat/batch/allocate:
+    post:
+      description: Fiat allocation request for a single customer account
+      operationId: allocationFiatBatchAllocateCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FiatAllocationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful submission of fiat allocation request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FiatAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request For Fiat Allocation
+      tags:
+      - Fiat Onboarding
+  /apex-crypto/api/v2/allocation/fiat/batch/allocate/{clientTransactionId}:
+    get:
+      description: Retrieve details pertaining to a particular fiat allocation by its clientTransactionId
+      operationId: allocationFiatBatchAllocateGet
+      parameters:
+      - description: Client-specified unique identifer for the fiat allocation
+        in: path
+        name: clientTransactionId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns details of the allocation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FiatAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Fiat Allocation Details By clientTransactionId
+      tags:
+      - Fiat Onboarding
+  /apex-crypto/api/v2/allocation/fiat/batch/close:
+    post:
+      description: Request to close off fiat allocations of a particular batch
+      operationId: allocationFiatBatchClose
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchFiatAllocationCloseRequest'
+        required: true
+      responses:
+        '200':
+          description: This response returns the details of the closed batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchFiatAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request To Close Fiat Allocation Batch
+      tags:
+      - Fiat Onboarding
+  /apex-crypto/api/v2/allocation/fiat/batch/{batchTransactionId}:
+    get:
+      description: Retrieve allocation details pertaining to a particular series of fiat allocations by their batchTransactionId
+      operationId: allocationFiatBatchGet
+      parameters:
+      - description: Client-specified unique identifier for a set of fiat allocations belonging to the same batch request
+        in: path
+        name: batchTransactionId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: This response returns the details of the fiat allocation batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchFiatAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Fiat Allocation Details By batchTransactionId
+      tags:
+      - Fiat Onboarding
+  /apex-crypto/api/v2/allocation/fiat/batch/open:
+    post:
+      description: Open a new batch of fiat allocations for a particular currency where all transactions will be quantity
+        based
+      operationId: allocationFiatBatchOpen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchFiatAllocationOpenRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully opened allocations batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchFiatAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request For New Fiat Allocation Batch
+      tags:
+      - Fiat Onboarding
+  /apex-crypto/api/v2/allocation/gift:
+    post:
+      description: Request to gift to a single customer account
+      operationId: allocationGiftCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftAllocationRequest'
+        required: true
+      responses:
+        '200':
+          description: Returns summary of the gift request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request For Gift
+      tags:
+      - Gift
+  /apex-crypto/api/v2/allocation/gift/{clientTransactionId}:
+    get:
+      description: Retrieve details pertaining to a particular gift by its clientTransactionId
+      operationId: allocationGiftGet
+      parameters:
+      - description: Client-specified unique identifier for the gift
+        in: path
+        name: clientTransactionId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns details of the gift
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Gift Details By clientTransactionId
+      tags:
+      - Gift
+  /apex-crypto/api/v2/allocation/trade/batch/allocate:
+    post:
+      description: Allocation request for a single customer account
+      operationId: allocationTradeBatchAllocateCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchTradeAllocationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful submission of allocation request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchTradeAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request For Allocation
+      tags:
+      - Block Trade & Allocate
+  /apex-crypto/api/v2/allocation/trade/batch/allocate/{clientTransactionId}:
+    get:
+      description: Retrieve details pertaining to a particular allocation by its clientTransactionId
+      operationId: allocationTradeBatchAllocateGet
+      parameters:
+      - description: Client-specified unique identifer for the allocation
+        in: path
+        name: clientTransactionId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns details of the allocation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchTradeAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Allocation Details By clientTransactionId
+      tags:
+      - Block Trade & Allocate
+  /apex-crypto/api/v2/allocation/trade/batch/close:
+    post:
+      description: Request to close off allocations of a particular batch
+      operationId: allocationTradeBatchClose
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchAllocationCloseRequest'
+        required: true
+      responses:
+        '200':
+          description: This response returns the details of the closed batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request To Close Allocation Batch
+      tags:
+      - Block Trade & Allocate
+  /apex-crypto/api/v2/allocation/trade/batch/{batchTransactionId}:
+    get:
+      description: Retrieve allocation details pertaining to a particular series of allocations by its batchTransactionId
+      operationId: allocationTradeBatchGet
+      parameters:
+      - description: Client-specified unique identifier for a set of allocations belonging to the same batch request
+        in: path
+        name: batchTransactionId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: This response returns the details of the allocation batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Allocation Details By batchTransactionId
+      tags:
+      - Block Trade & Allocate
+  /apex-crypto/api/v2/orders/{clientOrderId}/cancel:
+    post:
+      description: Use this endpoint to submit a request to cancel an order. Requests to cancel orders are subject to the
+        status of the order and if the order has not already processed.
+      operationId: cancelOrder
+      parameters:
+      - description: The `clientOrderId` of order to cancel (submitted when the order was originally created)
+        in: path
+        name: clientOrderId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelRequest'
+        description: Additional information regarding the order to cancel
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelResponse'
+        '400':
+          description: This response returns if the order could not be found to cancel it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: This response returns if the system could not complete this request, because the system could not find
+            the order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounteres an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Submit a Request to Cancel an Order
+      tags:
+      - Orders
+  /apex-crypto/api/v2/accounts:
+    post:
+      description: Use this endpoint to create new investor accounts. The client must provide an account ID that uniquely
+        identifies the investor from other investors on the client's platform.
+      operationId: createAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRequest'
+        description: The account request must provide the required, basic jurisdiction and biographical information about
+          the investor to enable the investor to participate in crypto asset transactions. Bakkt validates the provided information.
+        required: true
+      responses:
+        '200':
+          description: This response returns the newly created account for this investor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '422':
+          description: This response returns a validation failure with additional details about specific sections of the request
+            that failed validation in both machine-readable and developer-friendly messages tied to fields by name.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrors'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Create a New User Account
+      tags:
+      - Accounts
+  /apex-crypto/api/v2/documents/{clientDocumentId}:
+    get:
+      description: Use this endpoint to download a specific document associated with a given UUID
+      operationId: downloadDocument
+      parameters:
+      - description: Client document ID of the requested document
+        in: path
+        name: clientDocumentId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: This response returns the full details of the document.
+        '404':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/Error'
+            image/bmp:
+              schema:
+                $ref: '#/components/schemas/Error'
+            image/gif:
+              schema:
+                $ref: '#/components/schemas/Error'
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/Error'
+            image/png:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Download Document
+      tags:
+      - Documents
+  /partner/v1/oauth2/token:
+    post:
+      tags:
+      - Partner Connectivity
+      summary: Generate Access Token
+      description: Generate Access Token which is used to access Bakkt APIs
+      operationId: generateAccessToken
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: grant_type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/PartnerTokenResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/wire-instructions:
+    get:
+      tags:
+      - Partner Party Funding
+      summary: Generate inbound wire instructions
+      description: Generate end user specific inbound wire instructions for fiat deposit. Reponse not to be cached. Bank instructions
+        may change over time.
+      operationId: generateWireInstructions
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Request Accepted
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WireInstructionsResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /apex-crypto/api/v2/accounts/{clientAccountId}:
+    get:
+      description: This endpoint retrieves an investor account provided the client's unique account ID.
+      operationId: getAccount
+      parameters:
+      - description: A unique account ID originally provided by the client system when the account was created
+        in: path
+        name: clientAccountId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response returns the latest account information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieves Accounts by Account ID
+      tags:
+      - Accounts
+  /apex-crypto/api/v2/accounts/{clientAccountId}/status:
+    get:
+      description: This endpoint retrieves an investor account trading status provided the client's unique account ID.
+      operationId: getAccountStatus
+      parameters:
+      - description: A unique account ID originally provided by the client system when the account was created
+        in: path
+        name: clientAccountId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response returns the latest account status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOpeningStatus'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieves account status by Account ID
+      tags:
+      - Accounts
+  /apex-crypto/api/status:
+    get:
+      description: This endpoint provides an easy way to ensure the dedicated API Gateway is online and ready to service requests.
+      operationId: getApiStatus
+      responses:
+        '200':
+          description: If the API is in a good state, this call returns the text "ok."
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: If this request encounters an issue, the system provides an error code and message.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Check the Health of the API Gateway
+      tags:
+      - Configuration and Status
+  /apex-crypto/api/v2/config:
+    get:
+      description: Use this endpoint to get various configuration items for client systems to receive a flow of market data
+        and coin transfers updates during and after processing.
+      operationId: getConfig
+      responses:
+        '200':
+          description: This response returns the WebSocket URLs to track market data and transfers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigResponse'
+        '401':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Get Client Connection Configurations
+      tags:
+      - Configuration and Status
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/fiatAccount/balance:
+    get:
+      tags:
+      - Partner Party Funding
+      summary: Retrieve Fiat Account Balance
+      description: Retrieve the fiat account balance of a consumer
+      operationId: getFiatAccountBalance
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetFiatAccountBalanceResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /apex-crypto/api/v2/instruments:
+    get:
+      description: Use this endpoint to retrieve information about all crypto intruments in the system.
+      operationId: getInstruments
+      responses:
+        '200':
+          description: This response returns information for all instruments in the system.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentResponse'
+        '500':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Instrument Definitions
+      tags:
+      - Instruments
+  /apex-crypto/api/v2/jurisdictions:
+    get:
+      deprecated: true
+      description: Use this endpoint to retrieve a list of supported jurisdictions and any trading restrictions in place.
+      operationId: getJurisdictions
+      responses:
+        '200':
+          description: This response returns information for all jurisdictions in the system.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JurisdictionResponse'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Jurisdiction Definitions
+      tags:
+      - Jurisdictions
+  /apex-crypto/api/v2/jurisdictions/all:
+    get:
+      description: Use this endpoint to retrieve a list of supported jurisdictions and any restrictions in place.
+      operationId: getJurisdictionsAll
+      parameters:
+      - description: Country to query for. Lowest priority.
+        in: query
+        name: country
+        schema:
+          type: string
+      - description: State to query for. Prioritized over country.
+        in: query
+        name: state
+        schema:
+          type: string
+      - description: Deprecated, use tradingPair going forward. currency to query for. High priority.
+        in: query
+        name: currency
+        schema:
+          type: string
+      - description: tradingPair to query for. Highest priority. Example Value (BTCUSD, ETHUSDT)
+        in: query
+        name: tradingPair
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response returns information for all jurisdictions in the system.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JurisdictionAllResponse'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Jurisdiction Definitions
+      tags:
+      - Jurisdictions
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/kyc/documentVerificationDetails:
+    get:
+      tags:
+      - Partner Party Kyc
+      summary: Get Partner Party Document Verification Details
+      description: Retrieves the Document Verification Details for the party
+      operationId: getKycDocumentVerificationDetails
+      parameters:
+      - name: partnerId
+        in: path
+        description: Partner that the Party is linked to. May be different to the Partner associated with the credentials.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 53b16517-7766-4124-ab53-a798c310c139
+      - name: partnerPartyRef
+        in: path
+        description: Partner's primary key for Party
+        required: true
+        schema:
+          type: string
+        example: 98179173-65bc-4018-8a1a-7b5b87cbf3d8
+      - name: overrideCustomerDeclinedConsent
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: x-tracking-id
+        in: header
+        required: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/KycDocumentVerificationDetails'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /apex-crypto/api/v2/orders/{clientOrderId}:
+    get:
+      description: Use this endpoint to retrieve an order by its `clientOrderId.`
+      operationId: getOrder
+      parameters:
+      - description: Client Order ID of the order to retrieve
+        in: path
+        name: clientOrderId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response returns the full details of the order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: This response returns if the system could not complete this request because the order could not be
+            found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve an Order by Client Order ID
+      tags:
+      - Orders
+  /apex-crypto/api/v2/positions/{account}:
+    get:
+      description: Use this endpoint to retrieve current position amounts for all crypto in an investor's account. The amounts
+        are in crypto quantities - not notional.
+      operationId: getPositions
+      parameters:
+      - description: Account for which to retrieve positions
+        in: path
+        name: account
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response returns a list of crypto positions in the investor's account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PositionResponse'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Crypto Positions
+      tags:
+      - Positions
+  /apex-crypto/api/v2/transfers/withdraw/coin/{clientTransactionId}:
+    get:
+      description: Use this action to proactively request the status of a previously submitted withdrawal request. Bakkt provides
+        this service as a convenience to ask about specific withdrawals. Since Crypto systems must confirm withdrawals on
+        the blockchain, the request always has a network-dependent time lag from the moment a user submits a withdrawal on
+        chain until the transfer completes. While client systems may use this service to ask for the latest update for a given
+        transfer, Bakkt encourages clients to rely on the transfer websockets mechanism to receive timely updates to transfers
+        as they post to Bakkt systems and move through the blockchain.
+      operationId: getWithdraw
+      parameters:
+      - description: The client transaction ID of which to query the status
+        in: path
+        name: clientTransactionId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response provides the withdrawal status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Withdrawal'
+        '404':
+          description: This response returns if the system can not complete this request, because it can not find the withdrawal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve the Withdrawal Status
+      tags:
+      - Transfers
+  /partner/v1/heartbeat:
+    post:
+      tags:
+      - Partner Connectivity
+      summary: Check connectivity with Bakkt backend
+      description: This endpoint is meant to be access for development only
+      operationId: heartbeat
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/HeartBeatRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/HeartBeatResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /apex-crypto/api/v2/accounts/kycTransferRecovery/{clientAccountId}:
+    post:
+      description: Use this endpoing to recover KYC's that are transferred
+      operationId: kycTransferRecovery
+      parameters:
+      - description: A unique account ID originally provided by the client system when the account was created
+        in: path
+        name: clientAccountId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KycTransferRecoveryRequest'
+        description: The account transfer recovery request must provide the shared token
+        required: true
+      responses:
+        '200':
+          description: If transfer recovery request triggered successfully, this call returns the text "success."
+          content:
+            application/json:
+              schema:
+                type: string
+        '422':
+          description: This response returns a validation failure with additional details about the failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrors'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: KYC transfer recovery request
+      tags:
+      - Accounts
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/bankAccountLinking/ach:
+    post:
+      tags:
+      - Partner Party Funding
+      summary: Add Bank Account - ACH
+      operationId: linkBankAccountAchAsync
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/LinkBankAccountAchRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/LinkBankAccountAchResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /apex-crypto/api/v2/login:
+    post:
+      description: Client systems use this service to get a security token. All subsequent calls to the gateway must have
+        the token in the 'Authorization' header and must be made over HTTPS.
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        description: Submit login credentials for the system
+        required: true
+      responses:
+        '200':
+          description: This response returns a token to use for subsequent API calls.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: This response returns if the user is not authorized to get a token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Login
+      tags:
+      - Authorization
+  /apex-crypto/api/v2/transfers/vaspLookup/{receivingWallet}:
+    get:
+      description: Use this endpoint to lookup the name of a vasp associated with a wallet address.
+      operationId: lookupVasp
+      parameters:
+      - description: The wallet address to lookup the name of the vasp for.
+        in: path
+        name: receivingWallet
+        required: true
+        schema:
+          type: string
+      - description: The currency of the wallet address to lookup the name of the vasp for.
+        in: query
+        name: currency
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This response returns a list of transfers meeting the specified criteria.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaspLookupResponse'
+        '404':
+          description: This response returns if a vasp name cannot be found for the provided wallet address.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Lookup the name of a vasp associated with a wallet address.
+      tags:
+      - Transfers
+  /apex-crypto/api/v2/allocation/trade/batch/open:
+    post:
+      description: Open a new batch of allocations for a particular symbol where all transactions will either be notional
+        or quantity based
+      operationId: openBatchTradeAllocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchAllocationOpenRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully opened allocations batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchAllocation'
+        '400':
+          description: This response returns if the check was improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Request For New Allocation Batch
+      tags:
+      - Block Trade & Allocate
+  /apex-crypto/api/v2/transfers/deposit/coin/receiveAddress:
+    post:
+      description: 'This endpoint returns a wallet receive address to use for a deposit. Receive addresses change over time,
+        so clients should not cache them. Repeated calls to this service may or may not return the same result.
+
+        '
+      operationId: postReceiveAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositReceiveAddressRequest'
+        required: true
+      responses:
+        '200':
+          description: This response provides the deposit receive address response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepositReceiveAddressResponse'
+        '400':
+          description: This response returns if the request to retrieve the address is improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve a Wallet Receive Address
+      tags:
+      - Transfers
+  /apex-crypto/api/v2/transfers/withdraw/coin:
+    post:
+      description: This endpoint initiates a withdrawal from the investor's positions to a wallet on the blockchain. This
+        action requires users to request a fee estimate first.
+      operationId: postWithdraw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WithdrawRequest'
+        description: Information required to complete the withdrawal
+        required: true
+      responses:
+        '200':
+          description: This response returns the result of the withdrawal attempt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Withdrawal'
+        '400':
+          description: This response returns if the request to submit the withdrawal request is improperly submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Create a Crypto Withdrawal Request
+      tags:
+      - Transfers
+  /apex-crypto/api/v2/transfers/withdraw/coin/estimate:
+    post:
+      description: Withdrawing coins from an investor's crypto account may impose fees. Clients should request a fee estimate
+        detailing those fees and present it to investors for confirmation prior to completing a withdrawal. Clients must then
+        use the ID of the fee estimate to submit a withdrawal. The terms of the fee estimate are based on the underlying crypto
+        networks' market conditions and the system honors them up to a certain grace period after generating them. After the
+        grace period, clients must request a new fee estimate to conduct the withdrawal. Requests for estimates have no associated
+        cost.
+      operationId: postWithdrawFee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WithdrawalEstimatedFeeRequest'
+        description: Details required to identify the type and amount of crypto to withdraw.
+        required: true
+      responses:
+        '200':
+          description: This response returns the estimated fees required to conduct this withdrawal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WithdrawalEstimatedFeeResponse'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve a Fee Estimate to Complete a Withdrawal
+      tags:
+      - Transfers
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/fiatAccount/unlink:
+    post:
+      tags:
+      - Partner Party Linking
+      summary: Unlink a fiat account
+      description: Unlink a linked consumer fiat account
+      operationId: removeFiatAccount
+      deprecated: true
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/AccountUnLinkingRequest'
+        required: true
+      responses:
+        '201':
+          description: Transaction created
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/AccountUnLinkingResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /apex-crypto/api/v2/documents/{clientAccountId}/accountDocumentMetadata:
+    get:
+      description: Use this endpoint to retrieve metadata for all documents associated with a specific account
+      operationId: retrieveAccountDocumentMetadata
+      parameters:
+      - description: Client account ID of the requested document
+        in: path
+        name: clientAccountId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of document metadata for each document associated to a given account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveAccountDocumentMetadataResponse'
+        '404':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve All Document Metadata for an Account
+      tags:
+      - Documents
+  /apex-crypto/api/v2/documents/{clientDocumentId}/metadata:
+    get:
+      description: Use this endpoint to retrieve metadata for the document associated with a specific UUID
+      operationId: retrieveDocumentMetadata
+      parameters:
+      - description: Client document ID of the requested document
+        in: path
+        name: clientDocumentId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: This response returns the full details of the document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Retrieve Metadata for Specific Document
+      tags:
+      - Documents
+  /apex-crypto/api/v2/orders:
+    post:
+      description: 'Client systems use this endpoint to submit new order instructions to buy or sell crypto on behalf of an
+        investor. <br/><br/>The order processes asynchronously. The system allows duplicate submissions; however, order details
+        must NOT change in subsequent requests. Orders are uniquely tracked for idempotency by the submitting system providing
+        the `clientOrderId` field. <br/><br/> Clients can provide the amounts to purchase or sell crypto in two different
+        ways: <br/> <br/>`Notional` - Using the notional field, an investor may place an order for crypto given a USD amount
+        to purchase. For example, an investor can buy $100 of BTCUSD at market price by entering 100 in the notional field.
+        <br/>`Absolute` - Using the quantity field, an investor may place an order for an exact amount of crypto. For example,
+        an investor can sell 0.05 BTC for USD by entering 0.05 in the quantity field.
+
+        '
+      operationId: submitOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrderRequest'
+        description: Submits a new order to fill given the terms provided by the investor
+        required: true
+      responses:
+        '200':
+          description: This response returns when the order already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '201':
+          description: This response returns the newly created order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: This response returns when the request to submit the order was submitted improperly.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Submit an Order to Buy or Sell Crypto
+      tags:
+      - Orders
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/transfer:
+    post:
+      tags:
+      - Partner Party Funding
+      summary: Deposit or withdraw funds
+      description: Initiate deposit or withdraw on behalf of the consumer on linked fiat account.
+      operationId: transferFiatCurrency
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+        required: true
+      responses:
+        '200':
+          description: Request Accepted
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /apex-crypto/api/v2/accounts/triggerKYBScreening/{clientAccountId}:
+    post:
+      description: Use this endpoint to trigger a KYB screening on input account.
+      operationId: triggerKYBScreening
+      parameters:
+      - description: A unique account ID originally provided by the client system when the account was created
+        in: path
+        name: clientAccountId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If KYB has been triggered successfully, this call returns the text "success."
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Trigger KYB Screening on Account
+      tags:
+      - Accounts
+  /partner/v1/partner/{partnerId}/party/{partnerPartyRef}/bankAccountLinking/unlink:
+    post:
+      tags:
+      - Partner Party Funding
+      summary: Unlink fiat Account
+      operationId: unlinkBankAccount
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partnerPartyRef
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: x-tracking-id
+        in: header
+        required: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/UnlinkBankAccountRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UnlinkBankAccountResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+  /apex-crypto/api/v2/accounts/settlementMethod/update:
+    post:
+      description: Use this endpoint to update settlement method on input account.
+      operationId: updateAccountSettlement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountSettlementRequest'
+        description: The account settlement request must provide unique account ID and desired settlement method it needs
+          to be updated to
+        required: true
+      responses:
+        '200':
+          description: Response should return status of update and input request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSettlementResponse'
+        '422':
+          description: This response returns a validation failure with additional details about the failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrors'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Update Settlement Method on Account
+      tags:
+      - Accounts
+  /apex-crypto/api/v2/documents:
+    post:
+      description: Use this endpoint to upload a document and associated metadata
+      operationId: uploadDocument
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                metadata:
+                  description: "Document metadata with the DocumentRequest schema.  Handled as a formData string rather than\
+                    \ the typical\nbody reference due to the limitations of OpenAPI spec v2.\n\nExample:\n {\n    \"clientDocumentId\"\
+                    : \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"account\": \"myaccountnumber\",\n    \"documentType\"\
+                    : \"DRIVERS_LICENSE\",\n    \"description\": \"my optional description\",\n    \"documentSide\": \"FRONT\"\
+                    ,\n    \"clientOwnerId\": \"3fa87f64-5717-4562-b3fc-2c963f66afa6\",\n    \"issueCountry\": \"USA\",\n\
+                    \    \"documentExpiration\": \"2023-10-04T16:34:29.446Z\"\n  }\n"
+                  type: string
+                document:
+                  description: 'Document file to upload. The Content-Type header for this formData part must be set correctly.
+
+                    '
+                  type: string
+                  format: binary
+              required:
+              - metadata
+              - document
+        required: true
+      responses:
+        '200':
+          description: This response returns the full details of the document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Upload Document and Metadata
+      tags:
+      - Documents
+  /apex-crypto/api/v2/transfers/verifyWalletAddress:
+    post:
+      description: Use this endpoint to verify that a wallet address is valid prior to using it in a transfer request.
+      operationId: verifyWalletAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyWalletAddressRequest'
+        description: Request containing the information about the wallet address the client would like to verify.
+        required: true
+      responses:
+        '200':
+          description: This response returns the validity of the provided wallet address.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyWalletAddressResponse'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_key: []
+      summary: Verify that a wallet address is valid prior to using it in a transfer request.
+      tags:
+      - Transfers
+components:
+  schemas:
+    AccountLinkResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    PublicApiError:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Message from the exception
+          example: Parameter passed for field is not meeting its required format.
+        detail:
+          type: string
+          description: Description of the type
+          example: validation error
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicApiErrorDetail'
+        type:
+          type: string
+          example: INVALID_FIELD_VALUE
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR
+    PlaidAccountLinkingRequest:
+      required:
+      - processorToken
+      - partnerTransactionRef
+      type: object
+      properties:
+        processorToken:
+          type: string
+        partnerTransactionRef:
+          type: string
+    CreateBankAccountRequest:
+      required:
+      - accountNumber
+      - routingNumber
+      - accountType
+      type: object
+      properties:
+        accountDisplayName:
+          type: string
+        accountNumber:
+          type: string
+        accountStatus:
+          type: string
+        accountType:
+          type: string
+        bankName:
+          type: string
+        routingNumber:
+          type: string
+    CreateBankAccountResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    AllocationStatus:
+      description: Status of allocation
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      type: string
+    CurrencyAllocation:
+      description: Summary of details pertaining to a currency allocation request
+      properties:
+        createdAt:
+          description: Date at which the currency allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 0
+        id:
+          description: Bakkt unique identifier for the currency allocation
+          format: uuid
+          type: string
+          x-order: 1
+        rejectReason:
+          description: The reason the currency allocation was rejected
+          type: string
+          x-order: 3
+        request:
+          $ref: '#/components/schemas/CurrencyAllocationRequest'
+        status:
+          $ref: '#/components/schemas/AllocationStatus'
+      required:
+      - createdAt
+      - id
+      - request
+      - status
+    CurrencyAllocationRequest:
+      description: Currency allocation request for a single customer account
+      properties:
+        account:
+          description: External ID for customer account
+          type: string
+          x-order: 0
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of currency allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 2
+        clientTransactionId:
+          description: Client-specified unique identifier for the currency allocation
+          format: uuid
+          type: string
+          x-order: 3
+        currency:
+          description: Requested currency
+          type: string
+          x-order: 5
+        direction:
+          description: Denotes whether depositing or withdrawing currency
+          enum:
+          - DEPOSIT
+          - WITHDRAWAL
+          type: string
+          x-order: 4
+        quantity:
+          description: Order size in product units
+          format: decimal
+          type: string
+          x-order: 1
+      required:
+      - account
+      - quantity
+      - batchTransactionId
+      - clientTransactionId
+      - direction
+      - currency
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in
+            the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system
+            encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    BatchAllocationStatus:
+      description: Status of allocation
+      enum:
+      - OPEN
+      - CLOSED
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      type: string
+    BatchCurrencyAllocation:
+      description: Details of a particular currency allocation batch containing one or many allocation requests
+      properties:
+        allocations:
+          description: Number of requested currency allocations within the batch
+          type: integer
+          x-order: 0
+        createdAt:
+          description: Date and time at which the currency allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt internal id
+          format: uuid
+          type: string
+          x-order: 2
+        rejectReason:
+          description: The reason the currency allocation was rejected
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/BatchCurrencyAllocationOpenRequest'
+        status:
+          $ref: '#/components/schemas/BatchAllocationStatus'
+      required:
+      - allocations
+      - createdAt
+      - id
+      - request
+      - status
+    BatchCurrencyAllocationCloseRequest:
+      description: Request to close off currency allocations of a particular batch
+      properties:
+        allocations:
+          description: Number of requested currency allocations within the batch
+          type: integer
+          x-order: 1
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of currency allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+      required:
+      - batchTransactionId
+      - allocations
+    BatchCurrencyAllocationOpenRequest:
+      description: Request to open a currency allocation batch
+      properties:
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of currency allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+        currency:
+          description: Requested currency
+          type: string
+          x-order: 1
+        transactionHash:
+          description: Transaction hash for the blockchain transaction
+          type: string
+          x-order: 2
+      required:
+      - batchTransactionId
+      - currency
+      - transactionHash
+    FiatAllocation:
+      description: Summary of details pertaining to a fiat allocation request
+      properties:
+        createdAt:
+          description: Date at which the fiat allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 0
+        id:
+          description: Bakkt unique identifier for the fiat allocation
+          format: uuid
+          type: string
+          x-order: 1
+        rejectReason:
+          description: The reason the fiat allocation was rejected
+          type: string
+          x-order: 3
+        request:
+          $ref: '#/components/schemas/FiatAllocationRequest'
+        status:
+          $ref: '#/components/schemas/AllocationStatus'
+      required:
+      - createdAt
+      - id
+      - request
+      - status
+    FiatAllocationRequest:
+      description: Fiat allocation request for a single customer account
+      properties:
+        account:
+          description: Bakkt unique identifier for the fiat allocation
+          type: string
+          x-order: 0
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of fiat allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 2
+        clientTransactionId:
+          description: Client-specified unique identifier for the fiat allocation
+          format: uuid
+          type: string
+          x-order: 3
+        currency:
+          description: Requested fiat currency
+          type: string
+          x-order: 5
+        direction:
+          description: Denotes whether depositing or withdrawing currency
+          enum:
+          - DEPOSIT
+          - WITHDRAWAL
+          type: string
+          x-order: 4
+        quantity:
+          description: Order size in product units
+          format: decimal
+          type: string
+          x-order: 1
+      required:
+      - account
+      - quantity
+      - batchTransactionId
+      - clientTransactionId
+      - direction
+      - currency
+    BatchFiatAllocation:
+      description: Details of a particular fiat allocation batch containing one or many allocation requests
+      properties:
+        allocations:
+          description: Number of requested fiat allocations within the batch
+          type: integer
+          x-order: 0
+        createdAt:
+          description: Date and time at which the fiat allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt internal id
+          format: uuid
+          type: string
+          x-order: 2
+        rejectReason:
+          description: The reason the fiat allocation was rejected
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/BatchFiatAllocationOpenRequest'
+        status:
+          $ref: '#/components/schemas/BatchAllocationStatus'
+      required:
+      - allocations
+      - createdAt
+      - id
+      - request
+      - status
+    BatchFiatAllocationCloseRequest:
+      description: Request to close off fiat allocations of a particular batch
+      properties:
+        allocations:
+          description: Number of requested fiat allocations within the batch
+          type: integer
+          x-order: 1
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of fiat allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+      required:
+      - batchTransactionId
+      - allocations
+    BatchFiatAllocationOpenRequest:
+      description: Request to open a fiat allocation batch
+      properties:
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of fiat allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+      required:
+      - batchTransactionId
+    GiftAllocation:
+      description: Summary of the gift request
+      properties:
+        createdAt:
+          description: Time of submission to the Bakkt platform
+          format: date-time
+          type: string
+          x-order: 0
+        id:
+          description: Bakkt unique identifier for the gift
+          format: uuid
+          type: string
+          x-order: 1
+        notional:
+          description: Order size in approximate monetary units
+          format: decimal
+          type: string
+          x-order: 4
+        price:
+          description: Price of the coin
+          format: decimal
+          type: string
+          x-order: 2
+        quantity:
+          description: Order size in number of product units
+          format: decimal
+          type: string
+          x-order: 3
+        rejectReason:
+          description: The reason the allocation was rejected
+          type: string
+          x-order: 7
+        request:
+          $ref: '#/components/schemas/GiftAllocationRequest'
+        status:
+          $ref: '#/components/schemas/AllocationStatus'
+      required:
+      - createdAt
+      - id
+      - request
+      - status
+    GiftAllocationRequest:
+      description: Gift request for a particular customer account
+      properties:
+        account:
+          description: Investor account identifier
+          type: string
+          x-order: 0
+        clientTransactionId:
+          description: Client-specified unique identifier for the gift
+          format: uuid
+          type: string
+          x-order: 1
+        currency:
+          description: Coin to be allocated
+          type: string
+          x-order: 2
+        notional:
+          description: Order size in approximate monetary units; mutually exclusive with quantity
+          format: decimal
+          type: string
+          x-order: 3
+        quantity:
+          description: Order size in number of product units; mutually exclusive with notional
+          format: decimal
+          type: string
+          x-order: 4
+      required:
+      - account
+      - clientTransactionId
+      - currency
+    BatchTradeAllocation:
+      description: Summary of details pertaining to an allocation request
+      properties:
+        createdAt:
+          description: Date at which the allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 0
+        feeApplied:
+          description: USD value of the fee applied to the allocation
+          format: decimal
+          type: string
+          x-order: 5
+        id:
+          description: Bakkt unique identifier for the allocation
+          format: uuid
+          type: string
+          x-order: 1
+        netMoney:
+          description: Notional value of the allocation, inclusive of any fees applied
+          format: decimal
+          type: string
+          x-order: 2
+        price:
+          description: Price of the order at time of allocation
+          format: decimal
+          type: string
+          x-order: 3
+        quantity:
+          description: Order size in number of product units
+          format: decimal
+          type: string
+          x-order: 4
+        rejectReason:
+          description: The reason the allocation was rejected
+          type: string
+          x-order: 7
+        request:
+          $ref: '#/components/schemas/BatchTradeAllocationRequest'
+        status:
+          $ref: '#/components/schemas/AllocationStatus'
+      required:
+      - createdAt
+      - id
+      - request
+      - status
+    BatchTradeAllocationRequest:
+      description: Allocation request for a single customer account
+      properties:
+        account:
+          description: Bakkt client account identifier
+          type: string
+          x-order: 0
+        amount:
+          description: Order size depending on request type (NOTIONAL or QUANTITY)
+          format: decimal
+          type: string
+          x-order: 1
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 2
+        bpsCommission:
+          description: Clients use this parameter to add commission (in basis points) to the investor's executed allocation
+            cost
+          type: integer
+          x-order: 6
+          nullable: true
+        clientTransactionId:
+          description: Client-specified unique identifier for the allocation
+          format: uuid
+          type: string
+          x-order: 3
+        fixedCommission:
+          description: Clients use this parameter to add fixed commission (in USD) to the investor's executed allocation cost
+          format: decimal
+          type: string
+          x-order: 7
+          nullable: true
+        side:
+          description: Denotes whether buying or selling an asset
+          enum:
+          - BUY
+          - SELL
+          type: string
+          x-order: 4
+        symbol:
+          description: The symbol representing a crypto asset on the platform
+          type: string
+          x-order: 5
+      required:
+      - account
+      - amount
+      - batchTransactionId
+      - clientTransactionId
+      - side
+      - symbol
+    BatchAllocation:
+      description: Details of a particular allocation batch containing one or many allocation requests
+      properties:
+        allocations:
+          description: Number of requested allocations within the batch
+          type: integer
+          x-order: 0
+        createdAt:
+          description: Date at which the allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt allocation id
+          format: uuid
+          type: string
+          x-order: 2
+        rejectReason:
+          description: The reason the allocation was rejected
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/BatchAllocationOpenRequest'
+        status:
+          $ref: '#/components/schemas/BatchAllocationStatus'
+      required:
+      - allocations
+      - createdAt
+      - id
+      - request
+      - status
+    BatchAllocationCloseRequest:
+      description: Request to close off allocations of a particular batch
+      properties:
+        allocations:
+          description: Number of requested allocations within the batch
+          type: integer
+          x-order: 1
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+      required:
+      - batchTransactionId
+      - allocations
+    BatchAllocationOpenRequest:
+      description: Request to open an allocation batch
+      properties:
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+        symbol:
+          description: The symbol representing a crypto asset on the platform
+          type: string
+          x-order: 1
+        type:
+          description: Denotes if the order is based on monetary units or exact quantity of crypto
+          enum:
+          - NOTIONAL
+          - QUANTITY
+          type: string
+          x-order: 2
+      required:
+      - batchTransactionId
+      - symbol
+      - type
+    CancelRequest:
+      description: A request to stop attempting to serve an order; a `clientOrderId` is identified alongside this request
+        object in order to target a specific order to cancel
+      properties:
+        id:
+          description: An ID that uniquely identifies a request to cancel
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    CancelResponse:
+      properties:
+        receivedAt:
+          description: The time the request to cancel the order was received
+          format: date-time
+          type: string
+        request:
+          $ref: '#/components/schemas/CancelRequest'
+      required:
+      - request
+      type: object
+    Account:
+      properties:
+        cipClearanceState:
+          $ref: '#/components/schemas/CIPClearanceState'
+        createdAt:
+          description: The time the account was created
+          format: date-time
+          type: string
+          x-order: 3
+        id:
+          description: Bakkt unique internal account identifier
+          type: string
+          x-order: 0
+        mode:
+          description: The mode that the account is in
+          enum:
+          - OPEN
+          - CLOSED
+          - LOCKED
+          - CLOSING_ONLY
+          type: string
+          x-order: 6
+        pendingUpdateIds:
+          description: The ID of any pending updates requested for the account
+          items:
+            format: uuid
+            type: string
+          type: array
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/AccountRequest'
+        status:
+          $ref: '#/components/schemas/RequestStatus'
+      required:
+      - id
+      - request
+      - createdAt
+      - status
+      - mode
+      type: object
+    AccountGoals:
+      properties:
+        investmentObjective:
+          $ref: '#/components/schemas/InvestmentObjective'
+        liquidityNeeds:
+          $ref: '#/components/schemas/LiquidityNeeds'
+        riskTolerance:
+          $ref: '#/components/schemas/RiskTolerance'
+        timeHorizon:
+          $ref: '#/components/schemas/TimeHorizon'
+      required:
+      - investmentObjective
+      type: object
+    AccountRequest:
+      properties:
+        accountType:
+          description: Customer account type
+          enum:
+          - INDIVIDUAL
+          - CUSTODIAL
+          - ENTITY_PERSONAL_TRUST
+          - ENTITY
+          type: string
+          x-order: 2
+        clientAccountId:
+          description: Client-specified unique identifier for the account (clientAccountId)
+          type: string
+          x-order: 1
+        enrollments:
+          $ref: '#/components/schemas/Enrollments'
+        entity:
+          $ref: '#/components/schemas/Entity'
+        id:
+          description: DEPRECATED. Please use clientAccountId
+          type: string
+          x-order: 0
+        investmentProfile:
+          $ref: '#/components/schemas/InvestmentProfile'
+        owners:
+          items:
+            $ref: '#/components/schemas/Owner'
+          minimum: 1
+          type: array
+          x-order: 5
+        settlementMethod:
+          description: Method of settlement for the customer account
+          enum:
+          - BAKKT_TPJ
+          - NET_SETTLEMENT
+          type: string
+          x-order: 8
+        shareToken:
+          description: The share token field will contain a Sumsub token. If the user is designated for this specific KYC
+            flow, this token must be passed.
+          type: string
+          x-order: 9
+        trustedContacts:
+          items:
+            $ref: '#/components/schemas/TrustedContact'
+          type: array
+          x-order: 6
+      required:
+      - clientAccountId
+      - owners
+      type: object
+    Address:
+      properties:
+        city:
+          description: City of residence
+          type: string
+          x-order: 0
+        country:
+          description: Country of residence (ISO code)
+          type: string
+          x-order: 3
+        postalCode:
+          description: Postal code / zip code (required when country is USA)
+          type: string
+          x-order: 2
+        state:
+          description: State of residence (two-letter state abbreviation). If outside of the United States please provide
+            the province/territory in this field (no character limitation).
+          type: string
+          x-order: 1
+        streetAddress:
+          description: Street address for primary residence (for employer, street address for place of employment)
+          items:
+            type: string
+          type: array
+          x-order: 4
+      required:
+      - city
+      - country
+      - streetAddress
+      type: object
+    Agreement:
+      properties:
+        eSignedDate:
+          description: Date of electronic signature of the agreement
+          format: date-time
+          type: string
+          x-order: 3
+        name:
+          description: Name of the agreement document
+          type: string
+          x-order: 0
+        text:
+          description: Text containing the body of the agreement document
+          type: string
+          x-order: 2
+        version:
+          description: Agreement document version
+          type: string
+          x-order: 1
+      required:
+      - name
+      - version
+      type: object
+    CIPClearanceState:
+      description: '<br/>`PENDING` - The CIP check is waiting to be processed <br/>`IN_PROGRESS` - The CIP check is being
+        processed <br/>`ACCEPTED` - The CIP check result was good <br/>`INDETERMINATE` - The CIP check result was indeterminate.
+        Customer should review and update their account information <br/>`REJECTED` - The CIP check result was rejected. Customer
+        should review and update their account information <br/>`FAILED` - The CIP check could not be processed. Please contact
+        us to resolve this issue
+
+        '
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - ACCEPTED
+      - INDETERMINATE
+      - REJECTED
+      - FAILED
+      type: string
+    CustomerProfile:
+      properties:
+        annualIncomeRangeUsd:
+          $ref: '#/components/schemas/USDRange'
+        federalTaxBracket:
+          type: integer
+          x-order: 4
+        investmentExperience:
+          $ref: '#/components/schemas/InvestmentExperience'
+        liquidNetWorthRangeUsd:
+          $ref: '#/components/schemas/USDRange'
+        sourceOfFunds:
+          type: string
+          x-order: 5
+        totalNetWorthRangeUsd:
+          $ref: '#/components/schemas/USDRange'
+      required:
+      - annualIncomeRangeUsd
+      type: object
+    Disclosures:
+      properties:
+        controlPersonCompanySymbols:
+          description: Stock symbols of publicly traded companies for which the detailed customer is listed as a control person;
+            comma separated
+          type: string
+          x-order: 0
+        finraAssociatedEntities:
+          description: Names of the FINRA-associated entities or FINRA-regulated broker dealers; comma separated
+          type: string
+          x-order: 1
+        lastScreenedDate:
+          description: Date the account owner was last screened for CDD data
+          format: date-time
+          type: string
+          x-order: 6
+        ofacSanctioned:
+          description: Customer's OFAC sanction status
+          enum:
+          - UNKNOWN
+          - POSSIBLE
+          - EXACT
+          - NO_MATCH
+          type: string
+          x-order: 5
+          nullable: true
+        politicallyExposed:
+          description: Customer's political exposure status
+          enum:
+          - UNKNOWN
+          - POSSIBLE
+          - EXACT
+          - NO_MATCH
+          type: string
+          x-order: 4
+          nullable: true
+        politicallyExposedImmediateFamilyNames:
+          description: (Full) names of politically exposed family members including parent, child, spouse, cousin, etc.; comma
+            separated
+          type: string
+          x-order: 3
+        politicallyExposedOrganizations:
+          description: Names of the politically exposed organization(s); comma separated
+          type: string
+          x-order: 2
+      type: object
+    Employment:
+      properties:
+        employerAddress:
+          $ref: '#/components/schemas/Address'
+        employerName:
+          description: Name of customer's employer
+          type: string
+          x-order: 0
+        position:
+          description: Customer's employment position
+          type: string
+          x-order: 1
+        yearsEmployed:
+          description: Number of years customer employed with employer listed
+          type: integer
+          x-order: 2
+      required:
+      - employerName
+      - position
+      type: object
+    Enrollments:
+      description: DEPRECATED.
+      properties:
+        registrationIndividual:
+          $ref: '#/components/schemas/RegistrationIndividual'
+      required:
+      - registrationIndividual
+      type: object
+    Entity:
+      description: Entity details
+      properties:
+        activeWalletAddress:
+          description: Active crypto wallet address of the Entity
+          example: e1847689-3047-477d-a46f-79ad0ce8dc14
+          format: uuid
+          type: string
+          x-order: 0
+        dailyNotionalTradingVolumeUsdRange:
+          description: The Entity's expected daily trading volume
+          enum:
+          - UNDER_250K
+          - FROM_250K_TO_500K
+          - FROM_500K_TO_1M
+          - FROM_1M_TO_2M
+          - FROM_2M_TO_5M
+          - FROM_5M_TO_10M
+          - FROM_10M_TO_20M
+          - FROM_20M_TO_50M
+          - OVER_50M
+          example: FROM_1M_TO_2M
+          type: string
+          x-order: 1
+        dailyTransactionVolumeUsdRange:
+          description: The Entity's expected daily transaction volume
+          enum:
+          - UNDER_250K
+          - FROM_250K_TO_500K
+          - FROM_500K_TO_1M
+          - FROM_1M_TO_2M
+          - FROM_2M_TO_5M
+          - FROM_5M_TO_10M
+          - FROM_10M_TO_20M
+          - FROM_20M_TO_50M
+          - OVER_50M
+          example: FROM_1M_TO_2M
+          type: string
+          x-order: 2
+        entityEmailAddress:
+          description: The email of the Entity
+          example: johnw@hightable.com
+          format: email
+          type: string
+          x-order: 3
+        entityFormationDate:
+          description: The date of the Entity formation
+          example: '2001-01-01'
+          format: date
+          type: string
+          x-order: 4
+        entityLegalName:
+          description: The legal name of the Entity
+          example: Cruickshank, Franecki and Swift
+          maxLength: 100
+          minLength: 1
+          type: string
+          x-order: 5
+        entityOfferings:
+          description: Products and services offered
+          type: string
+          x-order: 6
+        entityPhoneNumber:
+          description: Phone number in e.164 format
+          example: '+1234567890'
+          pattern: ^\+[1-9][0-9]{3,14}$
+          type: string
+          x-order: 7
+        entityRegistrationStatus:
+          description: Entity's registration status with a regulatory body
+          enum:
+          - CURRENTLY_REGISTERED
+          - NOT_REGISTERED
+          - REGISTRATION_IN_PROGRESS
+          - NOT_APPLICABLE
+          example: NOT_APPLICABLE
+          type: string
+          x-order: 8
+        entityTaxId:
+          description: The tax identifier for the Entity
+          example: 098123456
+          type: string
+          x-order: 9
+        entityType:
+          description: Entity type
+          enum:
+          - CORPORATE
+          - PARTNERSHIP
+          - LLC
+          - LIMITED_PARTNERSHIP
+          - TRUST
+          example: CORPORATE
+          type: string
+          x-order: 10
+        firmAnnualNetIncome:
+          description: The annual net income of the Entity
+          enum:
+          - UNDER_250K
+          - FROM_250K_TO_500K
+          - FROM_500K_TO_1M
+          - FROM_1M_TO_2M
+          - FROM_2M_TO_5M
+          - FROM_5M_TO_10M
+          - FROM_10M_TO_20M
+          - FROM_20M_TO_50M
+          - OVER_50M
+          example: FROM_1M_TO_2M
+          type: string
+          x-order: 11
+        firmLiquidNetWorthUsdRange:
+          description: The liquid net worth of the Entity
+          enum:
+          - UNDER_250K
+          - FROM_250K_TO_500K
+          - FROM_500K_TO_1M
+          - FROM_1M_TO_2M
+          - FROM_2M_TO_5M
+          - FROM_5M_TO_10M
+          - FROM_10M_TO_20M
+          - FROM_20M_TO_50M
+          - OVER_50M
+          example: FROM_1M_TO_2M
+          type: string
+          x-order: 12
+        firmTotalNetWorthUsdRange:
+          description: The total net worth of the Entity
+          enum:
+          - UNDER_250K
+          - FROM_250K_TO_500K
+          - FROM_500K_TO_1M
+          - FROM_1M_TO_2M
+          - FROM_2M_TO_5M
+          - FROM_5M_TO_10M
+          - FROM_10M_TO_20M
+          - FROM_20M_TO_50M
+          - OVER_50M
+          example: FROM_1M_TO_2M
+          type: string
+          x-order: 13
+        investmentExperience:
+          description: Entity's level of investment experience prior to account creation
+          enum:
+          - NONE
+          - LIMITED
+          - GOOD
+          - EXTENSIVE
+          type: string
+          x-order: 14
+        investmentObjective:
+          description: Entity's primary objective for investment account
+          enum:
+          - BALANCED
+          - CAPITAL_PRESERVATION
+          - GROWTH
+          - INCOME
+          - SPECULATION
+          - OTHER
+          type: string
+          x-order: 15
+        operatingAddress:
+          $ref: '#/components/schemas/Address'
+        operatingCountries:
+          description: 3 letter country code as per ISO 3166 Alpha-3
+          example:
+          - USA
+          items:
+            description: 3 letter country code as per ISO 3166 Alpha-3
+            enum:
+            - AND
+            - ARE
+            - AFG
+            - ATG
+            - AIA
+            - ALB
+            - ARM
+            - AGO
+            - ATA
+            - ARG
+            - ASM
+            - AUT
+            - AUS
+            - ABW
+            - ALA
+            - AZE
+            - BIH
+            - BRB
+            - BGD
+            - BEL
+            - BFA
+            - BGR
+            - BHR
+            - BDI
+            - BEN
+            - BLM
+            - BMU
+            - BRN
+            - BOL
+            - BES
+            - BRA
+            - BHS
+            - BTN
+            - BVT
+            - BWA
+            - BLR
+            - BLZ
+            - CAN
+            - CCK
+            - COD
+            - CAF
+            - COG
+            - CHE
+            - CIV
+            - COK
+            - CHL
+            - CMR
+            - CHN
+            - COL
+            - CRI
+            - CUB
+            - CPV
+            - CUW
+            - CXR
+            - CYP
+            - CZE
+            - DEU
+            - DJI
+            - DNK
+            - DMA
+            - DOM
+            - DZA
+            - ECU
+            - EST
+            - EGY
+            - ESH
+            - ERI
+            - ESP
+            - ETH
+            - FIN
+            - FJI
+            - FLK
+            - FSM
+            - FRO
+            - FRA
+            - GAB
+            - GBR
+            - GRD
+            - GEO
+            - GUF
+            - GGY
+            - GHA
+            - GIB
+            - GRL
+            - GMB
+            - GIN
+            - GLP
+            - GNQ
+            - GRC
+            - SGS
+            - GTM
+            - GUM
+            - GNB
+            - GUY
+            - HKG
+            - HMD
+            - HND
+            - HRV
+            - HTI
+            - HUN
+            - IDN
+            - IRL
+            - ISR
+            - IMN
+            - IND
+            - IOT
+            - IRQ
+            - IRN
+            - ISL
+            - ITA
+            - JEY
+            - JAM
+            - JOR
+            - JPN
+            - KEN
+            - KGZ
+            - KHM
+            - KIR
+            - COM
+            - KNA
+            - PRK
+            - KOR
+            - KWT
+            - CYM
+            - KAZ
+            - LAO
+            - LBN
+            - LCA
+            - LIE
+            - LKA
+            - LBR
+            - LSO
+            - LTU
+            - LUX
+            - LVA
+            - LBY
+            - MAR
+            - MCO
+            - MDA
+            - MNE
+            - MAF
+            - MDG
+            - MHL
+            - MKD
+            - MLI
+            - MMR
+            - MNG
+            - MAC
+            - MNP
+            - MTQ
+            - MRT
+            - MSR
+            - MLT
+            - MUS
+            - MDV
+            - MWI
+            - MEX
+            - MYS
+            - MOZ
+            - NAM
+            - NCL
+            - NER
+            - NFK
+            - NGA
+            - NIC
+            - NLD
+            - NOR
+            - NPL
+            - NRU
+            - NIU
+            - NZL
+            - OMN
+            - PAN
+            - PER
+            - PYF
+            - PNG
+            - PHL
+            - PAK
+            - POL
+            - SPM
+            - PCN
+            - PRI
+            - PSE
+            - PRT
+            - PLW
+            - PRY
+            - QAT
+            - REU
+            - ROU
+            - SRB
+            - RUS
+            - RWA
+            - SAU
+            - SLB
+            - SYC
+            - SDN
+            - SWE
+            - SGP
+            - SHN
+            - SVN
+            - SJM
+            - SVK
+            - SLE
+            - SMR
+            - SEN
+            - SOM
+            - SUR
+            - SSD
+            - STP
+            - SLV
+            - SXM
+            - SYR
+            - SWZ
+            - TCA
+            - TCD
+            - ATF
+            - TGO
+            - THA
+            - TJK
+            - TKL
+            - TLS
+            - TKM
+            - TUN
+            - TON
+            - TUR
+            - TTO
+            - TUV
+            - TWN
+            - TZA
+            - UKR
+            - UGA
+            - UMI
+            - USA
+            - URY
+            - UZB
+            - VAT
+            - VCT
+            - VEN
+            - VGB
+            - VIR
+            - VNM
+            - VUT
+            - WLF
+            - WSM
+            - YEM
+            - MYT
+            - ZAF
+            - ZMB
+            - ZWE
+            example: USA
+            type: string
+          type: array
+          x-order: 17
+        operatingIndustry:
+          description: The Nature of Business (industry) of the Entity
+          type: string
+          x-order: 18
+        registeredAddress:
+          $ref: '#/components/schemas/Address'
+        sourceOfCurrency:
+          description: Source of virtual currency
+          type: string
+          x-order: 20
+        sourceOfFunds:
+          description: Source of fiat funds
+          type: string
+          x-order: 21
+        subjectToAMLRegulations:
+          description: Whether the Entity is subject to AML regulations
+          example: true
+          type: boolean
+          x-order: 22
+      required:
+      - entityEmailAddress
+      - entityLegalName
+      - entityPhoneNumber
+      - entityTaxId
+      - entityType
+      - operatingAddress
+      - operatingIndustry
+      - registeredAddress
+      type: object
+    Identity:
+      properties:
+        citizenshipCountry:
+          description: DEPRECATED
+          type: string
+          x-order: 7
+        dateOfBirth:
+          description: Customer's date of birth
+          format: date
+          type: string
+          x-order: 3
+        disclosures:
+          $ref: '#/components/schemas/Disclosures'
+        employment:
+          $ref: '#/components/schemas/Employment'
+        familyName:
+          description: Customer's family (typically last) name
+          type: string
+          x-order: 2
+        givenName:
+          description: Customer's given (typically first) name
+          type: string
+          x-order: 0
+        maritalStatus:
+          $ref: '#/components/schemas/MaritalStatus'
+        middleNames:
+          description: Customer's middle name(s). Space or comma separated.
+          type: string
+          x-order: 1
+        personalAddress:
+          $ref: '#/components/schemas/Address'
+        taxId:
+          description: Owner's tax ID (SSN/EIN/ITIN)
+          type: string
+          x-order: 4
+        taxIdCountry:
+          default: USA
+          description: Issuing country of the national identification code
+          type: string
+          x-order: 6
+        taxIdType:
+          $ref: '#/components/schemas/TaxIdType'
+        verificationResults:
+          $ref: '#/components/schemas/VerificationResults'
+      required:
+      - dateOfBirth
+      - familyName
+      - givenName
+      - personalAddress
+      type: object
+    InvestmentExperience:
+      description: Customer's level of investment experience prior to account creation
+      enum:
+      - NONE
+      - LIMITED
+      - GOOD
+      - EXTENSIVE
+      type: string
+    InvestmentObjective:
+      description: Customer's primary objective for investment account
+      enum:
+      - BALANCED
+      - CAPITAL_PRESERVATION
+      - GROWTH
+      - INCOME
+      - SPECULATION
+      - OTHER
+      type: string
+    InvestmentProfile:
+      properties:
+        accountGoals:
+          $ref: '#/components/schemas/AccountGoals'
+        customerProfile:
+          $ref: '#/components/schemas/CustomerProfile'
+      required:
+      - accountGoals
+      - customerProfile
+      type: object
+    LiquidityNeeds:
+      description: Importance of liquidity for the customer
+      enum:
+      - VERY_IMPORTANT
+      - SOMEWHAT_IMPORTANT
+      - NOT_IMPORTANT
+      type: string
+    MaritalStatus:
+      description: Customer's marital status
+      enum:
+      - SINGLE
+      - MARRIED
+      - DIVORCED
+      - WIDOWED
+      type: string
+    Owner:
+      properties:
+        agreements:
+          items:
+            $ref: '#/components/schemas/Agreement'
+          type: array
+          x-order: 8
+        clientOwnerId:
+          description: Client provided unique owner id (required when multiple owners are present or national id is specified)
+          type: string
+          x-order: 1
+        emailAddress:
+          description: Customer's contact email
+          format: email
+          type: string
+          x-order: 3
+        identity:
+          $ref: '#/components/schemas/Identity'
+        identityId:
+          description: DEPRECATED.
+          type: string
+          x-order: 5
+        mailingAddress:
+          $ref: '#/components/schemas/Address'
+        ownerId:
+          description: Bakkt owner identifier
+          format: uuid
+          type: string
+          x-order: 0
+        phoneNumber:
+          description: Customer's contact phone number (Should be in compacted E.164 format, eg UK (+44) 1234 123456 becomes
+            +441234123456)
+          type: string
+          x-order: 2
+        role:
+          $ref: '#/components/schemas/PartyRelationType'
+      required:
+      - emailAddress
+      - mailingAddress
+      - role
+      - identity
+      - agreements
+      type: object
+    PartyRelationType:
+      enum:
+      - AUTHORIZED_AGENT
+      - AUTHORIZED_MEMBER
+      - AUTHORIZED_OWNER
+      - BENEFICIAL_OWNER
+      - BENEFICIARY
+      - CUSTODIAN
+      - EDUCATION_BENEFICIARY
+      - EDUCATION_MANAGER
+      - EXECUTOR
+      - GUARDIAN_CONSERVATOR
+      - INTERNAL_POWER_OF_ATTY
+      - INITIAL_DEPOSITOR
+      - JOINT_OWNER
+      - MINOR_OWNER
+      - PRIMARY_OWNER
+      - POWER_OF_ATTY
+      - SOLE_PROPRIETOR
+      - TRADING_AUTHORITY
+      - TREASURER
+      - TRUSTEE
+      - TRUSTED_CONTACT
+      type: string
+    RegistrationIndividual:
+      type: object
+    RequestStatus:
+      description: Status of a request, where the request is a long running operation
+      enum:
+      - PENDING
+      - ACCEPTED
+      - IN_PROGRESS
+      - REJECTED
+      - CANCELLED
+      - COMPLETE
+      type: string
+    RiskTolerance:
+      description: Customer's accepted level of investment risk
+      enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+      type: string
+    TaxIdType:
+      description: Used for tax reporting
+      enum:
+      - SSN
+      - ITIN
+      - EIN
+      - NATIONAL_ID
+      type: string
+    TimeHorizon:
+      description: Investment time horizon
+      enum:
+      - SHORT
+      - AVERAGE
+      - LONG
+      type: string
+    TrustedContact:
+      properties:
+        emailAddress:
+          description: The trusted contact's email address
+          format: email
+          type: string
+          x-order: 4
+        familyName:
+          description: The trusted contact's family (typically last) name
+          type: string
+          x-order: 2
+        givenName:
+          description: The trusted contact's given (typically first) name
+          type: string
+          x-order: 0
+        mailingAddress:
+          $ref: '#/components/schemas/Address'
+        middleNames:
+          description: The trusted contact's middle name(s). Space or comma separated.
+          type: string
+          x-order: 1
+        phoneNumber:
+          description: The trusted contact's phone number
+          type: string
+          x-order: 3
+      required:
+      - givenName
+      - familyName
+      type: object
+    USDRange:
+      enum:
+      - UNDER_25K
+      - FROM_25K_TO_50K
+      - FROM_50K_TO_100K
+      - FROM_100K_TO_200K
+      - FROM_200K_TO_300K
+      - FROM_300K_TO_500K
+      - FROM_500K_TO_1M
+      - FROM_1M_TO_5M
+      - OVER_5M
+      type: string
+    ValidationError:
+      properties:
+        code:
+          description: This is an open API-styled validation error code. These fields are provided so that client systems
+            can present customized, localized messages in response to validation error types such as a required field.
+          format: int32
+          type: integer
+        field:
+          description: This is a field that failed validation in the input object as identified by an Open API Path.
+          type: string
+        message:
+          description: This is an open API-styled message that summarizes the validation failed. This may include Open API
+            Dot notation, so it should be formatted before being presented to an end user. Clients should consider implementing
+            their own custom messages driven off the code field.
+          type: string
+        rejectedValue:
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    ValidationErrors:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicates errors made in
+            the way the client made the request. Error codes in the 5xx range indicates errors that the Apex Crypto system
+            encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides a summary of the count of the validations that failed. Details about a
+            field-level falure are provided in the validationErrors field.
+          type: string
+        validationErrors:
+          description: The individual validation errors encountered in processing the client request. Each error should contain
+            detail about a specific field-level validation that failed, the rejected value, and a message indicating the nature
+            of the failure to aid in presentation to end users. The system makes a best effort to batch as many validation
+            failures together as possible to avoid piece-meal, one-time validations.
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      required:
+      - code
+      - message
+      type: object
+    VerificationResults:
+      properties:
+        addressVerified:
+          description: Indicates if the customer's address has been verified
+          type: boolean
+          x-order: 5
+        dateOfBirthVerified:
+          description: Indicates if the customer's DOB has been verified
+          type: boolean
+          x-order: 7
+        executionDate:
+          description: The date the KYC was performed
+          format: date
+          type: string
+          x-order: 3
+        externalCaseId:
+          description: Client-generated unique identifier associated with the KYC results for the appropriate case
+          type: string
+          x-order: 2
+        identityVerificationResultId:
+          type: string
+          x-order: 0
+        manualOverride:
+          description: Indicates account failed vendor verification but has been manually reviewed and approved
+          type: boolean
+          x-order: 8
+        manualOverrideApprover:
+          description: Individual who approved the override
+          type: string
+          x-order: 10
+        manualOverrideReason:
+          description: Reason for account approval override
+          type: string
+          x-order: 9
+        nameVerified:
+          description: Indicates if the customer's name has been verified
+          type: boolean
+          x-order: 4
+        taxIdVerified:
+          description: Indicates if the customer's taxId has been verified
+          type: boolean
+          x-order: 6
+        vendorName:
+          description: If client is providing KYC information, this section will be filled out with the relevant details.
+            Note that individual client implementations will vary.
+          type: string
+          x-order: 1
+      required:
+      - addressVerified
+      - dateOfBirthVerified
+      - executionDate
+      - externalCaseId
+      - nameVerified
+      - taxIdVerified
+      - vendorName
+      type: object
+    PartnerTokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: A standard JWT access token
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ii1xR1ZoVXdOMjc5a3NqNEoySnFXSWk2RDNQcyJ9.eyJhdWQiOiI3NTFkZjg0Yi0wZWU3LTQ2MWQtYThiZi0yMGQ2MTY1OTY2Y2EiLCJleHAiOjE2MTk1ODE3OTAsImlhdCI6MTYxOTU3ODE5MCwiaXNzIjoiaHR0cHM6Ly9pZC5kZXYuYmFra3QuY29tLyIsInN1YiI6ImE1NDNhMjE1LTg2M2QtNGFlMS1hYTZmLWIyYzEzNDczYmYzYyIsImp0aSI6ImZlMTY2OTc4LTJjODUtNGU2Zi05NDFkLTJjOTYyYmZkZjYwOSIsImF1dGhlbnRpY2F0aW9uVHlwZSI6IlBBU1NXT1JEIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZmRkMmNlYjktZjI0NS00ZWZiLTg3OTgtMGI0MTU1NjcyNGMzIiwiYXBwbGljYXRpb25JZCI6Ijc1MWRmODRiLTBlZTctNDYxZC1hOGJmLTIwZDYxNjU5NjZjYSIsInJvbGVzIjpbImJha2t0X21lcmNoYW50Il0sImJwSWQiOjQzNTY3MX0.NQgIPKNGqZfWqRHAaaBCHsWTEvhPv2g9MRtbnOqgMjaz8rHQQaor3dAcwozKSuw9VoE6JKMRP2ftigNhnqVyJUUxzAULm2MT8e7UOtCuVHld4TRjpAFJW-0qkeLMmag9nxZMFthqsiJFqrDI4BHfOF2t4TbIOEwfRKq42iQkIDNTzFzn34k_fVBBqcxQsBAOK7vea0LqO39lzNE1o2DLeJ5erqnCEwi05-zZR4zO0Es25eHpuwA3L1Qf-YRBGXm4ELxenUilEWRQJForVx2qTOGPIUapPzbpTmdxMwNEJUeYcTY9T_u5MZEf1GsE8rodRpuBneRoCGfpjkv6095Exg
+        expiresIn:
+          type: string
+          description: How long the token will last in seconds
+          example: '3667'
+        tokenType:
+          type: string
+          description: The token type that was generated
+          example: Bearer
+    WireInstructionsResponse:
+      type: object
+      required:
+      - wireReferenceNumber
+      - wireRoutingNumber
+      - wireAccountNumber
+      - wireSwiftCode
+      - wireBankName
+      - wireBankAddress
+      - wireBeneficiaryName
+      - wireBeneficiaryAddress
+      properties:
+        wireReferenceNumber:
+          type: string
+        wireRoutingNumber:
+          type: string
+        wireAccountNumber:
+          type: string
+        wireSwiftCode:
+          type: string
+        wireBankName:
+          type: string
+        wireBankAddress:
+          type: string
+        wireBeneficiaryName:
+          type: string
+        wireBeneficiaryAddress:
+          type: string
+    AccountOpeningStatus:
+      properties:
+        canTradeCrypto:
+          type: boolean
+          x-order: 0
+        cipClearanceState:
+          $ref: '#/components/schemas/CIPClearanceState'
+        settlementMethod:
+          $ref: '#/components/schemas/SettlementMethod'
+      required:
+      - canTradeCrypto
+      - cipClearanceState
+      - settlementMethod
+      type: object
+    SettlementMethod:
+      description: Settlement Method tied to Account
+      enum:
+      - NET_SETTLEMENT
+      - NO_SETTLEMENT
+      - BAKKT_TPJ
+      - APEX_TPJ
+      type: string
+    ConfigResponse:
+      properties:
+        streamingQuoteUrl:
+          type: string
+          x-order: 0
+    GetFiatAccountBalanceResponse:
+      required:
+      - partnerPartyRef
+      - currency
+      - settledAmount
+      - unsettledAmount
+      type: object
+      properties:
+        partnerPartyRef:
+          type: string
+          description: The Partner's primary key for this Party
+          example: b9e930d0-372a-48f0-9c04-fd51c58eafb6
+        currency:
+          type: string
+          description: Currency of the settled and unsettled amounts
+          example: USD
+        settledAmount:
+          type: number
+          description: Settled Fiat Account balance
+          example: 50.01
+        unsettledAmount:
+          type: number
+          description: Unsettled Fiat Account balance
+          example: 100.01
+    Instrument:
+      properties:
+        minimumOrderQuantity:
+          description: The smallest quantity of this crypto that can be bought or sold
+          type: string
+        minimumPriceIncrement:
+          type: string
+        minimumQuantityIncrement:
+          type: string
+        symbol:
+          type: string
+      required:
+      - minimumOrderQuantity
+      - minimumPriceIncrement
+      - minimumQuantityIncrement
+      - symbol
+    InstrumentResponse:
+      properties:
+        instruments:
+          items:
+            $ref: '#/components/schemas/Instrument'
+          type: array
+    JurisdictionResponse:
+      properties:
+        jurisdictions:
+          items:
+            $ref: '#/components/schemas/JurisdictionStatus'
+          type: array
+          x-order: 0
+    JurisdictionStatus:
+      properties:
+        countryCode:
+          description: The ISO 3166-1 alpha-3 country code of the jursidiction
+          type: string
+          x-order: 0
+        securities:
+          description: A list of security-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 3
+        stateCode:
+          type: string
+          x-order: 1
+        status:
+          description: '<br/>`OPEN` - Customer may buy and sell in this jurisdiction <br/>`CLOSE` - Customer may only sell
+            their existing position in this jurisdiction <br/>`PROHIBITED` - Customer may not buy or sell in this jurisdiction
+
+            '
+          enum:
+          - OPEN
+          - CLOSE
+          - PROHIBITED
+          type: string
+          x-order: 2
+    SecurityStatus:
+      properties:
+        currency:
+          type: string
+        status:
+          enum:
+          - OPEN
+          - CLOSE
+          - PROHIBITED
+          type: string
+        tradingPair:
+          type: string
+    JurisdictionAll:
+      properties:
+        countryCode:
+          description: The ISO 3166-1 alpha-3 country code of the jursidiction
+          type: string
+          x-order: 0
+        domain:
+          $ref: '#/components/schemas/JurisdictionDomain'
+        stateCode:
+          description: State of residence (two-letter state abbreviation)
+          type: string
+          x-order: 1
+    JurisdictionAllResponse:
+      properties:
+        jurisdictions:
+          items:
+            $ref: '#/components/schemas/JurisdictionAll'
+          type: array
+          x-order: 0
+    JurisdictionDomain:
+      properties:
+        orders:
+          description: A list of currency-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 0
+        staking:
+          description: A list of currency-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 1
+        transfers:
+          description: A list of currency-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 2
+    KycDocumentVerificationDetails:
+      type: object
+      properties:
+        verificationURL:
+          type: string
+          description: The url to be used for document verification
+          example: https://www.example-docv-url.com
+        verificationURLExpiry:
+          type: string
+          description: The time at which the verification URL will expire
+          example: '2024-05-04T12:00:00.000Z'
+    Execution:
+      description: An execution captures the results of an attempt to fill an order. There may be zero or more execution reports
+        associated with an order to track its attempts to purchase or sell a crypto asset.
+      properties:
+        commission:
+          description: 'In order to ensure that any configured minimum trade fee is met by any trading scenario, the first
+            execution fill is charged the minimum fee. The Apex Crypto system maintains a running total of any bps commission
+            charges as other fills are executed for that order. Once the minimum fee has been satisfied by the bps commission
+            charges for all of the fills on the order, the bps commission charges apply to any subsequent fills.
+
+            '
+          type: string
+        executedAt:
+          description: Time the execution was completed
+          format: date-time
+          type: string
+        id:
+          description: A unique identifier for the execution report
+          type: string
+        netMoney:
+          type: string
+        price:
+          description: The price at which the execution filled
+          type: string
+        quantity:
+          description: The amount that was filled in this execution
+          type: string
+        side:
+          $ref: '#/components/schemas/Side'
+        symbol:
+          description: The symbol filled
+          type: string
+        tradeDate:
+          description: Trading date the execution was completed on
+          format: date
+          type: string
+      required:
+      - id
+      - side
+      - symbol
+      - quantity
+      - price
+      - netMoney
+      - executedAt
+      type: object
+    NewOrderRequest:
+      properties:
+        account:
+          description: Investor account identifier
+          example: ABC12345
+          type: string
+        bpsCommission:
+          description: Clients use this parameter to add commission (in basis points) to the investor's executed trade cost
+          type: integer
+        bpsMarkup:
+          description: Clients use this parameter to add markup (in basis points) to the investor's ordered asset price
+          type: integer
+        clientOrderId:
+          description: Client-specified unique identifier used to track, manage, and retrieve details about the order once
+            it's submitted.
+          example: d3adb33f-some-guid-here-fcaf3b33f
+          maxLength: 64
+          type: string
+        expireTime:
+          description: Time the order expires for GTD orders
+          format: date-time
+          type: string
+          nullable: true
+        fixedCommission:
+          description: Clients use this parameter to add fixed commission (in USD) to the investor's executed trade cost
+          type: string
+        fixedMarkup:
+          description: Clients use this parameter to add fixed markup (in USD) to the investor's ordered asset price
+          type: string
+        notional:
+          description: Order size in approximate monetary units; mutually exclusive with quantity
+          type: string
+        price:
+          description: All float fields must accommodate up to fifteen significant digits
+          type: string
+        quantity:
+          description: Order size in number of product units; mutually exclusive with notional
+          type: string
+        side:
+          $ref: '#/components/schemas/Side'
+        stopPrice:
+          description: The stop price for stop limit order.
+          type: string
+        symbol:
+          description: The symbol representing a crypto asset on the platform
+          example: BTCUSD
+          type: string
+        timeInForce:
+          $ref: '#/components/schemas/TimeInForce'
+        type:
+          $ref: '#/components/schemas/OrderType'
+      required:
+      - symbol
+      - clientOrderId
+      - type
+      - timeInForce
+      - account
+      - side
+      type: object
+    Order:
+      description: An Order represents a request to buy or sell crypto. Orders can be placed with various criteria that include,
+        but are not limited to, how much to purchase, how long the purchase order should stand, what price is acceptable in
+        the case of limit orders, etc. Orders are sent to one or more liquidity providers for fullfillment using a best-bid,
+        offer-match methodology in order to acquire the best market execution for investors' orders.
+      properties:
+        averagePrice:
+          description: The price of the order averaged across all filled quantities for the order
+          type: string
+        cancels:
+          items:
+            $ref: '#/components/schemas/OrderCancel'
+          type: array
+        createdAt:
+          description: The time the order was submitted on the Apex Crypto platform
+          format: date-time
+          type: string
+        cumulativeQuantity:
+          description: The total amount of quantity filled for an order; if subsequent orders are filled, this value may increase
+            commensurately
+          type: string
+        executions:
+          description: The results of the order's attempt(s) to execute
+          items:
+            $ref: '#/components/schemas/Execution'
+          type: array
+        id:
+          description: Unique `clientOrderId` that represents this order
+          type: string
+        leavesQuantity:
+          description: In the case that your order is not yet or cannot be fully filled, this amount indicates the order's
+            open quantity remaining
+          type: string
+        rejectReason:
+          description: Provided when an order is rejected in the course of attempting to serve the request
+          type: string
+        request:
+          $ref: '#/components/schemas/NewOrderRequest'
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        working:
+          default: false
+          description: True if the order is actively being worked
+          type: boolean
+      required:
+      - id
+      - request
+      type: object
+    OrderCancel:
+      properties:
+        rejectReason:
+          type: string
+        request:
+          $ref: '#/components/schemas/CancelRequest'
+        transactTime:
+          format: date-time
+          type: string
+      required:
+      - request
+      type: object
+    OrderStatus:
+      enum:
+      - IN_PROGRESS
+      - COMPLETE
+      type: string
+    OrderType:
+      description: '<br/>`MARKET` - Fill the order using current MARKET price <br/>`LIMIT` - Fill the order matching the price
+        constraints provided
+
+        '
+      enum:
+      - LIMIT
+      - MARKET
+      - STOP_LIMIT
+      type: string
+    Side:
+      description: '<br/>`BUY` - Buy crypto assets <br/>`SELL` - Sell crypto assets
+
+        '
+      enum:
+      - BUY
+      - SELL
+      type: string
+    TimeInForce:
+      description: '<br/>`IOC` - Fill immediately and cancel any amount that can''t be filled <br/>`DAY` - Fill order until
+        the end of the current trading day <br/>`GTC` - Fill order until canceled or after 90 days <br/>`GTD` - Fill order
+        until the good-till date
+
+        '
+      enum:
+      - IOC
+      - DAY
+      - GTC
+      - GTD
+      type: string
+    Position:
+      properties:
+        account:
+          type: string
+        currency:
+          type: string
+        current:
+          type: string
+        settled:
+          type: string
+        tradable:
+          description: Current amount available for trading
+          type: string
+        transferable:
+          description: Current amount available for withdrawal
+          type: string
+    PositionResponse:
+      properties:
+        positions:
+          items:
+            $ref: '#/components/schemas/Position'
+          type: array
+    Network:
+      enum:
+      - Algorand
+      - Arbitrum
+      - Avalanche
+      - Berachain
+      - Binance_Smart_Chain
+      - Bitcoin
+      - Bitcoin_Cash
+      - Cardano
+      - Celestia
+      - Cosmos
+      - Dogecoin
+      - Ethereum
+      - Ethereum_Classic
+      - Litecoin
+      - Optimism
+      - Polkadot
+      - Polygon
+      - Ripple
+      - Solana
+      - Sonic
+      - Stellar
+      - Tron
+      type: string
+    WithdrawRequest:
+      properties:
+        account:
+          description: Bakkt client account identifier
+          example: ABC12345
+          type: string
+          x-order: 4
+        clientTransactionId:
+          description: Client-specified unique identifier
+          format: uuid
+          maxLength: 64
+          type: string
+          x-order: 3
+        currency:
+          description: Coin in which to withdraw; must match the estimated coin
+          type: string
+          x-order: 0
+        feeEstimateId:
+          description: The estimate provided for this withdrawal; this fee estimate must be recent and cannot be expired
+          format: uuid
+          type: string
+          x-order: 5
+        network:
+          $ref: '#/components/schemas/Network'
+        quantity:
+          description: Quantity of coin in which to withdraw; must match the estimated quantity
+          type: string
+          x-order: 1
+        receivingWallet:
+          description: Address of the wallet in which to deposit
+          type: string
+          x-order: 2
+        recipientFamilyName:
+          description: Family name of the recipient of the withdrawal
+          type: string
+          x-order: 12
+        recipientGivenName:
+          description: Given name of the recipient of the withdrawal
+          type: string
+          x-order: 11
+        requestEstimateExtension:
+          description: Using this flag allows clients to request an extension to the expiry time of the fee estimate
+          type: boolean
+          x-order: 6
+        selfHosted:
+          description: Using this flag allows clients to indicate that they are the owner of the receiving wallet
+          type: boolean
+          x-order: 7
+        tag:
+          description: Tag Details tied to withdrawal. Only applicable for Tag/Memo based Assets.
+          type: string
+          x-order: 14
+        vaspDid:
+          description: Decentralized identifier of the receiving VASP when it has been registered
+          example: did:ethr:0xa07094869d69fb7cc6e27c5c80d94fce3dd9755e
+          type: string
+          x-order: 10
+        vaspName:
+          description: Name of the VASP that owns the receiving wallet when the VASP has not been registered
+          example: Bakkt Trading
+          type: string
+          x-order: 8
+        vaspWebsite:
+          description: Website of the VASP that owns the receiving wallet when the VASP has not been registered
+          example: https://bakkt.com
+          type: string
+          x-order: 9
+      required:
+      - quantity
+      - clientTransactionId
+      - currency
+      - account
+      - receivingWallet
+      - feeEstimateId
+      type: object
+    Withdrawal:
+      properties:
+        blockchainHash:
+          description: Blockchain hash for this transaction, if the transaction has already been written to the blockchain
+          type: string
+          x-order: 7
+        createdAt:
+          description: Time at which a withdrawal was submitted
+          format: date-time
+          type: string
+          x-order: 8
+        fee:
+          description: Fee for the withdrawal in coin that is taken out of the investor's account on top of the requested
+            withdrawal quantity
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt Transaction ID
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+        rejectReason:
+          description: DEPRECATED, please use statusReason. Reason for a reject, if any
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/WithdrawRequest'
+        status:
+          $ref: '#/components/schemas/WithdrawalStatus'
+        statusReason:
+          description: reason for the current status of the withdrawal
+          type: string
+          x-order: 6
+        totalQuantity:
+          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen
+            (i.e., equals quantity plus fee)
+          type: string
+          x-order: 3
+        usdEquivalentFee:
+          description: Fee for the withdrawal in USD
+          type: string
+          x-order: 2
+      required:
+      - id
+      - status
+      - createdAt
+      - request
+      type: object
+    WithdrawalStatus:
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      - ACCEPTED
+      type: string
+    HeartBeatRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique key used by check Bakkt connectivity
+          example: 123e4567-e89b-12d3-a456-426614174000
+    HeartBeatResponse:
+      required:
+      - result
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique key used by check Bakkt connectivity, copy from request requestId
+          example: 123e4567-e89b-12d3-a456-426614174000
+        result:
+          type: string
+          description: Phrase attesting bakkt created the ping response
+          example: 'PONG: heartbeat received'
+    KycTransferRecoveryRequest:
+      properties:
+        shareToken:
+          description: The shared token
+          type: string
+          x-order: 0
+      required:
+      - shareToken
+      type: object
+    LinkBankAccountAchRequest:
+      required:
+      - accountNumber
+      - accountType
+      - partnerTransactionRef
+      - routingNumber
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+        partnerTransactionRef:
+          maxLength: 255
+          minLength: 0
+          type: string
+        routingNumber:
+          type: string
+    LinkBankAccountAchResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    LoginRequest:
+      properties:
+        logonId:
+          example: client_system_user_id
+          type: string
+        password:
+          example: client_system_pa$$w0rd
+          format: password
+          type: string
+      required:
+      - logonId
+      - password
+      type: object
+    LoginResponse:
+      description: The response containing security token credentials to use for subsequent calls
+      properties:
+        token:
+          description: A security token that represents a logged in client system
+          example: 7FEXAMPLE8lorem890EXamPLEASDdolorReXAMPLEv
+          type: string
+      required:
+      - token
+      type: object
+    VaspLookupResponse:
+      properties:
+        vaspName:
+          description: The name of the vasp associated with the provided wallet address
+          type: string
+          x-order: 0
+      required:
+      - vaspName
+      type: object
+    DepositReceiveAddressRequest:
+      properties:
+        account:
+          description: Bakkt client account identifier
+          example: ABC12345
+          type: string
+          x-order: 1
+        currency:
+          description: Crypto coin that you would like to deposit
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+      required:
+      - currency
+      - account
+      type: object
+    DepositReceiveAddressResponse:
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        receiveAddress:
+          description: A receive address to use to deposit coin
+          type: string
+          x-order: 0
+        request:
+          $ref: '#/components/schemas/DepositReceiveAddressRequest'
+        tag:
+          description: Tag tied to Tag based Assets
+          type: string
+          x-order: 3
+      required:
+      - receiveAddress
+      - request
+      type: object
+    WithdrawalEstimatedFeeRequest:
+      properties:
+        currency:
+          description: Crypto coin that the client would like to estimate the cost for transferring
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+        quantity:
+          description: Amount of coin that the client would like to estimate the cost for transferring
+          type: string
+          x-order: 1
+        receivingWallet:
+          description: Address of the wallet intended to receive the coin. This is only required for withdrawals with a notional
+            value greater than or equal to 3000.
+          type: string
+          x-order: 2
+      required:
+      - currency
+      - quantity
+      type: object
+    WithdrawalEstimatedFeeResponse:
+      properties:
+        estimatedAt:
+          description: Time at which a fee estimate was generated
+          type: string
+          x-order: 5
+        expiresAt:
+          description: The time at which a fee expires; a withdrawal request must be tied to an unexpired fee estimation
+          type: string
+          x-order: 6
+        fee:
+          description: Estimated fee, in coin, for a withdrawal request
+          type: string
+          x-order: 1
+        id:
+          description: A unique identifier for this estimate; this identifier must be supplied when initiating a withdrawal
+            request
+          format: uuid
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+        request:
+          $ref: '#/components/schemas/WithdrawalEstimatedFeeRequest'
+        totalQuantity:
+          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen
+            (i.e., equals quantity plus fee)
+          type: string
+          x-order: 3
+        usdEquivalentFee:
+          description: Fee for the withdrawal in USD
+          type: string
+          x-order: 2
+        usdRate:
+          description: The USD price for one coin in which the estimation was created
+          type: string
+          x-order: 4
+      required:
+      - id
+      - fee
+      - request
+      - estimatedAt
+      - usdEquivalentFee
+      - totalQuantity
+      - usdRate
+      - expiresAt
+      type: object
+    AccountUnLinkingRequest:
+      type: object
+      properties:
+        instrumentType:
+          type: string
+          enum:
+          - ACH
+          - DEBIT
+    AccountUnLinkingResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    DocumentMetadata:
+      properties:
+        account:
+          description: An account number to associate with the document being uploaded
+          type: string
+          x-order: 1
+        clientDocumentId:
+          description: Client-specified unique identifer for the uploaded document
+          format: uuid
+          type: string
+          x-order: 0
+        clientOwnerId:
+          description: An id used to associate the owner of the document with the document being uploaded
+          type: string
+          x-order: 6
+        description:
+          description: A description of the document being uploaded
+          type: string
+          x-order: 4
+        documentExpiration:
+          description: Date for which the document expires
+          format: date-time
+          type: string
+          x-order: 7
+          nullable: true
+        documentSide:
+          $ref: '#/components/schemas/DocumentSide'
+        documentType:
+          $ref: '#/components/schemas/DocumentType'
+        issueCountry:
+          description: Country for which the document was issued in/for
+          type: string
+          x-order: 3
+      required:
+      - clientDocumentId
+      - account
+      - documentType
+      - documentSide
+      type: object
+    DocumentSide:
+      description: Side of the document that is being submitted. Note that this field is required for entity account documents,
+        including owner specific documents.
+      enum:
+      - FRONT
+      - BACK
+      - UNSPECIFIED
+      type: string
+    DocumentType:
+      description: Document type assigned at upload
+      enum:
+      - DRIVERS_LICENSE
+      - IDENTIFICATION_CARD
+      - PASSPORT
+      - SOCIAL_SECURITY_CARD
+      - RAW_CIP_DATA
+      - TRUST_CERTIFICATION
+      - ENTITY_DUE_DILIGENCE
+      - RAW_CDD_DATA
+      - VISA
+      - W_8BEN_FORM
+      - PASSPORT_CARD
+      - CERTIFICATE_OF_INCORPORATION
+      - CERTIFICATE_OF_BENEFICIAL_OWNERS
+      - PROOF_OF_ENTITY_ADDRESS
+      - PROOF_OF_ENTITY_EIN_TAX_ID
+      - PROOF_OF_RESIDENTIAL_ADDRESS
+      - PROOF_OF_PERSONAL_TAX_ID
+      - SOURCE_OF_FUNDS
+      - TRANSFER_ON_DEATH
+      type: string
+    RetrieveAccountDocumentMetadataResponse:
+      properties:
+        documentMetadata:
+          items:
+            $ref: '#/components/schemas/DocumentMetadata'
+          type: array
+          x-order: 0
+      type: object
+    Document:
+      properties:
+        createdAt:
+          description: The time the document was uploaded to the Bakkt platform
+          format: date-time
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt unique identifer for the document
+          format: uuid
+          type: string
+          x-order: 0
+        request:
+          $ref: '#/components/schemas/DocumentRequest'
+      required:
+      - id
+      - createdAt
+      - request
+      type: object
+    DocumentRequest:
+      description: Request to upload a document with metadata
+      properties:
+        account:
+          description: An account number to associate with the document being uploaded
+          type: string
+          x-order: 1
+        clientDocumentId:
+          description: Client-specified unique identifer for the uploaded document
+          format: uuid
+          type: string
+          x-order: 0
+        clientOwnerId:
+          description: An id used to associate the owner of the document with the document being uploaded
+          type: string
+          x-order: 6
+        description:
+          description: A description of the document being uploaded
+          type: string
+          x-order: 4
+        documentExpiration:
+          description: Date for which the document expires
+          format: date-time
+          type: string
+          x-order: 7
+          nullable: true
+        documentSide:
+          $ref: '#/components/schemas/DocumentSide'
+        documentType:
+          $ref: '#/components/schemas/DocumentType'
+        issueCountry:
+          description: The ISO 3166-1 alpha-3 country code of the country for which the document is issued for
+          type: string
+          x-order: 3
+      required:
+      - clientDocumentId
+      - account
+      - documentType
+      type: object
+    TransferRequest:
+      type: object
+      required:
+      - amount
+      - currency
+      - fiatTransactType
+      - idempotencyKey
+      - instrumentType
+      - partnerTransactionRef
+      properties:
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+          enum:
+          - USD
+        fiatTransactType:
+          type: string
+          enum:
+          - DEPOSIT
+          - WITHDRAW
+        idempotencyKey:
+          type: string
+        instrumentType:
+          type: string
+          enum:
+          - ACH
+          - DEBIT
+          - WIRE
+        partnerTransactionRef:
+          type: string
+        wireWithdrawDetails:
+          $ref: '#/components/schemas/WireWithdrawDetails'
+    WireWithdrawDetails:
+      type: object
+      properties:
+        wireRoutingNumber:
+          type: string
+        wireAccountNumber:
+          type: string
+        wireBankName:
+          type: string
+        wireBankAddress:
+          type: string
+        wireSwiftCode:
+          type: string
+    UnlinkBankAccountRequest:
+      required:
+      - instrumentType
+      - partnerTransactionRef
+      type: object
+      properties:
+        instrumentType:
+          type: string
+          enum:
+          - ACH
+          - DEBIT
+          - TPJ
+          - WIRE
+        partnerTransactionRef:
+          maxLength: 255
+          minLength: 0
+          type: string
+    UnlinkBankAccountResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    AccountSettlementRequest:
+      properties:
+        accountId:
+          description: client-specified unique identifier for the account
+          type: string
+          x-order: 0
+        settlementMethod:
+          description: Settlement Method tied to Account
+          enum:
+          - NET_SETTLEMENT
+          - BAKKT_TPJ
+          type: string
+          x-order: 1
+      required:
+      - accountId
+      - settlementMethod
+      type: object
+    AccountSettlementResponse:
+      properties:
+        request:
+          $ref: '#/components/schemas/AccountSettlementRequest'
+        status:
+          description: status tied to account settlement update
+          enum:
+          - COMPLETE
+          - FAILED
+          type: string
+          x-order: 1
+      required:
+      - request
+      - status
+      type: object
+    VerifyWalletAddressRequest:
+      properties:
+        address:
+          description: Address which should be verified for correct format
+          type: string
+          x-order: 0
+        currency:
+          description: Crypto currency that the client would like to verify the address of
+          type: string
+          x-order: 1
+        network:
+          $ref: '#/components/schemas/Network'
+      required:
+      - address
+      type: object
+    VerifyWalletAddressResponse:
+      properties:
+        isValid:
+          description: Boolean indicating the wallet address is valid or not
+          type: boolean
+          x-order: 0
+        request:
+          $ref: '#/components/schemas/VerifyWalletAddressRequest'
+        requiredTag:
+          description: Tag must be specified when sending a withdrawal. Only applicable for Tag/Memo based blockchains.
+          type: boolean
+          x-order: 1
+      required:
+      - isValid
+      - requiredTag
+      type: object

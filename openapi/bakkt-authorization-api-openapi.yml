@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  title: Bakkt Crypto Solutions Accounts Authorization API
+  version: '2.0'
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  termsOfService: https://bakkt.com/user-agreement
+  contact:
+    name: Bakkt User Account Agreement
+    url: https://bakkt.com/user-agreement
+servers:
+- url: https://api.bakkt.com
+  description: Bakkt API gateway (dedicated per-client, IP-whitelisted; base paths /apex-crypto/api/v2 and /partner/v1)
+tags:
+- description: Authorization allows Client systems to authenticate and access services on behalf of their investors.
+  name: Authorization
+paths:
+  /apex-crypto/api/v2/login:
+    post:
+      description: Client systems use this service to get a security token. All subsequent calls to the gateway must have the token in the 'Authorization' header and must be made over HTTPS.
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        description: Submit login credentials for the system
+        required: true
+      responses:
+        '200':
+          description: This response returns a token to use for subsequent API calls.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: This response returns if the user is not authorized to get a token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: This response returns if the system encounters an unexpected error while handling this request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Login
+      tags:
+      - Authorization
+components:
+  schemas:
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    LoginResponse:
+      description: The response containing security token credentials to use for subsequent calls
+      properties:
+        token:
+          description: A security token that represents a logged in client system
+          example: 7FEXAMPLE8lorem890EXamPLEASDdolorReXAMPLEv
+          type: string
+      required:
+      - token
+      type: object
+    LoginRequest:
+      properties:
+        logonId:
+          example: client_system_user_id
+          type: string
+        password:
+          example: client_system_pa$$w0rd
+          format: password
+          type: string
+      required:
+      - logonId
+      - password
+      type: object
