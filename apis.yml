@@ -225,6 +225,8 @@ apis:
   - type: OpenAPI
     url: openapi/bakkt-transfers-api-openapi.yml
 common:
+- type: Overlay
+  url: overlays/bakkt-crypto-overlay.yaml
 # --- link properties (identity / discoverability) ---
 - type: DeveloperPortal
   url: https://bakkt.readme.io/
