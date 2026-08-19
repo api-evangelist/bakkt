@@ -1,0 +1,1070 @@
+{
+  "item": [
+    {
+      "id": "d888ed90-7153-4ac0-aa81-4242a1806437",
+      "name": "Accounts",
+      "description": {
+        "content": "Accounts are used to represent users that use the platform's services.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c127ddf6-9f13-46e9-8b04-f71f3df96d0f",
+          "name": "Create a New User Account",
+          "request": {
+            "name": "Create a New User Account",
+            "description": {
+              "content": "Use this endpoint to create new investor accounts. The client must provide an account ID that uniquely identifies the investor from other investors on the client's platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientAccountId\": \"<string>\",\n  \"owners\": [\n    {\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"role\": \"<string>\",\n      \"identity\": {\n        \"dateOfBirth\": \"<date>\",\n        \"familyName\": \"<string>\",\n        \"givenName\": \"<string>\",\n        \"personalAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"citizenshipCountry\": \"<string>\",\n        \"disclosures\": {\n          \"controlPersonCompanySymbols\": \"<string>\",\n          \"finraAssociatedEntities\": \"<string>\",\n          \"lastScreenedDate\": \"<dateTime>\",\n          \"ofacSanctioned\": \"<string>\",\n          \"politicallyExposed\": \"<string>\",\n          \"politicallyExposedImmediateFamilyNames\": \"<string>\",\n          \"politicallyExposedOrganizations\": \"<string>\"\n        },\n        \"employment\": {\n          \"employerName\": \"<string>\",\n          \"position\": \"<string>\",\n          \"employerAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"yearsEmployed\": \"<integer>\"\n        },\n        \"maritalStatus\": \"<string>\",\n        \"middleNames\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"taxIdCountry\": \"USA\",\n        \"taxIdType\": \"<string>\",\n        \"verificationResults\": {\n          \"addressVerified\": \"<boolean>\",\n          \"dateOfBirthVerified\": \"<boolean>\",\n          \"executionDate\": \"<date>\",\n          \"externalCaseId\": \"<string>\",\n          \"nameVerified\": \"<boolean>\",\n          \"taxIdVerified\": \"<boolean>\",\n          \"vendorName\": \"<string>\",\n          \"identityVerificationResultId\": \"<string>\",\n          \"manualOverride\": \"<boolean>\",\n          \"manualOverrideApprover\": \"<string>\",\n          \"manualOverrideReason\": \"<string>\"\n        }\n      },\n      \"agreements\": [\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"clientOwnerId\": \"<string>\",\n      \"identityId\": \"<string>\",\n      \"ownerId\": \"<uuid>\",\n      \"phoneNumber\": \"<string>\"\n    },\n    {\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"role\": \"<string>\",\n      \"identity\": {\n        \"dateOfBirth\": \"<date>\",\n        \"familyName\": \"<string>\",\n        \"givenName\": \"<string>\",\n        \"personalAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"citizenshipCountry\": \"<string>\",\n        \"disclosures\": {\n          \"controlPersonCompanySymbols\": \"<string>\",\n          \"finraAssociatedEntities\": \"<string>\",\n          \"lastScreenedDate\": \"<dateTime>\",\n          \"ofacSanctioned\": \"<string>\",\n          \"politicallyExposed\": \"<string>\",\n          \"politicallyExposedImmediateFamilyNames\": \"<string>\",\n          \"politicallyExposedOrganizations\": \"<string>\"\n        },\n        \"employment\": {\n          \"employerName\": \"<string>\",\n          \"position\": \"<string>\",\n          \"employerAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"yearsEmployed\": \"<integer>\"\n        },\n        \"maritalStatus\": \"<string>\",\n        \"middleNames\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"taxIdCountry\": \"USA\",\n        \"taxIdType\": \"<string>\",\n        \"verificationResults\": {\n          \"addressVerified\": \"<boolean>\",\n          \"dateOfBirthVerified\": \"<boolean>\",\n          \"executionDate\": \"<date>\",\n          \"externalCaseId\": \"<string>\",\n          \"nameVerified\": \"<boolean>\",\n          \"taxIdVerified\": \"<boolean>\",\n          \"vendorName\": \"<string>\",\n          \"identityVerificationResultId\": \"<string>\",\n          \"manualOverride\": \"<boolean>\",\n          \"manualOverrideApprover\": \"<string>\",\n          \"manualOverrideReason\": \"<string>\"\n        }\n      },\n      \"agreements\": [\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"clientOwnerId\": \"<string>\",\n      \"identityId\": \"<string>\",\n      \"ownerId\": \"<uuid>\",\n      \"phoneNumber\": \"<string>\"\n    }\n  ],\n  \"accountType\": \"<string>\",\n  \"enrollments\": {\n    \"registrationIndividual\": \"<object>\"\n  },\n  \"entity\": {\n    \"entityEmailAddress\": \"<email>\",\n    \"entityLegalName\": \"<string>\",\n    \"entityPhoneNumber\": \"<string>\",\n    \"entityTaxId\": \"<string>\",\n    \"entityType\": \"<string>\",\n    \"operatingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"streetAddress\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"operatingIndustry\": \"<string>\",\n    \"registeredAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"streetAddress\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"activeWalletAddress\": \"<uuid>\",\n    \"dailyNotionalTradingVolumeUsdRange\": \"<string>\",\n    \"dailyTransactionVolumeUsdRange\": \"<string>\",\n    \"entityFormationDate\": \"<date>\",\n    \"entityOfferings\": \"<string>\",\n    \"entityRegistrationStatus\": \"<string>\",\n    \"firmAnnualNetIncome\": \"<string>\",\n    \"firmLiquidNetWorthUsdRange\": \"<string>\",\n    \"firmTotalNetWorthUsdRange\": \"<string>\",\n    \"investmentExperience\": \"<string>\",\n    \"investmentObjective\": \"<string>\",\n    \"operatingCountries\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sourceOfCurrency\": \"<string>\",\n    \"sourceOfFunds\": \"<string>\",\n    \"subjectToAMLRegulations\": \"<boolean>\"\n  },\n  \"id\": \"<string>\",\n  \"investmentProfile\": {\n    \"accountGoals\": {\n      \"investmentObjective\": \"<string>\",\n      \"liquidityNeeds\": \"<string>\",\n      \"riskTolerance\": \"<string>\",\n      \"timeHorizon\": \"<string>\"\n    },\n    \"customerProfile\": {\n      \"annualIncomeRangeUsd\": \"<string>\",\n      \"federalTaxBracket\": \"<integer>\",\n      \"investmentExperience\": \"<string>\",\n      \"liquidNetWorthRangeUsd\": \"<string>\",\n      \"sourceOfFunds\": \"<string>\",\n      \"totalNetWorthRangeUsd\": \"<string>\"\n    }\n  },\n  \"settlementMethod\": \"<string>\",\n  \"shareToken\": \"<string>\",\n  \"trustedContacts\": [\n    {\n      \"givenName\": \"<string>\",\n      \"familyName\": \"<string>\",\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"middleNames\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    },\n    {\n      \"givenName\": \"<string>\",\n      \"familyName\": \"<string>\",\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"middleNames\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce8a659a-e5fc-4b52-984e-3b4ecc490a26",
+              "name": "This response returns the newly created account for this investor.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientAccountId\": \"<string>\",\n  \"owners\": [\n    {\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"role\": \"<string>\",\n      \"identity\": {\n        \"dateOfBirth\": \"<date>\",\n        \"familyName\": \"<string>\",\n        \"givenName\": \"<string>\",\n        \"personalAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"citizenshipCountry\": \"<string>\",\n        \"disclosures\": {\n          \"controlPersonCompanySymbols\": \"<string>\",\n          \"finraAssociatedEntities\": \"<string>\",\n          \"lastScreenedDate\": \"<dateTime>\",\n          \"ofacSanctioned\": \"<string>\",\n          \"politicallyExposed\": \"<string>\",\n          \"politicallyExposedImmediateFamilyNames\": \"<string>\",\n          \"politicallyExposedOrganizations\": \"<string>\"\n        },\n        \"employment\": {\n          \"employerName\": \"<string>\",\n          \"position\": \"<string>\",\n          \"employerAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"yearsEmployed\": \"<integer>\"\n        },\n        \"maritalStatus\": \"<string>\",\n        \"middleNames\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"taxIdCountry\": \"USA\",\n        \"taxIdType\": \"<string>\",\n        \"verificationResults\": {\n          \"addressVerified\": \"<boolean>\",\n          \"dateOfBirthVerified\": \"<boolean>\",\n          \"executionDate\": \"<date>\",\n          \"externalCaseId\": \"<string>\",\n          \"nameVerified\": \"<boolean>\",\n          \"taxIdVerified\": \"<boolean>\",\n          \"vendorName\": \"<string>\",\n          \"identityVerificationResultId\": \"<string>\",\n          \"manualOverride\": \"<boolean>\",\n          \"manualOverrideApprover\": \"<string>\",\n          \"manualOverrideReason\": \"<string>\"\n        }\n      },\n      \"agreements\": [\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"clientOwnerId\": \"<string>\",\n      \"identityId\": \"<string>\",\n      \"ownerId\": \"<uuid>\",\n      \"phoneNumber\": \"<string>\"\n    },\n    {\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"role\": \"<string>\",\n      \"identity\": {\n        \"dateOfBirth\": \"<date>\",\n        \"familyName\": \"<string>\",\n        \"givenName\": \"<string>\",\n        \"personalAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"citizenshipCountry\": \"<string>\",\n        \"disclosures\": {\n          \"controlPersonCompanySymbols\": \"<string>\",\n          \"finraAssociatedEntities\": \"<string>\",\n          \"lastScreenedDate\": \"<dateTime>\",\n          \"ofacSanctioned\": \"<string>\",\n          \"politicallyExposed\": \"<string>\",\n          \"politicallyExposedImmediateFamilyNames\": \"<string>\",\n          \"politicallyExposedOrganizations\": \"<string>\"\n        },\n        \"employment\": {\n          \"employerName\": \"<string>\",\n          \"position\": \"<string>\",\n          \"employerAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"yearsEmployed\": \"<integer>\"\n        },\n        \"maritalStatus\": \"<string>\",\n        \"middleNames\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"taxIdCountry\": \"USA\",\n        \"taxIdType\": \"<string>\",\n        \"verificationResults\": {\n          \"addressVerified\": \"<boolean>\",\n          \"dateOfBirthVerified\": \"<boolean>\",\n          \"executionDate\": \"<date>\",\n          \"externalCaseId\": \"<string>\",\n          \"nameVerified\": \"<boolean>\",\n          \"taxIdVerified\": \"<boolean>\",\n          \"vendorName\": \"<string>\",\n          \"identityVerificationResultId\": \"<string>\",\n          \"manualOverride\": \"<boolean>\",\n          \"manualOverrideApprover\": \"<string>\",\n          \"manualOverrideReason\": \"<string>\"\n        }\n      },\n      \"agreements\": [\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"clientOwnerId\": \"<string>\",\n      \"identityId\": \"<string>\",\n      \"ownerId\": \"<uuid>\",\n      \"phoneNumber\": \"<string>\"\n    }\n  ],\n  \"accountType\": \"<string>\",\n  \"enrollments\": {\n    \"registrationIndividual\": \"<object>\"\n  },\n  \"entity\": {\n    \"entityEmailAddress\": \"johnw@hightable.com\",\n    \"entityLegalName\": \"Cruickshank, Franecki and Swift\",\n    \"entityPhoneNumber\": \"+1234567890\",\n    \"entityTaxId\": \"<string>\",\n    \"entityType\": \"CORPORATE\",\n    \"operatingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"streetAddress\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"operatingIndustry\": \"<string>\",\n    \"registeredAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"streetAddress\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"activeWalletAddress\": \"e1847689-3047-477d-a46f-79ad0ce8dc14\",\n    \"dailyNotionalTradingVolumeUsdRange\": \"FROM_1M_TO_2M\",\n    \"dailyTransactionVolumeUsdRange\": \"FROM_1M_TO_2M\",\n    \"entityFormationDate\": \"2001-01-01\",\n    \"entityOfferings\": \"<string>\",\n    \"entityRegistrationStatus\": \"NOT_APPLICABLE\",\n    \"firmAnnualNetIncome\": \"FROM_1M_TO_2M\",\n    \"firmLiquidNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n    \"firmTotalNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n    \"investmentExperience\": \"<string>\",\n    \"investmentObjective\": \"<string>\",\n    \"operatingCountries\": [\n      \"USA\"\n    ],\n    \"sourceOfCurrency\": \"<string>\",\n    \"sourceOfFunds\": \"<string>\",\n    \"subjectToAMLRegulations\": true\n  },\n  \"id\": \"<string>\",\n  \"investmentProfile\": {\n    \"accountGoals\": {\n      \"investmentObjective\": \"<string>\",\n      \"liquidityNeeds\": \"<string>\",\n      \"riskTolerance\": \"<string>\",\n      \"timeHorizon\": \"<string>\"\n    },\n    \"customerProfile\": {\n      \"annualIncomeRangeUsd\": \"<string>\",\n      \"federalTaxBracket\": \"<integer>\",\n      \"investmentExperience\": \"<string>\",\n      \"liquidNetWorthRangeUsd\": \"<string>\",\n      \"sourceOfFunds\": \"<string>\",\n      \"totalNetWorthRangeUsd\": \"<string>\"\n    }\n  },\n  \"settlementMethod\": \"<string>\",\n  \"shareToken\": \"<string>\",\n  \"trustedContacts\": [\n    {\n      \"givenName\": \"<string>\",\n      \"familyName\": \"<string>\",\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"middleNames\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    },\n    {\n      \"givenName\": \"<string>\",\n      \"familyName\": \"<string>\",\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"middleNames\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"request\": {\n    \"clientAccountId\": \"<string>\",\n    \"owners\": [\n      {\n        \"emailAddress\": \"<email>\",\n        \"mailingAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"role\": \"<string>\",\n        \"identity\": {\n          \"dateOfBirth\": \"<date>\",\n          \"familyName\": \"<string>\",\n          \"givenName\": \"<string>\",\n          \"personalAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"citizenshipCountry\": \"<string>\",\n          \"disclosures\": {\n            \"controlPersonCompanySymbols\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"finraAssociatedEntities\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastScreenedDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ofacSanctioned\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposedImmediateFamilyNames\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposedOrganizations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"employment\": {\n            \"employerName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"position\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"employerAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"yearsEmployed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"maritalStatus\": \"<string>\",\n          \"middleNames\": \"<string>\",\n          \"taxId\": \"<string>\",\n          \"taxIdCountry\": \"USA\",\n          \"taxIdType\": \"<string>\",\n          \"verificationResults\": {\n            \"addressVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dateOfBirthVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"executionDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalCaseId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nameVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"taxIdVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vendorName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identityVerificationResultId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverride\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverrideApprover\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverrideReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"agreements\": [\n          {\n            \"name\": \"<string>\",\n            \"version\": \"<string>\",\n            \"eSignedDate\": \"<dateTime>\",\n            \"text\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"version\": \"<string>\",\n            \"eSignedDate\": \"<dateTime>\",\n            \"text\": \"<string>\"\n          }\n        ],\n        \"clientOwnerId\": \"<string>\",\n        \"identityId\": \"<string>\",\n        \"ownerId\": \"<uuid>\",\n        \"phoneNumber\": \"<string>\"\n      },\n      {\n        \"emailAddress\": \"<email>\",\n        \"mailingAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"role\": \"<string>\",\n        \"identity\": {\n          \"dateOfBirth\": \"<date>\",\n          \"familyName\": \"<string>\",\n          \"givenName\": \"<string>\",\n          \"personalAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"citizenshipCountry\": \"<string>\",\n          \"disclosures\": {\n            \"controlPersonCompanySymbols\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"finraAssociatedEntities\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastScreenedDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ofacSanctioned\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposedImmediateFamilyNames\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposedOrganizations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"employment\": {\n            \"employerName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"position\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"employerAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"yearsEmployed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"maritalStatus\": \"<string>\",\n          \"middleNames\": \"<string>\",\n          \"taxId\": \"<string>\",\n          \"taxIdCountry\": \"USA\",\n          \"taxIdType\": \"<string>\",\n          \"verificationResults\": {\n            \"addressVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dateOfBirthVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"executionDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalCaseId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nameVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"taxIdVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vendorName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identityVerificationResultId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverride\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverrideApprover\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverrideReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"agreements\": [\n          {\n            \"name\": \"<string>\",\n            \"version\": \"<string>\",\n            \"eSignedDate\": \"<dateTime>\",\n            \"text\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"version\": \"<string>\",\n            \"eSignedDate\": \"<dateTime>\",\n            \"text\": \"<string>\"\n          }\n        ],\n        \"clientOwnerId\": \"<string>\",\n        \"identityId\": \"<string>\",\n        \"ownerId\": \"<uuid>\",\n        \"phoneNumber\": \"<string>\"\n      }\n    ],\n    \"accountType\": \"<string>\",\n    \"enrollments\": {\n      \"registrationIndividual\": \"<object>\"\n    },\n    \"entity\": {\n      \"entityEmailAddress\": \"johnw@hightable.com\",\n      \"entityLegalName\": \"Cruickshank, Franecki and Swift\",\n      \"entityPhoneNumber\": \"+1234567890\",\n      \"entityTaxId\": \"<string>\",\n      \"entityType\": \"CORPORATE\",\n      \"operatingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"operatingIndustry\": \"<string>\",\n      \"registeredAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"activeWalletAddress\": \"e1847689-3047-477d-a46f-79ad0ce8dc14\",\n      \"dailyNotionalTradingVolumeUsdRange\": \"FROM_1M_TO_2M\",\n      \"dailyTransactionVolumeUsdRange\": \"FROM_1M_TO_2M\",\n      \"entityFormationDate\": \"2001-01-01\",\n      \"entityOfferings\": \"<string>\",\n      \"entityRegistrationStatus\": \"NOT_APPLICABLE\",\n      \"firmAnnualNetIncome\": \"FROM_1M_TO_2M\",\n      \"firmLiquidNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n      \"firmTotalNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n      \"investmentExperience\": \"<string>\",\n      \"investmentObjective\": \"<string>\",\n      \"operatingCountries\": [\n        \"USA\"\n      ],\n      \"sourceOfCurrency\": \"<string>\",\n      \"sourceOfFunds\": \"<string>\",\n      \"subjectToAMLRegulations\": true\n    },\n    \"id\": \"<string>\",\n    \"investmentProfile\": {\n      \"accountGoals\": {\n        \"investmentObjective\": \"<string>\",\n        \"liquidityNeeds\": \"<string>\",\n        \"riskTolerance\": \"<string>\",\n        \"timeHorizon\": \"<string>\"\n      },\n      \"customerProfile\": {\n        \"annualIncomeRangeUsd\": \"<string>\",\n        \"federalTaxBracket\": \"<integer>\",\n        \"investmentExperience\": \"<string>\",\n        \"liquidNetWorthRangeUsd\": \"<string>\",\n        \"sourceOfFunds\": \"<string>\",\n        \"totalNetWorthRangeUsd\": \"<string>\"\n      }\n    },\n    \"settlementMethod\": \"<string>\",\n    \"shareToken\": \"<string>\",\n    \"trustedContacts\": [\n      {\n        \"givenName\": \"<string>\",\n        \"familyName\": \"<string>\",\n        \"emailAddress\": \"<email>\",\n        \"mailingAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"middleNames\": \"<string>\",\n        \"phoneNumber\": \"<string>\"\n      },\n      {\n        \"givenName\": \"<string>\",\n        \"familyName\": \"<string>\",\n        \"emailAddress\": \"<email>\",\n        \"mailingAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"middleNames\": \"<string>\",\n        \"phoneNumber\": \"<string>\"\n      }\n    ]\n  },\n  \"createdAt\": \"1966-09-04T16:31:41.927Z\",\n  \"status\": \"IN_PROGRESS\",\n  \"mode\": \"CLOSED\",\n  \"cipClearanceState\": \"IN_PROGRESS\",\n  \"pendingUpdateIds\": [\n    \"a81d5152-056e-2005-e0c7-493c9f3d0640\",\n    \"ea486e4d-f4f3-5ed8-2531-24cbcff75a20\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82d12367-0e62-4adc-adae-3d14987a5bbc",
+              "name": "This response returns a validation failure with additional details about specific sections of the request that failed validation in both machine-readable and developer-friendly messages tied to fields by name.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientAccountId\": \"<string>\",\n  \"owners\": [\n    {\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"role\": \"<string>\",\n      \"identity\": {\n        \"dateOfBirth\": \"<date>\",\n        \"familyName\": \"<string>\",\n        \"givenName\": \"<string>\",\n        \"personalAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"citizenshipCountry\": \"<string>\",\n        \"disclosures\": {\n          \"controlPersonCompanySymbols\": \"<string>\",\n          \"finraAssociatedEntities\": \"<string>\",\n          \"lastScreenedDate\": \"<dateTime>\",\n          \"ofacSanctioned\": \"<string>\",\n          \"politicallyExposed\": \"<string>\",\n          \"politicallyExposedImmediateFamilyNames\": \"<string>\",\n          \"politicallyExposedOrganizations\": \"<string>\"\n        },\n        \"employment\": {\n          \"employerName\": \"<string>\",\n          \"position\": \"<string>\",\n          \"employerAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"yearsEmployed\": \"<integer>\"\n        },\n        \"maritalStatus\": \"<string>\",\n        \"middleNames\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"taxIdCountry\": \"USA\",\n        \"taxIdType\": \"<string>\",\n        \"verificationResults\": {\n          \"addressVerified\": \"<boolean>\",\n          \"dateOfBirthVerified\": \"<boolean>\",\n          \"executionDate\": \"<date>\",\n          \"externalCaseId\": \"<string>\",\n          \"nameVerified\": \"<boolean>\",\n          \"taxIdVerified\": \"<boolean>\",\n          \"vendorName\": \"<string>\",\n          \"identityVerificationResultId\": \"<string>\",\n          \"manualOverride\": \"<boolean>\",\n          \"manualOverrideApprover\": \"<string>\",\n          \"manualOverrideReason\": \"<string>\"\n        }\n      },\n      \"agreements\": [\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"clientOwnerId\": \"<string>\",\n      \"identityId\": \"<string>\",\n      \"ownerId\": \"<uuid>\",\n      \"phoneNumber\": \"<string>\"\n    },\n    {\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"role\": \"<string>\",\n      \"identity\": {\n        \"dateOfBirth\": \"<date>\",\n        \"familyName\": \"<string>\",\n        \"givenName\": \"<string>\",\n        \"personalAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"citizenshipCountry\": \"<string>\",\n        \"disclosures\": {\n          \"controlPersonCompanySymbols\": \"<string>\",\n          \"finraAssociatedEntities\": \"<string>\",\n          \"lastScreenedDate\": \"<dateTime>\",\n          \"ofacSanctioned\": \"<string>\",\n          \"politicallyExposed\": \"<string>\",\n          \"politicallyExposedImmediateFamilyNames\": \"<string>\",\n          \"politicallyExposedOrganizations\": \"<string>\"\n        },\n        \"employment\": {\n          \"employerName\": \"<string>\",\n          \"position\": \"<string>\",\n          \"employerAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"yearsEmployed\": \"<integer>\"\n        },\n        \"maritalStatus\": \"<string>\",\n        \"middleNames\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"taxIdCountry\": \"USA\",\n        \"taxIdType\": \"<string>\",\n        \"verificationResults\": {\n          \"addressVerified\": \"<boolean>\",\n          \"dateOfBirthVerified\": \"<boolean>\",\n          \"executionDate\": \"<date>\",\n          \"externalCaseId\": \"<string>\",\n          \"nameVerified\": \"<boolean>\",\n          \"taxIdVerified\": \"<boolean>\",\n          \"vendorName\": \"<string>\",\n          \"identityVerificationResultId\": \"<string>\",\n          \"manualOverride\": \"<boolean>\",\n          \"manualOverrideApprover\": \"<string>\",\n          \"manualOverrideReason\": \"<string>\"\n        }\n      },\n      \"agreements\": [\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"clientOwnerId\": \"<string>\",\n      \"identityId\": \"<string>\",\n      \"ownerId\": \"<uuid>\",\n      \"phoneNumber\": \"<string>\"\n    }\n  ],\n  \"accountType\": \"<string>\",\n  \"enrollments\": {\n    \"registrationIndividual\": \"<object>\"\n  },\n  \"entity\": {\n    \"entityEmailAddress\": \"johnw@hightable.com\",\n    \"entityLegalName\": \"Cruickshank, Franecki and Swift\",\n    \"entityPhoneNumber\": \"+1234567890\",\n    \"entityTaxId\": \"<string>\",\n    \"entityType\": \"CORPORATE\",\n    \"operatingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"streetAddress\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"operatingIndustry\": \"<string>\",\n    \"registeredAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"streetAddress\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"activeWalletAddress\": \"e1847689-3047-477d-a46f-79ad0ce8dc14\",\n    \"dailyNotionalTradingVolumeUsdRange\": \"FROM_1M_TO_2M\",\n    \"dailyTransactionVolumeUsdRange\": \"FROM_1M_TO_2M\",\n    \"entityFormationDate\": \"2001-01-01\",\n    \"entityOfferings\": \"<string>\",\n    \"entityRegistrationStatus\": \"NOT_APPLICABLE\",\n    \"firmAnnualNetIncome\": \"FROM_1M_TO_2M\",\n    \"firmLiquidNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n    \"firmTotalNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n    \"investmentExperience\": \"<string>\",\n    \"investmentObjective\": \"<string>\",\n    \"operatingCountries\": [\n      \"USA\"\n    ],\n    \"sourceOfCurrency\": \"<string>\",\n    \"sourceOfFunds\": \"<string>\",\n    \"subjectToAMLRegulations\": true\n  },\n  \"id\": \"<string>\",\n  \"investmentProfile\": {\n    \"accountGoals\": {\n      \"investmentObjective\": \"<string>\",\n      \"liquidityNeeds\": \"<string>\",\n      \"riskTolerance\": \"<string>\",\n      \"timeHorizon\": \"<string>\"\n    },\n    \"customerProfile\": {\n      \"annualIncomeRangeUsd\": \"<string>\",\n      \"federalTaxBracket\": \"<integer>\",\n      \"investmentExperience\": \"<string>\",\n      \"liquidNetWorthRangeUsd\": \"<string>\",\n      \"sourceOfFunds\": \"<string>\",\n      \"totalNetWorthRangeUsd\": \"<string>\"\n    }\n  },\n  \"settlementMethod\": \"<string>\",\n  \"shareToken\": \"<string>\",\n  \"trustedContacts\": [\n    {\n      \"givenName\": \"<string>\",\n      \"familyName\": \"<string>\",\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"middleNames\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    },\n    {\n      \"givenName\": \"<string>\",\n      \"familyName\": \"<string>\",\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"middleNames\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2584,\n  \"message\": \"string\",\n  \"validationErrors\": [\n    {\n      \"code\": 5275,\n      \"message\": \"string\",\n      \"field\": \"string\",\n      \"rejectedValue\": \"string\"\n    },\n    {\n      \"code\": 1886,\n      \"message\": \"string\",\n      \"field\": \"string\",\n      \"rejectedValue\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3cb3878-7c37-422d-9792-d2e679dcf4cf",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientAccountId\": \"<string>\",\n  \"owners\": [\n    {\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"role\": \"<string>\",\n      \"identity\": {\n        \"dateOfBirth\": \"<date>\",\n        \"familyName\": \"<string>\",\n        \"givenName\": \"<string>\",\n        \"personalAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"citizenshipCountry\": \"<string>\",\n        \"disclosures\": {\n          \"controlPersonCompanySymbols\": \"<string>\",\n          \"finraAssociatedEntities\": \"<string>\",\n          \"lastScreenedDate\": \"<dateTime>\",\n          \"ofacSanctioned\": \"<string>\",\n          \"politicallyExposed\": \"<string>\",\n          \"politicallyExposedImmediateFamilyNames\": \"<string>\",\n          \"politicallyExposedOrganizations\": \"<string>\"\n        },\n        \"employment\": {\n          \"employerName\": \"<string>\",\n          \"position\": \"<string>\",\n          \"employerAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"yearsEmployed\": \"<integer>\"\n        },\n        \"maritalStatus\": \"<string>\",\n        \"middleNames\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"taxIdCountry\": \"USA\",\n        \"taxIdType\": \"<string>\",\n        \"verificationResults\": {\n          \"addressVerified\": \"<boolean>\",\n          \"dateOfBirthVerified\": \"<boolean>\",\n          \"executionDate\": \"<date>\",\n          \"externalCaseId\": \"<string>\",\n          \"nameVerified\": \"<boolean>\",\n          \"taxIdVerified\": \"<boolean>\",\n          \"vendorName\": \"<string>\",\n          \"identityVerificationResultId\": \"<string>\",\n          \"manualOverride\": \"<boolean>\",\n          \"manualOverrideApprover\": \"<string>\",\n          \"manualOverrideReason\": \"<string>\"\n        }\n      },\n      \"agreements\": [\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"clientOwnerId\": \"<string>\",\n      \"identityId\": \"<string>\",\n      \"ownerId\": \"<uuid>\",\n      \"phoneNumber\": \"<string>\"\n    },\n    {\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"role\": \"<string>\",\n      \"identity\": {\n        \"dateOfBirth\": \"<date>\",\n        \"familyName\": \"<string>\",\n        \"givenName\": \"<string>\",\n        \"personalAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"citizenshipCountry\": \"<string>\",\n        \"disclosures\": {\n          \"controlPersonCompanySymbols\": \"<string>\",\n          \"finraAssociatedEntities\": \"<string>\",\n          \"lastScreenedDate\": \"<dateTime>\",\n          \"ofacSanctioned\": \"<string>\",\n          \"politicallyExposed\": \"<string>\",\n          \"politicallyExposedImmediateFamilyNames\": \"<string>\",\n          \"politicallyExposedOrganizations\": \"<string>\"\n        },\n        \"employment\": {\n          \"employerName\": \"<string>\",\n          \"position\": \"<string>\",\n          \"employerAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"yearsEmployed\": \"<integer>\"\n        },\n        \"maritalStatus\": \"<string>\",\n        \"middleNames\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"taxIdCountry\": \"USA\",\n        \"taxIdType\": \"<string>\",\n        \"verificationResults\": {\n          \"addressVerified\": \"<boolean>\",\n          \"dateOfBirthVerified\": \"<boolean>\",\n          \"executionDate\": \"<date>\",\n          \"externalCaseId\": \"<string>\",\n          \"nameVerified\": \"<boolean>\",\n          \"taxIdVerified\": \"<boolean>\",\n          \"vendorName\": \"<string>\",\n          \"identityVerificationResultId\": \"<string>\",\n          \"manualOverride\": \"<boolean>\",\n          \"manualOverrideApprover\": \"<string>\",\n          \"manualOverrideReason\": \"<string>\"\n        }\n      },\n      \"agreements\": [\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"version\": \"<string>\",\n          \"eSignedDate\": \"<dateTime>\",\n          \"text\": \"<string>\"\n        }\n      ],\n      \"clientOwnerId\": \"<string>\",\n      \"identityId\": \"<string>\",\n      \"ownerId\": \"<uuid>\",\n      \"phoneNumber\": \"<string>\"\n    }\n  ],\n  \"accountType\": \"<string>\",\n  \"enrollments\": {\n    \"registrationIndividual\": \"<object>\"\n  },\n  \"entity\": {\n    \"entityEmailAddress\": \"johnw@hightable.com\",\n    \"entityLegalName\": \"Cruickshank, Franecki and Swift\",\n    \"entityPhoneNumber\": \"+1234567890\",\n    \"entityTaxId\": \"<string>\",\n    \"entityType\": \"CORPORATE\",\n    \"operatingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"streetAddress\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"operatingIndustry\": \"<string>\",\n    \"registeredAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"streetAddress\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"activeWalletAddress\": \"e1847689-3047-477d-a46f-79ad0ce8dc14\",\n    \"dailyNotionalTradingVolumeUsdRange\": \"FROM_1M_TO_2M\",\n    \"dailyTransactionVolumeUsdRange\": \"FROM_1M_TO_2M\",\n    \"entityFormationDate\": \"2001-01-01\",\n    \"entityOfferings\": \"<string>\",\n    \"entityRegistrationStatus\": \"NOT_APPLICABLE\",\n    \"firmAnnualNetIncome\": \"FROM_1M_TO_2M\",\n    \"firmLiquidNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n    \"firmTotalNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n    \"investmentExperience\": \"<string>\",\n    \"investmentObjective\": \"<string>\",\n    \"operatingCountries\": [\n      \"USA\"\n    ],\n    \"sourceOfCurrency\": \"<string>\",\n    \"sourceOfFunds\": \"<string>\",\n    \"subjectToAMLRegulations\": true\n  },\n  \"id\": \"<string>\",\n  \"investmentProfile\": {\n    \"accountGoals\": {\n      \"investmentObjective\": \"<string>\",\n      \"liquidityNeeds\": \"<string>\",\n      \"riskTolerance\": \"<string>\",\n      \"timeHorizon\": \"<string>\"\n    },\n    \"customerProfile\": {\n      \"annualIncomeRangeUsd\": \"<string>\",\n      \"federalTaxBracket\": \"<integer>\",\n      \"investmentExperience\": \"<string>\",\n      \"liquidNetWorthRangeUsd\": \"<string>\",\n      \"sourceOfFunds\": \"<string>\",\n      \"totalNetWorthRangeUsd\": \"<string>\"\n    }\n  },\n  \"settlementMethod\": \"<string>\",\n  \"shareToken\": \"<string>\",\n  \"trustedContacts\": [\n    {\n      \"givenName\": \"<string>\",\n      \"familyName\": \"<string>\",\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"middleNames\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    },\n    {\n      \"givenName\": \"<string>\",\n      \"familyName\": \"<string>\",\n      \"emailAddress\": \"<email>\",\n      \"mailingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"middleNames\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5621,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecd7dabe-c9ec-4391-bf4d-96d7bf0b48e4",
+          "name": "Retrieves Accounts by Account ID",
+          "request": {
+            "name": "Retrieves Accounts by Account ID",
+            "description": {
+              "content": "This endpoint retrieves an investor account provided the client's unique account ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "accounts",
+                ":clientAccountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientAccountId",
+                  "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "a5c6e367-b41c-4b4f-b9fa-b93b14be1954",
+              "name": "This response returns the latest account information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    ":clientAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"request\": {\n    \"clientAccountId\": \"<string>\",\n    \"owners\": [\n      {\n        \"emailAddress\": \"<email>\",\n        \"mailingAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"role\": \"<string>\",\n        \"identity\": {\n          \"dateOfBirth\": \"<date>\",\n          \"familyName\": \"<string>\",\n          \"givenName\": \"<string>\",\n          \"personalAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"citizenshipCountry\": \"<string>\",\n          \"disclosures\": {\n            \"controlPersonCompanySymbols\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"finraAssociatedEntities\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastScreenedDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ofacSanctioned\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposedImmediateFamilyNames\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposedOrganizations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"employment\": {\n            \"employerName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"position\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"employerAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"yearsEmployed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"maritalStatus\": \"<string>\",\n          \"middleNames\": \"<string>\",\n          \"taxId\": \"<string>\",\n          \"taxIdCountry\": \"USA\",\n          \"taxIdType\": \"<string>\",\n          \"verificationResults\": {\n            \"addressVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dateOfBirthVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"executionDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalCaseId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nameVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"taxIdVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vendorName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identityVerificationResultId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverride\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverrideApprover\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverrideReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"agreements\": [\n          {\n            \"name\": \"<string>\",\n            \"version\": \"<string>\",\n            \"eSignedDate\": \"<dateTime>\",\n            \"text\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"version\": \"<string>\",\n            \"eSignedDate\": \"<dateTime>\",\n            \"text\": \"<string>\"\n          }\n        ],\n        \"clientOwnerId\": \"<string>\",\n        \"identityId\": \"<string>\",\n        \"ownerId\": \"<uuid>\",\n        \"phoneNumber\": \"<string>\"\n      },\n      {\n        \"emailAddress\": \"<email>\",\n        \"mailingAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"role\": \"<string>\",\n        \"identity\": {\n          \"dateOfBirth\": \"<date>\",\n          \"familyName\": \"<string>\",\n          \"givenName\": \"<string>\",\n          \"personalAddress\": {\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"streetAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"citizenshipCountry\": \"<string>\",\n          \"disclosures\": {\n            \"controlPersonCompanySymbols\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"finraAssociatedEntities\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastScreenedDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ofacSanctioned\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposedImmediateFamilyNames\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"politicallyExposedOrganizations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"employment\": {\n            \"employerName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"position\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"employerAddress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"yearsEmployed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"maritalStatus\": \"<string>\",\n          \"middleNames\": \"<string>\",\n          \"taxId\": \"<string>\",\n          \"taxIdCountry\": \"USA\",\n          \"taxIdType\": \"<string>\",\n          \"verificationResults\": {\n            \"addressVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dateOfBirthVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"executionDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"externalCaseId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nameVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"taxIdVerified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vendorName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identityVerificationResultId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverride\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverrideApprover\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"manualOverrideReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"agreements\": [\n          {\n            \"name\": \"<string>\",\n            \"version\": \"<string>\",\n            \"eSignedDate\": \"<dateTime>\",\n            \"text\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"version\": \"<string>\",\n            \"eSignedDate\": \"<dateTime>\",\n            \"text\": \"<string>\"\n          }\n        ],\n        \"clientOwnerId\": \"<string>\",\n        \"identityId\": \"<string>\",\n        \"ownerId\": \"<uuid>\",\n        \"phoneNumber\": \"<string>\"\n      }\n    ],\n    \"accountType\": \"<string>\",\n    \"enrollments\": {\n      \"registrationIndividual\": \"<object>\"\n    },\n    \"entity\": {\n      \"entityEmailAddress\": \"johnw@hightable.com\",\n      \"entityLegalName\": \"Cruickshank, Franecki and Swift\",\n      \"entityPhoneNumber\": \"+1234567890\",\n      \"entityTaxId\": \"<string>\",\n      \"entityType\": \"CORPORATE\",\n      \"operatingAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"operatingIndustry\": \"<string>\",\n      \"registeredAddress\": {\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"streetAddress\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"postalCode\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"activeWalletAddress\": \"e1847689-3047-477d-a46f-79ad0ce8dc14\",\n      \"dailyNotionalTradingVolumeUsdRange\": \"FROM_1M_TO_2M\",\n      \"dailyTransactionVolumeUsdRange\": \"FROM_1M_TO_2M\",\n      \"entityFormationDate\": \"2001-01-01\",\n      \"entityOfferings\": \"<string>\",\n      \"entityRegistrationStatus\": \"NOT_APPLICABLE\",\n      \"firmAnnualNetIncome\": \"FROM_1M_TO_2M\",\n      \"firmLiquidNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n      \"firmTotalNetWorthUsdRange\": \"FROM_1M_TO_2M\",\n      \"investmentExperience\": \"<string>\",\n      \"investmentObjective\": \"<string>\",\n      \"operatingCountries\": [\n        \"USA\"\n      ],\n      \"sourceOfCurrency\": \"<string>\",\n      \"sourceOfFunds\": \"<string>\",\n      \"subjectToAMLRegulations\": true\n    },\n    \"id\": \"<string>\",\n    \"investmentProfile\": {\n      \"accountGoals\": {\n        \"investmentObjective\": \"<string>\",\n        \"liquidityNeeds\": \"<string>\",\n        \"riskTolerance\": \"<string>\",\n        \"timeHorizon\": \"<string>\"\n      },\n      \"customerProfile\": {\n        \"annualIncomeRangeUsd\": \"<string>\",\n        \"federalTaxBracket\": \"<integer>\",\n        \"investmentExperience\": \"<string>\",\n        \"liquidNetWorthRangeUsd\": \"<string>\",\n        \"sourceOfFunds\": \"<string>\",\n        \"totalNetWorthRangeUsd\": \"<string>\"\n      }\n    },\n    \"settlementMethod\": \"<string>\",\n    \"shareToken\": \"<string>\",\n    \"trustedContacts\": [\n      {\n        \"givenName\": \"<string>\",\n        \"familyName\": \"<string>\",\n        \"emailAddress\": \"<email>\",\n        \"mailingAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"middleNames\": \"<string>\",\n        \"phoneNumber\": \"<string>\"\n      },\n      {\n        \"givenName\": \"<string>\",\n        \"familyName\": \"<string>\",\n        \"emailAddress\": \"<email>\",\n        \"mailingAddress\": {\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"streetAddress\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"postalCode\": \"<string>\",\n          \"state\": \"<string>\"\n        },\n        \"middleNames\": \"<string>\",\n        \"phoneNumber\": \"<string>\"\n      }\n    ]\n  },\n  \"createdAt\": \"1966-02-01T04:39:55.262Z\",\n  \"status\": \"ACCEPTED\",\n  \"mode\": \"OPEN\",\n  \"cipClearanceState\": \"REJECTED\",\n  \"pendingUpdateIds\": [\n    \"fbfb6c24-d6fa-96e9-23c3-cb6dce2e323c\",\n    \"06b1c876-35a3-22cc-b04d-a6f6a120103f\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62f8cea3-e365-4de7-8d7f-7bc423e9af91",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    ":clientAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5621,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ebaa2c9-7d19-47d0-8efa-f460ccd1871d",
+          "name": "Retrieves account status by Account ID",
+          "request": {
+            "name": "Retrieves account status by Account ID",
+            "description": {
+              "content": "This endpoint retrieves an investor account trading status provided the client's unique account ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "accounts",
+                ":clientAccountId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientAccountId",
+                  "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "93e4c5b8-ca4a-4432-8e6f-f99b3b06c5b8",
+              "name": "This response returns the latest account status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    ":clientAccountId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"canTradeCrypto\": false,\n  \"cipClearanceState\": \"PENDING\",\n  \"settlementMethod\": \"BAKKT_TPJ\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d04de8c0-54d2-402e-af10-2c858e989b42",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    ":clientAccountId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5621,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cd4666f-867c-404e-84f2-bc43c76cec6e",
+          "name": "KYC transfer recovery request",
+          "request": {
+            "name": "KYC transfer recovery request",
+            "description": {
+              "content": "Use this endpoing to recover KYC's that are transferred",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "accounts",
+                "kycTransferRecovery",
+                ":clientAccountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientAccountId",
+                  "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shareToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d5b5047-563c-4886-b617-79c76c338faf",
+              "name": "If transfer recovery request triggered successfully, this call returns the text \"success.\"",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    "kycTransferRecovery",
+                    ":clientAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shareToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e93ae90-a495-4ddc-b6a3-75687152e90c",
+              "name": "This response returns a validation failure with additional details about the failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    "kycTransferRecovery",
+                    ":clientAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shareToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1999,\n  \"message\": \"string\",\n  \"validationErrors\": [\n    {\n      \"code\": 9867,\n      \"message\": \"string\",\n      \"field\": \"string\",\n      \"rejectedValue\": \"string\"\n    },\n    {\n      \"code\": 7908,\n      \"message\": \"string\",\n      \"field\": \"string\",\n      \"rejectedValue\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d4f3089-d9b6-43ef-b02e-1850d05a887f",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    "kycTransferRecovery",
+                    ":clientAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shareToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5621,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41a17303-84c2-4391-bef5-4afa0e9d07e4",
+          "name": "Trigger KYB Screening on Account",
+          "request": {
+            "name": "Trigger KYB Screening on Account",
+            "description": {
+              "content": "Use this endpoint to trigger a KYB screening on input account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "accounts",
+                "triggerKYBScreening",
+                ":clientAccountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientAccountId",
+                  "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "b4b35d0b-d348-4086-a587-f6b8cd104bcb",
+              "name": "If KYB has been triggered successfully, this call returns the text \"success.\"",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    "triggerKYBScreening",
+                    ":clientAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d96d234-1954-4e61-ba08-9f9dbd585d4c",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    "triggerKYBScreening",
+                    ":clientAccountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) A unique account ID originally provided by the client system when the account was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5621,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc566797-6e98-4d61-9e27-48a4af625089",
+          "name": "Update Settlement Method on Account",
+          "request": {
+            "name": "Update Settlement Method on Account",
+            "description": {
+              "content": "Use this endpoint to update settlement method on input account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "accounts",
+                "settlementMethod",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": \"<string>\",\n  \"settlementMethod\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4edb3986-0cba-4058-a9e3-ba34a81c01c9",
+              "name": "Response should return status of update and input request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    "settlementMethod",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountId\": \"<string>\",\n  \"settlementMethod\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request\": {\n    \"accountId\": \"<string>\",\n    \"settlementMethod\": \"<string>\"\n  },\n  \"status\": \"FAILED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "179adb7d-6132-4c07-a5cd-61ad30a3d4b5",
+              "name": "This response returns a validation failure with additional details about the failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    "settlementMethod",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountId\": \"<string>\",\n  \"settlementMethod\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1999,\n  \"message\": \"string\",\n  \"validationErrors\": [\n    {\n      \"code\": 9867,\n      \"message\": \"string\",\n      \"field\": \"string\",\n      \"rejectedValue\": \"string\"\n    },\n    {\n      \"code\": 7908,\n      \"message\": \"string\",\n      \"field\": \"string\",\n      \"rejectedValue\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21e7674b-a371-4743-8b97-eb955fb27f99",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "accounts",
+                    "settlementMethod",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountId\": \"<string>\",\n  \"settlementMethod\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5621,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e34a13e7-d361-4619-9451-6cca408364c8",
+    "name": "Bakkt Crypto Solutions Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

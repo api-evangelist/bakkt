@@ -170,3 +170,9 @@ tools:
 - name: verifyWalletAddress
   description: Verify that a wallet address is valid prior to using it in a transfer request.
   source_operation: openapi/bakkt-crypto-openapi.yml#verifyWalletAddress
+deployment:
+  mode: none
+  verified: derived
+  tools: 54
+  checked: '2026-08-12'
+  source: catalog MCP census

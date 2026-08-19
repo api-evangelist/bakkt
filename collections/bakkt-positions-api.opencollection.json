@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Positions API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Positions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Crypto Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/positions/:account",
+            "params": [
+              {
+                "name": "account",
+                "value": "",
+                "type": "path",
+                "description": "Account for which to retrieve positions"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to retrieve current position amounts for all crypto in an investor's account. The amounts are in crypto quantities - not notional."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

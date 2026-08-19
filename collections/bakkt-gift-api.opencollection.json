@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Gift API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Gift",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request For Gift",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/gift",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request to gift to a single customer account"
+        },
+        {
+          "info": {
+            "name": "Retrieve Gift Details By clientTransactionId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/gift/:clientTransactionId",
+            "params": [
+              {
+                "name": "clientTransactionId",
+                "value": "",
+                "type": "path",
+                "description": "Client-specified unique identifier for the gift"
+              }
+            ]
+          },
+          "docs": "Retrieve details pertaining to a particular gift by its clientTransactionId"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

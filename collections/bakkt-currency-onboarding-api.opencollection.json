@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Currency Onboarding API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Currency Onboarding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request For Currency Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/currency/batch/allocate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Currency allocation request for a single customer account"
+        },
+        {
+          "info": {
+            "name": "Retrieve Currency Allocation Details By clientTransactionId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/currency/batch/allocate/:clientTransactionId",
+            "params": [
+              {
+                "name": "clientTransactionId",
+                "value": "",
+                "type": "path",
+                "description": "Client-specified unique identifer for the currency allocation"
+              }
+            ]
+          },
+          "docs": "Retrieve details pertaining to a particular currency allocation by its clientTransactionId"
+        },
+        {
+          "info": {
+            "name": "Request To Close Currency Allocation Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/currency/batch/close",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request to close off currency allocations of a particular batch"
+        },
+        {
+          "info": {
+            "name": "Retrieve Currency Allocation Details By batchTransactionId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/currency/batch/:batchTransactionId",
+            "params": [
+              {
+                "name": "batchTransactionId",
+                "value": "",
+                "type": "path",
+                "description": "Client-specified unique identifier for a set of currency allocations belonging to the same batch request"
+              }
+            ]
+          },
+          "docs": "Retrieve allocation details pertaining to a particular series of currency allocations by their batchTransactionId"
+        },
+        {
+          "info": {
+            "name": "Request For New Currency Allocation Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/currency/batch/open",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Open a new batch of currency allocations for a particular currency where all transactions will be quantity based"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

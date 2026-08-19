@@ -1,0 +1,1026 @@
+{
+  "item": [
+    {
+      "id": "107aeeea-bcd4-48a3-863d-9a6e8442a797",
+      "name": "Fiat Onboarding",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b165b12e-8a29-4ced-b9de-d6f885c2f96d",
+          "name": "Request For Fiat Allocation",
+          "request": {
+            "name": "Request For Fiat Allocation",
+            "description": {
+              "content": "Fiat allocation request for a single customer account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "fiat",
+                "batch",
+                "allocate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account\": \"<string>\",\n  \"quantity\": \"<decimal>\",\n  \"batchTransactionId\": \"<uuid>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"direction\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eda7cd34-5322-4e49-97c1-d86b680321e2",
+              "name": "Successful submission of fiat allocation request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "allocate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": \"<string>\",\n  \"quantity\": \"<decimal>\",\n  \"batchTransactionId\": \"<uuid>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"direction\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1977-12-12T05:37:12.878Z\",\n  \"id\": \"ed381596-ccdf-d121-1c3b-cdd7ed4b8fbb\",\n  \"request\": {\n    \"account\": \"<string>\",\n    \"quantity\": \"<decimal>\",\n    \"batchTransactionId\": \"<uuid>\",\n    \"clientTransactionId\": \"<uuid>\",\n    \"direction\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"status\": \"COMPLETE\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52ca874e-d160-473f-8542-136bd53ebe8a",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "allocate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": \"<string>\",\n  \"quantity\": \"<decimal>\",\n  \"batchTransactionId\": \"<uuid>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"direction\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "893b2392-e817-4443-bee8-4a43b7216f40",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "allocate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": \"<string>\",\n  \"quantity\": \"<decimal>\",\n  \"batchTransactionId\": \"<uuid>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"direction\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e576e3df-bab8-4e9e-8db3-05e5dd4f9929",
+          "name": "Retrieve Fiat Allocation Details By clientTransactionId",
+          "request": {
+            "name": "Retrieve Fiat Allocation Details By clientTransactionId",
+            "description": {
+              "content": "Retrieve details pertaining to a particular fiat allocation by its clientTransactionId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "fiat",
+                "batch",
+                "allocate",
+                ":clientTransactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "clientTransactionId",
+                  "description": "(Required) Client-specified unique identifer for the fiat allocation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e9e24f72-6608-4b24-b224-b8bea6efc3a4",
+              "name": "Returns details of the allocation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "allocate",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) Client-specified unique identifer for the fiat allocation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1977-12-12T05:37:12.878Z\",\n  \"id\": \"ed381596-ccdf-d121-1c3b-cdd7ed4b8fbb\",\n  \"request\": {\n    \"account\": \"<string>\",\n    \"quantity\": \"<decimal>\",\n    \"batchTransactionId\": \"<uuid>\",\n    \"clientTransactionId\": \"<uuid>\",\n    \"direction\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"status\": \"COMPLETE\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ef5f1bd-6972-4064-b8a3-66b1eb8d24cf",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "allocate",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) Client-specified unique identifer for the fiat allocation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51b8e09c-35d6-44d7-b56d-13cd85629b1f",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "allocate",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) Client-specified unique identifer for the fiat allocation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc6d5f86-0ca1-42c6-99f3-bc9e44fecc45",
+          "name": "Request To Close Fiat Allocation Batch",
+          "request": {
+            "name": "Request To Close Fiat Allocation Batch",
+            "description": {
+              "content": "Request to close off fiat allocations of a particular batch",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "fiat",
+                "batch",
+                "close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"allocations\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1eee0154-7f9c-4e39-b222-6c314af11c4d",
+              "name": "This response returns the details of the closed batch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"allocations\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allocations\": 5401,\n  \"createdAt\": \"1957-11-29T23:57:58.562Z\",\n  \"id\": \"a6f2e1a0-d4b9-4815-f5a5-85d8be71f9ec\",\n  \"request\": {\n    \"batchTransactionId\": \"ed7afea9-5fd8-4d06-2eb7-ff525b015472\"\n  },\n  \"status\": \"OPEN\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f364ab2-1d65-46c0-9a2d-7b975dc93480",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"allocations\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db44060b-ebe2-4c3b-908f-dfcd265cac9a",
+              "name": "This response returns if the system encounters an unexpected error while handling this request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"allocations\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2af2a1cc-fcef-4612-bebf-4dab933a66c8",
+          "name": "Retrieve Fiat Allocation Details By batchTransactionId",
+          "request": {
+            "name": "Retrieve Fiat Allocation Details By batchTransactionId",
+            "description": {
+              "content": "Retrieve allocation details pertaining to a particular series of fiat allocations by their batchTransactionId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "fiat",
+                "batch",
+                ":batchTransactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "batchTransactionId",
+                  "description": "(Required) Client-specified unique identifier for a set of fiat allocations belonging to the same batch request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f750c136-c916-4cac-bb41-f801d774cc07",
+              "name": "This response returns the details of the fiat allocation batch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    ":batchTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "batchTransactionId",
+                      "description": "(Required) Client-specified unique identifier for a set of fiat allocations belonging to the same batch request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allocations\": 5401,\n  \"createdAt\": \"1957-11-29T23:57:58.562Z\",\n  \"id\": \"a6f2e1a0-d4b9-4815-f5a5-85d8be71f9ec\",\n  \"request\": {\n    \"batchTransactionId\": \"ed7afea9-5fd8-4d06-2eb7-ff525b015472\"\n  },\n  \"status\": \"OPEN\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "561819dd-2482-4639-bbca-fc39885d3ca0",
+              "name": "This response returns if the check was improperly submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    ":batchTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "batchTransactionId",
+                      "description": "(Required) Client-specified unique identifier for a set of fiat allocations belonging to the same batch request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c03b1cb9-bc4a-4820-863c-df53c0fcd16e",
+              "name": "This response returns if the system encounters an unexpected error while handling this request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    ":batchTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "batchTransactionId",
+                      "description": "(Required) Client-specified unique identifier for a set of fiat allocations belonging to the same batch request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bf0e359-8422-4e8d-ab4f-deb109f587a8",
+          "name": "Request For New Fiat Allocation Batch",
+          "request": {
+            "name": "Request For New Fiat Allocation Batch",
+            "description": {
+              "content": "Open a new batch of fiat allocations for a particular currency where all transactions will be quantity based",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "fiat",
+                "batch",
+                "open"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"batchTransactionId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d9d2f55-2c76-4194-94a0-8661db4827de",
+              "name": "Successfully opened allocations batch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allocations\": 173,\n  \"createdAt\": \"2006-01-02T23:24:12.047Z\",\n  \"id\": \"df1d15ce-216a-6a49-4e36-09c6a315a369\",\n  \"request\": {\n    \"batchTransactionId\": \"<uuid>\"\n  },\n  \"status\": \"CLOSED\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91fb036d-e158-401c-92b1-3a0e4b763493",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd1f5b6b-06c9-4e56-8947-762ee876d858",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "fiat",
+                    "batch",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8268,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ab01be62-8e6b-41f8-8aa8-37eb8e65071a",
+    "name": "Bakkt Crypto Solutions Accounts Fiat Onboarding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

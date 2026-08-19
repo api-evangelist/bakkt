@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Documents API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/documents/:clientDocumentId",
+            "params": [
+              {
+                "name": "clientDocumentId",
+                "value": "",
+                "type": "path",
+                "description": "Client document ID of the requested document"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to download a specific document associated with a given UUID"
+        },
+        {
+          "info": {
+            "name": "Retrieve All Document Metadata for an Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/documents/:clientAccountId/accountDocumentMetadata",
+            "params": [
+              {
+                "name": "clientAccountId",
+                "value": "",
+                "type": "path",
+                "description": "Client account ID of the requested document"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to retrieve metadata for all documents associated with a specific account"
+        },
+        {
+          "info": {
+            "name": "Retrieve Metadata for Specific Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/documents/:clientDocumentId/metadata",
+            "params": [
+              {
+                "name": "clientDocumentId",
+                "value": "",
+                "type": "path",
+                "description": "Client document ID of the requested document"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to retrieve metadata for the document associated with a specific UUID"
+        },
+        {
+          "info": {
+            "name": "Upload Document and Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/documents",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "metadata",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "document",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Use this endpoint to upload a document and associated metadata"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

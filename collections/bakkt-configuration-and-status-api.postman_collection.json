@@ -1,0 +1,294 @@
+{
+  "item": [
+    {
+      "id": "175f9a03-00d6-4f4a-9abf-b5f41fe25e1f",
+      "name": "Configuration and Status",
+      "description": {
+        "content": "Client systems can use these resources to provide a connection to the platform's services and check API status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb3a3a28-e0f9-4540-930d-099a0154f924",
+          "name": "Check the Health of the API Gateway",
+          "request": {
+            "name": "Check the Health of the API Gateway",
+            "description": {
+              "content": "This endpoint provides an easy way to ensure the dedicated API Gateway is online and ready to service requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0635a9f8-28f7-40ea-8646-f2aa7349d3dc",
+              "name": "If the API is in a good state, this call returns the text \"ok.\"",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5092b589-edb7-4b5e-a6ea-b78bb336aa0c",
+              "name": "If this request encounters an issue, the system provides an error code and message.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5916,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3725c24-4a09-4453-bd7f-871ae3885fb1",
+          "name": "Get Client Connection Configurations",
+          "request": {
+            "name": "Get Client Connection Configurations",
+            "description": {
+              "content": "Use this endpoint to get various configuration items for client systems to receive a flow of market data and coin transfers updates during and after processing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "8ca2238f-b070-4130-b43e-e654dabb7dd9",
+              "name": "This response returns the WebSocket URLs to track market data and transfers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"streamingQuoteUrl\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ddadf25-8455-43a7-a86f-bb96f2813879",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5916,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71b94d5f-6996-4366-80c8-5e7b6bd06a83",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5916,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f32a4cf3-75ef-48b0-be9d-ec885727e48a",
+    "name": "Bakkt Crypto Solutions Accounts Configuration and Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

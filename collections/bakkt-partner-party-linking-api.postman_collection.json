@@ -1,0 +1,629 @@
+{
+  "item": [
+    {
+      "id": "2b308312-4268-42d4-af1c-7a17a7745f9e",
+      "name": "Partner Party Linking",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d263d9c3-355a-4690-b30c-cebdf27c3b73",
+          "name": "Link a Plaid account using processor token",
+          "request": {
+            "name": "Link a Plaid account using processor token",
+            "description": {
+              "content": "Send a processor token to link Plaid account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "partner",
+                ":partnerId",
+                "party",
+                ":partnerPartyRef",
+                "plaidAccount",
+                "link"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "partnerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerPartyRef",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"processorToken\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "550ff380-73bb-4210-90b1-0b4ef7d31bd9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "plaidAccount",
+                    "link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"processorToken\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "913870a0-dc28-4ed4-b12e-5d6a7a616d48",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "plaidAccount",
+                    "link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"processorToken\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b06b50f-5183-42ff-a162-d1f6e1483adf",
+          "name": "Add Bank Account",
+          "request": {
+            "name": "Add Bank Account",
+            "description": {
+              "content": "Add bank account details to a consumer account at Bakkt. Test Environment Use Only",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "partner",
+                ":partnerId",
+                "party",
+                ":partnerPartyRef",
+                "bankAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "partnerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerPartyRef",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"routingNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"accountDisplayName\": \"<string>\",\n  \"accountStatus\": \"<string>\",\n  \"bankName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5841a248-7103-4401-997c-d3fa473e2816",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "bankAccount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"routingNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"accountDisplayName\": \"<string>\",\n  \"accountStatus\": \"<string>\",\n  \"bankName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e3c650e-ebe5-49fe-a068-864dfea9d268",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "bankAccount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"routingNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"accountDisplayName\": \"<string>\",\n  \"accountStatus\": \"<string>\",\n  \"bankName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5861a2b5-4ce1-4bbe-b2da-6bcbdd95bf4b",
+          "name": "Unlink a fiat account",
+          "request": {
+            "name": "Unlink a fiat account",
+            "description": {
+              "content": "Unlink a linked consumer fiat account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "partner",
+                ":partnerId",
+                "party",
+                ":partnerPartyRef",
+                "fiatAccount",
+                "unlink"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "partnerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerPartyRef",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instrumentType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "795b065f-5c49-4be5-b698-d475ec7129a3",
+              "name": "Transaction created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "fiatAccount",
+                    "unlink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instrumentType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46261a4b-dc19-4705-ba9a-bf905d11f424",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "fiatAccount",
+                    "unlink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instrumentType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b906593c-2995-46f0-ae57-a0b2c79ff90d",
+    "name": "Bakkt Crypto Solutions Accounts Partner Party Linking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

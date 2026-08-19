@@ -1,0 +1,998 @@
+{
+  "item": [
+    {
+      "id": "6297ee4b-1277-4bcf-adb2-60678da79275",
+      "name": "Partner Party Funding",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bfd4c180-0448-4b0f-903c-b81e7b20e737",
+          "name": "Generate inbound wire instructions",
+          "request": {
+            "name": "Generate inbound wire instructions",
+            "description": {
+              "content": "Generate end user specific inbound wire instructions for fiat deposit. Reponse not to be cached. Bank instructions may change over time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "partner",
+                ":partnerId",
+                "party",
+                ":partnerPartyRef",
+                "wire-instructions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "partnerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerPartyRef",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7696435b-abdd-4996-8f20-a2869f857657",
+              "name": "Request Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "wire-instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"wireReferenceNumber\": \"string\",\n  \"wireRoutingNumber\": \"string\",\n  \"wireAccountNumber\": \"string\",\n  \"wireSwiftCode\": \"string\",\n  \"wireBankName\": \"string\",\n  \"wireBankAddress\": \"string\",\n  \"wireBeneficiaryName\": \"string\",\n  \"wireBeneficiaryAddress\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "895b3de6-17e5-4d06-aead-a60fdaead5af",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "wire-instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4360d86-4006-4729-b2cf-74acd625c685",
+          "name": "Retrieve Fiat Account Balance",
+          "request": {
+            "name": "Retrieve Fiat Account Balance",
+            "description": {
+              "content": "Retrieve the fiat account balance of a consumer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "partner",
+                ":partnerId",
+                "party",
+                ":partnerPartyRef",
+                "fiatAccount",
+                "balance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "partnerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerPartyRef",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa8e9609-a81c-4cde-9016-f6ee45798af6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "fiatAccount",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "[\n  {\n    \"partnerPartyRef\": \"b9e930d0-372a-48f0-9c04-fd51c58eafb6\",\n    \"currency\": \"USD\",\n    \"settledAmount\": 50.01,\n    \"unsettledAmount\": 100.01\n  },\n  {\n    \"partnerPartyRef\": \"b9e930d0-372a-48f0-9c04-fd51c58eafb6\",\n    \"currency\": \"USD\",\n    \"settledAmount\": 50.01,\n    \"unsettledAmount\": 100.01\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c718a9ea-e1ff-44a0-a0bc-74d1b72bcaa6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "fiatAccount",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0938100-b011-4bb0-93cc-ef9078dae38d",
+          "name": "Add Bank Account - ACH",
+          "request": {
+            "name": "Add Bank Account - ACH",
+            "description": {},
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "partner",
+                ":partnerId",
+                "party",
+                ":partnerPartyRef",
+                "bankAccountLinking",
+                "ach"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "partnerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerPartyRef",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\",\n  \"routingNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fa50b42b-b2df-4af8-818c-4df263ae93dc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "bankAccountLinking",
+                    "ach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\",\n  \"routingNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb0032f6-71b5-45c5-8e94-bb67069b4ce1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "bankAccountLinking",
+                    "ach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\",\n  \"routingNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60bcd5a7-57ac-4629-8671-65bdef334bf1",
+          "name": "Deposit or withdraw funds",
+          "request": {
+            "name": "Deposit or withdraw funds",
+            "description": {
+              "content": "Initiate deposit or withdraw on behalf of the consumer on linked fiat account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "partner",
+                ":partnerId",
+                "party",
+                ":partnerPartyRef",
+                "transfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "partnerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerPartyRef",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"fiatTransactType\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"instrumentType\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\",\n  \"wireWithdrawDetails\": {\n    \"wireRoutingNumber\": \"<string>\",\n    \"wireAccountNumber\": \"<string>\",\n    \"wireBankName\": \"<string>\",\n    \"wireBankAddress\": \"<string>\",\n    \"wireSwiftCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5803fb2-5dd0-4990-86a3-a050e529a09c",
+              "name": "Request Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "transfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"fiatTransactType\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"instrumentType\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\",\n  \"wireWithdrawDetails\": {\n    \"wireRoutingNumber\": \"<string>\",\n    \"wireAccountNumber\": \"<string>\",\n    \"wireBankName\": \"<string>\",\n    \"wireBankAddress\": \"<string>\",\n    \"wireSwiftCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9761566f-ca40-4c2f-8d90-fc2dead3119e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "transfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"fiatTransactType\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"instrumentType\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\",\n  \"wireWithdrawDetails\": {\n    \"wireRoutingNumber\": \"<string>\",\n    \"wireAccountNumber\": \"<string>\",\n    \"wireBankName\": \"<string>\",\n    \"wireBankAddress\": \"<string>\",\n    \"wireSwiftCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2278751f-97a0-44d7-a69c-b2e9e2bb620e",
+          "name": "Unlink fiat Account",
+          "request": {
+            "name": "Unlink fiat Account",
+            "description": {},
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "partner",
+                ":partnerId",
+                "party",
+                ":partnerPartyRef",
+                "bankAccountLinking",
+                "unlink"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "partnerId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerPartyRef",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-tracking-id",
+                "value": "<uuid>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instrumentType\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cc5645ba-44da-4fd1-bb1f-cf5119bd65f6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "bankAccountLinking",
+                    "unlink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-tracking-id",
+                    "value": "<uuid>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instrumentType\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e4152fa-16b7-4315-9b90-c284ae66f811",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "partner",
+                    ":partnerId",
+                    "party",
+                    ":partnerPartyRef",
+                    "bankAccountLinking",
+                    "unlink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "partnerId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerPartyRef",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-tracking-id",
+                    "value": "<uuid>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instrumentType\": \"<string>\",\n  \"partnerTransactionRef\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ab56480b-22ce-494e-a8d9-b298d1c661df",
+    "name": "Bakkt Crypto Solutions Accounts Partner Party Funding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

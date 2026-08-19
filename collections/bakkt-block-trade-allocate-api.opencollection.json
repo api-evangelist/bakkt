@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Block Trade & Allocate API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Block Trade & Allocate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request For Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/trade/batch/allocate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allocation request for a single customer account"
+        },
+        {
+          "info": {
+            "name": "Retrieve Allocation Details By clientTransactionId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/trade/batch/allocate/:clientTransactionId",
+            "params": [
+              {
+                "name": "clientTransactionId",
+                "value": "",
+                "type": "path",
+                "description": "Client-specified unique identifer for the allocation"
+              }
+            ]
+          },
+          "docs": "Retrieve details pertaining to a particular allocation by its clientTransactionId"
+        },
+        {
+          "info": {
+            "name": "Request To Close Allocation Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/trade/batch/close",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request to close off allocations of a particular batch"
+        },
+        {
+          "info": {
+            "name": "Retrieve Allocation Details By batchTransactionId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/trade/batch/:batchTransactionId",
+            "params": [
+              {
+                "name": "batchTransactionId",
+                "value": "",
+                "type": "path",
+                "description": "Client-specified unique identifier for a set of allocations belonging to the same batch request"
+              }
+            ]
+          },
+          "docs": "Retrieve allocation details pertaining to a particular series of allocations by its batchTransactionId"
+        },
+        {
+          "info": {
+            "name": "Request For New Allocation Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/trade/batch/open",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Open a new batch of allocations for a particular symbol where all transactions will either be notional or quantity based"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

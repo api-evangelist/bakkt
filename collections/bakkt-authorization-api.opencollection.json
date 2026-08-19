@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Authorization API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Client systems use this service to get a security token. All subsequent calls to the gateway must have the token in the 'Authorization' header and must be made over HTTPS."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

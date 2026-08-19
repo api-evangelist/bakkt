@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Fiat Onboarding API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fiat Onboarding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request For Fiat Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/fiat/batch/allocate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fiat allocation request for a single customer account"
+        },
+        {
+          "info": {
+            "name": "Retrieve Fiat Allocation Details By clientTransactionId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/fiat/batch/allocate/:clientTransactionId",
+            "params": [
+              {
+                "name": "clientTransactionId",
+                "value": "",
+                "type": "path",
+                "description": "Client-specified unique identifer for the fiat allocation"
+              }
+            ]
+          },
+          "docs": "Retrieve details pertaining to a particular fiat allocation by its clientTransactionId"
+        },
+        {
+          "info": {
+            "name": "Request To Close Fiat Allocation Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/fiat/batch/close",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request to close off fiat allocations of a particular batch"
+        },
+        {
+          "info": {
+            "name": "Retrieve Fiat Allocation Details By batchTransactionId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/fiat/batch/:batchTransactionId",
+            "params": [
+              {
+                "name": "batchTransactionId",
+                "value": "",
+                "type": "path",
+                "description": "Client-specified unique identifier for a set of fiat allocations belonging to the same batch request"
+              }
+            ]
+          },
+          "docs": "Retrieve allocation details pertaining to a particular series of fiat allocations by their batchTransactionId"
+        },
+        {
+          "info": {
+            "name": "Request For New Fiat Allocation Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/allocation/fiat/batch/open",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Open a new batch of fiat allocations for a particular currency where all transactions will be quantity based"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

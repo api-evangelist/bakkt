@@ -1,0 +1,320 @@
+{
+  "item": [
+    {
+      "id": "a3c473d5-98fd-4c13-822a-4f10ddfd7420",
+      "name": "Jurisdictions",
+      "description": {
+        "content": "Jurisdictions provides information about trading restrictions in different jurisdictions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c6184f3-ccd1-4250-aa50-314e978dfdc7",
+          "name": "Retrieve Jurisdiction Definitions",
+          "request": {
+            "name": "Retrieve Jurisdiction Definitions",
+            "description": {
+              "content": "Use this endpoint to retrieve a list of supported jurisdictions and any trading restrictions in place.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "jurisdictions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ba08a996-0f1d-4ec2-86e3-1ab43972aa0b",
+              "name": "This response returns information for all jurisdictions in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "jurisdictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jurisdictions\": [\n    {\n      \"countryCode\": \"string\",\n      \"securities\": [\n        {\n          \"currency\": \"string\",\n          \"status\": \"CLOSE\",\n          \"tradingPair\": \"string\"\n        },\n        {\n          \"currency\": \"string\",\n          \"status\": \"OPEN\",\n          \"tradingPair\": \"string\"\n        }\n      ],\n      \"stateCode\": \"string\",\n      \"status\": \"CLOSE\"\n    },\n    {\n      \"countryCode\": \"string\",\n      \"securities\": [\n        {\n          \"currency\": \"string\",\n          \"status\": \"OPEN\",\n          \"tradingPair\": \"string\"\n        },\n        {\n          \"currency\": \"string\",\n          \"status\": \"PROHIBITED\",\n          \"tradingPair\": \"string\"\n        }\n      ],\n      \"stateCode\": \"string\",\n      \"status\": \"PROHIBITED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c96c8505-b968-4483-8b70-97653696b934",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "jurisdictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1304,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99bd4d1e-b14d-470e-881e-e8e04cb8af6d",
+          "name": "Retrieve Jurisdiction Definitions",
+          "request": {
+            "name": "Retrieve Jurisdiction Definitions",
+            "description": {
+              "content": "Use this endpoint to retrieve a list of supported jurisdictions and any restrictions in place.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "jurisdictions",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Country to query for. Lowest priority."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "State to query for. Prioritized over country."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Deprecated, use tradingPair going forward. currency to query for. High priority."
+                },
+                {
+                  "disabled": false,
+                  "key": "tradingPair",
+                  "value": "<string>",
+                  "description": "tradingPair to query for. Highest priority. Example Value (BTCUSD, ETHUSDT)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "89d77d1b-dd07-4bd3-8392-b4699d951a45",
+              "name": "This response returns information for all jurisdictions in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "jurisdictions",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingPair",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jurisdictions\": [\n    {\n      \"countryCode\": \"string\",\n      \"domain\": {\n        \"orders\": [\n          {\n            \"currency\": \"string\",\n            \"status\": \"CLOSE\",\n            \"tradingPair\": \"string\"\n          },\n          {\n            \"currency\": \"string\",\n            \"status\": \"CLOSE\",\n            \"tradingPair\": \"string\"\n          }\n        ],\n        \"staking\": [\n          {\n            \"currency\": \"string\",\n            \"status\": \"CLOSE\",\n            \"tradingPair\": \"string\"\n          },\n          {\n            \"currency\": \"string\",\n            \"status\": \"OPEN\",\n            \"tradingPair\": \"string\"\n          }\n        ],\n        \"transfers\": [\n          {\n            \"currency\": \"string\",\n            \"status\": \"CLOSE\",\n            \"tradingPair\": \"string\"\n          },\n          {\n            \"currency\": \"string\",\n            \"status\": \"OPEN\",\n            \"tradingPair\": \"string\"\n          }\n        ]\n      },\n      \"stateCode\": \"string\"\n    },\n    {\n      \"countryCode\": \"string\",\n      \"domain\": {\n        \"orders\": [\n          {\n            \"currency\": \"string\",\n            \"status\": \"OPEN\",\n            \"tradingPair\": \"string\"\n          },\n          {\n            \"currency\": \"string\",\n            \"status\": \"CLOSE\",\n            \"tradingPair\": \"string\"\n          }\n        ],\n        \"staking\": [\n          {\n            \"currency\": \"string\",\n            \"status\": \"OPEN\",\n            \"tradingPair\": \"string\"\n          },\n          {\n            \"currency\": \"string\",\n            \"status\": \"PROHIBITED\",\n            \"tradingPair\": \"string\"\n          }\n        ],\n        \"transfers\": [\n          {\n            \"currency\": \"string\",\n            \"status\": \"CLOSE\",\n            \"tradingPair\": \"string\"\n          },\n          {\n            \"currency\": \"string\",\n            \"status\": \"CLOSE\",\n            \"tradingPair\": \"string\"\n          }\n        ]\n      },\n      \"stateCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dbc50f5-2770-432f-9db7-0559ed77ce81",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "jurisdictions",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingPair",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1304,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "98151526-fd9e-47ae-ae5a-91cbf8959060",
+    "name": "Bakkt Crypto Solutions Accounts Jurisdictions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

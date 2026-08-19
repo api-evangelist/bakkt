@@ -1,0 +1,736 @@
+{
+  "item": [
+    {
+      "id": "3fd5d20b-e450-4739-b6db-aefbeab9d480",
+      "name": "Orders",
+      "description": {
+        "content": "Orders enables customers to buy or sell crypto.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c64848f4-94af-40a6-9e97-5140c338699e",
+          "name": "Submit a Request to Cancel an Order",
+          "request": {
+            "name": "Submit a Request to Cancel an Order",
+            "description": {
+              "content": "Use this endpoint to submit a request to cancel an order. Requests to cancel orders are subject to the status of the order and if the order has not already processed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "orders",
+                ":clientOrderId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientOrderId",
+                  "description": "(Required) The `clientOrderId` of order to cancel (submitted when the order was originally created)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "77c1241e-3268-4d04-8a6d-55264e28c258",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders",
+                    ":clientOrderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientOrderId",
+                      "description": "(Required) The `clientOrderId` of order to cancel (submitted when the order was originally created)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request\": {\n    \"id\": \"<uuid>\"\n  },\n  \"receivedAt\": \"1967-11-26T09:19:40.214Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d64bf8dd-3de4-4db2-9b12-5d3a9754aa13",
+              "name": "This response returns if the order could not be found to cancel it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders",
+                    ":clientOrderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientOrderId",
+                      "description": "(Required) The `clientOrderId` of order to cancel (submitted when the order was originally created)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9886,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f09bfa6a-3420-428a-9960-8243f78670d3",
+              "name": "This response returns if the system could not complete this request, because the system could not find the order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders",
+                    ":clientOrderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientOrderId",
+                      "description": "(Required) The `clientOrderId` of order to cancel (submitted when the order was originally created)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9886,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9348cbb3-71ac-4fbb-8a97-f419698543cb",
+              "name": "This response returns if the system encounteres an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders",
+                    ":clientOrderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientOrderId",
+                      "description": "(Required) The `clientOrderId` of order to cancel (submitted when the order was originally created)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9886,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "274e4704-626b-4e19-beae-cfa460fa5fce",
+          "name": "Retrieve an Order by Client Order ID",
+          "request": {
+            "name": "Retrieve an Order by Client Order ID",
+            "description": {
+              "content": "Use this endpoint to retrieve an order by its `clientOrderId.`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "orders",
+                ":clientOrderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientOrderId",
+                  "description": "(Required) Client Order ID of the order to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "410b0ec0-d9f1-4d25-8c14-0185d77f3bc4",
+              "name": "This response returns the full details of the order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders",
+                    ":clientOrderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientOrderId",
+                      "description": "(Required) Client Order ID of the order to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"request\": {\n    \"symbol\": \"BTCUSD\",\n    \"clientOrderId\": \"d3adb33f-some-guid-here-fcaf3b33f\",\n    \"type\": \"LIMIT\",\n    \"timeInForce\": \"GTC\",\n    \"account\": \"ABC12345\",\n    \"side\": \"BUY\",\n    \"bpsCommission\": 4836,\n    \"bpsMarkup\": 7681,\n    \"expireTime\": \"2007-02-16T14:50:22.763Z\",\n    \"fixedCommission\": \"string\",\n    \"fixedMarkup\": \"string\",\n    \"notional\": \"string\",\n    \"price\": \"string\",\n    \"quantity\": \"string\",\n    \"stopPrice\": \"string\"\n  },\n  \"averagePrice\": \"string\",\n  \"cancels\": [\n    {\n      \"request\": {\n        \"id\": \"<uuid>\"\n      },\n      \"rejectReason\": \"string\",\n      \"transactTime\": \"2024-11-16T01:02:08.751Z\"\n    },\n    {\n      \"request\": {\n        \"id\": \"<uuid>\"\n      },\n      \"rejectReason\": \"string\",\n      \"transactTime\": \"1999-02-04T13:18:11.661Z\"\n    }\n  ],\n  \"createdAt\": \"2002-07-24T09:21:00.404Z\",\n  \"cumulativeQuantity\": \"string\",\n  \"executions\": [\n    {\n      \"id\": \"string\",\n      \"side\": \"SELL\",\n      \"symbol\": \"string\",\n      \"quantity\": \"string\",\n      \"price\": \"string\",\n      \"netMoney\": \"string\",\n      \"executedAt\": \"1949-12-20T05:53:34.129Z\",\n      \"commission\": \"string\",\n      \"tradeDate\": \"2021-01-12\"\n    },\n    {\n      \"id\": \"string\",\n      \"side\": \"BUY\",\n      \"symbol\": \"string\",\n      \"quantity\": \"string\",\n      \"price\": \"string\",\n      \"netMoney\": \"string\",\n      \"executedAt\": \"2024-06-07T18:13:44.413Z\",\n      \"commission\": \"string\",\n      \"tradeDate\": \"2009-03-08\"\n    }\n  ],\n  \"leavesQuantity\": \"string\",\n  \"rejectReason\": \"string\",\n  \"status\": \"IN_PROGRESS\",\n  \"working\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "830fb4d9-8333-47f2-8652-ab881b598073",
+              "name": "This response returns if the system could not complete this request because the order could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders",
+                    ":clientOrderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientOrderId",
+                      "description": "(Required) Client Order ID of the order to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9886,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9f59dd9-d183-4506-afc5-2b342b974ec2",
+          "name": "Submit an Order to Buy or Sell Crypto",
+          "request": {
+            "name": "Submit an Order to Buy or Sell Crypto",
+            "description": {
+              "content": "Client systems use this endpoint to submit new order instructions to buy or sell crypto on behalf of an investor. <br/><br/>The order processes asynchronously. The system allows duplicate submissions; however, order details must NOT change in subsequent requests. Orders are uniquely tracked for idempotency by the submitting system providing the `clientOrderId` field. <br/><br/> Clients can provide the amounts to purchase or sell crypto in two different ways: <br/> <br/>`Notional` - Using the notional field, an investor may place an order for crypto given a USD amount to purchase. For example, an investor can buy $100 of BTCUSD at market price by entering 100 in the notional field. <br/>`Absolute` - Using the quantity field, an investor may place an order for an exact amount of crypto. For example, an investor can sell 0.05 BTC for USD by entering 0.05 in the quantity field.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"<string>\",\n  \"clientOrderId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"timeInForce\": \"<string>\",\n  \"account\": \"<string>\",\n  \"side\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"bpsMarkup\": \"<integer>\",\n  \"expireTime\": \"<dateTime>\",\n  \"fixedCommission\": \"<string>\",\n  \"fixedMarkup\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"price\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"stopPrice\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e535772-e9df-4ea1-8b93-3bf38800e79f",
+              "name": "This response returns when the order already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"BTCUSD\",\n  \"clientOrderId\": \"d3adb33f-some-guid-here-fcaf3b33f\",\n  \"type\": \"<string>\",\n  \"timeInForce\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"side\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"bpsMarkup\": \"<integer>\",\n  \"expireTime\": \"<dateTime>\",\n  \"fixedCommission\": \"<string>\",\n  \"fixedMarkup\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"price\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"stopPrice\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"request\": {\n    \"symbol\": \"BTCUSD\",\n    \"clientOrderId\": \"d3adb33f-some-guid-here-fcaf3b33f\",\n    \"type\": \"<string>\",\n    \"timeInForce\": \"<string>\",\n    \"account\": \"ABC12345\",\n    \"side\": \"<string>\",\n    \"bpsCommission\": \"<integer>\",\n    \"bpsMarkup\": \"<integer>\",\n    \"expireTime\": \"<dateTime>\",\n    \"fixedCommission\": \"<string>\",\n    \"fixedMarkup\": \"<string>\",\n    \"notional\": \"<string>\",\n    \"price\": \"<string>\",\n    \"quantity\": \"<string>\",\n    \"stopPrice\": \"<string>\"\n  },\n  \"averagePrice\": \"string\",\n  \"cancels\": [\n    {\n      \"request\": {\n        \"id\": \"<uuid>\"\n      },\n      \"rejectReason\": \"string\",\n      \"transactTime\": \"1997-06-20T22:56:15.038Z\"\n    },\n    {\n      \"request\": {\n        \"id\": \"<uuid>\"\n      },\n      \"rejectReason\": \"string\",\n      \"transactTime\": \"2025-07-04T17:52:11.154Z\"\n    }\n  ],\n  \"createdAt\": \"2020-07-11T02:22:15.325Z\",\n  \"cumulativeQuantity\": \"string\",\n  \"executions\": [\n    {\n      \"id\": \"string\",\n      \"side\": \"<string>\",\n      \"symbol\": \"string\",\n      \"quantity\": \"string\",\n      \"price\": \"string\",\n      \"netMoney\": \"string\",\n      \"executedAt\": \"2015-06-05T21:50:50.730Z\",\n      \"commission\": \"string\",\n      \"tradeDate\": \"1975-10-27\"\n    },\n    {\n      \"id\": \"string\",\n      \"side\": \"<string>\",\n      \"symbol\": \"string\",\n      \"quantity\": \"string\",\n      \"price\": \"string\",\n      \"netMoney\": \"string\",\n      \"executedAt\": \"2017-07-21T19:09:01.504Z\",\n      \"commission\": \"string\",\n      \"tradeDate\": \"2007-09-15\"\n    }\n  ],\n  \"leavesQuantity\": \"string\",\n  \"rejectReason\": \"string\",\n  \"status\": \"IN_PROGRESS\",\n  \"working\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "612bc028-1e83-40a5-9024-c6d87da39e5c",
+              "name": "This response returns the newly created order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"BTCUSD\",\n  \"clientOrderId\": \"d3adb33f-some-guid-here-fcaf3b33f\",\n  \"type\": \"<string>\",\n  \"timeInForce\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"side\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"bpsMarkup\": \"<integer>\",\n  \"expireTime\": \"<dateTime>\",\n  \"fixedCommission\": \"<string>\",\n  \"fixedMarkup\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"price\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"stopPrice\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"request\": {\n    \"symbol\": \"BTCUSD\",\n    \"clientOrderId\": \"d3adb33f-some-guid-here-fcaf3b33f\",\n    \"type\": \"<string>\",\n    \"timeInForce\": \"<string>\",\n    \"account\": \"ABC12345\",\n    \"side\": \"<string>\",\n    \"bpsCommission\": \"<integer>\",\n    \"bpsMarkup\": \"<integer>\",\n    \"expireTime\": \"<dateTime>\",\n    \"fixedCommission\": \"<string>\",\n    \"fixedMarkup\": \"<string>\",\n    \"notional\": \"<string>\",\n    \"price\": \"<string>\",\n    \"quantity\": \"<string>\",\n    \"stopPrice\": \"<string>\"\n  },\n  \"averagePrice\": \"string\",\n  \"cancels\": [\n    {\n      \"request\": {\n        \"id\": \"<uuid>\"\n      },\n      \"rejectReason\": \"string\",\n      \"transactTime\": \"1997-06-20T22:56:15.038Z\"\n    },\n    {\n      \"request\": {\n        \"id\": \"<uuid>\"\n      },\n      \"rejectReason\": \"string\",\n      \"transactTime\": \"2025-07-04T17:52:11.154Z\"\n    }\n  ],\n  \"createdAt\": \"2020-07-11T02:22:15.325Z\",\n  \"cumulativeQuantity\": \"string\",\n  \"executions\": [\n    {\n      \"id\": \"string\",\n      \"side\": \"<string>\",\n      \"symbol\": \"string\",\n      \"quantity\": \"string\",\n      \"price\": \"string\",\n      \"netMoney\": \"string\",\n      \"executedAt\": \"2015-06-05T21:50:50.730Z\",\n      \"commission\": \"string\",\n      \"tradeDate\": \"1975-10-27\"\n    },\n    {\n      \"id\": \"string\",\n      \"side\": \"<string>\",\n      \"symbol\": \"string\",\n      \"quantity\": \"string\",\n      \"price\": \"string\",\n      \"netMoney\": \"string\",\n      \"executedAt\": \"2017-07-21T19:09:01.504Z\",\n      \"commission\": \"string\",\n      \"tradeDate\": \"2007-09-15\"\n    }\n  ],\n  \"leavesQuantity\": \"string\",\n  \"rejectReason\": \"string\",\n  \"status\": \"IN_PROGRESS\",\n  \"working\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4cf076a-9fd2-43fb-95fc-e312891c77d7",
+              "name": "This response returns when the request to submit the order was submitted improperly.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"BTCUSD\",\n  \"clientOrderId\": \"d3adb33f-some-guid-here-fcaf3b33f\",\n  \"type\": \"<string>\",\n  \"timeInForce\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"side\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"bpsMarkup\": \"<integer>\",\n  \"expireTime\": \"<dateTime>\",\n  \"fixedCommission\": \"<string>\",\n  \"fixedMarkup\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"price\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"stopPrice\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9886,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "283ffc84-b654-4e93-842f-d1383bd46b83",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"BTCUSD\",\n  \"clientOrderId\": \"d3adb33f-some-guid-here-fcaf3b33f\",\n  \"type\": \"<string>\",\n  \"timeInForce\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"side\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"bpsMarkup\": \"<integer>\",\n  \"expireTime\": \"<dateTime>\",\n  \"fixedCommission\": \"<string>\",\n  \"fixedMarkup\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"price\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"stopPrice\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9886,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9394a1f-3810-4f63-901b-50a41fcaf97e",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"symbol\": \"BTCUSD\",\n  \"clientOrderId\": \"d3adb33f-some-guid-here-fcaf3b33f\",\n  \"type\": \"<string>\",\n  \"timeInForce\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"side\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"bpsMarkup\": \"<integer>\",\n  \"expireTime\": \"<dateTime>\",\n  \"fixedCommission\": \"<string>\",\n  \"fixedMarkup\": \"<string>\",\n  \"notional\": \"<string>\",\n  \"price\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"stopPrice\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9886,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "173bfd40-214e-4344-98e5-d477c914234f",
+    "name": "Bakkt Crypto Solutions Accounts Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

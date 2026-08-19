@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Partner Connectivity API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partner Connectivity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/partner/v1/oauth2/token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "grant_type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Generate Access Token which is used to access Bakkt APIs"
+        },
+        {
+          "info": {
+            "name": "Check connectivity with Bakkt backend",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/partner/v1/heartbeat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is meant to be access for development only"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

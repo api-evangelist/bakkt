@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Orders API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a Request to Cancel an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/orders/:clientOrderId/cancel",
+            "params": [
+              {
+                "name": "clientOrderId",
+                "value": "",
+                "type": "path",
+                "description": "The `clientOrderId` of order to cancel (submitted when the order was originally created)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to submit a request to cancel an order. Requests to cancel orders are subject to the status of the order and if the order has not already processed."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Order by Client Order ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/orders/:clientOrderId",
+            "params": [
+              {
+                "name": "clientOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Client Order ID of the order to retrieve"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to retrieve an order by its `clientOrderId.`"
+        },
+        {
+          "info": {
+            "name": "Submit an Order to Buy or Sell Crypto",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Client systems use this endpoint to submit new order instructions to buy or sell crypto on behalf of an investor. <br/><br/>The order processes asynchronously. The system allows duplicate submissions; however, order details must NOT change in subsequent requests. Orders are uniquely tracked for idempotency by the submitting system providing the `clientOrderId` field. <br/><br/> Clients can provide the amounts to purchase or sell crypto in two different ways: <br/> <br/>`Notional` - Using the not"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

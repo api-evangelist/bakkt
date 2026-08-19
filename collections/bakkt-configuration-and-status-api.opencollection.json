@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Configuration and Status API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration and Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check the Health of the API Gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/status"
+          },
+          "docs": "This endpoint provides an easy way to ensure the dedicated API Gateway is online and ready to service requests."
+        },
+        {
+          "info": {
+            "name": "Get Client Connection Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/config"
+          },
+          "docs": "Use this endpoint to get various configuration items for client systems to receive a flow of market data and coin transfers updates during and after processing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

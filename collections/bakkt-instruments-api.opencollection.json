@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Instruments API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instruments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Instrument Definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/instruments"
+          },
+          "docs": "Use this endpoint to retrieve information about all crypto intruments in the system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

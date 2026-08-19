@@ -1,0 +1,415 @@
+{
+  "item": [
+    {
+      "id": "e259b3e6-4ef6-4a8e-ba92-c83b5140f680",
+      "name": "Gift",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0ecbd628-d192-4065-9716-404fab1fce95",
+          "name": "Request For Gift",
+          "request": {
+            "name": "Request For Gift",
+            "description": {
+              "content": "Request to gift to a single customer account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "gift"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account\": \"<string>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"notional\": \"<decimal>\",\n  \"quantity\": \"<decimal>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e86c6825-a89f-4bfa-8afa-bbcadceb45da",
+              "name": "Returns summary of the gift request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "gift"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": \"<string>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"notional\": \"<decimal>\",\n  \"quantity\": \"<decimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1987-04-25T16:21:18.657Z\",\n  \"id\": \"91e58a1e-54c1-80df-8d28-f75f7c540bbd\",\n  \"request\": {\n    \"account\": \"<string>\",\n    \"clientTransactionId\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"notional\": \"<decimal>\",\n    \"quantity\": \"<decimal>\"\n  },\n  \"status\": \"CANCELLED\",\n  \"notional\": \"string\",\n  \"price\": \"string\",\n  \"quantity\": \"string\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4083ab83-6bea-4a77-afdd-82ead0a19c4b",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "gift"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": \"<string>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"notional\": \"<decimal>\",\n  \"quantity\": \"<decimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8099,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b4385a9-e16d-453b-8c71-fb05606acfa7",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "gift"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": \"<string>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"notional\": \"<decimal>\",\n  \"quantity\": \"<decimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8099,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f25ba47c-f541-45df-a1e5-750f1161c678",
+          "name": "Retrieve Gift Details By clientTransactionId",
+          "request": {
+            "name": "Retrieve Gift Details By clientTransactionId",
+            "description": {
+              "content": "Retrieve details pertaining to a particular gift by its clientTransactionId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "gift",
+                ":clientTransactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "clientTransactionId",
+                  "description": "(Required) Client-specified unique identifier for the gift"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6f30dfd5-9448-482a-a9df-c067afd2f55e",
+              "name": "Returns details of the gift",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "gift",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) Client-specified unique identifier for the gift"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1987-04-25T16:21:18.657Z\",\n  \"id\": \"91e58a1e-54c1-80df-8d28-f75f7c540bbd\",\n  \"request\": {\n    \"account\": \"<string>\",\n    \"clientTransactionId\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"notional\": \"<decimal>\",\n    \"quantity\": \"<decimal>\"\n  },\n  \"status\": \"CANCELLED\",\n  \"notional\": \"string\",\n  \"price\": \"string\",\n  \"quantity\": \"string\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b66be603-fd0e-41db-a926-d96c11b3fe8a",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "gift",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) Client-specified unique identifier for the gift"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8099,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d141619-60e0-457a-a341-3da0df874dc4",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "gift",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) Client-specified unique identifier for the gift"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8099,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7eac3b17-29cc-472a-ac6b-6a057d42b01e",
+    "name": "Bakkt Crypto Solutions Accounts Gift API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

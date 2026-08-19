@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a New User Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to create new investor accounts. The client must provide an account ID that uniquely identifies the investor from other investors on the client's platform."
+        },
+        {
+          "info": {
+            "name": "Retrieves Accounts by Account ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/accounts/:clientAccountId",
+            "params": [
+              {
+                "name": "clientAccountId",
+                "value": "",
+                "type": "path",
+                "description": "A unique account ID originally provided by the client system when the account was created"
+              }
+            ]
+          },
+          "docs": "This endpoint retrieves an investor account provided the client's unique account ID."
+        },
+        {
+          "info": {
+            "name": "Retrieves account status by Account ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/accounts/:clientAccountId/status",
+            "params": [
+              {
+                "name": "clientAccountId",
+                "value": "",
+                "type": "path",
+                "description": "A unique account ID originally provided by the client system when the account was created"
+              }
+            ]
+          },
+          "docs": "This endpoint retrieves an investor account trading status provided the client's unique account ID."
+        },
+        {
+          "info": {
+            "name": "KYC transfer recovery request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/accounts/kycTransferRecovery/:clientAccountId",
+            "params": [
+              {
+                "name": "clientAccountId",
+                "value": "",
+                "type": "path",
+                "description": "A unique account ID originally provided by the client system when the account was created"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoing to recover KYC's that are transferred"
+        },
+        {
+          "info": {
+            "name": "Trigger KYB Screening on Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/accounts/triggerKYBScreening/:clientAccountId",
+            "params": [
+              {
+                "name": "clientAccountId",
+                "value": "",
+                "type": "path",
+                "description": "A unique account ID originally provided by the client system when the account was created"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to trigger a KYB screening on input account."
+        },
+        {
+          "info": {
+            "name": "Update Settlement Method on Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/accounts/settlementMethod/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to update settlement method on input account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

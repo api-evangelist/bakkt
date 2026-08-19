@@ -1,0 +1,1026 @@
+{
+  "item": [
+    {
+      "id": "cdd70502-4c11-4c50-94cc-348f11ce2118",
+      "name": "Block Trade & Allocate",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9cfb498a-3fec-4754-b26d-43a18187a45e",
+          "name": "Request For Allocation",
+          "request": {
+            "name": "Request For Allocation",
+            "description": {
+              "content": "Allocation request for a single customer account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "trade",
+                "batch",
+                "allocate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account\": \"<string>\",\n  \"amount\": \"<decimal>\",\n  \"batchTransactionId\": \"<uuid>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"side\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"fixedCommission\": \"<decimal>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4f44e5b-1db6-41fe-9803-91e548b109e3",
+              "name": "Successful submission of allocation request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "allocate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": \"<string>\",\n  \"amount\": \"<decimal>\",\n  \"batchTransactionId\": \"<uuid>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"side\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"fixedCommission\": \"<decimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"2001-09-26T02:44:40.189Z\",\n  \"id\": \"50ccc5af-034a-18ee-a3d6-9a4416a890ca\",\n  \"request\": {\n    \"account\": \"<string>\",\n    \"amount\": \"<decimal>\",\n    \"batchTransactionId\": \"<uuid>\",\n    \"clientTransactionId\": \"<uuid>\",\n    \"side\": \"<string>\",\n    \"symbol\": \"<string>\",\n    \"bpsCommission\": \"<integer>\",\n    \"fixedCommission\": \"<decimal>\"\n  },\n  \"status\": \"REJECTED\",\n  \"feeApplied\": \"string\",\n  \"netMoney\": \"string\",\n  \"price\": \"string\",\n  \"quantity\": \"string\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccb42767-600d-49e7-a983-e0987b493adf",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "allocate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": \"<string>\",\n  \"amount\": \"<decimal>\",\n  \"batchTransactionId\": \"<uuid>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"side\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"fixedCommission\": \"<decimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9595d63c-7d22-4718-bab9-809c8f4df982",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "allocate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account\": \"<string>\",\n  \"amount\": \"<decimal>\",\n  \"batchTransactionId\": \"<uuid>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"side\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"bpsCommission\": \"<integer>\",\n  \"fixedCommission\": \"<decimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4010856c-3d2c-4c73-a641-cae69031a00d",
+          "name": "Retrieve Allocation Details By clientTransactionId",
+          "request": {
+            "name": "Retrieve Allocation Details By clientTransactionId",
+            "description": {
+              "content": "Retrieve details pertaining to a particular allocation by its clientTransactionId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "trade",
+                "batch",
+                "allocate",
+                ":clientTransactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "clientTransactionId",
+                  "description": "(Required) Client-specified unique identifer for the allocation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f1dd51ac-af50-49c1-93c4-ce3e280e5ab8",
+              "name": "Returns details of the allocation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "allocate",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) Client-specified unique identifer for the allocation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"2001-09-26T02:44:40.189Z\",\n  \"id\": \"50ccc5af-034a-18ee-a3d6-9a4416a890ca\",\n  \"request\": {\n    \"account\": \"<string>\",\n    \"amount\": \"<decimal>\",\n    \"batchTransactionId\": \"<uuid>\",\n    \"clientTransactionId\": \"<uuid>\",\n    \"side\": \"<string>\",\n    \"symbol\": \"<string>\",\n    \"bpsCommission\": \"<integer>\",\n    \"fixedCommission\": \"<decimal>\"\n  },\n  \"status\": \"REJECTED\",\n  \"feeApplied\": \"string\",\n  \"netMoney\": \"string\",\n  \"price\": \"string\",\n  \"quantity\": \"string\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bdf7dcf-3423-4866-ab7d-4eeb7afd6119",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "allocate",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) Client-specified unique identifer for the allocation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffb34438-2fca-4d22-be8f-1758a20b379f",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "allocate",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) Client-specified unique identifer for the allocation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b33f76c3-7f84-486b-a7fa-c36d46c1f0f3",
+          "name": "Request To Close Allocation Batch",
+          "request": {
+            "name": "Request To Close Allocation Batch",
+            "description": {
+              "content": "Request to close off allocations of a particular batch",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "trade",
+                "batch",
+                "close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"allocations\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c34dd700-df84-4837-9430-6ec17b7c0dc2",
+              "name": "This response returns the details of the closed batch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"allocations\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allocations\": 7171,\n  \"createdAt\": \"1948-05-18T09:03:36.724Z\",\n  \"id\": \"eff6816d-a5d7-5958-064c-32d3a7f787d7\",\n  \"request\": {\n    \"batchTransactionId\": \"d5bb4863-4b61-c499-e5c3-7af5b8853bc3\",\n    \"symbol\": \"string\",\n    \"type\": \"NOTIONAL\"\n  },\n  \"status\": \"IN_PROGRESS\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc6c7c47-da18-4328-86d1-161b9ed12384",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"allocations\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96b2aef9-f887-4aa2-96c4-bdab5b79f609",
+              "name": "This response returns if the system encounters an unexpected error while handling this request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"allocations\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3670e891-ba49-48d5-b0a9-6a06d68d2080",
+          "name": "Retrieve Allocation Details By batchTransactionId",
+          "request": {
+            "name": "Retrieve Allocation Details By batchTransactionId",
+            "description": {
+              "content": "Retrieve allocation details pertaining to a particular series of allocations by its batchTransactionId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "trade",
+                "batch",
+                ":batchTransactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "batchTransactionId",
+                  "description": "(Required) Client-specified unique identifier for a set of allocations belonging to the same batch request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "d64ac841-5685-4240-b6df-f8f56ab6fc18",
+              "name": "This response returns the details of the allocation batch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    ":batchTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "batchTransactionId",
+                      "description": "(Required) Client-specified unique identifier for a set of allocations belonging to the same batch request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allocations\": 7171,\n  \"createdAt\": \"1948-05-18T09:03:36.724Z\",\n  \"id\": \"eff6816d-a5d7-5958-064c-32d3a7f787d7\",\n  \"request\": {\n    \"batchTransactionId\": \"d5bb4863-4b61-c499-e5c3-7af5b8853bc3\",\n    \"symbol\": \"string\",\n    \"type\": \"NOTIONAL\"\n  },\n  \"status\": \"IN_PROGRESS\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7888d4b2-70c4-4889-97e9-a283f61b892b",
+              "name": "This response returns if the check was improperly submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    ":batchTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "batchTransactionId",
+                      "description": "(Required) Client-specified unique identifier for a set of allocations belonging to the same batch request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2235e8f2-3f9c-4a9c-bf36-0d0eb0a444a3",
+              "name": "This response returns if the system encounters an unexpected error while handling this request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    ":batchTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "batchTransactionId",
+                      "description": "(Required) Client-specified unique identifier for a set of allocations belonging to the same batch request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a1844f2-aabb-4680-b3de-b9b51173efbb",
+          "name": "Request For New Allocation Batch",
+          "request": {
+            "name": "Request For New Allocation Batch",
+            "description": {
+              "content": "Open a new batch of allocations for a particular symbol where all transactions will either be notional or quantity based",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "allocation",
+                "trade",
+                "batch",
+                "open"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"symbol\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba152433-4beb-4c73-b357-3571962dca1a",
+              "name": "Successfully opened allocations batch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"symbol\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allocations\": 6035,\n  \"createdAt\": \"2011-09-26T23:48:40.266Z\",\n  \"id\": \"ba04128b-c11c-361e-42b4-81e2f4d260bd\",\n  \"request\": {\n    \"batchTransactionId\": \"<uuid>\",\n    \"symbol\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"status\": \"COMPLETE\",\n  \"rejectReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6eb248c-37ab-43ee-aab2-834a6e1fe6ab",
+              "name": "This response returns if the check was improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"symbol\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7f4f175-2d32-4cf1-9eda-56db4ae0d7d4",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "allocation",
+                    "trade",
+                    "batch",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchTransactionId\": \"<uuid>\",\n  \"symbol\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2960,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7f355d0c-d457-4b7c-a348-46aef00c9cb0",
+    "name": "Bakkt Crypto Solutions Accounts Block Trade & Allocate API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

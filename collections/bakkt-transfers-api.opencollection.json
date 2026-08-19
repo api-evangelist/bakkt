@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Transfers API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the Withdrawal Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/transfers/withdraw/coin/:clientTransactionId",
+            "params": [
+              {
+                "name": "clientTransactionId",
+                "value": "",
+                "type": "path",
+                "description": "The client transaction ID of which to query the status"
+              }
+            ]
+          },
+          "docs": "Use this action to proactively request the status of a previously submitted withdrawal request. Bakkt provides this service as a convenience to ask about specific withdrawals. Since Crypto systems must confirm withdrawals on the blockchain, the request always has a network-dependent time lag from the moment a user submits a withdrawal on chain until the transfer completes. While client systems may use this service to ask for the latest update for a given transfer, Bakkt encourages clients to rel"
+        },
+        {
+          "info": {
+            "name": "Lookup the name of a vasp associated with a wallet address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/transfers/vaspLookup/:receivingWallet",
+            "params": [
+              {
+                "name": "receivingWallet",
+                "value": "",
+                "type": "path",
+                "description": "The wallet address to lookup the name of the vasp for."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency of the wallet address to lookup the name of the vasp for."
+              }
+            ]
+          },
+          "docs": "Use this endpoint to lookup the name of a vasp associated with a wallet address."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Wallet Receive Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/transfers/deposit/coin/receiveAddress",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint returns a wallet receive address to use for a deposit. Receive addresses change over time, so clients should not cache them. Repeated calls to this service may or may not return the same result.\n"
+        },
+        {
+          "info": {
+            "name": "Create a Crypto Withdrawal Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/transfers/withdraw/coin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint initiates a withdrawal from the investor's positions to a wallet on the blockchain. This action requires users to request a fee estimate first."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Fee Estimate to Complete a Withdrawal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/transfers/withdraw/coin/estimate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Withdrawing coins from an investor's crypto account may impose fees. Clients should request a fee estimate detailing those fees and present it to investors for confirmation prior to completing a withdrawal. Clients must then use the ID of the fee estimate to submit a withdrawal. The terms of the fee estimate are based on the underlying crypto networks' market conditions and the system honors them up to a certain grace period after generating them. After the grace period, clients must request a n"
+        },
+        {
+          "info": {
+            "name": "Verify that a wallet address is valid prior to using it in a transfer request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/transfers/verifyWalletAddress",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to verify that a wallet address is valid prior to using it in a transfer request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

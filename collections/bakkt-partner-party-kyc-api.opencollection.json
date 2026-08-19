@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Partner Party Kyc API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partner Party Kyc",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Partner Party Document Verification Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/partner/v1/partner/:partnerId/party/:partnerPartyRef/kyc/documentVerificationDetails",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-tracking-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "53b16517-7766-4124-ab53-a798c310c139",
+                "type": "path",
+                "description": "Partner that the Party is linked to. May be different to the Partner associated with the credentials."
+              },
+              {
+                "name": "partnerPartyRef",
+                "value": "98179173-65bc-4018-8a1a-7b5b87cbf3d8",
+                "type": "path",
+                "description": "Partner's primary key for Party"
+              },
+              {
+                "name": "overrideCustomerDeclinedConsent",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the Document Verification Details for the party"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Partner Party Funding API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partner Party Funding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate inbound wire instructions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/partner/v1/partner/:partnerId/party/:partnerPartyRef/wire-instructions",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "partnerPartyRef",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Generate end user specific inbound wire instructions for fiat deposit. Reponse not to be cached. Bank instructions may change over time."
+        },
+        {
+          "info": {
+            "name": "Retrieve Fiat Account Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/partner/v1/partner/:partnerId/party/:partnerPartyRef/fiatAccount/balance",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "partnerPartyRef",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the fiat account balance of a consumer"
+        },
+        {
+          "info": {
+            "name": "Add Bank Account - ACH",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/partner/v1/partner/:partnerId/party/:partnerPartyRef/bankAccountLinking/ach",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "partnerPartyRef",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Bank Account - ACH"
+        },
+        {
+          "info": {
+            "name": "Deposit or withdraw funds",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/partner/v1/partner/:partnerId/party/:partnerPartyRef/transfer",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "partnerPartyRef",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate deposit or withdraw on behalf of the consumer on linked fiat account."
+        },
+        {
+          "info": {
+            "name": "Unlink fiat Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bakkt.com/partner/v1/partner/:partnerId/party/:partnerPartyRef/bankAccountLinking/unlink",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-tracking-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "partnerPartyRef",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unlink fiat Account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

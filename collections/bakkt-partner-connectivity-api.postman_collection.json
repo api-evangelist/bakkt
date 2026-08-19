@@ -1,0 +1,314 @@
+{
+  "item": [
+    {
+      "id": "09319182-1159-439e-a28f-2561a9314b69",
+      "name": "Partner Connectivity",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41b883c6-1e99-4c35-8477-c7d1796936b3",
+          "name": "Generate Access Token",
+          "request": {
+            "name": "Generate Access Token",
+            "description": {
+              "content": "Generate Access Token which is used to access Bakkt APIs",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "oauth2",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7aa063fb-354b-4638-afab-8f7d25b4b298",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "oauth2",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "grant_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"accessToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ii1xR1ZoVXdOMjc5a3NqNEoySnFXSWk2RDNQcyJ9.eyJhdWQiOiI3NTFkZjg0Yi0wZWU3LTQ2MWQtYThiZi0yMGQ2MTY1OTY2Y2EiLCJleHAiOjE2MTk1ODE3OTAsImlhdCI6MTYxOTU3ODE5MCwiaXNzIjoiaHR0cHM6Ly9pZC5kZXYuYmFra3QuY29tLyIsInN1YiI6ImE1NDNhMjE1LTg2M2QtNGFlMS1hYTZmLWIyYzEzNDczYmYzYyIsImp0aSI6ImZlMTY2OTc4LTJjODUtNGU2Zi05NDFkLTJjOTYyYmZkZjYwOSIsImF1dGhlbnRpY2F0aW9uVHlwZSI6IlBBU1NXT1JEIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZmRkMmNlYjktZjI0NS00ZWZiLTg3OTgtMGI0MTU1NjcyNGMzIiwiYXBwbGljYXRpb25JZCI6Ijc1MWRmODRiLTBlZTctNDYxZC1hOGJmLTIwZDYxNjU5NjZjYSIsInJvbGVzIjpbImJha2t0X21lcmNoYW50Il0sImJwSWQiOjQzNTY3MX0.NQgIPKNGqZfWqRHAaaBCHsWTEvhPv2g9MRtbnOqgMjaz8rHQQaor3dAcwozKSuw9VoE6JKMRP2ftigNhnqVyJUUxzAULm2MT8e7UOtCuVHld4TRjpAFJW-0qkeLMmag9nxZMFthqsiJFqrDI4BHfOF2t4TbIOEwfRKq42iQkIDNTzFzn34k_fVBBqcxQsBAOK7vea0LqO39lzNE1o2DLeJ5erqnCEwi05-zZR4zO0Es25eHpuwA3L1Qf-YRBGXm4ELxenUilEWRQJForVx2qTOGPIUapPzbpTmdxMwNEJUeYcTY9T_u5MZEf1GsE8rodRpuBneRoCGfpjkv6095Exg\",\n  \"expiresIn\": \"3667\",\n  \"tokenType\": \"Bearer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c71957e8-6f39-4b45-a1e0-0e187629912d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "oauth2",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "grant_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ac4ea22-d1e6-40f3-a6b3-0938030f285d",
+          "name": "Check connectivity with Bakkt backend",
+          "request": {
+            "name": "Check connectivity with Bakkt backend",
+            "description": {
+              "content": "This endpoint is meant to be access for development only",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                "v1",
+                "heartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b943d89-ea15-48da-8c4b-7064202cfeec",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"123e4567-e89b-12d3-a456-426614174000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"result\": \"PONG: heartbeat received\",\n  \"requestId\": \"123e4567-e89b-12d3-a456-426614174000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec116514-69ee-4219-b83a-7182a6cc7609",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    "v1",
+                    "heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"123e4567-e89b-12d3-a456-426614174000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"description\": \"Parameter passed for field is not meeting its required format.\",\n  \"detail\": \"validation error\",\n  \"details\": [\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    },\n    {\n      \"description\": \"Validation Error.\",\n      \"field\": \"id\",\n      \"rejectedValue\": {},\n      \"type\": \"VALIDATION_ERROR\"\n    }\n  ],\n  \"type\": \"INVALID_FIELD_VALUE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a464bdad-72e6-4958-9f5b-a29574ae9103",
+    "name": "Bakkt Crypto Solutions Accounts Partner Connectivity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

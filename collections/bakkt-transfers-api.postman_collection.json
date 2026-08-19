@@ -1,0 +1,1132 @@
+{
+  "item": [
+    {
+      "id": "027587eb-ad7c-4c4f-8734-fdb37ef808ac",
+      "name": "Transfers",
+      "description": {
+        "content": "Transfers allow users to access deposit and withdrawal functionality both within the Bakkt network and across the blockchain.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0be10607-baaf-41f2-976b-10ac479ba059",
+          "name": "Retrieve the Withdrawal Status",
+          "request": {
+            "name": "Retrieve the Withdrawal Status",
+            "description": {
+              "content": "Use this action to proactively request the status of a previously submitted withdrawal request. Bakkt provides this service as a convenience to ask about specific withdrawals. Since Crypto systems must confirm withdrawals on the blockchain, the request always has a network-dependent time lag from the moment a user submits a withdrawal on chain until the transfer completes. While client systems may use this service to ask for the latest update for a given transfer, Bakkt encourages clients to rely on the transfer websockets mechanism to receive timely updates to transfers as they post to Bakkt systems and move through the blockchain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "transfers",
+                "withdraw",
+                "coin",
+                ":clientTransactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientTransactionId",
+                  "description": "(Required) The client transaction ID of which to query the status"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "2dde583a-f0f1-4788-933d-22dd4ee7bd1b",
+              "name": "This response provides the withdrawal status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "withdraw",
+                    "coin",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) The client transaction ID of which to query the status"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"ACCEPTED\",\n  \"createdAt\": \"1980-12-06T04:53:53.154Z\",\n  \"request\": {\n    \"quantity\": \"string\",\n    \"clientTransactionId\": \"0cae12f1-372d-c6be-8cda-60f56b880ddf\",\n    \"currency\": \"string\",\n    \"account\": \"ABC12345\",\n    \"receivingWallet\": \"string\",\n    \"feeEstimateId\": \"fcdaccc6-0536-ae9e-d30e-e266e43dd0e4\",\n    \"network\": \"Arbitrum\",\n    \"recipientFamilyName\": \"string\",\n    \"recipientGivenName\": \"string\",\n    \"requestEstimateExtension\": true,\n    \"selfHosted\": true,\n    \"tag\": \"string\",\n    \"vaspDid\": \"did:ethr:0xa07094869d69fb7cc6e27c5c80d94fce3dd9755e\",\n    \"vaspName\": \"Bakkt Trading\",\n    \"vaspWebsite\": \"https://bakkt.com\"\n  },\n  \"blockchainHash\": \"string\",\n  \"fee\": \"string\",\n  \"network\": \"Cardano\",\n  \"rejectReason\": \"string\",\n  \"statusReason\": \"string\",\n  \"totalQuantity\": \"string\",\n  \"usdEquivalentFee\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6327bff2-922d-4fdd-be35-98ed2450c43c",
+              "name": "This response returns if the system can not complete this request, because it can not find the withdrawal.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "withdraw",
+                    "coin",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) The client transaction ID of which to query the status"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8756f7c8-e65a-4dcf-b525-800326055a1c",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "withdraw",
+                    "coin",
+                    ":clientTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientTransactionId",
+                      "description": "(Required) The client transaction ID of which to query the status"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "495dbb62-8e25-4ad4-b3b3-8c617b261ff6",
+          "name": "Lookup the name of a vasp associated with a wallet address.",
+          "request": {
+            "name": "Lookup the name of a vasp associated with a wallet address.",
+            "description": {
+              "content": "Use this endpoint to lookup the name of a vasp associated with a wallet address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "transfers",
+                "vaspLookup",
+                ":receivingWallet"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) The currency of the wallet address to lookup the name of the vasp for."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "receivingWallet",
+                  "description": "(Required) The wallet address to lookup the name of the vasp for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c3c7a590-9af4-43f9-b126-4549dd9a4455",
+              "name": "This response returns a list of transfers meeting the specified criteria.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "vaspLookup",
+                    ":receivingWallet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receivingWallet",
+                      "description": "(Required) The wallet address to lookup the name of the vasp for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vaspName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "657a44e2-1120-453a-aa17-ea6e377d6fdf",
+              "name": "This response returns if a vasp name cannot be found for the provided wallet address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "vaspLookup",
+                    ":receivingWallet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receivingWallet",
+                      "description": "(Required) The wallet address to lookup the name of the vasp for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc37d4c5-465b-4bdd-b2e1-14e6737fda7b",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "vaspLookup",
+                    ":receivingWallet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receivingWallet",
+                      "description": "(Required) The wallet address to lookup the name of the vasp for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93a6c922-e85a-41bc-ac78-bdf4fc9d8d54",
+          "name": "Retrieve a Wallet Receive Address",
+          "request": {
+            "name": "Retrieve a Wallet Receive Address",
+            "description": {
+              "content": "This endpoint returns a wallet receive address to use for a deposit. Receive addresses change over time, so clients should not cache them. Repeated calls to this service may or may not return the same result.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "transfers",
+                "deposit",
+                "coin",
+                "receiveAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currency\": \"<string>\",\n  \"account\": \"<string>\",\n  \"network\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b753d31-2a66-4861-8663-b90400d4bb15",
+              "name": "This response provides the deposit receive address response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "deposit",
+                    "coin",
+                    "receiveAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currency\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"network\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"receiveAddress\": \"string\",\n  \"request\": {\n    \"currency\": \"<string>\",\n    \"account\": \"ABC12345\",\n    \"network\": \"<string>\"\n  },\n  \"network\": \"<string>\",\n  \"tag\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc347dfe-7777-4fed-bc38-86e80b108426",
+              "name": "This response returns if the request to retrieve the address is improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "deposit",
+                    "coin",
+                    "receiveAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currency\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"network\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8dbb5e0-9495-4438-b846-43ba5d929cdb",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "deposit",
+                    "coin",
+                    "receiveAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currency\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"network\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "354f0cd1-f7e8-4629-a924-d61d6d33919f",
+          "name": "Create a Crypto Withdrawal Request",
+          "request": {
+            "name": "Create a Crypto Withdrawal Request",
+            "description": {
+              "content": "This endpoint initiates a withdrawal from the investor's positions to a wallet on the blockchain. This action requires users to request a fee estimate first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "transfers",
+                "withdraw",
+                "coin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": \"<string>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"account\": \"<string>\",\n  \"receivingWallet\": \"<string>\",\n  \"feeEstimateId\": \"<uuid>\",\n  \"network\": \"<string>\",\n  \"recipientFamilyName\": \"<string>\",\n  \"recipientGivenName\": \"<string>\",\n  \"requestEstimateExtension\": \"<boolean>\",\n  \"selfHosted\": \"<boolean>\",\n  \"tag\": \"<string>\",\n  \"vaspDid\": \"<string>\",\n  \"vaspName\": \"<string>\",\n  \"vaspWebsite\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e76148f-77ef-474e-bb96-149041a6ab27",
+              "name": "This response returns the result of the withdrawal attempt.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "withdraw",
+                    "coin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<string>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"receivingWallet\": \"<string>\",\n  \"feeEstimateId\": \"<uuid>\",\n  \"network\": \"<string>\",\n  \"recipientFamilyName\": \"<string>\",\n  \"recipientGivenName\": \"<string>\",\n  \"requestEstimateExtension\": \"<boolean>\",\n  \"selfHosted\": \"<boolean>\",\n  \"tag\": \"<string>\",\n  \"vaspDid\": \"did:ethr:0xa07094869d69fb7cc6e27c5c80d94fce3dd9755e\",\n  \"vaspName\": \"Bakkt Trading\",\n  \"vaspWebsite\": \"https://bakkt.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"PENDING\",\n  \"createdAt\": \"1985-11-12T23:51:51.467Z\",\n  \"request\": {\n    \"quantity\": \"<string>\",\n    \"clientTransactionId\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"account\": \"ABC12345\",\n    \"receivingWallet\": \"<string>\",\n    \"feeEstimateId\": \"<uuid>\",\n    \"network\": \"<string>\",\n    \"recipientFamilyName\": \"<string>\",\n    \"recipientGivenName\": \"<string>\",\n    \"requestEstimateExtension\": \"<boolean>\",\n    \"selfHosted\": \"<boolean>\",\n    \"tag\": \"<string>\",\n    \"vaspDid\": \"did:ethr:0xa07094869d69fb7cc6e27c5c80d94fce3dd9755e\",\n    \"vaspName\": \"Bakkt Trading\",\n    \"vaspWebsite\": \"https://bakkt.com\"\n  },\n  \"blockchainHash\": \"string\",\n  \"fee\": \"string\",\n  \"network\": \"<string>\",\n  \"rejectReason\": \"string\",\n  \"statusReason\": \"string\",\n  \"totalQuantity\": \"string\",\n  \"usdEquivalentFee\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29553ab8-72a1-42f7-b98f-e9e56fe5c7ac",
+              "name": "This response returns if the request to submit the withdrawal request is improperly submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "withdraw",
+                    "coin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<string>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"receivingWallet\": \"<string>\",\n  \"feeEstimateId\": \"<uuid>\",\n  \"network\": \"<string>\",\n  \"recipientFamilyName\": \"<string>\",\n  \"recipientGivenName\": \"<string>\",\n  \"requestEstimateExtension\": \"<boolean>\",\n  \"selfHosted\": \"<boolean>\",\n  \"tag\": \"<string>\",\n  \"vaspDid\": \"did:ethr:0xa07094869d69fb7cc6e27c5c80d94fce3dd9755e\",\n  \"vaspName\": \"Bakkt Trading\",\n  \"vaspWebsite\": \"https://bakkt.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2802e3f4-c169-4661-847c-a58229e15276",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "withdraw",
+                    "coin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<string>\",\n  \"clientTransactionId\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"account\": \"ABC12345\",\n  \"receivingWallet\": \"<string>\",\n  \"feeEstimateId\": \"<uuid>\",\n  \"network\": \"<string>\",\n  \"recipientFamilyName\": \"<string>\",\n  \"recipientGivenName\": \"<string>\",\n  \"requestEstimateExtension\": \"<boolean>\",\n  \"selfHosted\": \"<boolean>\",\n  \"tag\": \"<string>\",\n  \"vaspDid\": \"did:ethr:0xa07094869d69fb7cc6e27c5c80d94fce3dd9755e\",\n  \"vaspName\": \"Bakkt Trading\",\n  \"vaspWebsite\": \"https://bakkt.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91e6f96b-4a2f-4211-a3f1-d3cacc4e9f97",
+          "name": "Retrieve a Fee Estimate to Complete a Withdrawal",
+          "request": {
+            "name": "Retrieve a Fee Estimate to Complete a Withdrawal",
+            "description": {
+              "content": "Withdrawing coins from an investor's crypto account may impose fees. Clients should request a fee estimate detailing those fees and present it to investors for confirmation prior to completing a withdrawal. Clients must then use the ID of the fee estimate to submit a withdrawal. The terms of the fee estimate are based on the underlying crypto networks' market conditions and the system honors them up to a certain grace period after generating them. After the grace period, clients must request a new fee estimate to conduct the withdrawal. Requests for estimates have no associated cost.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "transfers",
+                "withdraw",
+                "coin",
+                "estimate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currency\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"network\": \"<string>\",\n  \"receivingWallet\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b3c3237-bb8d-4f95-b7fd-cc96dec597fd",
+              "name": "This response returns the estimated fees required to conduct this withdrawal.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "withdraw",
+                    "coin",
+                    "estimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currency\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"network\": \"<string>\",\n  \"receivingWallet\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"73bc9b7c-66fa-05c9-d300-e287cf4d0fba\",\n  \"fee\": \"string\",\n  \"request\": {\n    \"currency\": \"<string>\",\n    \"quantity\": \"<string>\",\n    \"network\": \"<string>\",\n    \"receivingWallet\": \"<string>\"\n  },\n  \"estimatedAt\": \"string\",\n  \"usdEquivalentFee\": \"string\",\n  \"totalQuantity\": \"string\",\n  \"usdRate\": \"string\",\n  \"expiresAt\": \"string\",\n  \"network\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c019474-47bc-4dfd-ad1a-1617305ca7ba",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "withdraw",
+                    "coin",
+                    "estimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currency\": \"<string>\",\n  \"quantity\": \"<string>\",\n  \"network\": \"<string>\",\n  \"receivingWallet\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18f5c5d5-3902-4849-a3c1-0ffae2d435b4",
+          "name": "Verify that a wallet address is valid prior to using it in a transfer request.",
+          "request": {
+            "name": "Verify that a wallet address is valid prior to using it in a transfer request.",
+            "description": {
+              "content": "Use this endpoint to verify that a wallet address is valid prior to using it in a transfer request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "transfers",
+                "verifyWalletAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"network\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3121e670-9eb9-4165-a506-9c89cf56039d",
+              "name": "This response returns the validity of the provided wallet address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "verifyWalletAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"network\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isValid\": false,\n  \"requiredTag\": false,\n  \"request\": {\n    \"address\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"network\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "659c7dda-e145-4e9d-b69d-13911b808f1b",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "transfers",
+                    "verifyWalletAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"network\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9389,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cc91ecc4-f407-43f2-9782-2bfb0b7329c9",
+    "name": "Bakkt Crypto Solutions Accounts Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

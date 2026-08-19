@@ -1,0 +1,629 @@
+{
+  "item": [
+    {
+      "id": "f0cbeb72-5855-489c-ba4a-cedfabedfd45",
+      "name": "Documents",
+      "description": {
+        "content": "Documents allows users to upload and retrieve documents along with their relevant metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6bc3b12e-47d9-4682-809e-4dc15ecda25a",
+          "name": "Download Document",
+          "request": {
+            "name": "Download Document",
+            "description": {
+              "content": "Use this endpoint to download a specific document associated with a given UUID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "documents",
+                ":clientDocumentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "clientDocumentId",
+                  "description": "(Required) Client document ID of the requested document"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "289cc753-2618-4b5f-b12d-7113f1cdcddc",
+              "name": "This response returns the full details of the document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "documents",
+                    ":clientDocumentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientDocumentId",
+                      "description": "(Required) Client document ID of the requested document"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bdbcf581-983d-4b8c-aaa0-df3196798e41",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "documents",
+                    ":clientDocumentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientDocumentId",
+                      "description": "(Required) Client document ID of the requested document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7071,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3da70c2c-83a2-44c0-8ead-adcdf8fc9b8b",
+          "name": "Retrieve All Document Metadata for an Account",
+          "request": {
+            "name": "Retrieve All Document Metadata for an Account",
+            "description": {
+              "content": "Use this endpoint to retrieve metadata for all documents associated with a specific account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "documents",
+                ":clientAccountId",
+                "accountDocumentMetadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientAccountId",
+                  "description": "(Required) Client account ID of the requested document"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f07b09b6-9e61-4588-a638-b03bb0d64076",
+              "name": "An array of document metadata for each document associated to a given account",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "documents",
+                    ":clientAccountId",
+                    "accountDocumentMetadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) Client account ID of the requested document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentMetadata\": [\n    {\n      \"clientDocumentId\": \"a08ce68d-b648-0476-e4f3-93e2b0d8f2b7\",\n      \"account\": \"string\",\n      \"documentType\": \"SOCIAL_SECURITY_CARD\",\n      \"documentSide\": \"BACK\",\n      \"clientOwnerId\": \"string\",\n      \"description\": \"string\",\n      \"documentExpiration\": \"2022-04-13T16:42:40.826Z\",\n      \"issueCountry\": \"string\"\n    },\n    {\n      \"clientDocumentId\": \"ae0de0b4-9f9f-e332-e7c8-d92e80da3ee0\",\n      \"account\": \"string\",\n      \"documentType\": \"W_8BEN_FORM\",\n      \"documentSide\": \"UNSPECIFIED\",\n      \"clientOwnerId\": \"string\",\n      \"description\": \"string\",\n      \"documentExpiration\": \"2007-10-05T02:01:01.333Z\",\n      \"issueCountry\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cf36d88-f54f-446e-9c52-549ae594b699",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "documents",
+                    ":clientAccountId",
+                    "accountDocumentMetadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientAccountId",
+                      "description": "(Required) Client account ID of the requested document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7071,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c242ff5f-ffdd-4299-9228-4536761243b1",
+          "name": "Retrieve Metadata for Specific Document",
+          "request": {
+            "name": "Retrieve Metadata for Specific Document",
+            "description": {
+              "content": "Use this endpoint to retrieve metadata for the document associated with a specific UUID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "documents",
+                ":clientDocumentId",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "clientDocumentId",
+                  "description": "(Required) Client document ID of the requested document"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "05a0137b-63e4-40ff-9d66-aeddde896c8b",
+              "name": "This response returns the full details of the document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "documents",
+                    ":clientDocumentId",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientDocumentId",
+                      "description": "(Required) Client document ID of the requested document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3e91601c-8fd1-980d-295d-2294a4b6716c\",\n  \"createdAt\": \"1955-11-24T09:54:28.063Z\",\n  \"request\": {\n    \"clientDocumentId\": \"8d94a442-b6dc-311a-42b3-11f04c790a2d\",\n    \"account\": \"string\",\n    \"documentType\": \"SOCIAL_SECURITY_CARD\",\n    \"clientOwnerId\": \"string\",\n    \"description\": \"string\",\n    \"documentExpiration\": \"2001-11-16T01:49:12.249Z\",\n    \"documentSide\": \"BACK\",\n    \"issueCountry\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed491b59-445d-4c12-8201-6538cd10ed41",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "documents",
+                    ":clientDocumentId",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clientDocumentId",
+                      "description": "(Required) Client document ID of the requested document"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7071,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e15bd28c-8328-4e41-9805-75f6125ddba4",
+          "name": "Upload Document and Metadata",
+          "request": {
+            "name": "Upload Document and Metadata",
+            "description": {
+              "content": "Use this endpoint to upload a document and associated metadata",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apex-crypto",
+                "api",
+                "v2",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "metadata",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Document metadata with the DocumentRequest schema.  Handled as a formData string rather than the typical\nbody reference due to the limitations of OpenAPI spec v2.\n\nExample:\n {\n    \"clientDocumentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"account\": \"myaccountnumber\",\n    \"documentType\": \"DRIVERS_LICENSE\",\n    \"description\": \"my optional description\",\n    \"documentSide\": \"FRONT\",\n    \"clientOwnerId\": \"3fa87f64-5717-4562-b3fc-2c963f66afa6\",\n    \"issueCountry\": \"USA\",\n    \"documentExpiration\": \"2023-10-04T16:34:29.446Z\"\n  }\n"
+                },
+                {
+                  "key": "document",
+                  "type": "file",
+                  "description": "(Required) Document file to upload. The Content-Type header for this formData part must be set correctly.\n"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0eae6119-a6ec-4c78-9e9d-b6c327e416ca",
+              "name": "This response returns the full details of the document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Document metadata with the DocumentRequest schema.  Handled as a formData string rather than the typical\nbody reference due to the limitations of OpenAPI spec v2.\n\nExample:\n {\n    \"clientDocumentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"account\": \"myaccountnumber\",\n    \"documentType\": \"DRIVERS_LICENSE\",\n    \"description\": \"my optional description\",\n    \"documentSide\": \"FRONT\",\n    \"clientOwnerId\": \"3fa87f64-5717-4562-b3fc-2c963f66afa6\",\n    \"issueCountry\": \"USA\",\n    \"documentExpiration\": \"2023-10-04T16:34:29.446Z\"\n  }\n",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Document file to upload. The Content-Type header for this formData part must be set correctly.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "document",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3e91601c-8fd1-980d-295d-2294a4b6716c\",\n  \"createdAt\": \"1955-11-24T09:54:28.063Z\",\n  \"request\": {\n    \"clientDocumentId\": \"8d94a442-b6dc-311a-42b3-11f04c790a2d\",\n    \"account\": \"string\",\n    \"documentType\": \"SOCIAL_SECURITY_CARD\",\n    \"clientOwnerId\": \"string\",\n    \"description\": \"string\",\n    \"documentExpiration\": \"2001-11-16T01:49:12.249Z\",\n    \"documentSide\": \"BACK\",\n    \"issueCountry\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9df3794-2f7f-411a-8cb0-231f4d2ab566",
+              "name": "This response returns if the system encounters an unexpected error while handling this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apex-crypto",
+                    "api",
+                    "v2",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Document metadata with the DocumentRequest schema.  Handled as a formData string rather than the typical\nbody reference due to the limitations of OpenAPI spec v2.\n\nExample:\n {\n    \"clientDocumentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"account\": \"myaccountnumber\",\n    \"documentType\": \"DRIVERS_LICENSE\",\n    \"description\": \"my optional description\",\n    \"documentSide\": \"FRONT\",\n    \"clientOwnerId\": \"3fa87f64-5717-4562-b3fc-2c963f66afa6\",\n    \"issueCountry\": \"USA\",\n    \"documentExpiration\": \"2023-10-04T16:34:29.446Z\"\n  }\n",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Document file to upload. The Content-Type header for this formData part must be set correctly.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "document",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7071,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bakkt.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "143a3328-4bc3-4604-be53-293c8547310b",
+    "name": "Bakkt Crypto Solutions Accounts Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.\n\nContact Support:\n Name: Bakkt User Account Agreement",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bakkt Crypto Solutions Accounts Jurisdictions API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jurisdictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Jurisdiction Definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/jurisdictions"
+          },
+          "docs": "Use this endpoint to retrieve a list of supported jurisdictions and any trading restrictions in place."
+        },
+        {
+          "info": {
+            "name": "Retrieve Jurisdiction Definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bakkt.com/apex-crypto/api/v2/jurisdictions/all",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Country to query for. Lowest priority."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State to query for. Prioritized over country."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated, use tradingPair going forward. currency to query for. High priority."
+              },
+              {
+                "name": "tradingPair",
+                "value": "",
+                "type": "query",
+                "description": "tradingPair to query for. Highest priority. Example Value (BTCUSD, ETHUSDT)"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to retrieve a list of supported jurisdictions and any restrictions in place."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
