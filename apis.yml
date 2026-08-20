@@ -39,6 +39,17 @@ tags:
 - Payments
 - Fiat On-Ramp
 - Custody
+- Webhook
+- FIX Protocol
+tags_raw:
+- Company
+- Crypto Web3
+- Cryptocurrency
+- Digital Assets
+- Trading
+- Payments
+- Fiat On-Ramp
+- Custody
 - Webhooks
 - FIX Protocol
 image: https://bakkt.com/favicon.ico
@@ -54,6 +65,8 @@ apis:
   humanURL: https://bakkt.readme.io/docs/welcome
   baseURL: https://api.bakkt.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -158,6 +171,8 @@ apis:
   humanURL: https://bakkt.readme.io/docs/welcome
   baseURL: https://api.bakkt.com
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
