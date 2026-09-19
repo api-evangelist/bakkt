@@ -155,6 +155,8 @@ apis:
   humanURL: https://bakkt.readme.io/docs/welcome
   baseURL: https://api.bakkt.com
   tags:
+  - Gifts
+  tags_raw:
   - Gift
   properties:
   - type: OpenAPI
