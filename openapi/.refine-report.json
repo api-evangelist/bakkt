@@ -1,23 +1,7 @@
 {
   "provider": "bakkt",
   "sources": [
-    "bakkt-accounts-api-openapi.yml",
-    "bakkt-authorization-api-openapi.yml",
-    "bakkt-block-trade-allocate-api-openapi.yml",
-    "bakkt-configuration-and-status-api-openapi.yml",
-    "bakkt-currency-onboarding-api-openapi.yml",
-    "bakkt-documents-api-openapi.yml",
-    "bakkt-fiat-onboarding-api-openapi.yml",
-    "bakkt-gift-api-openapi.yml",
-    "bakkt-instruments-api-openapi.yml",
-    "bakkt-jurisdictions-api-openapi.yml",
-    "bakkt-orders-api-openapi.yml",
-    "bakkt-partner-connectivity-api-openapi.yml",
-    "bakkt-partner-party-funding-api-openapi.yml",
-    "bakkt-partner-party-kyc-api-openapi.yml",
-    "bakkt-partner-party-linking-api-openapi.yml",
-    "bakkt-positions-api-openapi.yml",
-    "bakkt-transfers-api-openapi.yml"
+    "_original/bakkt-crypto-openapi.yml"
   ],
   "outputs": [
     "bakkt-accounts-api-openapi.yml",
@@ -41,6 +25,33 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "bakkt-crypto-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "bakkt-crypto-openapi.yml: declared missing tag: Block Trade & Allocate",
+    "bakkt-crypto-openapi.yml: declared missing tag: Currency Onboarding",
+    "bakkt-crypto-openapi.yml: declared missing tag: Fiat Onboarding",
+    "bakkt-crypto-openapi.yml: declared missing tag: Gift",
+    "bakkt-crypto-openapi.yml: declared missing tag: Partner Party Kyc",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "bakkt-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-block-trade-allocate-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-configuration-and-status-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-currency-onboarding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-fiat-onboarding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-gift-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-instruments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-jurisdictions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-partner-connectivity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-partner-party-funding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-partner-party-kyc-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-partner-party-linking-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-positions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bakkt-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bakkt Crypto Solutions Accounts Partner Connectivity API
+  title: Bakkt Crypto Solutions Partner Connectivity API
   version: '2.0'
-  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets.
   termsOfService: https://bakkt.com/user-agreement
   contact:
     name: Bakkt User Account Agreement
@@ -72,6 +72,19 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
+    HeartBeatResponse:
+      required:
+      - result
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique key used by check Bakkt connectivity, copy from request requestId
+          example: 123e4567-e89b-12d3-a456-426614174000
+        result:
+          type: string
+          description: Phrase attesting bakkt created the ping response
+          example: 'PONG: heartbeat received'
     PartnerTokenResponse:
       type: object
       properties:
@@ -87,6 +100,13 @@ components:
           type: string
           description: The token type that was generated
           example: Bearer
+    HeartBeatRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique key used by check Bakkt connectivity
+          example: 123e4567-e89b-12d3-a456-426614174000
     PublicApiError:
       type: object
       properties:
@@ -105,26 +125,6 @@ components:
         type:
           type: string
           example: INVALID_FIELD_VALUE
-    HeartBeatResponse:
-      required:
-      - result
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: Unique key used by check Bakkt connectivity, copy from request requestId
-          example: 123e4567-e89b-12d3-a456-426614174000
-        result:
-          type: string
-          description: Phrase attesting bakkt created the ping response
-          example: 'PONG: heartbeat received'
-    HeartBeatRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: Unique key used by check Bakkt connectivity
-          example: 123e4567-e89b-12d3-a456-426614174000
     PublicApiErrorDetail:
       type: object
       properties:

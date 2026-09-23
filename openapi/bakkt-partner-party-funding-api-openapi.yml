@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bakkt Crypto Solutions Accounts Partner Party Funding API
+  title: Bakkt Crypto Solutions Partner Party Funding API
   version: '2.0'
-  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets.
   termsOfService: https://bakkt.com/user-agreement
   contact:
     name: Bakkt User Account Agreement
@@ -205,6 +205,92 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
+    GetFiatAccountBalanceResponse:
+      required:
+      - partnerPartyRef
+      - currency
+      - settledAmount
+      - unsettledAmount
+      type: object
+      properties:
+        partnerPartyRef:
+          type: string
+          description: The Partner's primary key for this Party
+          example: b9e930d0-372a-48f0-9c04-fd51c58eafb6
+        currency:
+          type: string
+          description: Currency of the settled and unsettled amounts
+          example: USD
+        settledAmount:
+          type: number
+          description: Settled Fiat Account balance
+          example: 50.01
+        unsettledAmount:
+          type: number
+          description: Unsettled Fiat Account balance
+          example: 100.01
+    LinkBankAccountAchRequest:
+      required:
+      - accountNumber
+      - accountType
+      - partnerTransactionRef
+      - routingNumber
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+        partnerTransactionRef:
+          maxLength: 255
+          minLength: 0
+          type: string
+        routingNumber:
+          type: string
+    UnlinkBankAccountResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR
+    LinkBankAccountAchResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    PublicApiError:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Message from the exception
+          example: Parameter passed for field is not meeting its required format.
+        detail:
+          type: string
+          description: Description of the type
+          example: validation error
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicApiErrorDetail'
+        type:
+          type: string
+          example: INVALID_FIELD_VALUE
     TransferRequest:
       type: object
       required:
@@ -239,30 +325,6 @@ components:
           type: string
         wireWithdrawDetails:
           $ref: '#/components/schemas/WireWithdrawDetails'
-    GetFiatAccountBalanceResponse:
-      required:
-      - partnerPartyRef
-      - currency
-      - settledAmount
-      - unsettledAmount
-      type: object
-      properties:
-        partnerPartyRef:
-          type: string
-          description: The Partner's primary key for this Party
-          example: b9e930d0-372a-48f0-9c04-fd51c58eafb6
-        currency:
-          type: string
-          description: Currency of the settled and unsettled amounts
-          example: USD
-        settledAmount:
-          type: number
-          description: Settled Fiat Account balance
-          example: 50.01
-        unsettledAmount:
-          type: number
-          description: Unsettled Fiat Account balance
-          example: 100.01
     UnlinkBankAccountRequest:
       required:
       - instrumentType
@@ -280,47 +342,6 @@ components:
           maxLength: 255
           minLength: 0
           type: string
-    LinkBankAccountAchRequest:
-      required:
-      - accountNumber
-      - accountType
-      - partnerTransactionRef
-      - routingNumber
-      type: object
-      properties:
-        accountNumber:
-          type: string
-        accountType:
-          type: string
-        partnerTransactionRef:
-          maxLength: 255
-          minLength: 0
-          type: string
-        routingNumber:
-          type: string
-    PublicApiError:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Message from the exception
-          example: Parameter passed for field is not meeting its required format.
-        detail:
-          type: string
-          description: Description of the type
-          example: validation error
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicApiErrorDetail'
-        type:
-          type: string
-          example: INVALID_FIELD_VALUE
-    LinkBankAccountAchResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
     WireInstructionsResponse:
       type: object
       required:
@@ -349,11 +370,6 @@ components:
           type: string
         wireBeneficiaryAddress:
           type: string
-    UnlinkBankAccountResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
     WireWithdrawDetails:
       type: object
       properties:
@@ -367,19 +383,3 @@ components:
           type: string
         wireSwiftCode:
           type: string
-    PublicApiErrorDetail:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Human readable error description
-          example: Validation Error.
-        field:
-          type: string
-          example: id
-        rejectedValue:
-          type: object
-          example: i-am-not-a-uuid
-        type:
-          type: string
-          example: VALIDATION_ERROR

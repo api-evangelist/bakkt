@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bakkt Crypto Solutions Accounts Documents API
+  title: Bakkt Crypto Solutions Documents API
   version: '2.0'
-  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets.
   termsOfService: https://bakkt.com/user-agreement
   contact:
     name: Bakkt User Account Agreement
@@ -185,9 +185,10 @@ components:
         documentExpiration:
           description: Date for which the document expires
           format: date-time
-          type: string
+          type:
+          - string
+          - 'null'
           x-order: 7
-          nullable: true
         documentSide:
           $ref: '#/components/schemas/DocumentSide'
         documentType:
@@ -202,13 +203,18 @@ components:
       - documentType
       - documentSide
       type: object
-    RetrieveAccountDocumentMetadataResponse:
+    Error:
       properties:
-        documentMetadata:
-          items:
-            $ref: '#/components/schemas/DocumentMetadata'
-          type: array
-          x-order: 0
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
       type: object
     Document:
       properties:
@@ -228,6 +234,14 @@ components:
       - id
       - createdAt
       - request
+      type: object
+    RetrieveAccountDocumentMetadataResponse:
+      properties:
+        documentMetadata:
+          items:
+            $ref: '#/components/schemas/DocumentMetadata'
+          type: array
+          x-order: 0
       type: object
     DocumentSide:
       description: Side of the document that is being submitted. Note that this field is required for entity account documents, including owner specific documents.
@@ -259,9 +273,10 @@ components:
         documentExpiration:
           description: Date for which the document expires
           format: date-time
-          type: string
+          type:
+          - string
+          - 'null'
           x-order: 7
-          nullable: true
         documentSide:
           $ref: '#/components/schemas/DocumentSide'
         documentType:
@@ -274,19 +289,6 @@ components:
       - clientDocumentId
       - account
       - documentType
-      type: object
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
-          type: string
-      required:
-      - code
-      - message
       type: object
     DocumentType:
       description: Document type assigned at upload

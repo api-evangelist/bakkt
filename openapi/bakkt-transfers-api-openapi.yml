@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bakkt Crypto Solutions Accounts Transfers API
+  title: Bakkt Crypto Solutions Transfers API
   version: '2.0'
-  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets. Clients must have authorization to use the APIs, secure endpoints, and facilities to ensure safe, fast execution and tracking of orders. Users must specify all date and time units using epoch time in UTC. The URL path includes a version number to indicate major versions which retain backward compatibility to other URLs with the same version prefix. This document is reconstructed by the API Evangelist enrichment pipeline from the per-endpoint OpenAPI fragments Bakkt publishes on its ReadMe developer hub (bakkt.readme.io); it merges the Crypto Solutions (/apex-crypto/api/v2) and Fiat/Partner (/partner/v1) endpoint families.
+  description: The Bakkt Crypto Solutions API is a REST-based API that provides a platform for clients, so their investors can purchase, hold, sell, and transfer digital assets.
   termsOfService: https://bakkt.com/user-agreement
   contact:
     name: Bakkt User Account Agreement
@@ -87,14 +87,12 @@ paths:
                 $ref: '#/components/schemas/Error'
       security:
       - api_key: []
-      summary: Lookup the name of a vasp associated with a wallet address.
+      summary: Lookup the name of a vasp associated with a wallet address
       tags:
       - Transfers
   /apex-crypto/api/v2/transfers/deposit/coin/receiveAddress:
     post:
-      description: 'This endpoint returns a wallet receive address to use for a deposit. Receive addresses change over time, so clients should not cache them. Repeated calls to this service may or may not return the same result.
-
-        '
+      description: This endpoint returns a wallet receive address to use for a deposit. Receive addresses change over time, so clients should not cache them. Repeated calls to this service may or may not return the same result.
       operationId: postReceiveAddress
       requestBody:
         content:
@@ -216,155 +214,11 @@ paths:
                 $ref: '#/components/schemas/Error'
       security:
       - api_key: []
-      summary: Verify that a wallet address is valid prior to using it in a transfer request.
+      summary: Verify that a wallet address is valid prior to using it in a transfer request
       tags:
       - Transfers
 components:
   schemas:
-    VaspLookupResponse:
-      properties:
-        vaspName:
-          description: The name of the vasp associated with the provided wallet address
-          type: string
-          x-order: 0
-      required:
-      - vaspName
-      type: object
-    WithdrawalStatus:
-      enum:
-      - PENDING
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      - CANCELLED
-      - ACCEPTED
-      type: string
-    WithdrawalEstimatedFeeResponse:
-      properties:
-        estimatedAt:
-          description: Time at which a fee estimate was generated
-          type: string
-          x-order: 5
-        expiresAt:
-          description: The time at which a fee expires; a withdrawal request must be tied to an unexpired fee estimation
-          type: string
-          x-order: 6
-        fee:
-          description: Estimated fee, in coin, for a withdrawal request
-          type: string
-          x-order: 1
-        id:
-          description: A unique identifier for this estimate; this identifier must be supplied when initiating a withdrawal request
-          format: uuid
-          type: string
-          x-order: 0
-        network:
-          $ref: '#/components/schemas/Network'
-        request:
-          $ref: '#/components/schemas/WithdrawalEstimatedFeeRequest'
-        totalQuantity:
-          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen (i.e., equals quantity plus fee)
-          type: string
-          x-order: 3
-        usdEquivalentFee:
-          description: Fee for the withdrawal in USD
-          type: string
-          x-order: 2
-        usdRate:
-          description: The USD price for one coin in which the estimation was created
-          type: string
-          x-order: 4
-      required:
-      - id
-      - fee
-      - request
-      - estimatedAt
-      - usdEquivalentFee
-      - totalQuantity
-      - usdRate
-      - expiresAt
-      type: object
-    Withdrawal:
-      properties:
-        blockchainHash:
-          description: Blockchain hash for this transaction, if the transaction has already been written to the blockchain
-          type: string
-          x-order: 7
-        createdAt:
-          description: Time at which a withdrawal was submitted
-          format: date-time
-          type: string
-          x-order: 8
-        fee:
-          description: Fee for the withdrawal in coin that is taken out of the investor's account on top of the requested withdrawal quantity
-          type: string
-          x-order: 1
-        id:
-          description: Bakkt Transaction ID
-          type: string
-          x-order: 0
-        network:
-          $ref: '#/components/schemas/Network'
-        rejectReason:
-          description: DEPRECATED, please use statusReason. Reason for a reject, if any
-          type: string
-          x-order: 5
-        request:
-          $ref: '#/components/schemas/WithdrawRequest'
-        status:
-          $ref: '#/components/schemas/WithdrawalStatus'
-        statusReason:
-          description: reason for the current status of the withdrawal
-          type: string
-          x-order: 6
-        totalQuantity:
-          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen (i.e., equals quantity plus fee)
-          type: string
-          x-order: 3
-        usdEquivalentFee:
-          description: Fee for the withdrawal in USD
-          type: string
-          x-order: 2
-      required:
-      - id
-      - status
-      - createdAt
-      - request
-      type: object
-    VerifyWalletAddressResponse:
-      properties:
-        isValid:
-          description: Boolean indicating the wallet address is valid or not
-          type: boolean
-          x-order: 0
-        request:
-          $ref: '#/components/schemas/VerifyWalletAddressRequest'
-        requiredTag:
-          description: Tag must be specified when sending a withdrawal. Only applicable for Tag/Memo based blockchains.
-          type: boolean
-          x-order: 1
-      required:
-      - isValid
-      - requiredTag
-      type: object
-    DepositReceiveAddressResponse:
-      properties:
-        network:
-          $ref: '#/components/schemas/Network'
-        receiveAddress:
-          description: A receive address to use to deposit coin
-          type: string
-          x-order: 0
-        request:
-          $ref: '#/components/schemas/DepositReceiveAddressRequest'
-        tag:
-          description: Tag tied to Tag based Assets
-          type: string
-          x-order: 3
-      required:
-      - receiveAddress
-      - request
-      type: object
     WithdrawalEstimatedFeeRequest:
       properties:
         currency:
@@ -385,35 +239,23 @@ components:
       - currency
       - quantity
       type: object
-    DepositReceiveAddressRequest:
+    DepositReceiveAddressResponse:
       properties:
-        account:
-          description: Bakkt client account identifier
-          example: ABC12345
-          type: string
-          x-order: 1
-        currency:
-          description: Crypto coin that you would like to deposit
-          type: string
-          x-order: 0
         network:
           $ref: '#/components/schemas/Network'
-      required:
-      - currency
-      - account
-      type: object
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
+        receiveAddress:
+          description: A receive address to use to deposit coin
           type: string
+          x-order: 0
+        request:
+          $ref: '#/components/schemas/DepositReceiveAddressRequest'
+        tag:
+          description: Tag tied to Tag based Assets
+          type: string
+          x-order: 3
       required:
-      - code
-      - message
+      - receiveAddress
+      - request
       type: object
     WithdrawRequest:
       properties:
@@ -490,6 +332,34 @@ components:
       - receivingWallet
       - feeEstimateId
       type: object
+    VerifyWalletAddressRequest:
+      properties:
+        address:
+          description: Address which should be verified for correct format
+          type: string
+          x-order: 0
+        currency:
+          description: Crypto currency that the client would like to verify the address of
+          type: string
+          x-order: 1
+        network:
+          $ref: '#/components/schemas/Network'
+      required:
+      - address
+      type: object
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
     Network:
       enum:
       - Algorand
@@ -515,18 +385,146 @@ components:
       - Stellar
       - Tron
       type: string
-    VerifyWalletAddressRequest:
+    WithdrawalEstimatedFeeResponse:
       properties:
-        address:
-          description: Address which should be verified for correct format
+        estimatedAt:
+          description: Time at which a fee estimate was generated
           type: string
-          x-order: 0
-        currency:
-          description: Crypto currency that the client would like to verify the address of
+          x-order: 5
+        expiresAt:
+          description: The time at which a fee expires; a withdrawal request must be tied to an unexpired fee estimation
+          type: string
+          x-order: 6
+        fee:
+          description: Estimated fee, in coin, for a withdrawal request
           type: string
           x-order: 1
+        id:
+          description: A unique identifier for this estimate; this identifier must be supplied when initiating a withdrawal request
+          format: uuid
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+        request:
+          $ref: '#/components/schemas/WithdrawalEstimatedFeeRequest'
+        totalQuantity:
+          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen (i.e., equals quantity plus fee)
+          type: string
+          x-order: 3
+        usdEquivalentFee:
+          description: Fee for the withdrawal in USD
+          type: string
+          x-order: 2
+        usdRate:
+          description: The USD price for one coin in which the estimation was created
+          type: string
+          x-order: 4
+      required:
+      - id
+      - fee
+      - request
+      - estimatedAt
+      - usdEquivalentFee
+      - totalQuantity
+      - usdRate
+      - expiresAt
+      type: object
+    VerifyWalletAddressResponse:
+      properties:
+        isValid:
+          description: Boolean indicating the wallet address is valid or not
+          type: boolean
+          x-order: 0
+        request:
+          $ref: '#/components/schemas/VerifyWalletAddressRequest'
+        requiredTag:
+          description: Tag must be specified when sending a withdrawal. Only applicable for Tag/Memo based blockchains.
+          type: boolean
+          x-order: 1
+      required:
+      - isValid
+      - requiredTag
+      type: object
+    DepositReceiveAddressRequest:
+      properties:
+        account:
+          description: Bakkt client account identifier
+          example: ABC12345
+          type: string
+          x-order: 1
+        currency:
+          description: Crypto coin that you would like to deposit
+          type: string
+          x-order: 0
         network:
           $ref: '#/components/schemas/Network'
       required:
-      - address
+      - currency
+      - account
+      type: object
+    VaspLookupResponse:
+      properties:
+        vaspName:
+          description: The name of the vasp associated with the provided wallet address
+          type: string
+          x-order: 0
+      required:
+      - vaspName
+      type: object
+    WithdrawalStatus:
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      - ACCEPTED
+      type: string
+    Withdrawal:
+      properties:
+        blockchainHash:
+          description: Blockchain hash for this transaction, if the transaction has already been written to the blockchain
+          type: string
+          x-order: 7
+        createdAt:
+          description: Time at which a withdrawal was submitted
+          format: date-time
+          type: string
+          x-order: 8
+        fee:
+          description: Fee for the withdrawal in coin that is taken out of the investor's account on top of the requested withdrawal quantity
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt Transaction ID
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+        rejectReason:
+          description: DEPRECATED, please use statusReason. Reason for a reject, if any
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/WithdrawRequest'
+        status:
+          $ref: '#/components/schemas/WithdrawalStatus'
+        statusReason:
+          description: reason for the current status of the withdrawal
+          type: string
+          x-order: 6
+        totalQuantity:
+          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen (i.e., equals quantity plus fee)
+          type: string
+          x-order: 3
+        usdEquivalentFee:
+          description: Fee for the withdrawal in USD
+          type: string
+          x-order: 2
+      required:
+      - id
+      - status
+      - createdAt
+      - request
       type: object
