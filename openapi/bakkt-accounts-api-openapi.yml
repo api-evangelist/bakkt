@@ -215,36 +215,25 @@ paths:
       - Accounts
 components:
   schemas:
-    TaxIdType:
-      description: Used for tax reporting
-      enum:
-      - SSN
-      - ITIN
-      - EIN
-      - NATIONAL_ID
-      type: string
-    Agreement:
+    Employment:
       properties:
-        eSignedDate:
-          description: Date of electronic signature of the agreement
-          format: date-time
-          type: string
-          x-order: 3
-        name:
-          description: Name of the agreement document
+        employerAddress:
+          $ref: '#/components/schemas/Address'
+        employerName:
+          description: Name of customer's employer
           type: string
           x-order: 0
-        text:
-          description: Text containing the body of the agreement document
-          type: string
-          x-order: 2
-        version:
-          description: Agreement document version
+        position:
+          description: Customer's employment position
           type: string
           x-order: 1
+        yearsEmployed:
+          description: Number of years customer employed with employer listed
+          type: integer
+          x-order: 2
       required:
-      - name
-      - version
+      - employerName
+      - position
       type: object
     InvestmentObjective:
       description: Customer's primary objective for investment account
@@ -256,61 +245,6 @@ components:
       - SPECULATION
       - OTHER
       type: string
-    VerificationResults:
-      properties:
-        addressVerified:
-          description: Indicates if the customer's address has been verified
-          type: boolean
-          x-order: 5
-        dateOfBirthVerified:
-          description: Indicates if the customer's DOB has been verified
-          type: boolean
-          x-order: 7
-        executionDate:
-          description: The date the KYC was performed
-          format: date
-          type: string
-          x-order: 3
-        externalCaseId:
-          description: Client-generated unique identifier associated with the KYC results for the appropriate case
-          type: string
-          x-order: 2
-        identityVerificationResultId:
-          type: string
-          x-order: 0
-        manualOverride:
-          description: Indicates account failed vendor verification but has been manually reviewed and approved
-          type: boolean
-          x-order: 8
-        manualOverrideApprover:
-          description: Individual who approved the override
-          type: string
-          x-order: 10
-        manualOverrideReason:
-          description: Reason for account approval override
-          type: string
-          x-order: 9
-        nameVerified:
-          description: Indicates if the customer's name has been verified
-          type: boolean
-          x-order: 4
-        taxIdVerified:
-          description: Indicates if the customer's taxId has been verified
-          type: boolean
-          x-order: 6
-        vendorName:
-          description: If client is providing KYC information, this section will be filled out with the relevant details. Note that individual client implementations will vary.
-          type: string
-          x-order: 1
-      required:
-      - addressVerified
-      - dateOfBirthVerified
-      - executionDate
-      - externalCaseId
-      - nameVerified
-      - taxIdVerified
-      - vendorName
-      type: object
     AccountGoals:
       properties:
         investmentObjective:
@@ -324,18 +258,43 @@ components:
       required:
       - investmentObjective
       type: object
-    Error:
+    ValidationError:
       properties:
         code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          description: This is an open API-styled validation error code. These fields are provided so that client systems can present customized, localized messages in response to validation error types such as a required field.
           format: int32
           type: integer
+        field:
+          description: This is a field that failed validation in the input object as identified by an Open API Path.
+          type: string
         message:
-          description: This error message provides additional insight into the nature of the error encountered.
+          description: This is an open API-styled message that summarizes the validation failed. This may include Open API Dot notation, so it should be formatted before being presented to an end user. Clients should consider implementing their own custom messages driven off the code field.
+          type: string
+        rejectedValue:
           type: string
       required:
       - code
       - message
+      type: object
+    CIPClearanceState:
+      description: '<br/>`PENDING` - The CIP check is waiting to be processed <br/>`IN_PROGRESS` - The CIP check is being processed <br/>`ACCEPTED` - The CIP check result was good <br/>`INDETERMINATE` - The CIP check result was indeterminate. Customer should review and update their account information <br/>`REJECTED` - The CIP check result was rejected. Customer should review and update their account information <br/>`FAILED` - The CIP check could not be processed. Please contact us to resolve this issue
+
+        '
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - ACCEPTED
+      - INDETERMINATE
+      - REJECTED
+      - FAILED
+      type: string
+    Enrollments:
+      description: DEPRECATED.
+      properties:
+        registrationIndividual:
+          $ref: '#/components/schemas/RegistrationIndividual'
+      required:
+      - registrationIndividual
       type: object
     Owner:
       properties:
@@ -379,35 +338,51 @@ components:
       - identity
       - agreements
       type: object
-    CustomerProfile:
+    AccountOpeningStatus:
       properties:
-        annualIncomeRangeUsd:
-          $ref: '#/components/schemas/USDRange'
-        federalTaxBracket:
-          type: integer
-          x-order: 4
-        investmentExperience:
-          $ref: '#/components/schemas/InvestmentExperience'
-        liquidNetWorthRangeUsd:
-          $ref: '#/components/schemas/USDRange'
-        sourceOfFunds:
-          type: string
-          x-order: 5
-        totalNetWorthRangeUsd:
-          $ref: '#/components/schemas/USDRange'
+        canTradeCrypto:
+          type: boolean
+          x-order: 0
+        cipClearanceState:
+          $ref: '#/components/schemas/CIPClearanceState'
+        settlementMethod:
+          $ref: '#/components/schemas/SettlementMethod'
       required:
-      - annualIncomeRangeUsd
+      - canTradeCrypto
+      - cipClearanceState
+      - settlementMethod
       type: object
-    InvestmentProfile:
-      properties:
-        accountGoals:
-          $ref: '#/components/schemas/AccountGoals'
-        customerProfile:
-          $ref: '#/components/schemas/CustomerProfile'
-      required:
-      - accountGoals
-      - customerProfile
-      type: object
+    SettlementMethod:
+      description: Settlement Method tied to Account
+      enum:
+      - NET_SETTLEMENT
+      - NO_SETTLEMENT
+      - BAKKT_TPJ
+      - APEX_TPJ
+      type: string
+    MaritalStatus:
+      description: Customer's marital status
+      enum:
+      - SINGLE
+      - MARRIED
+      - DIVORCED
+      - WIDOWED
+      type: string
+    RiskTolerance:
+      description: Customer's accepted level of investment risk
+      enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+      type: string
+    TaxIdType:
+      description: Used for tax reporting
+      enum:
+      - SSN
+      - ITIN
+      - EIN
+      - NATIONAL_ID
+      type: string
     Disclosures:
       properties:
         controlPersonCompanySymbols:
@@ -454,98 +429,24 @@ components:
           type: string
           x-order: 2
       type: object
-    AccountOpeningStatus:
+    CustomerProfile:
       properties:
-        canTradeCrypto:
-          type: boolean
-          x-order: 0
-        cipClearanceState:
-          $ref: '#/components/schemas/CIPClearanceState'
-        settlementMethod:
-          $ref: '#/components/schemas/SettlementMethod'
-      required:
-      - canTradeCrypto
-      - cipClearanceState
-      - settlementMethod
-      type: object
-    AccountSettlementRequest:
-      properties:
-        accountId:
-          description: client-specified unique identifier for the account
+        annualIncomeRangeUsd:
+          $ref: '#/components/schemas/USDRange'
+        federalTaxBracket:
+          type: integer
+          x-order: 4
+        investmentExperience:
+          $ref: '#/components/schemas/InvestmentExperience'
+        liquidNetWorthRangeUsd:
+          $ref: '#/components/schemas/USDRange'
+        sourceOfFunds:
           type: string
-          x-order: 0
-        settlementMethod:
-          description: Settlement Method tied to Account
-          enum:
-          - NET_SETTLEMENT
-          - BAKKT_TPJ
-          type: string
-          x-order: 1
-      required:
-      - accountId
-      - settlementMethod
-      type: object
-    LiquidityNeeds:
-      description: Importance of liquidity for the customer
-      enum:
-      - VERY_IMPORTANT
-      - SOMEWHAT_IMPORTANT
-      - NOT_IMPORTANT
-      type: string
-    AccountSettlementResponse:
-      properties:
-        request:
-          $ref: '#/components/schemas/AccountSettlementRequest'
-        status:
-          description: status tied to account settlement update
-          enum:
-          - COMPLETE
-          - FAILED
-          type: string
-          x-order: 1
-      required:
-      - request
-      - status
-      type: object
-    Account:
-      properties:
-        cipClearanceState:
-          $ref: '#/components/schemas/CIPClearanceState'
-        createdAt:
-          description: The time the account was created
-          format: date-time
-          type: string
-          x-order: 3
-        id:
-          description: Bakkt unique internal account identifier
-          type: string
-          x-order: 0
-        mode:
-          description: The mode that the account is in
-          enum:
-          - OPEN
-          - CLOSED
-          - LOCKED
-          - CLOSING_ONLY
-          type: string
-          x-order: 6
-        pendingUpdateIds:
-          description: The ID of any pending updates requested for the account
-          items:
-            format: uuid
-            type: string
-          type: array
           x-order: 5
-        request:
-          $ref: '#/components/schemas/AccountRequest'
-        status:
-          $ref: '#/components/schemas/RequestStatus'
+        totalNetWorthRangeUsd:
+          $ref: '#/components/schemas/USDRange'
       required:
-      - id
-      - request
-      - createdAt
-      - status
-      - mode
+      - annualIncomeRangeUsd
       type: object
     ValidationErrors:
       properties:
@@ -575,32 +476,29 @@ components:
       - CANCELLED
       - COMPLETE
       type: string
-    CIPClearanceState:
-      description: '<br/>`PENDING` - The CIP check is waiting to be processed <br/>`IN_PROGRESS` - The CIP check is being processed <br/>`ACCEPTED` - The CIP check result was good <br/>`INDETERMINATE` - The CIP check result was indeterminate. Customer should review and update their account information <br/>`REJECTED` - The CIP check result was rejected. Customer should review and update their account information <br/>`FAILED` - The CIP check could not be processed. Please contact us to resolve this issue
-
-        '
+    PartyRelationType:
       enum:
-      - PENDING
-      - IN_PROGRESS
-      - ACCEPTED
-      - INDETERMINATE
-      - REJECTED
-      - FAILED
-      type: string
-    Enrollments:
-      description: DEPRECATED.
-      properties:
-        registrationIndividual:
-          $ref: '#/components/schemas/RegistrationIndividual'
-      required:
-      - registrationIndividual
-      type: object
-    TimeHorizon:
-      description: Investment time horizon
-      enum:
-      - SHORT
-      - AVERAGE
-      - LONG
+      - AUTHORIZED_AGENT
+      - AUTHORIZED_MEMBER
+      - AUTHORIZED_OWNER
+      - BENEFICIAL_OWNER
+      - BENEFICIARY
+      - CUSTODIAN
+      - EDUCATION_BENEFICIARY
+      - EDUCATION_MANAGER
+      - EXECUTOR
+      - GUARDIAN_CONSERVATOR
+      - INTERNAL_POWER_OF_ATTY
+      - INITIAL_DEPOSITOR
+      - JOINT_OWNER
+      - MINOR_OWNER
+      - PRIMARY_OWNER
+      - POWER_OF_ATTY
+      - SOLE_PROPRIETOR
+      - TRADING_AUTHORITY
+      - TREASURER
+      - TRUSTEE
+      - TRUSTED_CONTACT
       type: string
     AccountRequest:
       properties:
@@ -653,212 +551,35 @@ components:
       - clientAccountId
       - owners
       type: object
-    RiskTolerance:
-      description: Customer's accepted level of investment risk
-      enum:
-      - LOW
-      - MEDIUM
-      - HIGH
-      type: string
-    USDRange:
-      enum:
-      - UNDER_25K
-      - FROM_25K_TO_50K
-      - FROM_50K_TO_100K
-      - FROM_100K_TO_200K
-      - FROM_200K_TO_300K
-      - FROM_300K_TO_500K
-      - FROM_500K_TO_1M
-      - FROM_1M_TO_5M
-      - OVER_5M
-      type: string
-    KycTransferRecoveryRequest:
+    Error:
       properties:
-        shareToken:
-          description: The shared token
-          type: string
-          x-order: 0
-      required:
-      - shareToken
-      type: object
-    PartyRelationType:
-      enum:
-      - AUTHORIZED_AGENT
-      - AUTHORIZED_MEMBER
-      - AUTHORIZED_OWNER
-      - BENEFICIAL_OWNER
-      - BENEFICIARY
-      - CUSTODIAN
-      - EDUCATION_BENEFICIARY
-      - EDUCATION_MANAGER
-      - EXECUTOR
-      - GUARDIAN_CONSERVATOR
-      - INTERNAL_POWER_OF_ATTY
-      - INITIAL_DEPOSITOR
-      - JOINT_OWNER
-      - MINOR_OWNER
-      - PRIMARY_OWNER
-      - POWER_OF_ATTY
-      - SOLE_PROPRIETOR
-      - TRADING_AUTHORITY
-      - TREASURER
-      - TRUSTEE
-      - TRUSTED_CONTACT
-      type: string
-    Employment:
-      properties:
-        employerAddress:
-          $ref: '#/components/schemas/Address'
-        employerName:
-          description: Name of customer's employer
-          type: string
-          x-order: 0
-        position:
-          description: Customer's employment position
-          type: string
-          x-order: 1
-        yearsEmployed:
-          description: Number of years customer employed with employer listed
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
           type: integer
-          x-order: 2
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
       required:
-      - employerName
-      - position
-      type: object
-    SettlementMethod:
-      description: Settlement Method tied to Account
-      enum:
-      - NET_SETTLEMENT
-      - NO_SETTLEMENT
-      - BAKKT_TPJ
-      - APEX_TPJ
-      type: string
-    TrustedContact:
-      properties:
-        emailAddress:
-          description: The trusted contact's email address
-          format: email
-          type: string
-          x-order: 4
-        familyName:
-          description: The trusted contact's family (typically last) name
-          type: string
-          x-order: 2
-        givenName:
-          description: The trusted contact's given (typically first) name
-          type: string
-          x-order: 0
-        mailingAddress:
-          $ref: '#/components/schemas/Address'
-        middleNames:
-          description: The trusted contact's middle name(s). Space or comma separated.
-          type: string
-          x-order: 1
-        phoneNumber:
-          description: The trusted contact's phone number
-          type: string
-          x-order: 3
-      required:
-      - givenName
-      - familyName
-      type: object
-    MaritalStatus:
-      description: Customer's marital status
-      enum:
-      - SINGLE
-      - MARRIED
-      - DIVORCED
-      - WIDOWED
-      type: string
-    InvestmentExperience:
-      description: Customer's level of investment experience prior to account creation
-      enum:
-      - NONE
-      - LIMITED
-      - GOOD
-      - EXTENSIVE
-      type: string
-    Address:
-      properties:
-        city:
-          description: City of residence
-          type: string
-          x-order: 0
-        country:
-          description: Country of residence (ISO code)
-          type: string
-          x-order: 3
-        postalCode:
-          description: Postal code / zip code (required when country is USA)
-          type: string
-          x-order: 2
-        state:
-          description: State of residence (two-letter state abbreviation). If outside of the United States please provide the province/territory in this field (no character limitation).
-          type: string
-          x-order: 1
-        streetAddress:
-          description: Street address for primary residence (for employer, street address for place of employment)
-          items:
-            type: string
-          type: array
-          x-order: 4
-      required:
-      - city
-      - country
-      - streetAddress
+      - code
+      - message
       type: object
     RegistrationIndividual:
       type: object
-    Identity:
-      properties:
-        citizenshipCountry:
-          description: DEPRECATED
-          type: string
-          x-order: 7
-        dateOfBirth:
-          description: Customer's date of birth
-          format: date
-          type: string
-          x-order: 3
-        disclosures:
-          $ref: '#/components/schemas/Disclosures'
-        employment:
-          $ref: '#/components/schemas/Employment'
-        familyName:
-          description: Customer's family (typically last) name
-          type: string
-          x-order: 2
-        givenName:
-          description: Customer's given (typically first) name
-          type: string
-          x-order: 0
-        maritalStatus:
-          $ref: '#/components/schemas/MaritalStatus'
-        middleNames:
-          description: Customer's middle name(s). Space or comma separated.
-          type: string
-          x-order: 1
-        personalAddress:
-          $ref: '#/components/schemas/Address'
-        taxId:
-          description: Owner's tax ID (SSN/EIN/ITIN)
-          type: string
-          x-order: 4
-        taxIdCountry:
-          default: USA
-          description: Issuing country of the national identification code
-          type: string
-          x-order: 6
-        taxIdType:
-          $ref: '#/components/schemas/TaxIdType'
-        verificationResults:
-          $ref: '#/components/schemas/VerificationResults'
-      required:
-      - dateOfBirth
-      - familyName
-      - givenName
-      - personalAddress
-      type: object
+    LiquidityNeeds:
+      description: Importance of liquidity for the customer
+      enum:
+      - VERY_IMPORTANT
+      - SOMEWHAT_IMPORTANT
+      - NOT_IMPORTANT
+      type: string
+    TimeHorizon:
+      description: Investment time horizon
+      enum:
+      - SHORT
+      - AVERAGE
+      - LONG
+      type: string
     Entity:
       description: Entity details
       properties:
@@ -1309,21 +1030,300 @@ components:
       - operatingIndustry
       - registeredAddress
       type: object
-    ValidationError:
+    AccountSettlementResponse:
       properties:
-        code:
-          description: This is an open API-styled validation error code. These fields are provided so that client systems can present customized, localized messages in response to validation error types such as a required field.
-          format: int32
-          type: integer
-        field:
-          description: This is a field that failed validation in the input object as identified by an Open API Path.
+        request:
+          $ref: '#/components/schemas/AccountSettlementRequest'
+        status:
+          description: status tied to account settlement update
+          enum:
+          - COMPLETE
+          - FAILED
           type: string
-        message:
-          description: This is an open API-styled message that summarizes the validation failed. This may include Open API Dot notation, so it should be formatted before being presented to an end user. Clients should consider implementing their own custom messages driven off the code field.
-          type: string
-        rejectedValue:
-          type: string
+          x-order: 1
       required:
-      - code
-      - message
+      - request
+      - status
+      type: object
+    USDRange:
+      enum:
+      - UNDER_25K
+      - FROM_25K_TO_50K
+      - FROM_50K_TO_100K
+      - FROM_100K_TO_200K
+      - FROM_200K_TO_300K
+      - FROM_300K_TO_500K
+      - FROM_500K_TO_1M
+      - FROM_1M_TO_5M
+      - OVER_5M
+      type: string
+    InvestmentProfile:
+      properties:
+        accountGoals:
+          $ref: '#/components/schemas/AccountGoals'
+        customerProfile:
+          $ref: '#/components/schemas/CustomerProfile'
+      required:
+      - accountGoals
+      - customerProfile
+      type: object
+    AccountSettlementRequest:
+      properties:
+        accountId:
+          description: client-specified unique identifier for the account
+          type: string
+          x-order: 0
+        settlementMethod:
+          description: Settlement Method tied to Account
+          enum:
+          - NET_SETTLEMENT
+          - BAKKT_TPJ
+          type: string
+          x-order: 1
+      required:
+      - accountId
+      - settlementMethod
+      type: object
+    Identity:
+      properties:
+        citizenshipCountry:
+          description: DEPRECATED
+          type: string
+          x-order: 7
+        dateOfBirth:
+          description: Customer's date of birth
+          format: date
+          type: string
+          x-order: 3
+        disclosures:
+          $ref: '#/components/schemas/Disclosures'
+        employment:
+          $ref: '#/components/schemas/Employment'
+        familyName:
+          description: Customer's family (typically last) name
+          type: string
+          x-order: 2
+        givenName:
+          description: Customer's given (typically first) name
+          type: string
+          x-order: 0
+        maritalStatus:
+          $ref: '#/components/schemas/MaritalStatus'
+        middleNames:
+          description: Customer's middle name(s). Space or comma separated.
+          type: string
+          x-order: 1
+        personalAddress:
+          $ref: '#/components/schemas/Address'
+        taxId:
+          description: Owner's tax ID (SSN/EIN/ITIN)
+          type: string
+          x-order: 4
+        taxIdCountry:
+          default: USA
+          description: Issuing country of the national identification code
+          type: string
+          x-order: 6
+        taxIdType:
+          $ref: '#/components/schemas/TaxIdType'
+        verificationResults:
+          $ref: '#/components/schemas/VerificationResults'
+      required:
+      - dateOfBirth
+      - familyName
+      - givenName
+      - personalAddress
+      type: object
+    Agreement:
+      properties:
+        eSignedDate:
+          description: Date of electronic signature of the agreement
+          format: date-time
+          type: string
+          x-order: 3
+        name:
+          description: Name of the agreement document
+          type: string
+          x-order: 0
+        text:
+          description: Text containing the body of the agreement document
+          type: string
+          x-order: 2
+        version:
+          description: Agreement document version
+          type: string
+          x-order: 1
+      required:
+      - name
+      - version
+      type: object
+    VerificationResults:
+      properties:
+        addressVerified:
+          description: Indicates if the customer's address has been verified
+          type: boolean
+          x-order: 5
+        dateOfBirthVerified:
+          description: Indicates if the customer's DOB has been verified
+          type: boolean
+          x-order: 7
+        executionDate:
+          description: The date the KYC was performed
+          format: date
+          type: string
+          x-order: 3
+        externalCaseId:
+          description: Client-generated unique identifier associated with the KYC results for the appropriate case
+          type: string
+          x-order: 2
+        identityVerificationResultId:
+          type: string
+          x-order: 0
+        manualOverride:
+          description: Indicates account failed vendor verification but has been manually reviewed and approved
+          type: boolean
+          x-order: 8
+        manualOverrideApprover:
+          description: Individual who approved the override
+          type: string
+          x-order: 10
+        manualOverrideReason:
+          description: Reason for account approval override
+          type: string
+          x-order: 9
+        nameVerified:
+          description: Indicates if the customer's name has been verified
+          type: boolean
+          x-order: 4
+        taxIdVerified:
+          description: Indicates if the customer's taxId has been verified
+          type: boolean
+          x-order: 6
+        vendorName:
+          description: If client is providing KYC information, this section will be filled out with the relevant details. Note that individual client implementations will vary.
+          type: string
+          x-order: 1
+      required:
+      - addressVerified
+      - dateOfBirthVerified
+      - executionDate
+      - externalCaseId
+      - nameVerified
+      - taxIdVerified
+      - vendorName
+      type: object
+    Address:
+      properties:
+        city:
+          description: City of residence
+          type: string
+          x-order: 0
+        country:
+          description: Country of residence (ISO code)
+          type: string
+          x-order: 3
+        postalCode:
+          description: Postal code / zip code (required when country is USA)
+          type: string
+          x-order: 2
+        state:
+          description: State of residence (two-letter state abbreviation). If outside of the United States please provide the province/territory in this field (no character limitation).
+          type: string
+          x-order: 1
+        streetAddress:
+          description: Street address for primary residence (for employer, street address for place of employment)
+          items:
+            type: string
+          type: array
+          x-order: 4
+      required:
+      - city
+      - country
+      - streetAddress
+      type: object
+    TrustedContact:
+      properties:
+        emailAddress:
+          description: The trusted contact's email address
+          format: email
+          type: string
+          x-order: 4
+        familyName:
+          description: The trusted contact's family (typically last) name
+          type: string
+          x-order: 2
+        givenName:
+          description: The trusted contact's given (typically first) name
+          type: string
+          x-order: 0
+        mailingAddress:
+          $ref: '#/components/schemas/Address'
+        middleNames:
+          description: The trusted contact's middle name(s). Space or comma separated.
+          type: string
+          x-order: 1
+        phoneNumber:
+          description: The trusted contact's phone number
+          type: string
+          x-order: 3
+      required:
+      - givenName
+      - familyName
+      type: object
+    InvestmentExperience:
+      description: Customer's level of investment experience prior to account creation
+      enum:
+      - NONE
+      - LIMITED
+      - GOOD
+      - EXTENSIVE
+      type: string
+    KycTransferRecoveryRequest:
+      properties:
+        shareToken:
+          description: The shared token
+          type: string
+          x-order: 0
+      required:
+      - shareToken
+      type: object
+    Account:
+      properties:
+        cipClearanceState:
+          $ref: '#/components/schemas/CIPClearanceState'
+        createdAt:
+          description: The time the account was created
+          format: date-time
+          type: string
+          x-order: 3
+        id:
+          description: Bakkt unique internal account identifier
+          type: string
+          x-order: 0
+        mode:
+          description: The mode that the account is in
+          enum:
+          - OPEN
+          - CLOSED
+          - LOCKED
+          - CLOSING_ONLY
+          type: string
+          x-order: 6
+        pendingUpdateIds:
+          description: The ID of any pending updates requested for the account
+          items:
+            format: uuid
+            type: string
+          type: array
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/AccountRequest'
+        status:
+          $ref: '#/components/schemas/RequestStatus'
+      required:
+      - id
+      - request
+      - createdAt
+      - status
+      - mode
       type: object

@@ -130,57 +130,6 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
-    AccountUnLinkingResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-    CreateBankAccountResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-    PlaidAccountLinkingRequest:
-      required:
-      - processorToken
-      - partnerTransactionRef
-      type: object
-      properties:
-        processorToken:
-          type: string
-        partnerTransactionRef:
-          type: string
-    AccountLinkResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-    AccountUnLinkingRequest:
-      type: object
-      properties:
-        instrumentType:
-          type: string
-          enum:
-          - ACH
-          - DEBIT
-    PublicApiError:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Message from the exception
-          example: Parameter passed for field is not meeting its required format.
-        detail:
-          type: string
-          description: Description of the type
-          example: validation error
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicApiErrorDetail'
-        type:
-          type: string
-          example: INVALID_FIELD_VALUE
     CreateBankAccountRequest:
       required:
       - accountNumber
@@ -200,6 +149,52 @@ components:
           type: string
         routingNumber:
           type: string
+    AccountLinkResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    PublicApiError:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Message from the exception
+          example: Parameter passed for field is not meeting its required format.
+        detail:
+          type: string
+          description: Description of the type
+          example: validation error
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicApiErrorDetail'
+        type:
+          type: string
+          example: INVALID_FIELD_VALUE
+    CreateBankAccountResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    AccountUnLinkingRequest:
+      type: object
+      properties:
+        instrumentType:
+          type: string
+          enum:
+          - ACH
+          - DEBIT
+    PlaidAccountLinkingRequest:
+      required:
+      - processorToken
+      - partnerTransactionRef
+      type: object
+      properties:
+        processorToken:
+          type: string
+        partnerTransactionRef:
+          type: string
     PublicApiErrorDetail:
       type: object
       properties:
@@ -216,3 +211,8 @@ components:
         type:
           type: string
           example: VALIDATION_ERROR
+    AccountUnLinkingResponse:
+      type: object
+      properties:
+        success:
+          type: boolean

@@ -49,6 +49,16 @@ paths:
       - Authorization
 components:
   schemas:
+    LoginResponse:
+      description: The response containing security token credentials to use for subsequent calls
+      properties:
+        token:
+          description: A security token that represents a logged in client system
+          example: 7FEXAMPLE8lorem890EXamPLEASDdolorReXAMPLEv
+          type: string
+      required:
+      - token
+      type: object
     LoginRequest:
       properties:
         logonId:
@@ -74,14 +84,4 @@ components:
       required:
       - code
       - message
-      type: object
-    LoginResponse:
-      description: The response containing security token credentials to use for subsequent calls
-      properties:
-        token:
-          description: A security token that represents a logged in client system
-          example: 7FEXAMPLE8lorem890EXamPLEASDdolorReXAMPLEv
-          type: string
-      required:
-      - token
       type: object

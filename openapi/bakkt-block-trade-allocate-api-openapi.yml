@@ -189,34 +189,52 @@ paths:
       - Block Trade & Allocate
 components:
   schemas:
-    BatchAllocationCloseRequest:
-      description: Request to close off allocations of a particular batch
+    BatchTradeAllocation:
+      description: Summary of details pertaining to an allocation request
       properties:
-        allocations:
-          description: Number of requested allocations within the batch
-          type: integer
-          x-order: 1
-        batchTransactionId:
-          description: Client-specified unique identifier for a set of allocations belonging to the same batch
-          format: uuid
+        createdAt:
+          description: Date at which the allocation batch was submitted
+          format: date-time
           type: string
           x-order: 0
-      required:
-      - batchTransactionId
-      - allocations
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
+        feeApplied:
+          description: USD value of the fee applied to the allocation
+          format: decimal
           type: string
+          x-order: 5
+        id:
+          description: Bakkt unique identifier for the allocation
+          format: uuid
+          type: string
+          x-order: 1
+        netMoney:
+          description: Notional value of the allocation, inclusive of any fees applied
+          format: decimal
+          type: string
+          x-order: 2
+        price:
+          description: Price of the order at time of allocation
+          format: decimal
+          type: string
+          x-order: 3
+        quantity:
+          description: Order size in number of product units
+          format: decimal
+          type: string
+          x-order: 4
+        rejectReason:
+          description: The reason the allocation was rejected
+          type: string
+          x-order: 7
+        request:
+          $ref: '#/components/schemas/BatchTradeAllocationRequest'
+        status:
+          $ref: '#/components/schemas/AllocationStatus'
       required:
-      - code
-      - message
-      type: object
+      - createdAt
+      - id
+      - request
+      - status
     AllocationStatus:
       description: Status of allocation
       enum:
@@ -249,15 +267,6 @@ components:
       - batchTransactionId
       - symbol
       - type
-    BatchAllocationStatus:
-      description: Status of allocation
-      enum:
-      - OPEN
-      - CLOSED
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      type: string
     BatchAllocation:
       description: Details of a particular allocation batch containing one or many allocation requests
       properties:
@@ -342,49 +351,40 @@ components:
       - clientTransactionId
       - side
       - symbol
-    BatchTradeAllocation:
-      description: Summary of details pertaining to an allocation request
+    BatchAllocationCloseRequest:
+      description: Request to close off allocations of a particular batch
       properties:
-        createdAt:
-          description: Date at which the allocation batch was submitted
-          format: date-time
-          type: string
-          x-order: 0
-        feeApplied:
-          description: USD value of the fee applied to the allocation
-          format: decimal
-          type: string
-          x-order: 5
-        id:
-          description: Bakkt unique identifier for the allocation
+        allocations:
+          description: Number of requested allocations within the batch
+          type: integer
+          x-order: 1
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of allocations belonging to the same batch
           format: uuid
           type: string
-          x-order: 1
-        netMoney:
-          description: Notional value of the allocation, inclusive of any fees applied
-          format: decimal
-          type: string
-          x-order: 2
-        price:
-          description: Price of the order at time of allocation
-          format: decimal
-          type: string
-          x-order: 3
-        quantity:
-          description: Order size in number of product units
-          format: decimal
-          type: string
-          x-order: 4
-        rejectReason:
-          description: The reason the allocation was rejected
-          type: string
-          x-order: 7
-        request:
-          $ref: '#/components/schemas/BatchTradeAllocationRequest'
-        status:
-          $ref: '#/components/schemas/AllocationStatus'
+          x-order: 0
       required:
-      - createdAt
-      - id
-      - request
-      - status
+      - batchTransactionId
+      - allocations
+    BatchAllocationStatus:
+      description: Status of allocation
+      enum:
+      - OPEN
+      - CLOSED
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      type: string
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object

@@ -44,6 +44,12 @@ paths:
       - Instruments
 components:
   schemas:
+    InstrumentResponse:
+      properties:
+        instruments:
+          items:
+            $ref: '#/components/schemas/Instrument'
+          type: array
     Error:
       properties:
         code:
@@ -73,9 +79,3 @@ components:
       - minimumPriceIncrement
       - minimumQuantityIncrement
       - symbol
-    InstrumentResponse:
-      properties:
-        instruments:
-          items:
-            $ref: '#/components/schemas/Instrument'
-          type: array

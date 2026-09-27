@@ -61,12 +61,6 @@ components:
         transferable:
           description: Current amount available for withdrawal
           type: string
-    PositionResponse:
-      properties:
-        positions:
-          items:
-            $ref: '#/components/schemas/Position'
-          type: array
     Error:
       properties:
         code:
@@ -80,3 +74,9 @@ components:
       - code
       - message
       type: object
+    PositionResponse:
+      properties:
+        positions:
+          items:
+            $ref: '#/components/schemas/Position'
+          type: array

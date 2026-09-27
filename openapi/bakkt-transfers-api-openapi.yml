@@ -219,43 +219,18 @@ paths:
       - Transfers
 components:
   schemas:
-    WithdrawalEstimatedFeeRequest:
+    Error:
       properties:
-        currency:
-          description: Crypto coin that the client would like to estimate the cost for transferring
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
           type: string
-          x-order: 0
-        network:
-          $ref: '#/components/schemas/Network'
-        quantity:
-          description: Amount of coin that the client would like to estimate the cost for transferring
-          type: string
-          x-order: 1
-        receivingWallet:
-          description: Address of the wallet intended to receive the coin. This is only required for withdrawals with a notional value greater than or equal to 3000.
-          type: string
-          x-order: 2
       required:
-      - currency
-      - quantity
-      type: object
-    DepositReceiveAddressResponse:
-      properties:
-        network:
-          $ref: '#/components/schemas/Network'
-        receiveAddress:
-          description: A receive address to use to deposit coin
-          type: string
-          x-order: 0
-        request:
-          $ref: '#/components/schemas/DepositReceiveAddressRequest'
-        tag:
-          description: Tag tied to Tag based Assets
-          type: string
-          x-order: 3
-      required:
-      - receiveAddress
-      - request
+      - code
+      - message
       type: object
     WithdrawRequest:
       properties:
@@ -332,6 +307,33 @@ components:
       - receivingWallet
       - feeEstimateId
       type: object
+    WithdrawalStatus:
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      - ACCEPTED
+      type: string
+    DepositReceiveAddressResponse:
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        receiveAddress:
+          description: A receive address to use to deposit coin
+          type: string
+          x-order: 0
+        request:
+          $ref: '#/components/schemas/DepositReceiveAddressRequest'
+        tag:
+          description: Tag tied to Tag based Assets
+          type: string
+          x-order: 3
+      required:
+      - receiveAddress
+      - request
+      type: object
     VerifyWalletAddressRequest:
       properties:
         address:
@@ -347,44 +349,59 @@ components:
       required:
       - address
       type: object
-    Error:
+    WithdrawalEstimatedFeeRequest:
       properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
+        currency:
+          description: Crypto coin that the client would like to estimate the cost for transferring
           type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+        quantity:
+          description: Amount of coin that the client would like to estimate the cost for transferring
+          type: string
+          x-order: 1
+        receivingWallet:
+          description: Address of the wallet intended to receive the coin. This is only required for withdrawals with a notional value greater than or equal to 3000.
+          type: string
+          x-order: 2
       required:
-      - code
-      - message
+      - currency
+      - quantity
       type: object
-    Network:
-      enum:
-      - Algorand
-      - Arbitrum
-      - Avalanche
-      - Berachain
-      - Binance_Smart_Chain
-      - Bitcoin
-      - Bitcoin_Cash
-      - Cardano
-      - Celestia
-      - Cosmos
-      - Dogecoin
-      - Ethereum
-      - Ethereum_Classic
-      - Litecoin
-      - Optimism
-      - Polkadot
-      - Polygon
-      - Ripple
-      - Solana
-      - Sonic
-      - Stellar
-      - Tron
-      type: string
+    DepositReceiveAddressRequest:
+      properties:
+        account:
+          description: Bakkt client account identifier
+          example: ABC12345
+          type: string
+          x-order: 1
+        currency:
+          description: Crypto coin that you would like to deposit
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+      required:
+      - currency
+      - account
+      type: object
+    VerifyWalletAddressResponse:
+      properties:
+        isValid:
+          description: Boolean indicating the wallet address is valid or not
+          type: boolean
+          x-order: 0
+        request:
+          $ref: '#/components/schemas/VerifyWalletAddressRequest'
+        requiredTag:
+          description: Tag must be specified when sending a withdrawal. Only applicable for Tag/Memo based blockchains.
+          type: boolean
+          x-order: 1
+      required:
+      - isValid
+      - requiredTag
+      type: object
     WithdrawalEstimatedFeeResponse:
       properties:
         estimatedAt:
@@ -430,57 +447,6 @@ components:
       - usdRate
       - expiresAt
       type: object
-    VerifyWalletAddressResponse:
-      properties:
-        isValid:
-          description: Boolean indicating the wallet address is valid or not
-          type: boolean
-          x-order: 0
-        request:
-          $ref: '#/components/schemas/VerifyWalletAddressRequest'
-        requiredTag:
-          description: Tag must be specified when sending a withdrawal. Only applicable for Tag/Memo based blockchains.
-          type: boolean
-          x-order: 1
-      required:
-      - isValid
-      - requiredTag
-      type: object
-    DepositReceiveAddressRequest:
-      properties:
-        account:
-          description: Bakkt client account identifier
-          example: ABC12345
-          type: string
-          x-order: 1
-        currency:
-          description: Crypto coin that you would like to deposit
-          type: string
-          x-order: 0
-        network:
-          $ref: '#/components/schemas/Network'
-      required:
-      - currency
-      - account
-      type: object
-    VaspLookupResponse:
-      properties:
-        vaspName:
-          description: The name of the vasp associated with the provided wallet address
-          type: string
-          x-order: 0
-      required:
-      - vaspName
-      type: object
-    WithdrawalStatus:
-      enum:
-      - PENDING
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      - CANCELLED
-      - ACCEPTED
-      type: string
     Withdrawal:
       properties:
         blockchainHash:
@@ -528,3 +494,37 @@ components:
       - createdAt
       - request
       type: object
+    VaspLookupResponse:
+      properties:
+        vaspName:
+          description: The name of the vasp associated with the provided wallet address
+          type: string
+          x-order: 0
+      required:
+      - vaspName
+      type: object
+    Network:
+      enum:
+      - Algorand
+      - Arbitrum
+      - Avalanche
+      - Berachain
+      - Binance_Smart_Chain
+      - Bitcoin
+      - Bitcoin_Cash
+      - Cardano
+      - Celestia
+      - Cosmos
+      - Dogecoin
+      - Ethereum
+      - Ethereum_Classic
+      - Litecoin
+      - Optimism
+      - Polkadot
+      - Polygon
+      - Ripple
+      - Solana
+      - Sonic
+      - Stellar
+      - Tron
+      type: string

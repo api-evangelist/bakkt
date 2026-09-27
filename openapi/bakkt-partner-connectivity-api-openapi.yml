@@ -72,19 +72,6 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
-    HeartBeatResponse:
-      required:
-      - result
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: Unique key used by check Bakkt connectivity, copy from request requestId
-          example: 123e4567-e89b-12d3-a456-426614174000
-        result:
-          type: string
-          description: Phrase attesting bakkt created the ping response
-          example: 'PONG: heartbeat received'
     PartnerTokenResponse:
       type: object
       properties:
@@ -100,13 +87,6 @@ components:
           type: string
           description: The token type that was generated
           example: Bearer
-    HeartBeatRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: Unique key used by check Bakkt connectivity
-          example: 123e4567-e89b-12d3-a456-426614174000
     PublicApiError:
       type: object
       properties:
@@ -125,6 +105,13 @@ components:
         type:
           type: string
           example: INVALID_FIELD_VALUE
+    HeartBeatRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique key used by check Bakkt connectivity
+          example: 123e4567-e89b-12d3-a456-426614174000
     PublicApiErrorDetail:
       type: object
       properties:
@@ -141,3 +128,16 @@ components:
         type:
           type: string
           example: VALIDATION_ERROR
+    HeartBeatResponse:
+      required:
+      - result
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique key used by check Bakkt connectivity, copy from request requestId
+          example: 123e4567-e89b-12d3-a456-426614174000
+        result:
+          type: string
+          description: Phrase attesting bakkt created the ping response
+          example: 'PONG: heartbeat received'

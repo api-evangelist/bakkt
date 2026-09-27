@@ -67,17 +67,6 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
-    KycDocumentVerificationDetails:
-      type: object
-      properties:
-        verificationURL:
-          type: string
-          description: The url to be used for document verification
-          example: https://www.example-docv-url.com
-        verificationURLExpiry:
-          type: string
-          description: The time at which the verification URL will expire
-          example: '2024-05-04T12:00:00.000Z'
     PublicApiErrorDetail:
       type: object
       properties:
@@ -94,6 +83,17 @@ components:
         type:
           type: string
           example: VALIDATION_ERROR
+    KycDocumentVerificationDetails:
+      type: object
+      properties:
+        verificationURL:
+          type: string
+          description: The url to be used for document verification
+          example: https://www.example-docv-url.com
+        verificationURLExpiry:
+          type: string
+          description: The time at which the verification URL will expire
+          example: '2024-05-04T12:00:00.000Z'
     PublicApiError:
       type: object
       properties:

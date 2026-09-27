@@ -82,6 +82,25 @@ paths:
       - Jurisdictions
 components:
   schemas:
+    JurisdictionAllResponse:
+      properties:
+        jurisdictions:
+          items:
+            $ref: '#/components/schemas/JurisdictionAll'
+          type: array
+          x-order: 0
+    SecurityStatus:
+      properties:
+        currency:
+          type: string
+        status:
+          enum:
+          - OPEN
+          - CLOSE
+          - PROHIBITED
+          type: string
+        tradingPair:
+          type: string
     JurisdictionResponse:
       properties:
         jurisdictions:
@@ -89,26 +108,6 @@ components:
             $ref: '#/components/schemas/JurisdictionStatus'
           type: array
           x-order: 0
-    JurisdictionDomain:
-      properties:
-        orders:
-          description: A list of currency-specific overrides to the jurisdiction status
-          items:
-            $ref: '#/components/schemas/SecurityStatus'
-          type: array
-          x-order: 0
-        staking:
-          description: A list of currency-specific overrides to the jurisdiction status
-          items:
-            $ref: '#/components/schemas/SecurityStatus'
-          type: array
-          x-order: 1
-        transfers:
-          description: A list of currency-specific overrides to the jurisdiction status
-          items:
-            $ref: '#/components/schemas/SecurityStatus'
-          type: array
-          x-order: 2
     JurisdictionStatus:
       properties:
         countryCode:
@@ -133,6 +132,26 @@ components:
           - CLOSE
           - PROHIBITED
           type: string
+          x-order: 2
+    JurisdictionDomain:
+      properties:
+        orders:
+          description: A list of currency-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 0
+        staking:
+          description: A list of currency-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
+          x-order: 1
+        transfers:
+          description: A list of currency-specific overrides to the jurisdiction status
+          items:
+            $ref: '#/components/schemas/SecurityStatus'
+          type: array
           x-order: 2
     JurisdictionAll:
       properties:
@@ -159,22 +178,3 @@ components:
       - code
       - message
       type: object
-    JurisdictionAllResponse:
-      properties:
-        jurisdictions:
-          items:
-            $ref: '#/components/schemas/JurisdictionAll'
-          type: array
-          x-order: 0
-    SecurityStatus:
-      properties:
-        currency:
-          type: string
-        status:
-          enum:
-          - OPEN
-          - CLOSE
-          - PROHIBITED
-          type: string
-        tradingPair:
-          type: string
