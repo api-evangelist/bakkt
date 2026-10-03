@@ -189,6 +189,30 @@ paths:
       - Currency Onboarding
 components:
   schemas:
+    AllocationStatus:
+      description: Status of allocation
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      type: string
+    BatchCurrencyAllocationCloseRequest:
+      description: Request to close off currency allocations of a particular batch
+      properties:
+        allocations:
+          description: Number of requested currency allocations within the batch
+          type: integer
+          x-order: 1
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of currency allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+      required:
+      - batchTransactionId
+      - allocations
     CurrencyAllocation:
       description: Summary of details pertaining to a currency allocation request
       properties:
@@ -211,6 +235,50 @@ components:
         status:
           $ref: '#/components/schemas/AllocationStatus'
       required:
+      - createdAt
+      - id
+      - request
+      - status
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    BatchCurrencyAllocation:
+      description: Details of a particular currency allocation batch containing one or many allocation requests
+      properties:
+        allocations:
+          description: Number of requested currency allocations within the batch
+          type: integer
+          x-order: 0
+        createdAt:
+          description: Date and time at which the currency allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt internal id
+          format: uuid
+          type: string
+          x-order: 2
+        rejectReason:
+          description: The reason the currency allocation was rejected
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/BatchCurrencyAllocationOpenRequest'
+        status:
+          $ref: '#/components/schemas/BatchAllocationStatus'
+      required:
+      - allocations
       - createdAt
       - id
       - request
@@ -255,70 +323,6 @@ components:
       - clientTransactionId
       - direction
       - currency
-    BatchCurrencyAllocation:
-      description: Details of a particular currency allocation batch containing one or many allocation requests
-      properties:
-        allocations:
-          description: Number of requested currency allocations within the batch
-          type: integer
-          x-order: 0
-        createdAt:
-          description: Date and time at which the currency allocation batch was submitted
-          format: date-time
-          type: string
-          x-order: 1
-        id:
-          description: Bakkt internal id
-          format: uuid
-          type: string
-          x-order: 2
-        rejectReason:
-          description: The reason the currency allocation was rejected
-          type: string
-          x-order: 5
-        request:
-          $ref: '#/components/schemas/BatchCurrencyAllocationOpenRequest'
-        status:
-          $ref: '#/components/schemas/BatchAllocationStatus'
-      required:
-      - allocations
-      - createdAt
-      - id
-      - request
-      - status
-    AllocationStatus:
-      description: Status of allocation
-      enum:
-      - PENDING
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      - CANCELLED
-      type: string
-    BatchCurrencyAllocationCloseRequest:
-      description: Request to close off currency allocations of a particular batch
-      properties:
-        allocations:
-          description: Number of requested currency allocations within the batch
-          type: integer
-          x-order: 1
-        batchTransactionId:
-          description: Client-specified unique identifier for a set of currency allocations belonging to the same batch
-          format: uuid
-          type: string
-          x-order: 0
-      required:
-      - batchTransactionId
-      - allocations
-    BatchAllocationStatus:
-      description: Status of allocation
-      enum:
-      - OPEN
-      - CLOSED
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      type: string
     BatchCurrencyAllocationOpenRequest:
       description: Request to open a currency allocation batch
       properties:
@@ -339,16 +343,12 @@ components:
       - batchTransactionId
       - currency
       - transactionHash
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
-          type: string
-      required:
-      - code
-      - message
-      type: object
+    BatchAllocationStatus:
+      description: Status of allocation
+      enum:
+      - OPEN
+      - CLOSED
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      type: string

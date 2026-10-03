@@ -222,6 +222,35 @@ components:
       - account
       - side
       type: object
+    OrderStatus:
+      enum:
+      - IN_PROGRESS
+      - COMPLETE
+      type: string
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    CancelResponse:
+      properties:
+        receivedAt:
+          description: The time the request to cancel the order was received
+          format: date-time
+          type: string
+        request:
+          $ref: '#/components/schemas/CancelRequest'
+      required:
+      - request
+      type: object
     Execution:
       description: An execution captures the results of an attempt to fill an order. There may be zero or more execution reports associated with an order to track its attempts to purchase or sell a crypto asset.
       properties:
@@ -262,31 +291,6 @@ components:
       - price
       - netMoney
       - executedAt
-      type: object
-    OrderStatus:
-      enum:
-      - IN_PROGRESS
-      - COMPLETE
-      type: string
-    TimeInForce:
-      description: '<br/>`IOC` - Fill immediately and cancel any amount that can''t be filled <br/>`DAY` - Fill order until the end of the current trading day <br/>`GTC` - Fill order until canceled or after 90 days <br/>`GTD` - Fill order until the good-till date
-
-        '
-      enum:
-      - IOC
-      - DAY
-      - GTC
-      - GTD
-      type: string
-    CancelRequest:
-      description: A request to stop attempting to serve an order; a `clientOrderId` is identified alongside this request object in order to target a specific order to cancel
-      properties:
-        id:
-          description: An ID that uniquely identifies a request to cancel
-          format: uuid
-          type: string
-      required:
-      - id
       type: object
     OrderType:
       description: '<br/>`MARKET` - Fill the order using current MARKET price <br/>`LIMIT` - Fill the order matching the price constraints provided
@@ -340,16 +344,25 @@ components:
       - id
       - request
       type: object
-    CancelResponse:
+    TimeInForce:
+      description: '<br/>`IOC` - Fill immediately and cancel any amount that can''t be filled <br/>`DAY` - Fill order until the end of the current trading day <br/>`GTC` - Fill order until canceled or after 90 days <br/>`GTD` - Fill order until the good-till date
+
+        '
+      enum:
+      - IOC
+      - DAY
+      - GTC
+      - GTD
+      type: string
+    CancelRequest:
+      description: A request to stop attempting to serve an order; a `clientOrderId` is identified alongside this request object in order to target a specific order to cancel
       properties:
-        receivedAt:
-          description: The time the request to cancel the order was received
-          format: date-time
+        id:
+          description: An ID that uniquely identifies a request to cancel
+          format: uuid
           type: string
-        request:
-          $ref: '#/components/schemas/CancelRequest'
       required:
-      - request
+      - id
       type: object
     Side:
       description: '<br/>`BUY` - Buy crypto assets <br/>`SELL` - Sell crypto assets
@@ -359,16 +372,3 @@ components:
       - BUY
       - SELL
       type: string
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
-          type: string
-      required:
-      - code
-      - message
-      type: object

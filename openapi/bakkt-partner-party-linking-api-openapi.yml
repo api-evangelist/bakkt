@@ -130,6 +130,14 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
+    AccountUnLinkingRequest:
+      type: object
+      properties:
+        instrumentType:
+          type: string
+          enum:
+          - ACH
+          - DEBIT
     CreateBankAccountRequest:
       required:
       - accountNumber
@@ -149,7 +157,17 @@ components:
           type: string
         routingNumber:
           type: string
+    CreateBankAccountResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
     AccountLinkResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    AccountUnLinkingResponse:
       type: object
       properties:
         success:
@@ -172,19 +190,6 @@ components:
         type:
           type: string
           example: INVALID_FIELD_VALUE
-    CreateBankAccountResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-    AccountUnLinkingRequest:
-      type: object
-      properties:
-        instrumentType:
-          type: string
-          enum:
-          - ACH
-          - DEBIT
     PlaidAccountLinkingRequest:
       required:
       - processorToken
@@ -211,8 +216,3 @@ components:
         type:
           type: string
           example: VALIDATION_ERROR
-    AccountUnLinkingResponse:
-      type: object
-      properties:
-        success:
-          type: boolean

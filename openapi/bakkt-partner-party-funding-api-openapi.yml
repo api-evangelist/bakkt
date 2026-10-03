@@ -205,75 +205,11 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
-    LinkBankAccountAchRequest:
-      required:
-      - accountNumber
-      - accountType
-      - partnerTransactionRef
-      - routingNumber
-      type: object
-      properties:
-        accountNumber:
-          type: string
-        accountType:
-          type: string
-        partnerTransactionRef:
-          maxLength: 255
-          minLength: 0
-          type: string
-        routingNumber:
-          type: string
     UnlinkBankAccountResponse:
       type: object
       properties:
         success:
           type: boolean
-    PublicApiError:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Message from the exception
-          example: Parameter passed for field is not meeting its required format.
-        detail:
-          type: string
-          description: Description of the type
-          example: validation error
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicApiErrorDetail'
-        type:
-          type: string
-          example: INVALID_FIELD_VALUE
-    WireInstructionsResponse:
-      type: object
-      required:
-      - wireReferenceNumber
-      - wireRoutingNumber
-      - wireAccountNumber
-      - wireSwiftCode
-      - wireBankName
-      - wireBankAddress
-      - wireBeneficiaryName
-      - wireBeneficiaryAddress
-      properties:
-        wireReferenceNumber:
-          type: string
-        wireRoutingNumber:
-          type: string
-        wireAccountNumber:
-          type: string
-        wireSwiftCode:
-          type: string
-        wireBankName:
-          type: string
-        wireBankAddress:
-          type: string
-        wireBeneficiaryName:
-          type: string
-        wireBeneficiaryAddress:
-          type: string
     GetFiatAccountBalanceResponse:
       required:
       - partnerPartyRef
@@ -298,44 +234,6 @@ components:
           type: number
           description: Unsettled Fiat Account balance
           example: 100.01
-    PublicApiErrorDetail:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Human readable error description
-          example: Validation Error.
-        field:
-          type: string
-          example: id
-        rejectedValue:
-          type: object
-          example: i-am-not-a-uuid
-        type:
-          type: string
-          example: VALIDATION_ERROR
-    UnlinkBankAccountRequest:
-      required:
-      - instrumentType
-      - partnerTransactionRef
-      type: object
-      properties:
-        instrumentType:
-          type: string
-          enum:
-          - ACH
-          - DEBIT
-          - TPJ
-          - WIRE
-        partnerTransactionRef:
-          maxLength: 255
-          minLength: 0
-          type: string
-    LinkBankAccountAchResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
     TransferRequest:
       type: object
       required:
@@ -370,6 +268,92 @@ components:
           type: string
         wireWithdrawDetails:
           $ref: '#/components/schemas/WireWithdrawDetails'
+    WireInstructionsResponse:
+      type: object
+      required:
+      - wireReferenceNumber
+      - wireRoutingNumber
+      - wireAccountNumber
+      - wireSwiftCode
+      - wireBankName
+      - wireBankAddress
+      - wireBeneficiaryName
+      - wireBeneficiaryAddress
+      properties:
+        wireReferenceNumber:
+          type: string
+        wireRoutingNumber:
+          type: string
+        wireAccountNumber:
+          type: string
+        wireSwiftCode:
+          type: string
+        wireBankName:
+          type: string
+        wireBankAddress:
+          type: string
+        wireBeneficiaryName:
+          type: string
+        wireBeneficiaryAddress:
+          type: string
+    UnlinkBankAccountRequest:
+      required:
+      - instrumentType
+      - partnerTransactionRef
+      type: object
+      properties:
+        instrumentType:
+          type: string
+          enum:
+          - ACH
+          - DEBIT
+          - TPJ
+          - WIRE
+        partnerTransactionRef:
+          maxLength: 255
+          minLength: 0
+          type: string
+    LinkBankAccountAchResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    LinkBankAccountAchRequest:
+      required:
+      - accountNumber
+      - accountType
+      - partnerTransactionRef
+      - routingNumber
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+        partnerTransactionRef:
+          maxLength: 255
+          minLength: 0
+          type: string
+        routingNumber:
+          type: string
+    PublicApiError:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Message from the exception
+          example: Parameter passed for field is not meeting its required format.
+        detail:
+          type: string
+          description: Description of the type
+          example: validation error
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicApiErrorDetail'
+        type:
+          type: string
+          example: INVALID_FIELD_VALUE
     WireWithdrawDetails:
       type: object
       properties:
@@ -383,3 +367,19 @@ components:
           type: string
         wireSwiftCode:
           type: string
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR

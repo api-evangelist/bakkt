@@ -44,12 +44,6 @@ paths:
       - Instruments
 components:
   schemas:
-    InstrumentResponse:
-      properties:
-        instruments:
-          items:
-            $ref: '#/components/schemas/Instrument'
-          type: array
     Error:
       properties:
         code:
@@ -63,6 +57,12 @@ components:
       - code
       - message
       type: object
+    InstrumentResponse:
+      properties:
+        instruments:
+          items:
+            $ref: '#/components/schemas/Instrument'
+          type: array
     Instrument:
       properties:
         minimumOrderQuantity:

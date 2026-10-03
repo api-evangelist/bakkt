@@ -163,28 +163,52 @@ paths:
       - Documents
 components:
   schemas:
-    DocumentType:
-      description: Document type assigned at upload
+    Document:
+      properties:
+        createdAt:
+          description: The time the document was uploaded to the Bakkt platform
+          format: date-time
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt unique identifer for the document
+          format: uuid
+          type: string
+          x-order: 0
+        request:
+          $ref: '#/components/schemas/DocumentRequest'
+      required:
+      - id
+      - createdAt
+      - request
+      type: object
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    RetrieveAccountDocumentMetadataResponse:
+      properties:
+        documentMetadata:
+          items:
+            $ref: '#/components/schemas/DocumentMetadata'
+          type: array
+          x-order: 0
+      type: object
+    DocumentSide:
+      description: Side of the document that is being submitted. Note that this field is required for entity account documents, including owner specific documents.
       enum:
-      - DRIVERS_LICENSE
-      - IDENTIFICATION_CARD
-      - PASSPORT
-      - SOCIAL_SECURITY_CARD
-      - RAW_CIP_DATA
-      - TRUST_CERTIFICATION
-      - ENTITY_DUE_DILIGENCE
-      - RAW_CDD_DATA
-      - VISA
-      - W_8BEN_FORM
-      - PASSPORT_CARD
-      - CERTIFICATE_OF_INCORPORATION
-      - CERTIFICATE_OF_BENEFICIAL_OWNERS
-      - PROOF_OF_ENTITY_ADDRESS
-      - PROOF_OF_ENTITY_EIN_TAX_ID
-      - PROOF_OF_RESIDENTIAL_ADDRESS
-      - PROOF_OF_PERSONAL_TAX_ID
-      - SOURCE_OF_FUNDS
-      - TRANSFER_ON_DEATH
+      - FRONT
+      - BACK
+      - UNSPECIFIED
       type: string
     DocumentRequest:
       description: Request to upload a document with metadata
@@ -226,14 +250,6 @@ components:
       - account
       - documentType
       type: object
-    RetrieveAccountDocumentMetadataResponse:
-      properties:
-        documentMetadata:
-          items:
-            $ref: '#/components/schemas/DocumentMetadata'
-          type: array
-          x-order: 0
-      type: object
     DocumentMetadata:
       properties:
         account:
@@ -274,42 +290,26 @@ components:
       - documentType
       - documentSide
       type: object
-    Document:
-      properties:
-        createdAt:
-          description: The time the document was uploaded to the Bakkt platform
-          format: date-time
-          type: string
-          x-order: 1
-        id:
-          description: Bakkt unique identifer for the document
-          format: uuid
-          type: string
-          x-order: 0
-        request:
-          $ref: '#/components/schemas/DocumentRequest'
-      required:
-      - id
-      - createdAt
-      - request
-      type: object
-    DocumentSide:
-      description: Side of the document that is being submitted. Note that this field is required for entity account documents, including owner specific documents.
+    DocumentType:
+      description: Document type assigned at upload
       enum:
-      - FRONT
-      - BACK
-      - UNSPECIFIED
+      - DRIVERS_LICENSE
+      - IDENTIFICATION_CARD
+      - PASSPORT
+      - SOCIAL_SECURITY_CARD
+      - RAW_CIP_DATA
+      - TRUST_CERTIFICATION
+      - ENTITY_DUE_DILIGENCE
+      - RAW_CDD_DATA
+      - VISA
+      - W_8BEN_FORM
+      - PASSPORT_CARD
+      - CERTIFICATE_OF_INCORPORATION
+      - CERTIFICATE_OF_BENEFICIAL_OWNERS
+      - PROOF_OF_ENTITY_ADDRESS
+      - PROOF_OF_ENTITY_EIN_TAX_ID
+      - PROOF_OF_RESIDENTIAL_ADDRESS
+      - PROOF_OF_PERSONAL_TAX_ID
+      - SOURCE_OF_FUNDS
+      - TRANSFER_ON_DEATH
       type: string
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
-          type: string
-      required:
-      - code
-      - message
-      type: object
