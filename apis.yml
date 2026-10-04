@@ -58,6 +58,7 @@ tags:
 - Custody
 - Webhook
 - FIX Protocol
+- Web3
 tags_raw:
 - Company
 - Crypto Web3
@@ -69,6 +70,7 @@ tags_raw:
 - Custody
 - Webhooks
 - FIX Protocol
+- Web3
 image: https://bakkt.com/favicon.ico
 maintainers:
 - FN: Kin Lane
