@@ -235,23 +235,22 @@ components:
       - isValid
       - requiredTag
       type: object
-    DepositReceiveAddressResponse:
+    DepositReceiveAddressRequest:
       properties:
-        network:
-          $ref: '#/components/schemas/Network'
-        receiveAddress:
-          description: A receive address to use to deposit coin
+        account:
+          description: Bakkt client account identifier
+          example: ABC12345
+          type: string
+          x-order: 1
+        currency:
+          description: Crypto coin that you would like to deposit
           type: string
           x-order: 0
-        request:
-          $ref: '#/components/schemas/DepositReceiveAddressRequest'
-        tag:
-          description: Tag tied to Tag based Assets
-          type: string
-          x-order: 3
+        network:
+          $ref: '#/components/schemas/Network'
       required:
-      - receiveAddress
-      - request
+      - currency
+      - account
       type: object
     VerifyWalletAddressRequest:
       properties:
@@ -267,6 +266,161 @@ components:
           $ref: '#/components/schemas/Network'
       required:
       - address
+      type: object
+    WithdrawalEstimatedFeeRequest:
+      properties:
+        currency:
+          description: Crypto coin that the client would like to estimate the cost for transferring
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+        quantity:
+          description: Amount of coin that the client would like to estimate the cost for transferring
+          type: string
+          x-order: 1
+        receivingWallet:
+          description: Address of the wallet intended to receive the coin. This is only required for withdrawals with a notional value greater than or equal to 3000.
+          type: string
+          x-order: 2
+      required:
+      - currency
+      - quantity
+      type: object
+    Withdrawal:
+      properties:
+        blockchainHash:
+          description: Blockchain hash for this transaction, if the transaction has already been written to the blockchain
+          type: string
+          x-order: 7
+        createdAt:
+          description: Time at which a withdrawal was submitted
+          format: date-time
+          type: string
+          x-order: 8
+        fee:
+          description: Fee for the withdrawal in coin that is taken out of the investor's account on top of the requested withdrawal quantity
+          type: string
+          x-order: 1
+        id:
+          description: Bakkt Transaction ID
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+        rejectReason:
+          description: DEPRECATED, please use statusReason. Reason for a reject, if any
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/WithdrawRequest'
+        status:
+          $ref: '#/components/schemas/WithdrawalStatus'
+        statusReason:
+          description: reason for the current status of the withdrawal
+          type: string
+          x-order: 6
+        totalQuantity:
+          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen (i.e., equals quantity plus fee)
+          type: string
+          x-order: 3
+        usdEquivalentFee:
+          description: Fee for the withdrawal in USD
+          type: string
+          x-order: 2
+      required:
+      - id
+      - status
+      - createdAt
+      - request
+      type: object
+    WithdrawalEstimatedFeeResponse:
+      properties:
+        estimatedAt:
+          description: Time at which a fee estimate was generated
+          type: string
+          x-order: 5
+        expiresAt:
+          description: The time at which a fee expires; a withdrawal request must be tied to an unexpired fee estimation
+          type: string
+          x-order: 6
+        fee:
+          description: Estimated fee, in coin, for a withdrawal request
+          type: string
+          x-order: 1
+        id:
+          description: A unique identifier for this estimate; this identifier must be supplied when initiating a withdrawal request
+          format: uuid
+          type: string
+          x-order: 0
+        network:
+          $ref: '#/components/schemas/Network'
+        request:
+          $ref: '#/components/schemas/WithdrawalEstimatedFeeRequest'
+        totalQuantity:
+          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen (i.e., equals quantity plus fee)
+          type: string
+          x-order: 3
+        usdEquivalentFee:
+          description: Fee for the withdrawal in USD
+          type: string
+          x-order: 2
+        usdRate:
+          description: The USD price for one coin in which the estimation was created
+          type: string
+          x-order: 4
+      required:
+      - id
+      - fee
+      - request
+      - estimatedAt
+      - usdEquivalentFee
+      - totalQuantity
+      - usdRate
+      - expiresAt
+      type: object
+    WithdrawalStatus:
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      - ACCEPTED
+      type: string
+    Network:
+      enum:
+      - Algorand
+      - Arbitrum
+      - Avalanche
+      - Berachain
+      - Binance_Smart_Chain
+      - Bitcoin
+      - Bitcoin_Cash
+      - Cardano
+      - Celestia
+      - Cosmos
+      - Dogecoin
+      - Ethereum
+      - Ethereum_Classic
+      - Litecoin
+      - Optimism
+      - Polkadot
+      - Polygon
+      - Ripple
+      - Solana
+      - Sonic
+      - Stellar
+      - Tron
+      type: string
+    VaspLookupResponse:
+      properties:
+        vaspName:
+          description: The name of the vasp associated with the provided wallet address
+          type: string
+          x-order: 0
+      required:
+      - vaspName
       type: object
     WithdrawRequest:
       properties:
@@ -343,14 +497,23 @@ components:
       - receivingWallet
       - feeEstimateId
       type: object
-    VaspLookupResponse:
+    DepositReceiveAddressResponse:
       properties:
-        vaspName:
-          description: The name of the vasp associated with the provided wallet address
+        network:
+          $ref: '#/components/schemas/Network'
+        receiveAddress:
+          description: A receive address to use to deposit coin
           type: string
           x-order: 0
+        request:
+          $ref: '#/components/schemas/DepositReceiveAddressRequest'
+        tag:
+          description: Tag tied to Tag based Assets
+          type: string
+          x-order: 3
       required:
-      - vaspName
+      - receiveAddress
+      - request
       type: object
     Error:
       properties:
@@ -364,167 +527,4 @@ components:
       required:
       - code
       - message
-      type: object
-    Withdrawal:
-      properties:
-        blockchainHash:
-          description: Blockchain hash for this transaction, if the transaction has already been written to the blockchain
-          type: string
-          x-order: 7
-        createdAt:
-          description: Time at which a withdrawal was submitted
-          format: date-time
-          type: string
-          x-order: 8
-        fee:
-          description: Fee for the withdrawal in coin that is taken out of the investor's account on top of the requested withdrawal quantity
-          type: string
-          x-order: 1
-        id:
-          description: Bakkt Transaction ID
-          type: string
-          x-order: 0
-        network:
-          $ref: '#/components/schemas/Network'
-        rejectReason:
-          description: DEPRECATED, please use statusReason. Reason for a reject, if any
-          type: string
-          x-order: 5
-        request:
-          $ref: '#/components/schemas/WithdrawRequest'
-        status:
-          $ref: '#/components/schemas/WithdrawalStatus'
-        statusReason:
-          description: reason for the current status of the withdrawal
-          type: string
-          x-order: 6
-        totalQuantity:
-          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen (i.e., equals quantity plus fee)
-          type: string
-          x-order: 3
-        usdEquivalentFee:
-          description: Fee for the withdrawal in USD
-          type: string
-          x-order: 2
-      required:
-      - id
-      - status
-      - createdAt
-      - request
-      type: object
-    WithdrawalStatus:
-      enum:
-      - PENDING
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      - CANCELLED
-      - ACCEPTED
-      type: string
-    Network:
-      enum:
-      - Algorand
-      - Arbitrum
-      - Avalanche
-      - Berachain
-      - Binance_Smart_Chain
-      - Bitcoin
-      - Bitcoin_Cash
-      - Cardano
-      - Celestia
-      - Cosmos
-      - Dogecoin
-      - Ethereum
-      - Ethereum_Classic
-      - Litecoin
-      - Optimism
-      - Polkadot
-      - Polygon
-      - Ripple
-      - Solana
-      - Sonic
-      - Stellar
-      - Tron
-      type: string
-    WithdrawalEstimatedFeeResponse:
-      properties:
-        estimatedAt:
-          description: Time at which a fee estimate was generated
-          type: string
-          x-order: 5
-        expiresAt:
-          description: The time at which a fee expires; a withdrawal request must be tied to an unexpired fee estimation
-          type: string
-          x-order: 6
-        fee:
-          description: Estimated fee, in coin, for a withdrawal request
-          type: string
-          x-order: 1
-        id:
-          description: A unique identifier for this estimate; this identifier must be supplied when initiating a withdrawal request
-          format: uuid
-          type: string
-          x-order: 0
-        network:
-          $ref: '#/components/schemas/Network'
-        request:
-          $ref: '#/components/schemas/WithdrawalEstimatedFeeRequest'
-        totalQuantity:
-          description: The total amount of coin to move out of the investor account to make the requested coin transfer happen (i.e., equals quantity plus fee)
-          type: string
-          x-order: 3
-        usdEquivalentFee:
-          description: Fee for the withdrawal in USD
-          type: string
-          x-order: 2
-        usdRate:
-          description: The USD price for one coin in which the estimation was created
-          type: string
-          x-order: 4
-      required:
-      - id
-      - fee
-      - request
-      - estimatedAt
-      - usdEquivalentFee
-      - totalQuantity
-      - usdRate
-      - expiresAt
-      type: object
-    DepositReceiveAddressRequest:
-      properties:
-        account:
-          description: Bakkt client account identifier
-          example: ABC12345
-          type: string
-          x-order: 1
-        currency:
-          description: Crypto coin that you would like to deposit
-          type: string
-          x-order: 0
-        network:
-          $ref: '#/components/schemas/Network'
-      required:
-      - currency
-      - account
-      type: object
-    WithdrawalEstimatedFeeRequest:
-      properties:
-        currency:
-          description: Crypto coin that the client would like to estimate the cost for transferring
-          type: string
-          x-order: 0
-        network:
-          $ref: '#/components/schemas/Network'
-        quantity:
-          description: Amount of coin that the client would like to estimate the cost for transferring
-          type: string
-          x-order: 1
-        receivingWallet:
-          description: Address of the wallet intended to receive the coin. This is only required for withdrawals with a notional value greater than or equal to 3000.
-          type: string
-          x-order: 2
-      required:
-      - currency
-      - quantity
       type: object

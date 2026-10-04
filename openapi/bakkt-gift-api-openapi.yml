@@ -85,28 +85,6 @@ paths:
       - Gift
 components:
   schemas:
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
-          type: string
-      required:
-      - code
-      - message
-      type: object
-    AllocationStatus:
-      description: Status of allocation
-      enum:
-      - PENDING
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      - CANCELLED
-      type: string
     GiftAllocationRequest:
       description: Gift request for a particular customer account
       properties:
@@ -137,6 +115,15 @@ components:
       - account
       - clientTransactionId
       - currency
+    AllocationStatus:
+      description: Status of allocation
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      type: string
     GiftAllocation:
       description: Summary of the gift request
       properties:
@@ -178,3 +165,16 @@ components:
       - id
       - request
       - status
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object

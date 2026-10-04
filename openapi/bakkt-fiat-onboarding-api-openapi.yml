@@ -189,40 +189,44 @@ paths:
       - Fiat Onboarding
 components:
   schemas:
-    AllocationStatus:
-      description: Status of allocation
-      enum:
-      - PENDING
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      - CANCELLED
-      type: string
-    Error:
+    BatchFiatAllocation:
+      description: Details of a particular fiat allocation batch containing one or many allocation requests
       properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
+        allocations:
+          description: Number of requested fiat allocations within the batch
           type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
+          x-order: 0
+        createdAt:
+          description: Date and time at which the fiat allocation batch was submitted
+          format: date-time
           type: string
+          x-order: 1
+        id:
+          description: Bakkt internal id
+          format: uuid
+          type: string
+          x-order: 2
+        rejectReason:
+          description: The reason the fiat allocation was rejected
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/BatchFiatAllocationOpenRequest'
+        status:
+          $ref: '#/components/schemas/BatchAllocationStatus'
       required:
-      - code
-      - message
-      type: object
-    BatchAllocationStatus:
-      description: Status of allocation
-      enum:
-      - OPEN
-      - CLOSED
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      type: string
-    BatchFiatAllocationOpenRequest:
-      description: Request to open a fiat allocation batch
+      - allocations
+      - createdAt
+      - id
+      - request
+      - status
+    BatchFiatAllocationCloseRequest:
+      description: Request to close off fiat allocations of a particular batch
       properties:
+        allocations:
+          description: Number of requested fiat allocations within the batch
+          type: integer
+          x-order: 1
         batchTransactionId:
           description: Client-specified unique identifier for a set of fiat allocations belonging to the same batch
           format: uuid
@@ -230,6 +234,33 @@ components:
           x-order: 0
       required:
       - batchTransactionId
+      - allocations
+    FiatAllocation:
+      description: Summary of details pertaining to a fiat allocation request
+      properties:
+        createdAt:
+          description: Date at which the fiat allocation batch was submitted
+          format: date-time
+          type: string
+          x-order: 0
+        id:
+          description: Bakkt unique identifier for the fiat allocation
+          format: uuid
+          type: string
+          x-order: 1
+        rejectReason:
+          description: The reason the fiat allocation was rejected
+          type: string
+          x-order: 3
+        request:
+          $ref: '#/components/schemas/FiatAllocationRequest'
+        status:
+          $ref: '#/components/schemas/AllocationStatus'
+      required:
+      - createdAt
+      - id
+      - request
+      - status
     FiatAllocationRequest:
       description: Fiat allocation request for a single customer account
       properties:
@@ -270,13 +301,27 @@ components:
       - clientTransactionId
       - direction
       - currency
-    BatchFiatAllocationCloseRequest:
-      description: Request to close off fiat allocations of a particular batch
+    AllocationStatus:
+      description: Status of allocation
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      type: string
+    BatchAllocationStatus:
+      description: Status of allocation
+      enum:
+      - OPEN
+      - CLOSED
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      type: string
+    BatchFiatAllocationOpenRequest:
+      description: Request to open a fiat allocation batch
       properties:
-        allocations:
-          description: Number of requested fiat allocations within the batch
-          type: integer
-          x-order: 1
         batchTransactionId:
           description: Client-specified unique identifier for a set of fiat allocations belonging to the same batch
           format: uuid
@@ -284,61 +329,16 @@ components:
           x-order: 0
       required:
       - batchTransactionId
-      - allocations
-    BatchFiatAllocation:
-      description: Details of a particular fiat allocation batch containing one or many allocation requests
+    Error:
       properties:
-        allocations:
-          description: Number of requested fiat allocations within the batch
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
           type: integer
-          x-order: 0
-        createdAt:
-          description: Date and time at which the fiat allocation batch was submitted
-          format: date-time
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
           type: string
-          x-order: 1
-        id:
-          description: Bakkt internal id
-          format: uuid
-          type: string
-          x-order: 2
-        rejectReason:
-          description: The reason the fiat allocation was rejected
-          type: string
-          x-order: 5
-        request:
-          $ref: '#/components/schemas/BatchFiatAllocationOpenRequest'
-        status:
-          $ref: '#/components/schemas/BatchAllocationStatus'
       required:
-      - allocations
-      - createdAt
-      - id
-      - request
-      - status
-    FiatAllocation:
-      description: Summary of details pertaining to a fiat allocation request
-      properties:
-        createdAt:
-          description: Date at which the fiat allocation batch was submitted
-          format: date-time
-          type: string
-          x-order: 0
-        id:
-          description: Bakkt unique identifier for the fiat allocation
-          format: uuid
-          type: string
-          x-order: 1
-        rejectReason:
-          description: The reason the fiat allocation was rejected
-          type: string
-          x-order: 3
-        request:
-          $ref: '#/components/schemas/FiatAllocationRequest'
-        status:
-          $ref: '#/components/schemas/AllocationStatus'
-      required:
-      - createdAt
-      - id
-      - request
-      - status
+      - code
+      - message
+      type: object

@@ -130,14 +130,6 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
-    AccountUnLinkingRequest:
-      type: object
-      properties:
-        instrumentType:
-          type: string
-          enum:
-          - ACH
-          - DEBIT
     CreateBankAccountRequest:
       required:
       - accountNumber
@@ -157,21 +149,42 @@ components:
           type: string
         routingNumber:
           type: string
-    CreateBankAccountResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
     AccountLinkResponse:
       type: object
       properties:
         success:
           type: boolean
-    AccountUnLinkingResponse:
+    PlaidAccountLinkingRequest:
+      required:
+      - processorToken
+      - partnerTransactionRef
+      type: object
+      properties:
+        processorToken:
+          type: string
+        partnerTransactionRef:
+          type: string
+    CreateBankAccountResponse:
       type: object
       properties:
         success:
           type: boolean
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR
     PublicApiError:
       type: object
       properties:
@@ -190,29 +203,16 @@ components:
         type:
           type: string
           example: INVALID_FIELD_VALUE
-    PlaidAccountLinkingRequest:
-      required:
-      - processorToken
-      - partnerTransactionRef
+    AccountUnLinkingRequest:
       type: object
       properties:
-        processorToken:
+        instrumentType:
           type: string
-        partnerTransactionRef:
-          type: string
-    PublicApiErrorDetail:
+          enum:
+          - ACH
+          - DEBIT
+    AccountUnLinkingResponse:
       type: object
       properties:
-        description:
-          type: string
-          description: Human readable error description
-          example: Validation Error.
-        field:
-          type: string
-          example: id
-        rejectedValue:
-          type: object
-          example: i-am-not-a-uuid
-        type:
-          type: string
-          example: VALIDATION_ERROR
+        success:
+          type: boolean

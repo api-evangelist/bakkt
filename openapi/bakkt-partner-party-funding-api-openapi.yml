@@ -205,35 +205,42 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
+    LinkBankAccountAchRequest:
+      required:
+      - accountNumber
+      - accountType
+      - partnerTransactionRef
+      - routingNumber
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+        partnerTransactionRef:
+          maxLength: 255
+          minLength: 0
+          type: string
+        routingNumber:
+          type: string
     UnlinkBankAccountResponse:
       type: object
       properties:
         success:
           type: boolean
-    GetFiatAccountBalanceResponse:
-      required:
-      - partnerPartyRef
-      - currency
-      - settledAmount
-      - unsettledAmount
+    WireWithdrawDetails:
       type: object
       properties:
-        partnerPartyRef:
+        wireRoutingNumber:
           type: string
-          description: The Partner's primary key for this Party
-          example: b9e930d0-372a-48f0-9c04-fd51c58eafb6
-        currency:
+        wireAccountNumber:
           type: string
-          description: Currency of the settled and unsettled amounts
-          example: USD
-        settledAmount:
-          type: number
-          description: Settled Fiat Account balance
-          example: 50.01
-        unsettledAmount:
-          type: number
-          description: Unsettled Fiat Account balance
-          example: 100.01
+        wireBankName:
+          type: string
+        wireBankAddress:
+          type: string
+        wireSwiftCode:
+          type: string
     TransferRequest:
       type: object
       required:
@@ -268,6 +275,11 @@ components:
           type: string
         wireWithdrawDetails:
           $ref: '#/components/schemas/WireWithdrawDetails'
+    LinkBankAccountAchResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
     WireInstructionsResponse:
       type: object
       required:
@@ -296,6 +308,22 @@ components:
           type: string
         wireBeneficiaryAddress:
           type: string
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR
     UnlinkBankAccountRequest:
       required:
       - instrumentType
@@ -312,29 +340,6 @@ components:
         partnerTransactionRef:
           maxLength: 255
           minLength: 0
-          type: string
-    LinkBankAccountAchResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-    LinkBankAccountAchRequest:
-      required:
-      - accountNumber
-      - accountType
-      - partnerTransactionRef
-      - routingNumber
-      type: object
-      properties:
-        accountNumber:
-          type: string
-        accountType:
-          type: string
-        partnerTransactionRef:
-          maxLength: 255
-          minLength: 0
-          type: string
-        routingNumber:
           type: string
     PublicApiError:
       type: object
@@ -354,32 +359,27 @@ components:
         type:
           type: string
           example: INVALID_FIELD_VALUE
-    WireWithdrawDetails:
+    GetFiatAccountBalanceResponse:
+      required:
+      - partnerPartyRef
+      - currency
+      - settledAmount
+      - unsettledAmount
       type: object
       properties:
-        wireRoutingNumber:
+        partnerPartyRef:
           type: string
-        wireAccountNumber:
+          description: The Partner's primary key for this Party
+          example: b9e930d0-372a-48f0-9c04-fd51c58eafb6
+        currency:
           type: string
-        wireBankName:
-          type: string
-        wireBankAddress:
-          type: string
-        wireSwiftCode:
-          type: string
-    PublicApiErrorDetail:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Human readable error description
-          example: Validation Error.
-        field:
-          type: string
-          example: id
-        rejectedValue:
-          type: object
-          example: i-am-not-a-uuid
-        type:
-          type: string
-          example: VALIDATION_ERROR
+          description: Currency of the settled and unsettled amounts
+          example: USD
+        settledAmount:
+          type: number
+          description: Settled Fiat Account balance
+          example: 50.01
+        unsettledAmount:
+          type: number
+          description: Unsettled Fiat Account balance
+          example: 100.01

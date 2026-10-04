@@ -44,25 +44,6 @@ paths:
       - Instruments
 components:
   schemas:
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
-          type: string
-      required:
-      - code
-      - message
-      type: object
-    InstrumentResponse:
-      properties:
-        instruments:
-          items:
-            $ref: '#/components/schemas/Instrument'
-          type: array
     Instrument:
       properties:
         minimumOrderQuantity:
@@ -79,3 +60,22 @@ components:
       - minimumPriceIncrement
       - minimumQuantityIncrement
       - symbol
+    InstrumentResponse:
+      properties:
+        instruments:
+          items:
+            $ref: '#/components/schemas/Instrument'
+          type: array
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object

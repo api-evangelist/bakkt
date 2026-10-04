@@ -78,22 +78,6 @@ components:
           type: string
           description: The time at which the verification URL will expire
           example: '2024-05-04T12:00:00.000Z'
-    PublicApiErrorDetail:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Human readable error description
-          example: Validation Error.
-        field:
-          type: string
-          example: id
-        rejectedValue:
-          type: object
-          example: i-am-not-a-uuid
-        type:
-          type: string
-          example: VALIDATION_ERROR
     PublicApiError:
       type: object
       properties:
@@ -112,3 +96,19 @@ components:
         type:
           type: string
           example: INVALID_FIELD_VALUE
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR

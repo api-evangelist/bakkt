@@ -82,6 +82,37 @@ paths:
       - Jurisdictions
 components:
   schemas:
+    JurisdictionAll:
+      properties:
+        countryCode:
+          description: The ISO 3166-1 alpha-3 country code of the jursidiction
+          type: string
+          x-order: 0
+        domain:
+          $ref: '#/components/schemas/JurisdictionDomain'
+        stateCode:
+          description: State of residence (two-letter state abbreviation)
+          type: string
+          x-order: 1
+    JurisdictionResponse:
+      properties:
+        jurisdictions:
+          items:
+            $ref: '#/components/schemas/JurisdictionStatus'
+          type: array
+          x-order: 0
+    SecurityStatus:
+      properties:
+        currency:
+          type: string
+        status:
+          enum:
+          - OPEN
+          - CLOSE
+          - PROHIBITED
+          type: string
+        tradingPair:
+          type: string
     JurisdictionStatus:
       properties:
         countryCode:
@@ -107,26 +138,6 @@ components:
           - PROHIBITED
           type: string
           x-order: 2
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
-          type: string
-      required:
-      - code
-      - message
-      type: object
-    JurisdictionResponse:
-      properties:
-        jurisdictions:
-          items:
-            $ref: '#/components/schemas/JurisdictionStatus'
-          type: array
-          x-order: 0
     JurisdictionAllResponse:
       properties:
         jurisdictions:
@@ -154,27 +165,16 @@ components:
             $ref: '#/components/schemas/SecurityStatus'
           type: array
           x-order: 2
-    JurisdictionAll:
+    Error:
       properties:
-        countryCode:
-          description: The ISO 3166-1 alpha-3 country code of the jursidiction
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
           type: string
-          x-order: 0
-        domain:
-          $ref: '#/components/schemas/JurisdictionDomain'
-        stateCode:
-          description: State of residence (two-letter state abbreviation)
-          type: string
-          x-order: 1
-    SecurityStatus:
-      properties:
-        currency:
-          type: string
-        status:
-          enum:
-          - OPEN
-          - CLOSE
-          - PROHIBITED
-          type: string
-        tradingPair:
-          type: string
+      required:
+      - code
+      - message
+      type: object

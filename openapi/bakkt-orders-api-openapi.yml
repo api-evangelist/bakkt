@@ -151,6 +151,79 @@ paths:
       - Orders
 components:
   schemas:
+    CancelResponse:
+      properties:
+        receivedAt:
+          description: The time the request to cancel the order was received
+          format: date-time
+          type: string
+        request:
+          $ref: '#/components/schemas/CancelRequest'
+      required:
+      - request
+      type: object
+    Order:
+      description: An Order represents a request to buy or sell crypto. Orders can be placed with various criteria that include, but are not limited to, how much to purchase, how long the purchase order should stand, what price is acceptable in the case of limit orders, etc. Orders are sent to one or more liquidity providers for fullfillment using a best-bid, offer-match methodology in order to acquire the best market execution for investors' orders.
+      properties:
+        averagePrice:
+          description: The price of the order averaged across all filled quantities for the order
+          type: string
+        cancels:
+          items:
+            $ref: '#/components/schemas/OrderCancel'
+          type: array
+        createdAt:
+          description: The time the order was submitted on the Apex Crypto platform
+          format: date-time
+          type: string
+        cumulativeQuantity:
+          description: The total amount of quantity filled for an order; if subsequent orders are filled, this value may increase commensurately
+          type: string
+        executions:
+          description: The results of the order's attempt(s) to execute
+          items:
+            $ref: '#/components/schemas/Execution'
+          type: array
+        id:
+          description: Unique `clientOrderId` that represents this order
+          type: string
+        leavesQuantity:
+          description: In the case that your order is not yet or cannot be fully filled, this amount indicates the order's open quantity remaining
+          type: string
+        rejectReason:
+          description: Provided when an order is rejected in the course of attempting to serve the request
+          type: string
+        request:
+          $ref: '#/components/schemas/NewOrderRequest'
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        working:
+          default: false
+          description: True if the order is actively being worked
+          type: boolean
+      required:
+      - id
+      - request
+      type: object
+    OrderType:
+      description: '<br/>`MARKET` - Fill the order using current MARKET price <br/>`LIMIT` - Fill the order matching the price constraints provided
+
+        '
+      enum:
+      - LIMIT
+      - MARKET
+      - STOP_LIMIT
+      type: string
+    TimeInForce:
+      description: '<br/>`IOC` - Fill immediately and cancel any amount that can''t be filled <br/>`DAY` - Fill order until the end of the current trading day <br/>`GTC` - Fill order until canceled or after 90 days <br/>`GTD` - Fill order until the good-till date
+
+        '
+      enum:
+      - IOC
+      - DAY
+      - GTC
+      - GTD
+      type: string
     OrderCancel:
       properties:
         rejectReason:
@@ -162,6 +235,47 @@ components:
           type: string
       required:
       - request
+      type: object
+    Execution:
+      description: An execution captures the results of an attempt to fill an order. There may be zero or more execution reports associated with an order to track its attempts to purchase or sell a crypto asset.
+      properties:
+        commission:
+          description: 'In order to ensure that any configured minimum trade fee is met by any trading scenario, the first execution fill is charged the minimum fee. The Apex Crypto system maintains a running total of any bps commission charges as other fills are executed for that order. Once the minimum fee has been satisfied by the bps commission charges for all of the fills on the order, the bps commission charges apply to any subsequent fills.
+
+            '
+          type: string
+        executedAt:
+          description: Time the execution was completed
+          format: date-time
+          type: string
+        id:
+          description: A unique identifier for the execution report
+          type: string
+        netMoney:
+          type: string
+        price:
+          description: The price at which the execution filled
+          type: string
+        quantity:
+          description: The amount that was filled in this execution
+          type: string
+        side:
+          $ref: '#/components/schemas/Side'
+        symbol:
+          description: The symbol filled
+          type: string
+        tradeDate:
+          description: Trading date the execution was completed on
+          format: date
+          type: string
+      required:
+      - id
+      - side
+      - symbol
+      - quantity
+      - price
+      - netMoney
+      - executedAt
       type: object
     NewOrderRequest:
       properties:
@@ -227,6 +341,16 @@ components:
       - IN_PROGRESS
       - COMPLETE
       type: string
+    CancelRequest:
+      description: A request to stop attempting to serve an order; a `clientOrderId` is identified alongside this request object in order to target a specific order to cancel
+      properties:
+        id:
+          description: An ID that uniquely identifies a request to cancel
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
     Error:
       properties:
         code:
@@ -239,130 +363,6 @@ components:
       required:
       - code
       - message
-      type: object
-    CancelResponse:
-      properties:
-        receivedAt:
-          description: The time the request to cancel the order was received
-          format: date-time
-          type: string
-        request:
-          $ref: '#/components/schemas/CancelRequest'
-      required:
-      - request
-      type: object
-    Execution:
-      description: An execution captures the results of an attempt to fill an order. There may be zero or more execution reports associated with an order to track its attempts to purchase or sell a crypto asset.
-      properties:
-        commission:
-          description: 'In order to ensure that any configured minimum trade fee is met by any trading scenario, the first execution fill is charged the minimum fee. The Apex Crypto system maintains a running total of any bps commission charges as other fills are executed for that order. Once the minimum fee has been satisfied by the bps commission charges for all of the fills on the order, the bps commission charges apply to any subsequent fills.
-
-            '
-          type: string
-        executedAt:
-          description: Time the execution was completed
-          format: date-time
-          type: string
-        id:
-          description: A unique identifier for the execution report
-          type: string
-        netMoney:
-          type: string
-        price:
-          description: The price at which the execution filled
-          type: string
-        quantity:
-          description: The amount that was filled in this execution
-          type: string
-        side:
-          $ref: '#/components/schemas/Side'
-        symbol:
-          description: The symbol filled
-          type: string
-        tradeDate:
-          description: Trading date the execution was completed on
-          format: date
-          type: string
-      required:
-      - id
-      - side
-      - symbol
-      - quantity
-      - price
-      - netMoney
-      - executedAt
-      type: object
-    OrderType:
-      description: '<br/>`MARKET` - Fill the order using current MARKET price <br/>`LIMIT` - Fill the order matching the price constraints provided
-
-        '
-      enum:
-      - LIMIT
-      - MARKET
-      - STOP_LIMIT
-      type: string
-    Order:
-      description: An Order represents a request to buy or sell crypto. Orders can be placed with various criteria that include, but are not limited to, how much to purchase, how long the purchase order should stand, what price is acceptable in the case of limit orders, etc. Orders are sent to one or more liquidity providers for fullfillment using a best-bid, offer-match methodology in order to acquire the best market execution for investors' orders.
-      properties:
-        averagePrice:
-          description: The price of the order averaged across all filled quantities for the order
-          type: string
-        cancels:
-          items:
-            $ref: '#/components/schemas/OrderCancel'
-          type: array
-        createdAt:
-          description: The time the order was submitted on the Apex Crypto platform
-          format: date-time
-          type: string
-        cumulativeQuantity:
-          description: The total amount of quantity filled for an order; if subsequent orders are filled, this value may increase commensurately
-          type: string
-        executions:
-          description: The results of the order's attempt(s) to execute
-          items:
-            $ref: '#/components/schemas/Execution'
-          type: array
-        id:
-          description: Unique `clientOrderId` that represents this order
-          type: string
-        leavesQuantity:
-          description: In the case that your order is not yet or cannot be fully filled, this amount indicates the order's open quantity remaining
-          type: string
-        rejectReason:
-          description: Provided when an order is rejected in the course of attempting to serve the request
-          type: string
-        request:
-          $ref: '#/components/schemas/NewOrderRequest'
-        status:
-          $ref: '#/components/schemas/OrderStatus'
-        working:
-          default: false
-          description: True if the order is actively being worked
-          type: boolean
-      required:
-      - id
-      - request
-      type: object
-    TimeInForce:
-      description: '<br/>`IOC` - Fill immediately and cancel any amount that can''t be filled <br/>`DAY` - Fill order until the end of the current trading day <br/>`GTC` - Fill order until canceled or after 90 days <br/>`GTD` - Fill order until the good-till date
-
-        '
-      enum:
-      - IOC
-      - DAY
-      - GTC
-      - GTD
-      type: string
-    CancelRequest:
-      description: A request to stop attempting to serve an order; a `clientOrderId` is identified alongside this request object in order to target a specific order to cancel
-      properties:
-        id:
-          description: An ID that uniquely identifies a request to cancel
-          format: uuid
-          type: string
-      required:
-      - id
       type: object
     Side:
       description: '<br/>`BUY` - Buy crypto assets <br/>`SELL` - Sell crypto assets

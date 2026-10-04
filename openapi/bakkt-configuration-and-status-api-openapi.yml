@@ -64,6 +64,11 @@ paths:
       - Configuration and Status
 components:
   schemas:
+    ConfigResponse:
+      properties:
+        streamingQuoteUrl:
+          type: string
+          x-order: 0
     Error:
       properties:
         code:
@@ -77,8 +82,3 @@ components:
       - code
       - message
       type: object
-    ConfigResponse:
-      properties:
-        streamingQuoteUrl:
-          type: string
-          x-order: 0

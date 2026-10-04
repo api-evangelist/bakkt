@@ -189,28 +189,37 @@ paths:
       - Block Trade & Allocate
 components:
   schemas:
-    AllocationStatus:
-      description: Status of allocation
-      enum:
-      - PENDING
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      - CANCELLED
-      type: string
-    Error:
+    BatchAllocation:
+      description: Details of a particular allocation batch containing one or many allocation requests
       properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
+        allocations:
+          description: Number of requested allocations within the batch
           type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
+          x-order: 0
+        createdAt:
+          description: Date at which the allocation batch was submitted
+          format: date-time
           type: string
+          x-order: 1
+        id:
+          description: Bakkt allocation id
+          format: uuid
+          type: string
+          x-order: 2
+        rejectReason:
+          description: The reason the allocation was rejected
+          type: string
+          x-order: 5
+        request:
+          $ref: '#/components/schemas/BatchAllocationOpenRequest'
+        status:
+          $ref: '#/components/schemas/BatchAllocationStatus'
       required:
-      - code
-      - message
-      type: object
+      - allocations
+      - createdAt
+      - id
+      - request
+      - status
     BatchTradeAllocationRequest:
       description: Allocation request for a single customer account
       properties:
@@ -264,6 +273,15 @@ components:
       - clientTransactionId
       - side
       - symbol
+    AllocationStatus:
+      description: Status of allocation
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      type: string
     BatchAllocationStatus:
       description: Status of allocation
       enum:
@@ -273,37 +291,6 @@ components:
       - COMPLETE
       - REJECTED
       type: string
-    BatchAllocation:
-      description: Details of a particular allocation batch containing one or many allocation requests
-      properties:
-        allocations:
-          description: Number of requested allocations within the batch
-          type: integer
-          x-order: 0
-        createdAt:
-          description: Date at which the allocation batch was submitted
-          format: date-time
-          type: string
-          x-order: 1
-        id:
-          description: Bakkt allocation id
-          format: uuid
-          type: string
-          x-order: 2
-        rejectReason:
-          description: The reason the allocation was rejected
-          type: string
-          x-order: 5
-        request:
-          $ref: '#/components/schemas/BatchAllocationOpenRequest'
-        status:
-          $ref: '#/components/schemas/BatchAllocationStatus'
-      required:
-      - allocations
-      - createdAt
-      - id
-      - request
-      - status
     BatchAllocationOpenRequest:
       description: Request to open an allocation batch
       properties:
@@ -327,6 +314,34 @@ components:
       - batchTransactionId
       - symbol
       - type
+    BatchAllocationCloseRequest:
+      description: Request to close off allocations of a particular batch
+      properties:
+        allocations:
+          description: Number of requested allocations within the batch
+          type: integer
+          x-order: 1
+        batchTransactionId:
+          description: Client-specified unique identifier for a set of allocations belonging to the same batch
+          format: uuid
+          type: string
+          x-order: 0
+      required:
+      - batchTransactionId
+      - allocations
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
     BatchTradeAllocation:
       description: Summary of details pertaining to an allocation request
       properties:
@@ -373,18 +388,3 @@ components:
       - id
       - request
       - status
-    BatchAllocationCloseRequest:
-      description: Request to close off allocations of a particular batch
-      properties:
-        allocations:
-          description: Number of requested allocations within the batch
-          type: integer
-          x-order: 1
-        batchTransactionId:
-          description: Client-specified unique identifier for a set of allocations belonging to the same batch
-          format: uuid
-          type: string
-          x-order: 0
-      required:
-      - batchTransactionId
-      - allocations
