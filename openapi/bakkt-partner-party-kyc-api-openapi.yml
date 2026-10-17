@@ -67,6 +67,22 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
+    PublicApiErrorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable error description
+          example: Validation Error.
+        field:
+          type: string
+          example: id
+        rejectedValue:
+          type: object
+          example: i-am-not-a-uuid
+        type:
+          type: string
+          example: VALIDATION_ERROR
     KycDocumentVerificationDetails:
       type: object
       properties:
@@ -96,19 +112,3 @@ components:
         type:
           type: string
           example: INVALID_FIELD_VALUE
-    PublicApiErrorDetail:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Human readable error description
-          example: Validation Error.
-        field:
-          type: string
-          example: id
-        rejectedValue:
-          type: object
-          example: i-am-not-a-uuid
-        type:
-          type: string
-          example: VALIDATION_ERROR

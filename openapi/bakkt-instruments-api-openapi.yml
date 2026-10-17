@@ -44,22 +44,6 @@ paths:
       - Instruments
 components:
   schemas:
-    Instrument:
-      properties:
-        minimumOrderQuantity:
-          description: The smallest quantity of this crypto that can be bought or sold
-          type: string
-        minimumPriceIncrement:
-          type: string
-        minimumQuantityIncrement:
-          type: string
-        symbol:
-          type: string
-      required:
-      - minimumOrderQuantity
-      - minimumPriceIncrement
-      - minimumQuantityIncrement
-      - symbol
     InstrumentResponse:
       properties:
         instruments:
@@ -79,3 +63,19 @@ components:
       - code
       - message
       type: object
+    Instrument:
+      properties:
+        minimumOrderQuantity:
+          description: The smallest quantity of this crypto that can be bought or sold
+          type: string
+        minimumPriceIncrement:
+          type: string
+        minimumQuantityIncrement:
+          type: string
+        symbol:
+          type: string
+      required:
+      - minimumOrderQuantity
+      - minimumPriceIncrement
+      - minimumQuantityIncrement
+      - symbol

@@ -163,14 +163,6 @@ paths:
       - Documents
 components:
   schemas:
-    RetrieveAccountDocumentMetadataResponse:
-      properties:
-        documentMetadata:
-          items:
-            $ref: '#/components/schemas/DocumentMetadata'
-          type: array
-          x-order: 0
-      type: object
     DocumentType:
       description: Document type assigned at upload
       enum:
@@ -194,6 +186,34 @@ components:
       - SOURCE_OF_FUNDS
       - TRANSFER_ON_DEATH
       type: string
+    DocumentSide:
+      description: Side of the document that is being submitted. Note that this field is required for entity account documents, including owner specific documents.
+      enum:
+      - FRONT
+      - BACK
+      - UNSPECIFIED
+      type: string
+    RetrieveAccountDocumentMetadataResponse:
+      properties:
+        documentMetadata:
+          items:
+            $ref: '#/components/schemas/DocumentMetadata'
+          type: array
+          x-order: 0
+      type: object
+    Error:
+      properties:
+        code:
+          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
+          format: int32
+          type: integer
+        message:
+          description: This error message provides additional insight into the nature of the error encountered.
+          type: string
+      required:
+      - code
+      - message
+      type: object
     DocumentRequest:
       description: Request to upload a document with metadata
       properties:
@@ -234,13 +254,6 @@ components:
       - account
       - documentType
       type: object
-    DocumentSide:
-      description: Side of the document that is being submitted. Note that this field is required for entity account documents, including owner specific documents.
-      enum:
-      - FRONT
-      - BACK
-      - UNSPECIFIED
-      type: string
     DocumentMetadata:
       properties:
         account:
@@ -299,17 +312,4 @@ components:
       - id
       - createdAt
       - request
-      type: object
-    Error:
-      properties:
-        code:
-          description: This code represents an HTTP style error code. Error codes in the 4xx range indicate errors made in the way the client made the request. Error codes in the 5xx range indicate errors that the Apex Crypto system encountered in handling the request.
-          format: int32
-          type: integer
-        message:
-          description: This error message provides additional insight into the nature of the error encountered.
-          type: string
-      required:
-      - code
-      - message
       type: object

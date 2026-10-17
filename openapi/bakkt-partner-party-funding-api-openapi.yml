@@ -205,42 +205,6 @@ paths:
                 $ref: '#/components/schemas/PublicApiError'
 components:
   schemas:
-    LinkBankAccountAchRequest:
-      required:
-      - accountNumber
-      - accountType
-      - partnerTransactionRef
-      - routingNumber
-      type: object
-      properties:
-        accountNumber:
-          type: string
-        accountType:
-          type: string
-        partnerTransactionRef:
-          maxLength: 255
-          minLength: 0
-          type: string
-        routingNumber:
-          type: string
-    UnlinkBankAccountResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-    WireWithdrawDetails:
-      type: object
-      properties:
-        wireRoutingNumber:
-          type: string
-        wireAccountNumber:
-          type: string
-        wireBankName:
-          type: string
-        wireBankAddress:
-          type: string
-        wireSwiftCode:
-          type: string
     TransferRequest:
       type: object
       required:
@@ -275,11 +239,41 @@ components:
           type: string
         wireWithdrawDetails:
           $ref: '#/components/schemas/WireWithdrawDetails'
-    LinkBankAccountAchResponse:
+    PublicApiError:
       type: object
       properties:
-        success:
-          type: boolean
+        description:
+          type: string
+          description: Message from the exception
+          example: Parameter passed for field is not meeting its required format.
+        detail:
+          type: string
+          description: Description of the type
+          example: validation error
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicApiErrorDetail'
+        type:
+          type: string
+          example: INVALID_FIELD_VALUE
+    UnlinkBankAccountRequest:
+      required:
+      - instrumentType
+      - partnerTransactionRef
+      type: object
+      properties:
+        instrumentType:
+          type: string
+          enum:
+          - ACH
+          - DEBIT
+          - TPJ
+          - WIRE
+        partnerTransactionRef:
+          maxLength: 255
+          minLength: 0
+          type: string
     WireInstructionsResponse:
       type: object
       required:
@@ -324,41 +318,42 @@ components:
         type:
           type: string
           example: VALIDATION_ERROR
-    UnlinkBankAccountRequest:
+    LinkBankAccountAchRequest:
       required:
-      - instrumentType
+      - accountNumber
+      - accountType
       - partnerTransactionRef
+      - routingNumber
       type: object
       properties:
-        instrumentType:
+        accountNumber:
           type: string
-          enum:
-          - ACH
-          - DEBIT
-          - TPJ
-          - WIRE
+        accountType:
+          type: string
         partnerTransactionRef:
           maxLength: 255
           minLength: 0
           type: string
-    PublicApiError:
+        routingNumber:
+          type: string
+    WireWithdrawDetails:
       type: object
       properties:
-        description:
+        wireRoutingNumber:
           type: string
-          description: Message from the exception
-          example: Parameter passed for field is not meeting its required format.
-        detail:
+        wireAccountNumber:
           type: string
-          description: Description of the type
-          example: validation error
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicApiErrorDetail'
-        type:
+        wireBankName:
           type: string
-          example: INVALID_FIELD_VALUE
+        wireBankAddress:
+          type: string
+        wireSwiftCode:
+          type: string
+    UnlinkBankAccountResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
     GetFiatAccountBalanceResponse:
       required:
       - partnerPartyRef
@@ -383,3 +378,8 @@ components:
           type: number
           description: Unsettled Fiat Account balance
           example: 100.01
+    LinkBankAccountAchResponse:
+      type: object
+      properties:
+        success:
+          type: boolean

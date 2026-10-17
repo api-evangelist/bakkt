@@ -85,6 +85,15 @@ paths:
       - Gift
 components:
   schemas:
+    AllocationStatus:
+      description: Status of allocation
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETE
+      - REJECTED
+      - CANCELLED
+      type: string
     GiftAllocationRequest:
       description: Gift request for a particular customer account
       properties:
@@ -115,15 +124,6 @@ components:
       - account
       - clientTransactionId
       - currency
-    AllocationStatus:
-      description: Status of allocation
-      enum:
-      - PENDING
-      - IN_PROGRESS
-      - COMPLETE
-      - REJECTED
-      - CANCELLED
-      type: string
     GiftAllocation:
       description: Summary of the gift request
       properties:
